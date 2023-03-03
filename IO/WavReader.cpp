@@ -13,7 +13,7 @@
  * https://sites.google.com/site/musicgapi/technical-documents/wav-file-format#wavefileheader
  */
 
-constexpr std::uint8_t idSize = 4u;
+constexpr auto idSize = 4u;
 
 #pragma pack(push, 1)
 struct Chunk { //Generic chunk
@@ -25,7 +25,7 @@ struct Chunk { //Generic chunk
 #pragma pack(push, 1)
 struct FmtChunk {
     //Chunk defined above
-    std::uint16_t compressionCode;
+    std::uint16_t audioFormat;
     std::uint16_t channels;
     std::uint32_t sampleRate;
     std::uint32_t averageBytePerSec;
@@ -43,7 +43,7 @@ constexpr std::uint8_t DataID[] = {0x64u, 0x61u, 0x74u, 0x61u}; //DATA
 
 //Check if the WAV has the correct characteristics
 static bool checkFmtChunk(const FmtChunk &fmtChunk) {
-    return (fmtChunk.compressionCode == 1u) &&                  //PCM
+    return (fmtChunk.audioFormat == 1u) &&                  //PCM
            (fmtChunk.channels == Consts::Audio::Channels) &&
            (fmtChunk.sampleRate == Consts::Audio::SampleRate) &&
            (fmtChunk.bitsPerSample == Consts::Audio::BitsPerSample);
