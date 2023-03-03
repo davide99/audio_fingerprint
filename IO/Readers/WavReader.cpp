@@ -1,7 +1,7 @@
 #include "WavReader.h"
-#include "../Utils/Utils.h"
-#include "../Math/Integers.h"
-#include "../Consts.h"
+#include "../../Utils/Utils.h"
+#include "../../Math/Integers.h"
+#include "../../Consts.h"
 #include <iostream>
 #include <fstream>
 #include <cstdint>
@@ -50,7 +50,7 @@ static bool checkFmtChunk(const FmtChunk &fmtChunk) {
 }
 
 //Iterate through the WAV file to find a chunk given the id
-bool IO::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian,
+bool IO::Readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian,
                               const bool iterate = true) {
     bool found;
 
@@ -79,11 +79,9 @@ bool IO::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstrea
     return true;
 }
 
-IO::WavReader::WavReader(const std::string &fileName) {
+IO::Readers::WavReader::WavReader(const std::string &fileName) {
     Chunk chunk{};
     bool isBigEndian;
-
-    this->fileName = fileName;
 
     if (!Utils::fileExists(fileName))
         throw std::runtime_error("Can't open file: " + fileName);
@@ -147,10 +145,6 @@ IO::WavReader::WavReader(const std::string &fileName) {
     wavFile.close();
 }
 
-const std::vector<float> &IO::WavReader::getData() {
+const std::vector<float> &IO::Readers::WavReader::getData() {
     return this->data;
-}
-
-const std::string &IO::WavReader::getFileName() const {
-    return this->fileName;
 }

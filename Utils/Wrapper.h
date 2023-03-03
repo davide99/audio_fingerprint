@@ -3,7 +3,7 @@
 
 #include <string>
 #include "../IO/DB.h"
-#include "../IO/WavReader.h"
+#include "../IO/Readers/WavReader.h"
 #include "../Math/Spectrogram.h"
 #include "../Core/Fingerprint.h"
 
@@ -12,15 +12,38 @@
  */
 namespace Utils {
     /**
-     * Insert a song in the database
-     * @param fileName of the song
-     * @param db initialized db object
-     */
-    void insertSong(const std::string &fileName, IO::DB &db) {
-        IO::WavReader wavReader(fileName);
-        Math::Spectrogram spectrogram(wavReader.getData());
+    * Compute links given a generic reader
+    * @param reader where to read samples from
+    * @return computed links
+    */
+    Core::Links computeLinks(IO::Readers::Reader &reader) {
+        Math::Spectrogram spectrogram(reader.getData());
         std::vector<Core::Peak> peaks = Core::Fingerprint::compute(spectrogram);
-        Core::Links links = Core::Links(peaks);
+        return Core::Links(peaks);
+    }
+
+    /**
+    * Try to find a match given some links
+    * @param links of the recording
+    * @param db initialized db object
+    * @return the name of the song if found, an empty string otherwise
+    */
+    std::string searchFromLinks(const Core::Links &links, IO::DB &db) {
+        std::uint64_t id;
+        if (db.searchIdGivenLinks(links, id))
+            return db.getSongNameById(id);
+        else
+            return "";
+    }
+
+    /**
+    * Insert a song in the database
+    * @param fileName of the song
+    * @param db initialized db object
+    */
+    void insertSong(const std::string &fileName, IO::DB &db) {
+        IO::Readers::WavReader wavReader(fileName);
+        Core::Links links = computeLinks(wavReader);
 
         db.insertSong(fileName, links);
     }
@@ -29,19 +52,13 @@ namespace Utils {
      * Try to find a match for a recording
      * @param fileName of the recording
      * @param db initialized db object
-     * @return the name of the sonf if found, an empty string otherwise
+     * @return the name of the song if found, an empty string otherwise
      */
     std::string search(const std::string &fileName, IO::DB &db) {
-        IO::WavReader wavMic(fileName);
-        Math::Spectrogram specMic(wavMic.getData());
-        std::vector<Core::Peak> peaksMic = Core::Fingerprint::compute(specMic);
-        Core::Links linksMic = Core::Links(peaksMic);
+        IO::Readers::WavReader wavMic(fileName);
+        Core::Links links = computeLinks(wavMic);
 
-        std::uint64_t id;
-        if (db.searchIdGivenLinks(linksMic, id))
-            return db.getSongNameById(id);
-        else
-            return "";
+        return searchFromLinks(links, db);
     }
 };
 

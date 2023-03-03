@@ -4,26 +4,25 @@
 #include <string>
 #include <vector>
 #include <cstdint>
+#include "Reader.h"
 
 struct Chunk;
 
-namespace IO {
+namespace IO::Readers {
     /**
      * Class to read WAV files
      */
-    class WavReader {
+    class WavReader : public Reader {
 
     private:
         std::string fileName;
-    public:
-        [[nodiscard]] const std::string &getFileName() const;
 
     private:
         std::vector<float> data;
     public:
         explicit WavReader(const std::string &fileName);
 
-        const std::vector<float> &getData();
+        const std::vector<float> &getData() override;
 
     private:
         static bool

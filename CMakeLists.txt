@@ -10,7 +10,7 @@ include_directories(mariadbpp/include)
 
 add_executable(audio_fingerprint
         main.cpp
-        IO/WavReader.cpp IO/WavReader.h
+        IO/Readers/WavReader.cpp IO/Readers/WavReader.h
         Utils/Utils.cpp Utils/Utils.h
         Consts.h
         Math/Integers.cpp Math/Integers.h
@@ -25,7 +25,7 @@ add_executable(audio_fingerprint
         Core/Link.h Core/Link.cpp
         Core/Links.cpp Core/Links.h
         IO/DB.cpp IO/DB.h
-        Utils/Wrapper.h)
+        Utils/Wrapper.h IO/Readers/Reader.h)
 
 target_link_libraries(audio_fingerprint fftw3f mariadbclientpp stdc++fs)
 target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")
