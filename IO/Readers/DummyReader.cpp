@@ -1,7 +1,7 @@
 #include "DummyReader.h"
 
 namespace IO::Readers {
-    DummyReader::DummyReader(float *samples, std::size_t size) {
+    DummyReader::DummyReader(const float *samples, const size_t size) {
         this->data.insert(data.end(), samples, samples + size);
     }
 

@@ -2,10 +2,14 @@
 #define UTILS_WRAPPER_H
 
 #include <string>
+#ifdef BUILD_SERVER
 #include "../IO/DB.h"
 #include "../IO/Readers/WavReader.h"
+#endif
 #include "../Math/Spectrogram.h"
 #include "../Core/Fingerprint.h"
+#include "../Core/Links.h"
+#include "../IO/Readers/Reader.h"
 
 /*
  * Just a wrapper around the two main functions

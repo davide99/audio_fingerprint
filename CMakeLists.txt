@@ -6,6 +6,8 @@ option(BUILD_SERVER "Build the server side code" OFF)
 
 if(BUILD_CLIENT)
     add_definitions(-DBUILD_CLIENT)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_FUNCTIONS=['_compute']")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_RUNTIME_METHODS=['cwrap']")
 endif()
 if(BUILD_SERVER)
     add_definitions(-DBUILD_SERVER)
@@ -15,8 +17,19 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mtune=native -flto")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-flto")
 
-add_subdirectory(mariadbpp)
-include_directories(mariadbpp/include)
+if(BUILD_SERVER)
+    add_subdirectory(mariadbpp)
+    include_directories(mariadbpp/include)
+endif()
+
+set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+
+set(ENABLE_FLOAT ON)
+set(BUILD_SHARED_LIBS OFF)
+set(BUILD_TESTS OFF)
+set(DISABLE_FORTRAN ON)
+set(ENABLE_THREADS ON)
+add_subdirectory(fftw)
 
 add_executable(audio_fingerprint
         main.cpp
@@ -34,8 +47,15 @@ add_executable(audio_fingerprint
         Core/PeaksFinder.cpp Core/PeaksFinder.h
         Core/Link.h Core/Link.cpp
         Core/Links.cpp Core/Links.h
-        IO/DB.cpp IO/DB.h
-        Utils/Wrapper.h IO/Readers/Reader.h wasm.cpp IO/Readers/DummyReader.cpp IO/Readers/DummyReader.h)
+        #IO/DB.cpp IO/DB.h
+        Utils/Wrapper.h IO/Readers/Reader.h IO/Readers/DummyReader.cpp IO/Readers/DummyReader.h)
 
-target_link_libraries(audio_fingerprint fftw3f mariadbclientpp stdc++fs)
+target_include_directories(audio_fingerprint PRIVATE fftw/api)
+
+if(BUILD_SERVER)
+    target_link_libraries(audio_fingerprint fftw3f mariadbclientpp stdc++fs)
+else()
+    target_link_libraries(audio_fingerprint fftw3f)
+endif()
+
 target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")

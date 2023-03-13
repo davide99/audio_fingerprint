@@ -9,6 +9,10 @@ class CustomNodeProcessor extends AudioWorkletProcessor {
 
         return true;
     }
+
+    /*boh() {
+        return "9";
+    }*/
 }
 
 registerProcessor("custom-node-processor", CustomNodeProcessor);

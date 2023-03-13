@@ -10,7 +10,7 @@ namespace IO::Readers {
         std::vector<float> data;
 
     public:
-        DummyReader(float *samples, std::size_t size);
+        DummyReader(const float *samples, std::size_t size);
 
         const std::vector<float> &getData() override;
     };
