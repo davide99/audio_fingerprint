@@ -6,8 +6,6 @@ option(BUILD_SERVER "Build the server side code" OFF)
 
 if(BUILD_CLIENT)
     add_definitions(-DBUILD_CLIENT)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_FUNCTIONS=['_compute']")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s EXPORTED_RUNTIME_METHODS=['cwrap']")
 endif()
 if(BUILD_SERVER)
     add_definitions(-DBUILD_SERVER)
@@ -59,3 +57,4 @@ else()
 endif()
 
 target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")
+set_target_properties(audio_fingerprint PROPERTIES LINK_FLAGS "-s WASM=0 -s EXPORTED_FUNCTIONS='[_compute]' -s EXPORTED_RUNTIME_METHODS=['cwrap']")
