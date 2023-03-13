@@ -22,6 +22,7 @@ namespace Utils {
         return Core::Links(peaks);
     }
 
+#ifdef BUILD_SERVER
     /**
     * Try to find a match given some links
     * @param links of the recording
@@ -47,20 +48,7 @@ namespace Utils {
 
         db.insertSong(fileName, links);
     }
-
-    /**
-     * Try to find a match for a recording
-     * @param fileName of the recording
-     * @param db initialized db object
-     * @return the name of the song if found, an empty string otherwise
-     */
-    std::string search(const std::string &fileName, IO::DB &db) {
-        IO::Readers::WavReader wavMic(fileName);
-        Core::Links links = computeLinks(wavMic);
-
-        return searchFromLinks(links, db);
-    }
-};
-
+#endif
+}
 
 #endif

@@ -6,6 +6,7 @@
 #include "Math/Integers.h"
 
 int main(int argc, char **argv) {
+#ifdef BUILD_SERVER
     if (argc != 3) {
         std::cerr << "Wrong number of parameters, please use: " << std::endl
                   << "-i <path to wav directory>" << std::endl
@@ -52,6 +53,9 @@ int main(int argc, char **argv) {
                 std::cout << "Can't drop database" << std::endl;
         }
     }
+#endif
+
+
 
     return 0;
 }
