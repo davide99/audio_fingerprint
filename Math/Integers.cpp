@@ -61,6 +61,7 @@ std::int64_t Math::Integers::BSwap(const int64_t &x) {
 }
 
 
+#ifdef BUILD_SERVER
 static constexpr auto MaxUInt64Len = 16u;
 static constexpr auto buffLen = MaxUInt64Len + 2u;
 static thread_local char buff[buffLen];
@@ -104,3 +105,4 @@ std::string_view Math::Integers::toHex(std::uint64_t x) {
 
     return std::string_view(buff + i, buffLen - i);
 }
+#endif

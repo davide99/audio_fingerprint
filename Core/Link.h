@@ -11,13 +11,13 @@ namespace Core {
     class Link {
     private:
         std::uint64_t hash;
-        std::size_t window;
+        std::uint64_t window;
     public:
         Link(const Peak &address, const Peak &peak);
 
-        [[nodiscard]] const std::size_t &getHash() const;
+        [[nodiscard]] std::uint64_t getHash() const;
 
-        [[nodiscard]] const std::size_t &getTime() const;
+        [[nodiscard]] std::uint64_t getTime() const;
     };
 }
 

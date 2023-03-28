@@ -20,7 +20,9 @@ namespace Math::Integers {
      * @param x uint to convert
      * @return the converted number wrapped in a string_view
      */
+#ifdef BUILD_SERVER
     std::string_view toHex(std::uint64_t x);
+#endif
 }
 
 #endif

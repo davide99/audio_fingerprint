@@ -7,12 +7,14 @@
 namespace IO::Readers {
     class DummyReader : public Reader {
     private:
-        std::vector<float> data;
+        std::vector<float> data{};
 
     public:
-        DummyReader(const float *samples, std::size_t size);
+        void addSamples(float* samples, std::size_t size);
 
         const std::vector<float> &getData() override;
+
+        std::size_t getLen();
     };
 }
 

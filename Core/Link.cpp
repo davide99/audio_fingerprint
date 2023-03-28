@@ -25,11 +25,11 @@ Core::Link::Link(const Peak &address, const Peak &peak) {
     this->window = address.getWindow();
 }
 
-const std::size_t &Core::Link::getHash() const {
+std::uint64_t Core::Link::getHash() const {
     return this->hash;
 }
 
-const std::size_t &Core::Link::getTime() const {
+std::uint64_t Core::Link::getTime() const {
     return this->window;
 }
 

@@ -4,9 +4,11 @@
 #include <filesystem>
 #include <algorithm>
 
+#ifdef BUILD_SERVER
 bool Utils::fileExists(const std::string &fileName) {
     return access(fileName.c_str(), F_OK) == 0;
 }
+#endif
 
 bool Utils::isBigEndian() {
     uint16_t n = 0x0001u;
@@ -15,6 +17,7 @@ bool Utils::isBigEndian() {
     return ptr[0] == 0;
 }
 
+#ifdef BUILD_SERVER
 //https://stackoverflow.com/a/2072890/6441490
 bool Utils::endsWith(const std::string &str, const std::string &ending) {
     if (ending.size() > str.size())
@@ -48,3 +51,4 @@ std::string Utils::trim(const std::string &str) {
 
     return s;
 }
+#endif

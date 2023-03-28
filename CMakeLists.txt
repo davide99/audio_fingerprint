@@ -12,7 +12,8 @@ if(BUILD_SERVER)
 endif()
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mtune=native -flto")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mtune=native -flto -fsanitize=undefined")
+set(CMAKE_CXX_FLAGS "-fsanitize=undefined -Wcast-align -Wover-aligned")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-flto")
 
 if(BUILD_SERVER)
@@ -31,7 +32,7 @@ add_subdirectory(fftw)
 
 add_executable(audio_fingerprint
         main.cpp
-        IO/Readers/WavReader.cpp IO/Readers/WavReader.h
+        #IO/Readers/WavReader.cpp IO/Readers/WavReader.h
         Utils/Utils.cpp Utils/Utils.h
         Consts.h
         Math/Integers.cpp Math/Integers.h
@@ -57,4 +58,5 @@ else()
 endif()
 
 target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")
-set_target_properties(audio_fingerprint PROPERTIES LINK_FLAGS "-s WASM=0 -s EXPORTED_FUNCTIONS='[_compute]' -s EXPORTED_RUNTIME_METHODS=['cwrap']")
+set_target_properties(audio_fingerprint PROPERTIES LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_STACK=1GB -s INITIAL_MEMORY=2GB -s ASSERTIONS=2 -s SAFE_HEAP=1 -s WARN_UNALIGNED=1")
+set(CMAKE_EXECUTABLE_SUFFIX ".html")

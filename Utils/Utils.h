@@ -5,10 +5,13 @@
 #include <vector>
 
 namespace Utils {
+#ifdef BUILD_SERVER
     bool fileExists(const std::string &fileName);
+#endif
 
     bool isBigEndian();
 
+#ifdef BUILD_SERVER
     /**
      * @param str haystack
      * @param ending needle
@@ -24,6 +27,7 @@ namespace Utils {
     std::vector<std::string> listFiles(const std::string &path, const std::string &extension = "");
 
     std::string trim(const std::string &str);
+#endif
 }
 
 #endif

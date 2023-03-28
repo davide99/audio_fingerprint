@@ -12,7 +12,7 @@ namespace Utils {
 
     public:
         void insert(const T &value) {
-            if (value < super::c.front() && super::c.size() == size)
+            if (super::c.size() == size && value < super::c.front())
                 return;
 
             super::push(value);
