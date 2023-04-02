@@ -22,11 +22,9 @@ std::int8_t first_time = 1;
 
 void MessageReceivedOnMainThread() {
     printf("MessageReceivedOnMainThread\n");
-	//assert(!emscripten_current_thread_is_audio_worklet());
 
     auto links = Utils::computeLinks(dummyReader);
-
-    printf("1\n");
+    dummyReader.dropSamples();
 
 	std::string json = "[";
 	for (auto &link : links){
@@ -34,8 +32,6 @@ void MessageReceivedOnMainThread() {
 	}
 	json.pop_back();
 	json += "]";
-
-    printf("2\n");
 
 	EM_ASM({
 		console.log(UTF8ToString($0));
