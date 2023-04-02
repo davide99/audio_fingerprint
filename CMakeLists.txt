@@ -1,27 +1,40 @@
 cmake_minimum_required(VERSION 3.17)
 project(audio_fingerprint)
 
-option(BUILD_CLIENT "Build the client side code" ON)
+option(BUILD_CLIENT "Build the client side code" OFF)
+option(BUILD_MOCK_CLIENT "Build the mock client side code" ON)
 option(BUILD_SERVER "Build the server side code" OFF)
 
-if(BUILD_CLIENT)
+if (BUILD_CLIENT)
+    message("Building WASM client")
     add_definitions(-DBUILD_CLIENT)
-endif()
-if(BUILD_SERVER)
+endif ()
+if (BUILD_MOCK_CLIENT)
+    message("Building mock client")
+    add_definitions(-DBUILD_MOCK_CLIENT)
+endif ()
+if (BUILD_SERVER)
+    message("Building server")
     add_definitions(-DBUILD_SERVER)
-endif()
+endif ()
 
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mtune=native -flto -fsanitize=undefined")
-set(CMAKE_CXX_FLAGS "-fsanitize=undefined -Wcast-align -Wover-aligned")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -march=native -mtune=native -flto")
 set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-flto")
 
-if(BUILD_SERVER)
+if (BUILD_CLIENT)
+    set(CMAKE_CXX_FLAGS "-fsanitize=undefined -Wcast-align -Wover-aligned")
+endif ()
+
+# Mariadbpp
+if (BUILD_SERVER)
     add_subdirectory(mariadbpp)
     include_directories(mariadbpp/include)
-endif()
+endif ()
 
+#fftw
 set(CMAKE_POLICY_DEFAULT_CMP0077 NEW)
+set(CMAKE_POLICY_DEFAULT_CMP0075 NEW)
 
 set(ENABLE_FLOAT ON)
 set(BUILD_SHARED_LIBS OFF)
@@ -30,9 +43,8 @@ set(DISABLE_FORTRAN ON)
 set(ENABLE_THREADS ON)
 add_subdirectory(fftw)
 
-add_executable(audio_fingerprint
-        wasm.cpp
-        #IO/Readers/WavReader.cpp IO/Readers/WavReader.h
+#common source files
+set(SOURCE_FILES
         Utils/Utils.cpp Utils/Utils.h
         Consts.h
         Math/Integers.cpp Math/Integers.h
@@ -46,17 +58,45 @@ add_executable(audio_fingerprint
         Core/PeaksFinder.cpp Core/PeaksFinder.h
         Core/Link.h Core/Link.cpp
         Core/Links.cpp Core/Links.h
-        #IO/DB.cpp IO/DB.h
-        Utils/Wrapper.h IO/Readers/Reader.h IO/Readers/DummyReader.cpp IO/Readers/DummyReader.h)
+        Utils/Wrapper.h
+        IO/Readers/Reader.h)
+
+if (BUILD_CLIENT)
+    set(SOURCE_FILES
+            ${SOURCE_FILES}
+            wasm.cpp
+            IO/Readers/DummyReader.cpp IO/Readers/DummyReader.h)
+endif ()
+
+if (BUILD_MOCK_CLIENT)
+    set(SOURCE_FILES
+            ${SOURCE_FILES}
+            wasm_mock.cpp
+            IO/Readers/WavReader.cpp IO/Readers/WavReader.h)
+endif ()
+
+if (BUILD_SERVER)
+    set(SOURCE_FILES
+            ${SOURCE_FILES}
+            server.cpp
+            IO/Readers/WavReader.cpp IO/Readers/WavReader.h
+            IO/DB.cpp IO/DB.h)
+endif ()
+
+add_executable(audio_fingerprint ${SOURCE_FILES})
 
 target_include_directories(audio_fingerprint PRIVATE fftw/api)
 
-if(BUILD_SERVER)
+if (BUILD_SERVER)
     target_link_libraries(audio_fingerprint fftw3f mariadbclientpp stdc++fs)
-else()
+else ()
     target_link_libraries(audio_fingerprint fftw3f)
-endif()
+endif ()
 
 target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")
-set_target_properties(audio_fingerprint PROPERTIES LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_STACK=1GB -s INITIAL_MEMORY=2GB -s ASSERTIONS=2 -s SAFE_HEAP=1 -s WARN_UNALIGNED=1")
-set(CMAKE_EXECUTABLE_SUFFIX ".html")
+if (BUILD_CLIENT)
+    set_target_properties(audio_fingerprint
+            PROPERTIES
+            LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_STACK=1GB -s INITIAL_MEMORY=2GB -s ASSERTIONS=2 -s SAFE_HEAP=1 -s WARN_UNALIGNED=1")
+    set(CMAKE_EXECUTABLE_SUFFIX ".html")
+endif ()

@@ -50,8 +50,9 @@ static bool checkFmtChunk(const FmtChunk &fmtChunk) {
 }
 
 //Iterate through the WAV file to find a chunk given the id
-bool IO::Readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian,
-                              const bool iterate = true) {
+bool
+IO::Readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian,
+                                  const bool iterate = true) {
     bool found;
 
     do {
@@ -81,15 +82,13 @@ bool IO::Readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std
 
 IO::Readers::WavReader::WavReader(const std::string &fileName) {
     Chunk chunk{};
-    bool isBigEndian;
-
-    if (!Utils::fileExists(fileName))
-        throw std::runtime_error("Can't open file: " + fileName);
-
-    isBigEndian = Utils::isBigEndian();
+    bool isBigEndian = Utils::isBigEndian();
 
     std::ifstream wavFile(fileName, std::ios::binary);
     wavFile.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+    if (wavFile.fail()) {
+        throw std::runtime_error("Can't open file: " + fileName);
+    }
 
     //Read riff chunk
     {
@@ -134,7 +133,7 @@ IO::Readers::WavReader::WavReader(const std::string &fileName) {
     wavFile.read(reinterpret_cast<char *>(iData.data()), numberOfSamples * Consts::Audio::BitsPerSample >> 3u);
 
     if (isBigEndian)
-        for (auto &sample : iData)
+        for (auto &sample: iData)
             sample = Math::Integers::BSwap(sample);
 
     //Convert the int16 to a float

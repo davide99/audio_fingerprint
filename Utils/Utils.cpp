@@ -4,12 +4,6 @@
 #include <filesystem>
 #include <algorithm>
 
-#ifdef BUILD_SERVER
-bool Utils::fileExists(const std::string &fileName) {
-    return access(fileName.c_str(), F_OK) == 0;
-}
-#endif
-
 bool Utils::isBigEndian() {
     uint16_t n = 0x0001u;
     auto *ptr = reinterpret_cast<uint8_t *>(&n);

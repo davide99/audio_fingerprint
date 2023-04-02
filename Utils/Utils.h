@@ -5,10 +5,6 @@
 #include <vector>
 
 namespace Utils {
-#ifdef BUILD_SERVER
-    bool fileExists(const std::string &fileName);
-#endif
-
     bool isBigEndian();
 
 #ifdef BUILD_SERVER

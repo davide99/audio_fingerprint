@@ -22,9 +22,7 @@ namespace Utils {
     */
     Core::Links computeLinks(IO::Readers::Reader &reader) {
         Math::Spectrogram spectrogram(reader.getData());
-        printf("A\n");
         std::vector<Core::Peak> peaks = Core::Fingerprint::compute(spectrogram);
-        printf("B\n");
         return Core::Links(peaks);
     }
 
