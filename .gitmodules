@@ -1,6 +1,6 @@
 [submodule "xxHash"]
-	path = xxHash
+	path = libs/xxHash
 	url = https://github.com/Cyan4973/xxHash.git
 [submodule "mariadbpp"]
-	path = mariadbpp
+	path = libs/mariadbpp
 	url = https://github.com/viaduck/mariadbpp.git

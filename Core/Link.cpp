@@ -1,7 +1,7 @@
 #include "Link.h"
 #include "../Utils/Utils.h"
 #include "../Math/Integers.h"
-#include "../xxHash/xxh3.h"
+#include <xxh3.h>
 
 Core::Link::Link(const Peak &address, const Peak &peak) {
     std::int64_t deltaTime = peak.getWindow() - address.getWindow();

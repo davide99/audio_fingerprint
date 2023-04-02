@@ -28,8 +28,8 @@ endif ()
 
 # Mariadbpp
 if (BUILD_SERVER)
-    add_subdirectory(mariadbpp)
-    include_directories(mariadbpp/include)
+    add_subdirectory(libs/mariadbpp)
+    include_directories(libs/mariadbpp/include)
 endif ()
 
 #fftw
@@ -41,7 +41,7 @@ set(BUILD_SHARED_LIBS OFF)
 set(BUILD_TESTS OFF)
 set(DISABLE_FORTRAN ON)
 set(ENABLE_THREADS ON)
-add_subdirectory(fftw)
+add_subdirectory(libs/fftw)
 
 #common source files
 set(SOURCE_FILES
@@ -85,7 +85,7 @@ endif ()
 
 add_executable(audio_fingerprint ${SOURCE_FILES})
 
-target_include_directories(audio_fingerprint PRIVATE fftw/api)
+target_include_directories(audio_fingerprint PRIVATE libs/fftw/api libs/xxHash)
 
 if (BUILD_SERVER)
     target_link_libraries(audio_fingerprint fftw3f mariadbclientpp stdc++fs)
