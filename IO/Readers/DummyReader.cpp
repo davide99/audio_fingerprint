@@ -14,4 +14,8 @@ namespace IO::Readers {
     std::size_t DummyReader::getLen() {
         return this->data.size();
     }
+
+    void DummyReader::dropSamples() {
+        this->data.resize(0);
+    }
 }

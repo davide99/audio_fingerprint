@@ -8,6 +8,7 @@ int main(int argc, char **argv) {
 
     IO::Readers::WavReader reader(argv[1]);
     auto links = Utils::computeLinks(reader);
+    reader.dropSamples();
 
     std::string json = "[";
     for (auto &link: links) {

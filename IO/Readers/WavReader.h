@@ -24,6 +24,8 @@ namespace IO::Readers {
 
         const std::vector<float> &getData() override;
 
+        void dropSamples() override;
+
     private:
         static bool
         findChunk(const uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian, bool iterate);

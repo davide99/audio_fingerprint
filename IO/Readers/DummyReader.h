@@ -14,6 +14,8 @@ namespace IO::Readers {
 
         const std::vector<float> &getData() override;
 
+        void dropSamples() override;
+
         std::size_t getLen();
     };
 }

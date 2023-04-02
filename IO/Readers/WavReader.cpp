@@ -147,3 +147,7 @@ IO::Readers::WavReader::WavReader(const std::string &fileName) {
 const std::vector<float> &IO::Readers::WavReader::getData() {
     return this->data;
 }
+
+void IO::Readers::WavReader::dropSamples() {
+    this->data.resize(0);
+}
