@@ -1,6 +1,5 @@
 #include <emscripten/webaudio.h>
 #include <string>
-#include <cstdint>
 #include "IO/Readers/DummyReader.h"
 #include "Utils/Wrapper.h"
 #include "Consts.h"
@@ -23,7 +22,7 @@ void messageReceivedOnMainThread() {
     std::string json = "[";
     for (auto &link: links) {
         json += "{\"hash\":" + std::to_string(link.getHash()) +
-                ", \"window\":" + std::to_string(link.getTime()) + "},";
+                ",\"window\":" + std::to_string(link.getTime()) + "},";
     }
     json.pop_back();
     json += "]";
@@ -106,21 +105,6 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
 }
 
 /*
- * This callback will fire when the Wasm Module has been shared to the AudioWorklet global scope,
- * and is now ready to begin adding Audio Worklet Processors.
-*/
-void webAudioWorkletThreadInitialized(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL success, void *userData) {
-    (void) userData;
-
-    if (!success) return;
-
-    WebAudioWorkletProcessorCreateOptions opts = {
-            .name = "node",
-    };
-    emscripten_create_wasm_audio_worklet_processor_async(audioContext, &opts, audioWorkletProcessorCreated, nullptr);
-}
-
-/*
  * Define a global stack space for the AudioWorkletGlobalScope.
  * Note that all AudioWorkletProcessors and/or AudioWorkletNodes on the given Audio Context all share the same
  * AudioWorkerGlobalScope, i.e. they all run on the same one audio thread (multiple nodes/processors do not each
@@ -144,5 +128,15 @@ int main() {
     emscripten_start_wasm_audio_worklet_thread_async(
             context,
             wasmAudioWorkletStack, sizeof(wasmAudioWorkletStack),
-            webAudioWorkletThreadInitialized, nullptr);
+            [](EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL success, void *userData) {
+                // This callback will fire when the Wasm Module has been shared to the AudioWorklet global scope,
+                // and is now ready to begin adding Audio Worklet Processors.
+
+                if (!success) return;
+
+                WebAudioWorkletProcessorCreateOptions opts = {.name = "node"};
+                emscripten_create_wasm_audio_worklet_processor_async(
+                        audioContext, &opts, audioWorkletProcessorCreated, nullptr);
+            },
+            nullptr);
 }

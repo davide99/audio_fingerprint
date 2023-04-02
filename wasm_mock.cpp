@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     std::string json = "[";
     for (auto &link: links) {
         json += "{\"hash\":" + std::to_string(link.getHash()) +
-                ", \"window\":" + std::to_string(link.getTime()) + "},";
+                ",\"window\":" + std::to_string(link.getTime()) + "},";
     }
     json.pop_back();
     json += "]";
