@@ -4,7 +4,6 @@
 #include "../../Consts.h"
 #include <iostream>
 #include <fstream>
-#include <cstdint>
 #include <cstring>
 #include <algorithm>
 
@@ -28,8 +27,8 @@ struct FmtChunk {
     std::uint16_t audioFormat;
     std::uint16_t channels;
     std::uint32_t sampleRate;
-    std::uint32_t averageBytePerSec;
-    std::uint16_t blockAlign;
+    [[maybe_unused]] std::uint32_t averageBytePerSec;
+    [[maybe_unused]] std::uint16_t blockAlign;
     std::uint16_t bitsPerSample;
 };
 #pragma pack(pop)
@@ -102,7 +101,7 @@ IO::Readers::WavReader::WavReader(const std::string &fileName) {
             throw std::runtime_error("Invalid RIFF chunk in: " + fileName);
     }
 
-    //Read fmt chunk, it might not be the immediately after the riff chunk
+    //Read fmt chunk, it might not be immediately after the riff chunk
     {
         if (!this->findChunk(FmtID, chunk, wavFile, isBigEndian))
             throw std::runtime_error(fileName + " is malformed");
@@ -114,7 +113,7 @@ IO::Readers::WavReader::WavReader(const std::string &fileName) {
             throw std::runtime_error("WAV is not in the correct format");
     }
 
-    size_t numberOfSamples;
+    std::int64_t numberOfSamples;
 
     //Read data chunk
     {

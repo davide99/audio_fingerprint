@@ -17,7 +17,7 @@ namespace Core {
      * @return The found peaks
      */
     Utils::FixedSizePQ<Peak, Consts::Fingerprint::NPeaks>
-    findPeaks(const Math::FFTWindow &fftWindow, const std::size_t &window, const int &bandStart, const int &bandEnd);
+    findPeaks(const Math::FFTWindow &fftWindow, const std::int64_t &window, const int &bandStart, const int &bandEnd);
 }
 
 #endif

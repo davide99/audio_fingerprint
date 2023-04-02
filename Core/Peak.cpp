@@ -4,7 +4,7 @@ const int &Core::Peak::getFreqIndex() const {
     return this->freqIndex;
 }
 
-const std::size_t &Core::Peak::getWindow() const {
+const std::int64_t & Core::Peak::getWindow() const {
     return this->window;
 }
 

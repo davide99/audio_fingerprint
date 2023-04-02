@@ -1,7 +1,6 @@
 #include "Fingerprint.h"
 #include "../Utils/FixedSizePQ.h"
 #include "PeaksFinder.h"
-#include <cstdint>
 #include <algorithm>
 
 std::vector<Core::Peak> Core::Fingerprint::compute(const Math::Spectrogram &spectrogram) {
@@ -10,12 +9,12 @@ std::vector<Core::Peak> Core::Fingerprint::compute(const Math::Spectrogram &spec
     Utils::FixedSizePQ<Peak, Consts::Fingerprint::NPeaks> tmp; //to store the temporary loudest peaks
 
     //For each band
-    for (std::size_t b = 0; b < Math::Window::bands.size() - 1; b++) {
+    for (std::int64_t b = 0; b < Math::Window::bands.size() - 1; b++) {
         currBand = Math::Window::bands[b];
         nextBand = Math::Window::bands[b + 1];
 
         //For each window in the spectrogram
-        for (std::size_t i = 0; i < spectrogram.size(); i++) {
+        for (std::int64_t i = 0; i < spectrogram.size(); i++) {
 
             //Every C, or at the end of the window, add tmp to peakVec then reset tmp
             if (i % Consts::Fingerprint::C == 0 || i == spectrogram.size() - 1) {

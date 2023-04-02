@@ -3,7 +3,7 @@
 #include "Vector.h"
 #include "Window.h"
 
-//The output length of a FFT for a x real-valued input array is x.length / 2 + 1
+//The output length of an FFT for an x real-valued input array is x.length / 2 + 1
 static constexpr std::uint16_t FFTOutSize = Consts::Window::Size / 2 + 1;
 
 Math::Spectrogram::Spectrogram(const std::vector<float> &data) {

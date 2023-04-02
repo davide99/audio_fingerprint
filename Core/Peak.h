@@ -12,20 +12,20 @@ namespace Core {
      */
     class Peak {
     private:
-        int freqIndex;      //index referring to an element of Window::freqBins
-        float power;        //magnitude
-        std::size_t window; //window the peak belongs to
-        float time;         //time in the audio file, related to the window member
-        int bandIndex;      //index referring to an element of Window::bands (getBandsIndex)
+        int freqIndex;       //index referring to an element of Window::freqBins
+        float power;         //magnitude
+        std::int64_t window; //window the peak belongs to
+        float time;          //time in the audio file, related to the window member
+        int bandIndex;       //index referring to an element of Window::bands (getBandsIndex)
 
     public:
-        Peak(const int &freqIndex, const float &power, const std::size_t &window, const float &time) :
+        Peak(const int &freqIndex, const float &power, const std::int64_t &window, const float &time) :
                 freqIndex(freqIndex), power(power), window(window), time(time),
                 bandIndex(Math::Window::getBandIndex(freqIndex)) {};
 
         [[nodiscard]] const int &getFreqIndex() const;
 
-        [[nodiscard]] const std::size_t &getWindow() const;
+        [[nodiscard]] const int64_t & getWindow() const;
 
         [[nodiscard]] const float &getTime() const;
 

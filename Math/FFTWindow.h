@@ -15,7 +15,7 @@ namespace Math {
         friend class Spectrogram;
 
     private:
-        std::array<float, Consts::Window::FreqBins> magnitudes;
+        std::array<float, Consts::Window::FreqBins> magnitudes{};
         float time{};
 
     public:

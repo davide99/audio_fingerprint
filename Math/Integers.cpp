@@ -1,5 +1,4 @@
 #include "Integers.h"
-#include <cstring>
 #include <algorithm>
 
 std::uint32_t Math::Integers::BSwap(const std::uint32_t &x) {
