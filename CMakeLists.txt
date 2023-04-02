@@ -24,6 +24,11 @@ set(CMAKE_EXE_LINKER_FLAGS_RELEASE "-flto")
 
 if (BUILD_CLIENT)
     set(CMAKE_CXX_FLAGS "-fsanitize=undefined -Wcast-align")
+
+    if (UNIX AND DEFINED ENV{CLION_IDE})
+        #Giusto per avere l'autocompletamento funzionante da CLion
+        include_directories($ENV{HOME}/emsdk/upstream/emscripten/system/include)
+    endif ()
 endif ()
 
 # Mariadbpp
