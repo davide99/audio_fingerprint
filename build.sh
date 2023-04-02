@@ -11,6 +11,6 @@ cd $BUILD_DIR || exit
 #Build
 if [[ $1 == update ]]; then
   echo Rieseguo cmake
-  emcmake cmake ..
+  emcmake cmake -DBUILD_CLIENT:BOOL=ON -DBUILD_SERVER:BOOL=OFF -DBUILD_MOCK_CLIENT:BOOL=OFF ..
 fi
 make
