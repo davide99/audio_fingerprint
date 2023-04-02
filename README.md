@@ -93,7 +93,7 @@ To do so add `max_allowed_packet=64M` to `/etc/my.cnf` or
 ### Debian
 
 1. `git submodule update --init --recursive`
-1. `sudo apt install libmariadbclient-dev`
+1. `sudo apt install libmariadb-dev`
 1. `sudo apt install libfftw3-dev`
 
 ### Windows (MSys2)

@@ -1,5 +1,6 @@
 #include "Integers.h"
 #include <algorithm>
+#include <cstring>
 
 std::uint32_t Math::Integers::BSwap(const std::uint32_t &x) {
 #if defined(_MSC_VER)

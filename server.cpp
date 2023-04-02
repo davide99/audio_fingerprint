@@ -37,15 +37,6 @@ int main(int argc, char **argv) {
 
                 std::cout << "Mean time for each song: " << duration << "ms" << std::endl;
             }
-
-        } else if (command == "-s") {
-            auto songFile = Utils::search(argument, db);
-
-            if (songFile.empty())
-                std::cout << "Can't find the song" << std::endl;
-            else
-                std::cout << "Found: " << songFile << std::endl;
-
         } else if (command == "-d" && argument == "database") {
             if (db.drop())
                 std::cout << "Database dropped" << std::endl;
