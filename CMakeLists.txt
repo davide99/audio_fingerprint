@@ -31,7 +31,7 @@ set(ENABLE_THREADS ON)
 add_subdirectory(fftw)
 
 add_executable(audio_fingerprint
-        main.cpp
+        wasm.cpp
         #IO/Readers/WavReader.cpp IO/Readers/WavReader.h
         Utils/Utils.cpp Utils/Utils.h
         Consts.h
