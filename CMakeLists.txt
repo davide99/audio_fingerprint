@@ -97,6 +97,6 @@ target_compile_definitions(audio_fingerprint PUBLIC "$<$<CONFIG:DEBUG>:DEBUG>")
 if (BUILD_CLIENT)
     set_target_properties(audio_fingerprint
             PROPERTIES
-            LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -s TOTAL_STACK=1GB -s INITIAL_MEMORY=2GB -s ASSERTIONS=2 -s SAFE_HEAP=1 -s WARN_UNALIGNED=1")
+            LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -s INITIAL_MEMORY=256MB")
     set(CMAKE_EXECUTABLE_SUFFIX ".html")
 endif ()
