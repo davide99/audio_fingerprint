@@ -2,7 +2,7 @@
 #include <string>
 #include "IO/Readers/DummyReader.h"
 #include "Utils/Wrapper.h"
-#include "Consts.h"
+#include "consts.h"
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;

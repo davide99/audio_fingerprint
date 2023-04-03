@@ -19,22 +19,22 @@ release optimizations turned on.
 
 <a name="explanation"/>
 
-La cartella `Core` contiene l'implementazione dell'algorimo che consiste in:
+La cartella `core` contiene l'implementazione dell'algorimo che consiste in:
 
-* *Fingerprint*: divide lo spettro in sezioni (in tempo e in frequenza), per ogni sezione individua i picchi utilizzando
+* *fingerprint*: divide lo spettro in sezioni (in tempo e in frequenza), per ogni sezione individua i picchi utilizzando
   la funzione definita in PeaksFinder
 * *Link*: classe per la rappresentazione dei picchi secondo lo schema indirizzo-picco utilizzata per creare l'hash
-* *Links*: contiene la funzione per creare i link
+* *links*: contiene la funzione per creare i link
 * *Peak*: classe per la rappresentazione dei picchi di intensità
 * *PeaksFinder*: classe per individuare i picchi
 
-La cartella `Math` contiene alcune classi di supporto:
+La cartella `math` contiene alcune classi di supporto:
 
 * *FFTWindow*: classe per rappresentare una finestra dello spettro
-* *Integers*: contiene funzioni per fare operazioni su interi (byte swap e conversione in stringa)
-* *Spectrogram*: classe per rappresentare lo spettro
-* *Vector*: contiene una funzione per multiplicare due vettori tra di loro (utilizzata durante la finestratura)
-* *Window*: contiene funzioni per calcolare la finestra di hamming, la frequenza centrale di ogni bin di frequenze dello
+* *integers*: contiene funzioni per fare operazioni su interi (byte swap e conversione in stringa)
+* *spectrogram*: classe per rappresentare lo spettro
+* *vector*: contiene una funzione per multiplicare due vettori tra di loro (utilizzata durante la finestratura)
+* *window*: contiene funzioni per calcolare la finestra di hamming, la frequenza centrale di ogni bin di frequenze dello
   spettro, le bande Mel, ottenere la banda Mel a partire da una frequenza in Hertz
 
 La cartella `IO` contiene la classi per le operazioni di I/O:
@@ -44,11 +44,11 @@ La cartella `IO` contiene la classi per le operazioni di I/O:
   canzone dato il suo id
 * *WavReader*: classe per fare il parse di un file WAV
 
-La cartella `Utils` contiene alcune funzioni di utilità utilizzate nel programma:
+La cartella `utils` contiene alcune funzioni di utilità utilizzate nel programma:
 
 * *FixedSizePQ*: priority queue a lunghezza fissa, utilizzata per individuare i picchi a intensità maggiori in una
-  sezione dello spettro (vedi classe Core/Fingerprint)
-* *Utils*: funzioni per verificare che un file esista, per ottenere l'endianess della macchina, verificare che una
+  sezione dello spettro (vedi classe core/fingerprint)
+* *utils*: funzioni per verificare che un file esista, per ottenere l'endianess della macchina, verificare che una
   stringa termini in un determinato modo, ottenere i file in una directory, effettuare il trim di una stringa
 * *Wrapper*: semplifica le operazioni di inserimento e ricerca dei brani fungendo da wrapper
 
@@ -58,7 +58,7 @@ Si consiglia di partire dalla funzione `insertSong` in Wrapper per comprendere i
 
 <a name="configuration"/>
 
-1. In the `Consts.h` file insert the correct hostname, username and password
+1. In the `consts.h` file insert the correct hostname, username and password
    (the database will be automatically created if not existent)
 1. Put some WAV files in a directory
 1. Run the program with the following parameters: `-i <path to wav files>`
