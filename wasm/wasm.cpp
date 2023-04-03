@@ -1,28 +1,28 @@
 #include <emscripten/webaudio.h>
 #include <string>
-#include "IO/Readers/DummyReader.h"
-#include "Utils/Wrapper.h"
-#include "consts.h"
+#include "dummy_reader.h"
+#include "wrapper.h"
+#include "../consts.h"
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;
 
 //variabili del solo audio thread
 constexpr auto SAMPLE_SEC = 4; //numero secondi durata sample
-constexpr auto NUM_SAMPLES = Consts::Audio::SampleRate * SAMPLE_SEC;
+constexpr auto NUM_SAMPLES = consts::audio::SAMPLE_RATE * SAMPLE_SEC;
 constexpr auto PROCESS_SAMPLES = 128;
 
-IO::Readers::DummyReader dummyReader;
+dummy_reader dummyReader;
 std::int8_t first_time = 1;
 
 void messageReceivedOnMainThread() {
-    auto links = Utils::computeLinks(dummyReader);
-    dummyReader.dropSamples();
+    auto links = utils::computeLinks(dummyReader);
+    dummyReader.drop_samples();
 
     std::string json = "[";
     for (auto &link: links) {
-        json += "{\"hash\":" + std::to_string(link.getHash()) +
-                ",\"window\":" + std::to_string(link.getTime()) + "},";
+        json += "{\"hash\":" + std::to_string(link.get_hash()) +
+                ",\"window\":" + std::to_string(link.get_time()) + "},";
     }
     json.pop_back();
     json += "]";
@@ -45,9 +45,9 @@ EM_BOOL processAudio(
     //Se non l'ho avviato allora esco subito
     if (!start) return EM_TRUE;
 
-    if (dummyReader.getLen() < NUM_SAMPLES) {
+    if (dummyReader.get_len() < NUM_SAMPLES) {
         //Assumiamo numero input == 1
-        dummyReader.addSamples(inputs->data, PROCESS_SAMPLES);
+        dummyReader.add_samples(inputs->data, PROCESS_SAMPLES);
     } else if (first_time) {
         first_time = 0;
 
@@ -116,7 +116,7 @@ int main() {
     // Create an audio context
     EmscriptenWebAudioCreateAttributes attrs = {
             .latencyHint = "interactive",
-            .sampleRate = Consts::Audio::SampleRate
+            .sampleRate = consts::audio::SAMPLE_RATE
     };
 
     EMSCRIPTEN_WEBAUDIO_T context = emscripten_create_audio_context(&attrs);
@@ -129,6 +129,8 @@ int main() {
             context,
             wasmAudioWorkletStack, sizeof(wasmAudioWorkletStack),
             [](EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL success, void *userData) {
+                (void) userData;
+
                 // This callback will fire when the Wasm Module has been shared to the AudioWorklet global scope,
                 // and is now ready to begin adding Audio Worklet Processors.
 
