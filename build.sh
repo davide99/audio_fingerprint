@@ -10,7 +10,7 @@ esac
 
 if [[ $machine == UNKNOWN ]]; then
   echo Build su questa architettura non supportata: usare Linux o MINGW64
-  exit -1
+  exit 255
 fi
 
 #Inizializzo SDK emscripten
