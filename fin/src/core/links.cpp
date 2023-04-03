@@ -1,8 +1,8 @@
-#include "../../include/core/links.h"
+#include <fin/core/links.h>
 #include <cmath>
 #include <algorithm>
 
-core::links::links(const std::vector<peak> &peak_vec) {
+fin::core::links::links(const std::vector<peak> &peak_vec) {
     float time_step = (float) consts::window::step_size / consts::audio::SAMPLE_RATE; //Time step between each window
     //Get the maximum window distance in terms of array index given the float time difference
     std::int64_t max_win_distance = std::lround(consts::Links::MaxWinDistanceF / time_step);

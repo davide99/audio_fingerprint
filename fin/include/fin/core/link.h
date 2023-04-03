@@ -2,9 +2,9 @@
 #define CORE_LINK_H
 
 #include <cstdint>
-#include "peak.h"
+#include <fin/core/peak.h>
 
-namespace core {
+namespace fin::core {
     /**
      * Class to hold a link information
      */
@@ -13,7 +13,7 @@ namespace core {
         std::uint64_t hash;
         std::uint64_t window;
     public:
-        link(const peak &address, const peak &peak);
+        link(const fin::core::peak &address, const fin::core::peak &peak);
 
         [[nodiscard]] std::uint64_t get_hash() const;
 

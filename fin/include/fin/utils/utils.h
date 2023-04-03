@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace utils {
+namespace fin::utils {
     bool is_big_endian();
 }
 

@@ -6,7 +6,7 @@
 #include <complex>
 #include "../../../consts.h"
 
-namespace math {
+namespace fin::math {
     /**
      * Simple container class to store the output of the
      * FFT and the corresponding time

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/libs/mariadbpp" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/libs/mariadbpp/external/cmake-modules" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/libs/xxHash" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/fin/libs/xxHash" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/server/libs/mariadbpp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/server/libs/mariadbpp/external/cmake-modules" vcs="Git" />
   </component>
 </project>

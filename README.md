@@ -39,10 +39,10 @@ La cartella `math` contiene alcune classi di supporto:
 
 La cartella `IO` contiene la classi per le operazioni di I/O:
 
-* *DB*: classe per interfacciarsi col database, permette di verificare che il database esista, di crearlo, di
+* *db*: classe per interfacciarsi col database, permette di verificare che il database esista, di crearlo, di
   eliminarlo, di inserire i fingerprint di una canzone, di ricercare l'id di una canzone, ottenere il nome di una
   canzone dato il suo id
-* *WavReader*: classe per fare il parse di un file WAV
+* *wav_reader*: classe per fare il parse di un file WAV
 
 La cartella `utils` contiene alcune funzioni di utilità utilizzate nel programma:
 
@@ -58,7 +58,7 @@ Si consiglia di partire dalla funzione `insertSong` in Wrapper per comprendere i
 
 <a name="configuration"/>
 
-1. In the `consts.h` file insert the correct hostname, username and password
+1. In the `consts.h` file insert the correct HOSTNAME, USERNAME and PASSWORD
    (the database will be automatically created if not existent)
 1. Put some WAV files in a directory
 1. Run the program with the following parameters: `-i <path to wav files>`

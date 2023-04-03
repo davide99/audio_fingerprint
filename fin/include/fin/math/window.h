@@ -5,7 +5,7 @@
 #include <vector>
 #include "../../../consts.h"
 
-namespace math::window {
+namespace fin::math::window {
     extern const std::array<float, consts::window::size> window;
     extern const std::array<float, consts::window::freq_bins> freq_bins;
     extern const std::vector<int> bands;

@@ -1,7 +1,7 @@
-#include "../../include/utils/utils.h"
+#include <fin/utils/utils.h>
 #include <cstdint>
 
-bool utils::is_big_endian() {
+bool fin::utils::is_big_endian() {
     uint16_t n = 0x0001u;
     auto *ptr = reinterpret_cast<uint8_t *>(&n);
 

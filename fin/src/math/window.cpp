@@ -1,4 +1,4 @@
-#include "../../include/math/window.h"
+#include <fin/math/window.h>
 #include <cmath>
 
 static std::array<float, consts::window::size> make_window() noexcept {
@@ -10,7 +10,7 @@ static std::array<float, consts::window::size> make_window() noexcept {
     return tmp;
 }
 
-const std::array<float, consts::window::size> math::window::window = make_window();
+const std::array<float, consts::window::size> fin::math::window::window = make_window();
 
 //----------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ static std::array<float, consts::window::freq_bins> make_freq_bins() noexcept {
     return tmp;
 }
 
-const std::array<float, consts::window::freq_bins> math::window::freq_bins = make_freq_bins();
+const std::array<float, consts::window::freq_bins> fin::math::window::freq_bins = make_freq_bins();
 
 //----------------------------------------------------------------------
 
@@ -46,18 +46,18 @@ static std::vector<int> make_bands() noexcept {
     return tmp;
 }
 
-const std::vector<int> math::window::bands = make_bands();
+const std::vector<int> fin::math::window::bands = make_bands();
 
 //----------------------------------------------------------------------
 
 static std::array<int, consts::window::freq_bins> make_bands_map() noexcept {
     std::array<int, consts::window::freq_bins> tmp{};
 
-    auto it = math::window::bands.begin();
+    auto it = fin::math::window::bands.begin();
     int bandIndex = 0;
 
     for (int i = 0; i < consts::window::freq_bins; i++) {
-        if (i >= *it && it != math::window::bands.end()) { //next band?
+        if (i >= *it && it != fin::math::window::bands.end()) { //next band?
             it++;
             bandIndex++;
         }
@@ -68,8 +68,8 @@ static std::array<int, consts::window::freq_bins> make_bands_map() noexcept {
     return tmp;
 }
 
-const std::array<int, consts::window::freq_bins> math::window::bands_map = make_bands_map();
+const std::array<int, consts::window::freq_bins> fin::math::window::bands_map = make_bands_map();
 
-const int &math::window::get_band_index(const int &freq_index) {
+const int &fin::math::window::get_band_index(const int &freq_index) {
     return bands_map[freq_index];
 }

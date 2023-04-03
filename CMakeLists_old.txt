@@ -77,15 +77,15 @@ if (BUILD_MOCK_CLIENT)
     set(SOURCE_FILES
             ${SOURCE_FILES}
             wasm_mock.cpp
-            IO/readers/WavReader.cpp IO/readers/WavReader.h)
+            IO/readers/wav_reader.cpp IO/readers/wav_reader.h)
 endif ()
 
 if (BUILD_SERVER)
     set(SOURCE_FILES
             ${SOURCE_FILES}
             server.cpp
-            IO/readers/WavReader.cpp IO/readers/WavReader.h
-            IO/DB.cpp IO/DB.h)
+            IO/readers/wav_reader.cpp IO/readers/wav_reader.h
+            IO/db.cpp IO/db.h)
 endif ()
 
 add_executable(audio_fingerprint ${SOURCE_FILES})

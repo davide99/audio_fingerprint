@@ -26,7 +26,9 @@ target_link_libraries(fin fftw3f)
 target_include_directories(
         fin
         PUBLIC
-        libs/fftw/api libs/xxHash)
+        libs/fftw/api libs/xxHash
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
 
 target_compile_features(fin PUBLIC cxx_std_17)
 

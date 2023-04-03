@@ -1,12 +1,12 @@
 #include <fftw3.h>
-#include "../../include/math/spectrogram.h"
-#include "../../include/math/vector.h"
-#include "../../include/math/window.h"
+#include <fin/math/spectrogram.h>
+#include <fin/math/vector.h>
+#include <fin/math/window.h>
 
 //The output length of an FFT for an x real-valued input array is x.length / 2 + 1
 static constexpr std::uint16_t fft_out_size = consts::window::size / 2 + 1;
 
-math::spectrogram::spectrogram(const std::vector<float> &data) {
+fin::math::spectrogram::spectrogram(const std::vector<float> &data) {
     //Calculation of the winFFT size with integer roundup
     std::size_t win_fft_size = ((std::size_t) ((data.size() - consts::window::size) / consts::window::step_size)) *
                                consts::window::step_size;
@@ -39,10 +39,10 @@ math::spectrogram::spectrogram(const std::vector<float> &data) {
     fftwf_destroy_plan(p);
 }
 
-const math::fft_window &math::spectrogram::operator[](std::size_t pos) const {
+const fin::math::fft_window &fin::math::spectrogram::operator[](std::size_t pos) const {
     return this->fft_windows[pos];
 }
 
-std::size_t math::spectrogram::size() const {
+std::size_t fin::math::spectrogram::size() const {
     return this->fft_windows.size();
 }

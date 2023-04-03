@@ -7,7 +7,7 @@
 #include <vector>
 #include <cstdint>
 
-namespace core {
+namespace fin::core {
     /**
      * Finds the peaks in the fft_window between band_start and band_end
      * @param fft_window FFT window to analyze

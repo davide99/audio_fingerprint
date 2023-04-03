@@ -5,7 +5,7 @@
 #include "fft_window.h"
 #include "../../../consts.h"
 
-namespace math {
+namespace fin::math {
     /**
      * Class to compute the spectrogram given the samples
      */

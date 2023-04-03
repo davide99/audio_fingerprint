@@ -4,7 +4,7 @@
 #include <queue>
 #include <cstdint>
 
-namespace utils {
+namespace fin::utils {
     template<typename T, std::size_t size>
     class fixed_size_pq : private std::priority_queue<T, std::deque<T>, std::greater<T>> {
     private:

@@ -1,8 +1,8 @@
-#include "../../include/core/fingerprint.h"
-#include "../../include/core/peaks_finder.h"
+#include <fin/core/fingerprint.h>
+#include <fin/core/peaks_finder.h>
 #include <algorithm>
 
-std::vector<core::peak> core::fingerprint::compute(const math::spectrogram &spectrogram) {
+std::vector<fin::core::peak> fin::core::fingerprint::compute(const math::spectrogram &spectrogram) {
     int currBand, nextBand;
     std::vector<peak> peak_vec; //vector to be returned
     utils::fixed_size_pq<peak, consts::fingerprint::n_peaks> tmp; //to store the temporary loudest peaks

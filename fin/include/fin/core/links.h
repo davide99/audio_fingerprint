@@ -2,10 +2,10 @@
 #define CORE_LINKS_H
 
 #include <vector>
-#include "link.h"
-#include "peak.h"
+#include <fin/core/link.h>
+#include <fin/core/peak.h>
 
-namespace core {
+namespace fin::core {
     /**
      * vector of links. Access the peaks as you would normally do with a vector.
      */
@@ -15,7 +15,7 @@ namespace core {
          * Constructs the links given the peaks
          * @param peak_vec Computed peaks
          */
-        explicit links(const std::vector<peak> &peak_vec);
+        explicit links(const std::vector<fin::core::peak> &peak_vec);
     };
 }
 

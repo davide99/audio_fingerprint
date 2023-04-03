@@ -7,9 +7,9 @@
 
 namespace consts {
     namespace audio {
-        constexpr std::uint16_t Channels = 1u;
+        constexpr std::uint16_t CHANNELS = 1u;
         constexpr std::uint32_t SAMPLE_RATE = 8000u;
-        constexpr std::uint16_t BitsPerSample = 16u;
+        constexpr std::uint16_t BITS_PER_SAMPLE = 16u;
     }
 
     namespace window {
@@ -39,21 +39,21 @@ namespace consts {
         constexpr std::uint64_t MinHint = 15;
     }
 
-    namespace DB {
+    namespace db {
         //Credentials
-        const std::string Hostname = "localhost";
-        const std::string Username = "root";
-        const std::string Password = "davide";
-        const std::string Name = "musiclibrary";
+        const std::string HOSTNAME = "localhost";
+        const std::string USERNAME = "root";
+        const std::string PASSWORD = "davide";
+        const std::string NAME = "musiclibrary";
 
         //Table names
-        const std::string RecordingsTable = "recordings";
-        const std::string InfoTable = "musicinfo";
-        const std::string TmpRecordTable = "_recording";
+        const std::string RECORDINGS_TABLE = "recordings";
+        const std::string INFO_TABLE = "musicinfo";
+        const std::string TMP_RECORD_TABLE = "_recording";
 
-        const std::string RecordingsTableFull = Name + "." + RecordingsTable;
-        const std::string InfoTableFull = Name + "." + InfoTable;
-        const std::string TmpRecordTableFull = Name + "." + TmpRecordTable;
+        const std::string RECORDINGS_TABLE_FULL = NAME + "." + RECORDINGS_TABLE;
+        const std::string INFO_TABLE_FULL = NAME + "." + INFO_TABLE;
+        const std::string TMP_RECORD_TABLE_FULL = NAME + "." + TMP_RECORD_TABLE;
 
         //Table fields
         const std::string UInt64 = "BIGINT UNSIGNED";

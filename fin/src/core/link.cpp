@@ -1,9 +1,9 @@
-#include "../../include/core/link.h"
-#include "../../include/utils/utils.h"
-#include "../../include/math/integers.h"
+#include <fin/core/link.h>
+#include <fin/utils/utils.h>
+#include <fin/math/integers.h>
 #include <xxh3.h>
 
-core::link::link(const peak &address, const peak &peak) {
+fin::core::link::link(const peak &address, const peak &peak) {
     std::int64_t delta_time = peak.get_window() - address.get_window();
     std::int64_t delta_freq = peak.get_freq_index() - address.get_freq_index();
     std::uint64_t addr_freq = address.get_freq_index();
@@ -25,11 +25,11 @@ core::link::link(const peak &address, const peak &peak) {
     this->window = address.get_window();
 }
 
-std::uint64_t core::link::get_hash() const {
+std::uint64_t fin::core::link::get_hash() const {
     return this->hash;
 }
 
-std::uint64_t core::link::get_time() const {
+std::uint64_t fin::core::link::get_time() const {
     return this->window;
 }
 

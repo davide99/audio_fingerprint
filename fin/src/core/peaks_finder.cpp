@@ -1,7 +1,7 @@
-#include "../../include/core/peaks_finder.h"
+#include <fin/core/peaks_finder.h>
 
-utils::fixed_size_pq<core::peak, consts::fingerprint::n_peaks>
-core::find_peaks(const math::fft_window &fft_window, const int64_t &window, const int &band_start, const int &band_end) {
+fin::utils::fixed_size_pq<fin::core::peak, consts::fingerprint::n_peaks>
+fin::core::find_peaks(const math::fft_window &fft_window, const int64_t &window, const int &band_start, const int &band_end) {
     utils::fixed_size_pq<peak, consts::fingerprint::n_peaks> peaks;
     float mag_current, freq_current;
     int index_left, index_right, j;

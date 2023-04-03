@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <functional>
 
-namespace math::vector {
+namespace fin::math::vector {
 
     /**
      * Multiply array v1 by v2 element-wise and store the output in out

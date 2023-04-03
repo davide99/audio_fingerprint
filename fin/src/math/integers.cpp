@@ -1,7 +1,7 @@
-#include "../../include/math/integers.h"
+#include <fin/math/integers.h>
 #include <algorithm>
 
-std::uint32_t math::integers::byte_swap(const std::uint32_t &x) {
+std::uint32_t fin::math::integers::byte_swap(const std::uint32_t &x) {
 #if defined(_MSC_VER)
     return _byteswap_ulong((x));
 #elif (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
@@ -16,7 +16,7 @@ std::uint32_t math::integers::byte_swap(const std::uint32_t &x) {
 #endif
 }
 
-std::uint16_t math::integers::byte_swap(const std::uint16_t &x) {
+std::uint16_t fin::math::integers::byte_swap(const std::uint16_t &x) {
 #if defined(_MSC_VER)
     return _byteswap_ushort((x));
 #elif (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
@@ -28,13 +28,13 @@ std::uint16_t math::integers::byte_swap(const std::uint16_t &x) {
 #endif
 }
 
-std::int16_t math::integers::byte_swap(const std::int16_t &x) {
+std::int16_t fin::math::integers::byte_swap(const std::int16_t &x) {
     std::uint16_t val_u = *(std::uint16_t *) &x;  //Convert to unsigned
     val_u = byte_swap(val_u);                         //Convert to big endian
     return *(std::int16_t *) &val_u;              //Make it signed
 }
 
-std::uint64_t math::integers::byte_swap(const std::uint64_t &x) {
+std::uint64_t fin::math::integers::byte_swap(const std::uint64_t &x) {
 #if defined(_MSC_VER)
     return _byteswap_uint64((x));
 #elif (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
@@ -53,7 +53,7 @@ std::uint64_t math::integers::byte_swap(const std::uint64_t &x) {
 #endif
 }
 
-std::int64_t math::integers::byte_swap(const int64_t &x) {
+std::int64_t fin::math::integers::byte_swap(const int64_t &x) {
     std::uint64_t val_u = *(std::uint64_t *) &x;  //Convert to unsigned
     val_u = byte_swap(val_u);                         //Convert to big endian
     return *(std::int64_t *) &val_u;              //Make it signed

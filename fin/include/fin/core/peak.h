@@ -6,7 +6,7 @@
 #include "../math/window.h"
 #include "../../../consts.h"
 
-namespace core {
+namespace fin::core {
     /**
      * Class to hold peak information
      */

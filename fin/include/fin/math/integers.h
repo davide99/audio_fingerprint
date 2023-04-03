@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <string>
 
-namespace math::integers {
+namespace fin::math::integers {
     std::uint64_t byte_swap(const std::uint64_t &x);
 
     std::uint32_t byte_swap(const std::uint32_t &x);
