@@ -30,7 +30,7 @@ if [[ $1 == update ]]; then
   echo Rieseguo cmake
   #cmake dev'essere installato da apt, a meno di non mettere il percorso completo che punta
   #a quello bundled in clion
-  emcmake cmake --target wasm_client ../wasm
+  emcmake cmake -DJUST_WASM:BOOL=ON ..
 fi
 
 if [[ $machine == Linux ]]; then
