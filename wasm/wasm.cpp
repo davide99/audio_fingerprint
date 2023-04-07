@@ -1,7 +1,7 @@
 #include <emscripten/webaudio.h>
 #include <string>
 #include "dummy_reader.h"
-#include "wrapper.h"
+#include <fin/utils/utils.h>
 #include "../consts.h"
 
 //shared variable between main thread and audio thread
@@ -16,7 +16,7 @@ dummy_reader dummyReader;
 std::int8_t first_time = 1;
 
 void messageReceivedOnMainThread() {
-    auto links = utils::computeLinks(dummyReader);
+    auto links = fin::utils::computeLinks(dummyReader);
     dummyReader.drop_samples();
 
     std::string json = "[";

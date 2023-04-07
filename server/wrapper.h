@@ -8,22 +8,12 @@
 #include <fin/readers/reader.h>
 #include "db.h"
 #include <fin/readers/wav_reader.h>
+#include <fin/utils/utils.h>
 
 /*
  * Just a wrapper around the two main functions
  */
 namespace utils {
-    /**
-    * Compute links given a generic reader
-    * @param reader where to read samples from
-    * @return computed links
-    */
-    fin::core::links computeLinks(fin::readers::reader &reader) {
-        fin::math::spectrogram spectrogram(reader.get_data());
-        std::vector<fin::core::peak> peaks = fin::core::fingerprint::compute(spectrogram);
-        return fin::core::links(peaks);
-    }
-
     /**
     * Try to find a match given some links
     * @param links of the recording
@@ -45,7 +35,7 @@ namespace utils {
     */
     void insertSong(const std::string &fileName, db &db) {
         fin::readers::wav_reader wavReader(fileName);
-        fin::core::links links = computeLinks(wavReader);
+        fin::core::links links = fin::utils::computeLinks(wavReader);
 
         db.insertSong(fileName, links);
     }

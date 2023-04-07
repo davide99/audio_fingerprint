@@ -1,5 +1,5 @@
-#ifndef FIN_CPP_UTILS_H
-#define FIN_CPP_UTILS_H
+#ifndef SERVER_CPP_UTILS_H
+#define SERVER_CPP_UTILS_H
 
 #include <string>
 #include <vector>
