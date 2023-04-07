@@ -1,12 +1,12 @@
 #include <string>
 #include <iostream>
-#include "wav_reader.h"
+#include <fin/readers/wav_reader.h>
 #include "wrapper.h"
 
 int main(int argc, char **argv) {
     if (argc != 2) return -1;
 
-    wav_reader reader(argv[1]);
+    fin::readers::wav_reader reader(argv[1]);
     auto links = utils::computeLinks(reader);
     reader.drop_samples();
 

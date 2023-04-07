@@ -7,7 +7,7 @@
 #include <fin/core/links.h>
 #include <fin/readers/reader.h>
 #include "db.h"
-#include "wav_reader.h"
+#include <fin/readers/wav_reader.h>
 
 /*
  * Just a wrapper around the two main functions
@@ -44,7 +44,7 @@ namespace utils {
     * @param db initialized db object
     */
     void insertSong(const std::string &fileName, db &db) {
-        wav_reader wavReader(fileName);
+        fin::readers::wav_reader wavReader(fileName);
         fin::core::links links = computeLinks(wavReader);
 
         db.insertSong(fileName, links);

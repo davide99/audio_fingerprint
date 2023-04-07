@@ -5,7 +5,6 @@ project(mock_client)
 # set up target
 add_executable(mock_client
         main.cpp
-        wav_reader.h wav_reader.cpp
         wrapper.h
         )
 

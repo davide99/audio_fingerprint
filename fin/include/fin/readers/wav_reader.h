@@ -11,7 +11,8 @@ struct chunk;
 /**
  * Class to read WAV files
  */
-class wav_reader : public fin::readers::reader {
+namespace fin::readers {
+    class wav_reader : public fin::readers::reader {
 
     private:
         std::string filename;
@@ -29,5 +30,5 @@ class wav_reader : public fin::readers::reader {
         static bool
         find_chunk(const uint8_t *id, chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian, bool iterate);
     };
-
+}
 #endif

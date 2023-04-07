@@ -6,7 +6,6 @@
 #include <fin/core/fingerprint.h>
 #include <fin/core/links.h>
 #include <fin/readers/reader.h>
-#include "wav_reader.h"
 
 /*
  * Just a wrapper around the two main functions

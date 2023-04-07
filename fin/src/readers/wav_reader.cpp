@@ -1,7 +1,7 @@
-#include "wav_reader.h"
+#include <fin/readers/wav_reader.h>
 #include <fin/math/integers.h>
 #include <fin/utils/utils.h>
-#include "../consts.h"
+#include "../../consts.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -50,7 +50,7 @@ static bool check_fmt_chunk(const fmt_chunk &fmtChunk) {
 
 //Iterate through the WAV file to find a chunk given the id
 bool
-wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian,
+fin::readers::wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian,
                        bool iterate = true) {
     bool found;
 
@@ -79,7 +79,7 @@ wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::ifstream &wav_
     return true;
 }
 
-wav_reader::wav_reader(const std::string &filename) {
+fin::readers::wav_reader::wav_reader(const std::string &filename) {
     chunk chunk{};
     bool is_big_endian = fin::utils::is_big_endian();
 
@@ -143,10 +143,10 @@ wav_reader::wav_reader(const std::string &filename) {
     wav_file.close();
 }
 
-const std::vector<float> &wav_reader::get_data() {
+const std::vector<float> &fin::readers::wav_reader::get_data() {
     return this->data;
 }
 
-void wav_reader::drop_samples() {
+void fin::readers::wav_reader::drop_samples() {
     this->data.resize(0);
 }
