@@ -1,5 +1,5 @@
-#ifndef IO_WAVREADER_H
-#define IO_WAVREADER_H
+#ifndef FIN_READERS_WAVREADER_H
+#define FIN_READERS_WAVREADER_H
 
 #include <string>
 #include <vector>

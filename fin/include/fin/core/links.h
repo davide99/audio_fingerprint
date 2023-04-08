@@ -1,5 +1,5 @@
-#ifndef CORE_LINKS_H
-#define CORE_LINKS_H
+#ifndef FIN_CORE_LINKS_H
+#define FIN_CORE_LINKS_H
 
 #include <vector>
 #include <fin/core/link.h>

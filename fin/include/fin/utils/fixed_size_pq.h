@@ -1,5 +1,5 @@
-#ifndef FIXEDSIZEPQ_H
-#define FIXEDSIZEPQ_H
+#ifndef FIN_UTILS_FIXED_SIZE_PQ_H
+#define FIN_UTILS_FIXED_SIZE_PQ_H
 
 #include <queue>
 #include <cstdint>

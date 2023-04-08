@@ -1,5 +1,5 @@
-#ifndef DUMMYREADER_H
-#define DUMMYREADER_H
+#ifndef WASM_DUMMY_READER_H
+#define WASM_DUMMY_READER_H
 
 #include <cstdint>
 #include <fin/readers/reader.h>

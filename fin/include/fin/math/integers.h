@@ -1,5 +1,5 @@
-#ifndef MATH_INTEGERS_H
-#define MATH_INTEGERS_H
+#ifndef FIN_MATH_INTEGERS_H
+#define FIN_MATH_INTEGERS_H
 
 #include <cstdint>
 #include <string>

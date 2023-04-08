@@ -3,9 +3,7 @@ cmake_minimum_required(VERSION 3.17)
 project(mock_client)
 
 # set up target
-add_executable(mock_client
-        main.cpp
-        )
+add_executable(mock_client main.cpp)
 
 # target options
 target_include_directories(mock_client PRIVATE fin)

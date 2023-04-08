@@ -1,5 +1,5 @@
-#ifndef GENERICREADER_H
-#define GENERICREADER_H
+#ifndef FIN_READERS_READER_H
+#define FIN_READERS_READER_H
 
 #include <vector>
 

@@ -1,7 +1,7 @@
+#include "../../consts.h"
 #include <fin/readers/wav_reader.h>
 #include <fin/math/integers.h>
 #include <fin/utils/utils.h>
-#include "../../consts.h"
 #include <iostream>
 #include <fstream>
 #include <cstring>

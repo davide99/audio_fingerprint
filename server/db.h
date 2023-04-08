@@ -1,5 +1,5 @@
-#ifndef IO_DB_H
-#define IO_DB_H
+#ifndef SERVER_DB_H
+#define SERVER_DB_H
 
 #include <mariadb++/connection.hpp>
 #include <mariadb++/statement.hpp>

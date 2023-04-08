@@ -1,9 +1,9 @@
-#ifndef STRUCTURES_PEAK_H
-#define STRUCTURES_PEAK_H
+#ifndef FIN_CORE_PEAK_H
+#define FIN_CORE_PEAK_H
 
 #include <cstdint>
 #include <type_traits>
-#include "../math/window.h"
+#include <fin/math/window.h>
 #include "../../../consts.h"
 
 namespace fin::core {

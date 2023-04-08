@@ -1,5 +1,5 @@
-#ifndef CORE_FINGERPRINT_H
-#define CORE_FINGERPRINT_H
+#ifndef FIN_CORE_FINGERPRINT_H
+#define FIN_CORE_FINGERPRINT_H
 
 #include <vector>
 #include <fin/core/peak.h>

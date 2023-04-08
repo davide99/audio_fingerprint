@@ -1,5 +1,5 @@
-#ifndef STRUCTURES_FFTWINDOW_H
-#define STRUCTURES_FFTWINDOW_H
+#ifndef FIN_MATH_FFT_WINDOW_H
+#define FIN_MATH_FFT_WINDOW_H
 
 #include <array>
 #include <vector>

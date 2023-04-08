@@ -1,8 +1,8 @@
+#include "../consts.h"
 #include <emscripten/webaudio.h>
 #include <string>
 #include "dummy_reader.h"
 #include <fin/utils/utils.h>
-#include "../consts.h"
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;

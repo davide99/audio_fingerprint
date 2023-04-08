@@ -1,5 +1,5 @@
-#ifndef MATH_WINDOW_H
-#define MATH_WINDOW_H
+#ifndef FIN_MATH_WINDOW_H
+#define FIN_MATH_WINDOW_H
 
 #include <array>
 #include <vector>

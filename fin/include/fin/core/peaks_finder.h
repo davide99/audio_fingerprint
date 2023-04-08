@@ -1,5 +1,5 @@
-#ifndef CORE_PEAKSFINDER_H
-#define CORE_PEAKSFINDER_H
+#ifndef FIN_CORE_PEAKS_FINDER_H
+#define FIN_CORE_PEAKS_FINDER_H
 
 #include "../math/fft_window.h"
 #include "../utils/fixed_size_pq.h"

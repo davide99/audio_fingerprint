@@ -1,4 +1,6 @@
 #include <fin/utils/utils.h>
+#include <fin/math/spectrogram.h>
+#include <fin/core/fingerprint.h>
 #include <cstdint>
 
 bool fin::utils::is_big_endian() {

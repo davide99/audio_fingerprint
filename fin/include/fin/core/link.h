@@ -1,5 +1,5 @@
-#ifndef CORE_LINK_H
-#define CORE_LINK_H
+#ifndef FIN_CORE_LINK_H
+#define FIN_CORE_LINK_H
 
 #include <cstdint>
 #include <fin/core/peak.h>

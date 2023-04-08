@@ -1,5 +1,5 @@
-#ifndef MATH_VECTOR_H
-#define MATH_VECTOR_H
+#ifndef FIN_MATH_VECTOR_H
+#define FIN_MATH_VECTOR_H
 
 #include <cstdint>
 #include <algorithm>

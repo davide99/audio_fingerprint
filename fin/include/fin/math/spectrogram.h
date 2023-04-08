@@ -1,8 +1,8 @@
-#ifndef MATH_SPECTROGRAM_H
-#define MATH_SPECTROGRAM_H
+#ifndef FIN_MATH_SPECTROGRAM_H
+#define FIN_MATH_SPECTROGRAM_H
 
 #include <vector>
-#include "fft_window.h"
+#include <fin/math/fft_window.h>
 #include "../../../consts.h"
 
 namespace fin::math {

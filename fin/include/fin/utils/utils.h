@@ -1,12 +1,10 @@
-#ifndef FIN_CPP_UTILS_H
-#define FIN_CPP_UTILS_H
+#ifndef FIN_UTILS_UTILS_H
+#define FIN_UTILS_UTILS_H
 
 #include <string>
 #include <vector>
 #include <fin/core/links.h>
 #include <fin/readers/reader.h>
-#include <fin/math/spectrogram.h>
-#include <fin/core/fingerprint.h>
 
 namespace fin::utils {
     bool is_big_endian();

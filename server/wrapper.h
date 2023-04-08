@@ -1,5 +1,5 @@
-#ifndef UTILS_WRAPPER_H
-#define UTILS_WRAPPER_H
+#ifndef SERVER_WRAPPER_H
+#define SERVER_WRAPPER_H
 
 #include <string>
 #include <fin/math/spectrogram.h>
