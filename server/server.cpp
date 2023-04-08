@@ -3,7 +3,7 @@
 #include <chrono>
 #include <fin_db/utils.h>
 #include <fin_db/db.h>
-#include <fin_db/wrapper.h>
+#include <fin_db/fin_db.h>
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
 
             for (const auto &fileName:fileList) {
                 std::cout << "Analyzing " << fileName << std::endl;
-                fin::utils::insertSong(fileName, db);
+                fin::insertSong(fileName, db);
             }
 
             if (!fileList.empty()) {

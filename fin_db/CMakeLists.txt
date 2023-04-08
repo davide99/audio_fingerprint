@@ -6,7 +6,7 @@ project(fin_db LANGUAGES CXX)
 set(fin_db_HEADERS
         include/fin_db/db.h
         include/fin_db/utils.h
-        include/fin_db/wrapper.h
+        include/fin_db/fin_db.h
         )
 set(fin_db_SOURCES
         src/db.cpp

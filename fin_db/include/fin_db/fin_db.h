@@ -13,7 +13,7 @@
 /*
  * Just a wrapper around the two main functions
  */
-namespace fin::utils {
+namespace fin {
     /**
     * Try to find a match given some links
     * @param links of the recording
