@@ -20,6 +20,8 @@ set(fin_HEADERS
 
         include/fin/utils/fixed_size_pq.h
         include/fin/utils/utils.h
+
+        include/fin/fin.h
         )
 set(fin_SOURCES
         src/core/fingerprint.cpp
@@ -34,7 +36,7 @@ set(fin_SOURCES
         src/readers/dummy_reader.cpp
 
         src/utils/utils.cpp
-        )
+        src/fin.cpp)
 
 # set up target
 add_library(fin ${fin_SOURCES} ${fin_HEADERS})

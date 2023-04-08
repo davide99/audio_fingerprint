@@ -7,7 +7,7 @@
 #include <fin/core/links.h>
 #include <fin/readers/reader.h>
 #include <fin/readers/wav_reader.h>
-#include <fin/utils/utils.h>
+#include <fin/fin.h>
 #include <fin_db/db.h>
 
 /*
@@ -35,7 +35,7 @@ namespace fin::utils {
     */
     void insertSong(const std::string &fileName, DB &db) {
         fin::readers::WavReader wavReader(fileName);
-        fin::core::Links links = fin::utils::computeLinks(wavReader);
+        fin::core::Links links = fin::computeLinks(wavReader);
 
         db.insertSong(fileName, links);
     }
