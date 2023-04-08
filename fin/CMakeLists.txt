@@ -3,8 +3,36 @@ cmake_minimum_required(VERSION 3.17)
 project(fin LANGUAGES CXX)
 
 # find files
-file(GLOB_RECURSE fin_HEADERS include/*.h)
-file(GLOB_RECURSE fin_SOURCES src/*.cpp)
+set(fin_HEADERS
+        include/fin/core/fingerprint.h
+        include/fin/core/link.h include/fin/core/links.h
+        include/fin/core/peak.h include/fin/core/peaks_finder.h
+
+        include/fin/math/fft_window.h
+        include/fin/math/integers.h
+        include/fin/math/spectrogram.h
+        include/fin/math/vector.h
+        include/fin/math/window.h
+
+        include/fin/readers/reader.h
+        include/fin/readers/wav_reader.h
+
+        include/fin/utils/fixed_size_pq.h
+        include/fin/utils/utils.h
+        )
+set(fin_SOURCES
+        src/core/fingerprint.cpp
+        src/core/link.cpp src/core/links.cpp
+        src/core/peak.cpp src/core/peaks_finder.cpp
+
+        src/math/integers.cpp
+        src/math/spectrogram.cpp
+        src/math/window.cpp
+
+        src/readers/wav_reader.cpp
+
+        src/utils/utils.cpp
+        )
 
 # set up target
 add_library(fin ${fin_SOURCES} ${fin_HEADERS})
@@ -34,6 +62,6 @@ target_compile_features(fin PUBLIC cxx_std_17)
 
 if (MSVC)
     target_compile_options(fin PRIVATE /W4)
-else()
+else ()
     target_compile_options(fin PRIVATE -Wall -Wextra)
-endif()
+endif ()
