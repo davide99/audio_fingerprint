@@ -12,7 +12,7 @@ namespace fin::core::fingerprint {
      * @param spectrogram Computed spectrum
      * @return vector of peaks
      */
-    [[nodiscard]] std::vector<fin::core::peak> compute(const fin::math::spectrogram& spectrogram);
+    [[nodiscard]] std::vector<fin::core::Peak> compute(const fin::math::Spectrogram& spectrogram);
 }
 
 

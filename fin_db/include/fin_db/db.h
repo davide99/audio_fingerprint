@@ -10,15 +10,15 @@
  * Class to manage the database
  */
 namespace fin {
-    class db {
+    class DB {
     private:
         mariadb::connection_ref conn;
+        mariadb::statement_ref insSongInfoStmt, selSongById;
 
-        mariadb::statement_ref ins_song_info_stmt, sel_song_by_id;
     public:
-        db();
+        DB();
 
-        ~db();
+        ~DB();
 
         /**
          * @return true if the database exists, false otherwise
@@ -43,7 +43,7 @@ namespace fin {
          * @param links Song's links
          * @return true if no errors occurred, false otherwise
          */
-        bool insertSong(const std::string &name, const fin::core::links &links);
+        bool insertSong(const std::string &name, const fin::core::Links &links);
 
         /**
          * Try to find a match for a recording
@@ -53,7 +53,7 @@ namespace fin {
          * @return true if a match is found, false otherwise
          */
         bool
-        searchIdGivenLinks(const fin::core::links &links, std::uint64_t &id, std::uint64_t *commonLinks = nullptr);
+        searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &id, std::uint64_t *commonLinks = nullptr);
 
         /**
          * Find the name of a song

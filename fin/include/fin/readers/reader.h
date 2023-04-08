@@ -4,10 +4,10 @@
 #include <vector>
 
 namespace fin::readers {
-    class reader {
+    class Reader {
     public:
-        virtual const std::vector<float> &get_data() = 0;
-        virtual void drop_samples() = 0;
+        virtual const std::vector<float> &getData() = 0;
+        virtual void dropSamples() = 0;
     };
 }
 

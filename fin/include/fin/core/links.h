@@ -9,13 +9,13 @@ namespace fin::core {
     /**
      * vector of links. Access the peaks as you would normally do with a vector.
      */
-    class links : public std::vector<link> {
+    class Links : public std::vector<Link> {
     public:
         /**
          * Constructs the links given the peaks
-         * @param peak_vec Computed peaks
+         * @param peakVec Computed peaks
          */
-        explicit links(const std::vector<fin::core::peak> &peak_vec);
+        explicit Links(const std::vector<fin::core::Peak> &peakVec);
     };
 }
 

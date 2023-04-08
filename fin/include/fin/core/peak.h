@@ -10,24 +10,24 @@ namespace fin::core {
     /**
      * Class to hold peak information
      */
-    class peak {
+    class Peak {
     private:
-        int freq_index;       //index referring to an element of window::freq_bins
+        int freqIndex;       //index referring to an element of window::FREQ_BINS
         float power;         //magnitude
         std::int64_t window; //window the peak belongs to
         float time;          //time in the audio file, related to the window member
-        int band_index;       //index referring to an element of window::bands (getBandsIndex)
+        int bandIndex;       //index referring to an element of window::BANDS (getBandsIndex)
 
     public:
-        peak(const int &freq_index, const float &power, const std::int64_t &window, const float &time) :
-                freq_index(freq_index), power(power), window(window), time(time),
-                band_index(math::window::get_band_index(freq_index)) {};
+        Peak(const int &freq_index, const float &power, const std::int64_t &window, const float &time) :
+                freqIndex(freq_index), power(power), window(window), time(time),
+                bandIndex(math::window::getBandIndex(freq_index)) {};
 
-        [[nodiscard]] const int &get_freq_index() const;
+        [[nodiscard]] const int &getFreqIndex() const;
 
-        [[nodiscard]] const int64_t & get_window() const;
+        [[nodiscard]] const int64_t & getWindow() const;
 
-        [[nodiscard]] const float &get_time() const;
+        [[nodiscard]] const float &getTime() const;
 
         /**
          * Check whether the current peak and the other belong to
@@ -35,21 +35,21 @@ namespace fin::core {
          * @param peak Other peak to compare
          * @return true if in the same band, false otherwise
          */
-        [[nodiscard]] bool same_band(const peak &peak) const;
+        [[nodiscard]] bool sameBand(const Peak &peak) const;
 
         /**
          * Operator to decreasingly sort peaks by power
          * @param peak Other peak
          * @return true if this.power < other.power, false otherwise
          */
-        bool operator<(const peak &peak) const;
+        bool operator<(const Peak &peak) const;
 
         /**
          * Operator to decreasingly sort peaks by power
          * @param peak Other peak
          * @return true if this.power > other.power, false otherwise
          */
-        bool operator>(const peak &peak) const;
+        bool operator>(const Peak &peak) const;
 
     };
 }

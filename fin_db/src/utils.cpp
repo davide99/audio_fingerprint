@@ -5,19 +5,19 @@
 
 
 //https://stackoverflow.com/a/2072890/6441490
-bool fin::utils::ends_with(const std::string &str, const std::string &ending) {
+bool fin::utils::endsWith(const std::string &str, const std::string &ending) {
     if (ending.size() > str.size())
         return false;
 
     return std::equal(ending.rbegin(), ending.rend(), str.rbegin());
 }
 
-std::vector<std::string> fin::utils::list_files(const std::string &path, const std::string &extension) {
+std::vector<std::string> fin::utils::listFiles(const std::string &path, const std::string &extension) {
     namespace fs = std::filesystem;
     std::vector<std::string> files;
 
     for (const auto &p : fs::directory_iterator(path))
-        if (!p.is_directory() && (extension.empty() || ends_with(p.path().string(), extension)))
+        if (!p.is_directory() && (extension.empty() || endsWith(p.path().string(), extension)))
             files.push_back(p.path().string());
 
     return files;
@@ -58,7 +58,7 @@ static constexpr char hexTable[] = "000102030405060708090A0B0C0D0E0F"
                                    "E0E1E2E3E4E5E6E7E8E9EAEBECEDEEEF"
                                    "F0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF";
 
-std::string_view fin::utils::to_hex(std::uint64_t x) {
+std::string_view fin::utils::toHex(std::uint64_t x) {
     int i;
     std::uint_fast8_t byte;
 

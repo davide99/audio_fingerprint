@@ -1,6 +1,6 @@
 #include "dummy_reader.h"
 
-const std::vector<float> &dummy_reader::get_data() {
+const std::vector<float> &dummy_reader::getData() {
     return this->data;
 }
 
@@ -14,6 +14,6 @@ std::size_t dummy_reader::get_len() {
     return this->data.size();
 }
 
-void dummy_reader::drop_samples() {
+void dummy_reader::dropSamples() {
     this->data.resize(0);
 }

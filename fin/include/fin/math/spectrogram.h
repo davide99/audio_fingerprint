@@ -9,24 +9,24 @@ namespace fin::math {
     /**
      * Class to compute the spectrogram given the samples
      */
-    class spectrogram {
+    class Spectrogram {
 
     public:
         /**
          * Constructs the spectrogram
          * @param data samples
          */
-        explicit spectrogram(const std::vector<float>& data);
+        explicit Spectrogram(const std::vector<float>& data);
 
     private:
-        std::vector<fft_window> fft_windows;
+        std::vector<FFTWindow> fftWindows;
     public:
         /**
          * Get a specific FFT window
          * @param pos what window
          * @return the window
          */
-        const fft_window &operator[](std::size_t pos) const;
+        const FFTWindow &operator[](std::size_t pos) const;
 
         /**
          * @return the number of FFT windows

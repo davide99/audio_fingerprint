@@ -12,17 +12,17 @@
  * https://sites.google.com/site/musicgapi/technical-documents/wav-file-format#wavefileheader
  */
 
-constexpr auto id_size = 4u;
+constexpr auto idSize = 4u;
 
 #pragma pack(push, 1)
-struct chunk { //Generic chunk
-    std::uint8_t id[id_size];
+struct Chunk { //Generic chunk
+    std::uint8_t id[idSize];
     std::uint32_t size;
 };
 #pragma pack(pop)
 
 #pragma pack(push, 1)
-struct fmt_chunk {
+struct FmtChunk {
     //chunk defined above
     std::uint16_t audio_format;
     std::uint16_t channels;
@@ -35,13 +35,13 @@ struct fmt_chunk {
 
 
 //chunk IDs
-constexpr std::uint8_t riff_id[] = {0x52u, 0x49u, 0x46u, 0x46u}; //RIFF
-constexpr std::uint8_t wave_id[] = {0x57u, 0x41u, 0x56u, 0x45u}; //WAVE
-constexpr std::uint8_t fmt_id[] = {0x66u, 0x6Du, 0x74u, 0x20u};  //fmt_
-constexpr std::uint8_t data_id[] = {0x64u, 0x61u, 0x74u, 0x61u}; //DATA
+constexpr std::uint8_t riffId[] = {0x52u, 0x49u, 0x46u, 0x46u}; //RIFF
+constexpr std::uint8_t waveId[] = {0x57u, 0x41u, 0x56u, 0x45u}; //WAVE
+constexpr std::uint8_t fmtId[] = {0x66u, 0x6Du, 0x74u, 0x20u};  //fmt_
+constexpr std::uint8_t dataId[] = {0x64u, 0x61u, 0x74u, 0x61u}; //DATA
 
 //Check if the WAV has the correct characteristics
-static bool check_fmt_chunk(const fmt_chunk &fmtChunk) {
+static bool checkFmtChunk(const FmtChunk &fmtChunk) {
     return (fmtChunk.audio_format == 1u) &&                  //PCM
            (fmtChunk.channels == consts::audio::CHANNELS) &&
            (fmtChunk.sample_rate == consts::audio::SAMPLE_RATE) &&
@@ -50,8 +50,8 @@ static bool check_fmt_chunk(const fmt_chunk &fmtChunk) {
 
 //Iterate through the WAV file to find a chunk given the id
 bool
-fin::readers::wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian,
-                       bool iterate = true) {
+fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian,
+                                   bool iterate = true) {
     bool found;
 
     do {
@@ -62,9 +62,9 @@ fin::readers::wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::
         }
 
         if (is_big_endian)
-            chunk.size = fin::math::integers::byte_swap(chunk.size);
+            chunk.size = fin::math::integers::byteSwap(chunk.size);
 
-        found = !std::memcmp(chunk.id, id, id_size); //Compare with the given id
+        found = !std::memcmp(chunk.id, id, idSize); //Compare with the given id
 
         if (!found)
             try {
@@ -79,74 +79,74 @@ fin::readers::wav_reader::find_chunk(const std::uint8_t *id, chunk &chunk, std::
     return true;
 }
 
-fin::readers::wav_reader::wav_reader(const std::string &filename) {
-    chunk chunk{};
-    bool is_big_endian = fin::utils::is_big_endian();
+fin::readers::WavReader::WavReader(const std::string &filename) {
+    Chunk chunk{};
+    bool isBigEndian = fin::utils::isBigEndian();
 
-    std::ifstream wav_file(filename, std::ios::binary);
-    wav_file.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
-    if (wav_file.fail()) {
+    std::ifstream wavFile(filename, std::ios::binary);
+    wavFile.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
+    if (wavFile.fail()) {
         throw std::runtime_error("Can't open file: " + filename);
     }
 
     //Read riff chunk
     {
-        if (!this->find_chunk(riff_id, chunk, wav_file, is_big_endian, false))
+        if (!this->findChunk(riffId, chunk, wavFile, isBigEndian, false))
             throw std::runtime_error(filename + " is not a WAV file");
 
-        std::uint8_t riff_type[id_size];
-        wav_file.read(reinterpret_cast<char *>(&riff_type), sizeof(riff_type));
+        std::uint8_t riffType[idSize];
+        wavFile.read(reinterpret_cast<char *>(&riffType), sizeof(riffType));
 
-        if (std::memcmp(riff_type, wave_id, id_size) != 0)
+        if (std::memcmp(riffType, waveId, idSize) != 0)
             throw std::runtime_error("Invalid RIFF chunk in: " + filename);
     }
 
     //Read fmt chunk, it might not be immediately after the riff chunk
     {
-        if (!this->find_chunk(fmt_id, chunk, wav_file, is_big_endian))
+        if (!this->findChunk(fmtId, chunk, wavFile, isBigEndian))
             throw std::runtime_error(filename + " is malformed");
 
-        fmt_chunk fmt_chunk{};
-        wav_file.read(reinterpret_cast<char *>(&fmt_chunk), sizeof(fmt_chunk));
+        FmtChunk fmtChunk{};
+        wavFile.read(reinterpret_cast<char *>(&fmtChunk), sizeof(fmtChunk));
 
-        if (!check_fmt_chunk(fmt_chunk))
+        if (!checkFmtChunk(fmtChunk))
             throw std::runtime_error("WAV is not in the correct format");
     }
 
-    std::int64_t number_of_samples;
+    std::int64_t numberOfSamples;
 
     //Read data chunk
     {
-        if (!this->find_chunk(data_id, chunk, wav_file, is_big_endian))
+        if (!this->findChunk(dataId, chunk, wavFile, isBigEndian))
             throw std::runtime_error(filename + " is malformed");
 
-        number_of_samples = (chunk.size << 3u) / (consts::audio::CHANNELS * consts::audio::BITS_PER_SAMPLE);
+        numberOfSamples = (chunk.size << 3u) / (consts::audio::CHANNELS * consts::audio::BITS_PER_SAMPLE);
     }
 
     //For whatever reason using a vector instead of a plain old array makes valgrind not complain
-    std::vector<std::int16_t> i_data;
-    i_data.resize(number_of_samples); //Resize to avoid relocations
-    this->data.resize(number_of_samples);
+    std::vector<std::int16_t> iData;
+    iData.resize(numberOfSamples); //Resize to avoid relocations
+    this->data.resize(numberOfSamples);
 
     //Read the samples
-    wav_file.read(reinterpret_cast<char *>(i_data.data()), number_of_samples * consts::audio::BITS_PER_SAMPLE >> 3u);
+    wavFile.read(reinterpret_cast<char *>(iData.data()), numberOfSamples * consts::audio::BITS_PER_SAMPLE >> 3u);
 
-    if (is_big_endian)
-        for (auto &sample: i_data)
-            sample = fin::math::integers::byte_swap(sample);
+    if (isBigEndian)
+        for (auto &sample: iData)
+            sample = fin::math::integers::byteSwap(sample);
 
     //Convert the int16 to a float
-    std::transform(i_data.begin(), i_data.end(), this->data.data(), [](const std::int16_t &i) -> float {
+    std::transform(iData.begin(), iData.end(), this->data.data(), [](const std::int16_t &i) -> float {
         return i;
     });
 
-    wav_file.close();
+    wavFile.close();
 }
 
-const std::vector<float> &fin::readers::wav_reader::get_data() {
+const std::vector<float> &fin::readers::WavReader::getData() {
     return this->data;
 }
 
-void fin::readers::wav_reader::drop_samples() {
+void fin::readers::WavReader::dropSamples() {
     this->data.resize(0);
 }

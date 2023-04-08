@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
         auto command = fin::utils::trim(std::string(argv[1]));
         auto argument = fin::utils::trim(std::string(argv[2]));
 
-        fin::db db;
+        fin::DB db;
 
         if (command == "-i") {
 #ifdef DEBUG
@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
             db.create();
 #endif
             auto start = std::chrono::high_resolution_clock::now();
-            std::vector<std::string> fileList = fin::utils::list_files(argument, "wav");
+            std::vector<std::string> fileList = fin::utils::listFiles(argument, "wav");
 
             for (const auto &fileName:fileList) {
                 std::cout << "Analyzing " << fileName << std::endl;

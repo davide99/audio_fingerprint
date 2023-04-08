@@ -13,30 +13,30 @@ namespace consts {
     }
 
     namespace window {
-        constexpr std::uint16_t size = 512u;
-        constexpr std::uint16_t Overlap = 256u;
-        constexpr std::uint16_t step_size = size - Overlap;
-        constexpr std::uint16_t freq_bins = size / 2;
+        constexpr std::uint16_t SIZE = 512u;
+        constexpr std::uint16_t OVERLAP = 256u;
+        constexpr std::uint16_t STEP_SIZE = SIZE - OVERLAP;
+        constexpr std::uint16_t FREQ_BINS = SIZE / 2;
 
-        constexpr std::uint16_t MelStart = 250u;
-        constexpr std::uint16_t MelStep = 200u;
+        constexpr std::uint16_t MEL_START = 250u;
+        constexpr std::uint16_t MEL_STEP = 200u;
 
-        constexpr float FreqBinStep = ((float) audio::SAMPLE_RATE) / size;
+        constexpr float FREQ_BIN_STEP = ((float) audio::SAMPLE_RATE) / SIZE;
     }
 
     namespace fingerprint {
         constexpr std::uint8_t C = 32u;
-        constexpr std::uint8_t n_peaks = 3u;
-        constexpr std::uint8_t PeakRange = 5u;
-        constexpr std::uint16_t MinFreq = 100u;
-        constexpr std::uint16_t MaxFreq = 2000u;
+        constexpr std::uint8_t N_PEAKS = 3u;
+        constexpr std::uint8_t PEAK_RANGE = 5u;
+        constexpr std::uint16_t MIN_FREQ = 100u;
+        constexpr std::uint16_t MAX_FREQ = 2000u;
     }
 
-    namespace Links {
-        constexpr float MinWinDistanceF = 1.0f;
-        constexpr float MaxWinDistanceF = 3.0f;
+    namespace links {
+        constexpr float MIN_WIN_DISTANCE_F = 1.0f;
+        constexpr float MAX_WIN_DISTANCE_F = 3.0f;
 
-        constexpr std::uint64_t MinHint = 15;
+        constexpr std::uint64_t MIN_HINT = 15;
     }
 
     namespace db {
@@ -56,8 +56,8 @@ namespace consts {
         const std::string TMP_RECORD_TABLE_FULL = NAME + "." + TMP_RECORD_TABLE;
 
         //Table fields
-        const std::string UInt64 = "BIGINT UNSIGNED";
-        const std::string UInt = "INT UNSIGNED";
+        const std::string UINT64 = "BIGINT UNSIGNED";
+        const std::string UINT = "INT UNSIGNED";
     }
 }
 

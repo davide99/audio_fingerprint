@@ -1,44 +1,45 @@
 #include <fin/core/peaks_finder.h>
 
-fin::utils::fixed_size_pq<fin::core::peak, consts::fingerprint::n_peaks>
-fin::core::find_peaks(const math::fft_window &fft_window, const int64_t &window, const int &band_start, const int &band_end) {
-    utils::fixed_size_pq<peak, consts::fingerprint::n_peaks> peaks;
-    float mag_current, freq_current;
-    int index_left, index_right, j;
+fin::utils::FixedSizePQ<fin::core::Peak, consts::fingerprint::N_PEAKS>
+fin::core::findPeaks(const math::FFTWindow &fftWindow, const int64_t &window, const int &bandStart,
+                     const int &bandEnd) {
+    utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS> peaks;
+    float magCurrent, freqCurrent;
+    int indexLeft, indexRight, j;
     bool ok;
 
-    for (int i = band_start; i <= band_end; i++) {
-        freq_current = math::window::freq_bins[i];
+    for (int i = bandStart; i <= bandEnd; i++) {
+        freqCurrent = math::window::FREQ_BINS[i];
 
         //The peak freq must be between the two boundaries
-        if ((freq_current < consts::fingerprint::MinFreq) || (freq_current > consts::fingerprint::MaxFreq))
+        if ((freqCurrent < consts::fingerprint::MIN_FREQ) || (freqCurrent > consts::fingerprint::MAX_FREQ))
             continue; //Maybe ugly, but early exit helps a lot
 
         //Get the current peak value
-        mag_current = fft_window.get_magnitudes()[i];
+        magCurrent = fftWindow.getMagnitudes()[i];
 
         /*
          * Extract respectively 5 element after and before 'i'.
          * Are there 5 element before and after actually?
          */
-        index_left = i - consts::fingerprint::PeakRange >= band_start ? i - consts::fingerprint::PeakRange : band_start;
-        index_right =
-                i + consts::fingerprint::PeakRange + 1 <= band_end ? i + consts::fingerprint::PeakRange + 1 : band_end;
+        indexLeft = i - consts::fingerprint::PEAK_RANGE >= bandStart ? i - consts::fingerprint::PEAK_RANGE : bandStart;
+        indexRight =
+                i + consts::fingerprint::PEAK_RANGE + 1 <= bandEnd ? i + consts::fingerprint::PEAK_RANGE + 1 : bandEnd;
 
         //while we don't reach the current peak and the analyzed peak is less loud than the current one
-        for (; index_left != i && (ok = fft_window.get_magnitudes()[index_left] < mag_current); index_left++);
+        for (; indexLeft != i && (ok = fftWindow.getMagnitudes()[indexLeft] < magCurrent); indexLeft++);
         if (!ok)
             continue;
 
         //same as above
-        for (j = i + 1; j <= index_right && (ok = fft_window.get_magnitudes()[j] < mag_current); j++);
+        for (j = i + 1; j <= indexRight && (ok = fftWindow.getMagnitudes()[j] < magCurrent); j++);
         if (!ok) {
             //if @ j there's a loudest peak, we can skip all the peaks between 'i' and 'j-1'
             i = j - 1; //for will increment it
             continue;
         }
 
-        peaks.insert(peak(i, mag_current, window, fft_window.getTime()));
+        peaks.insert(Peak(i, magCurrent, window, fftWindow.getTime()));
     }
 
     return peaks;

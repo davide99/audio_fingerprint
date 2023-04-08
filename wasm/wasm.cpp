@@ -17,12 +17,12 @@ std::int8_t first_time = 1;
 
 void messageReceivedOnMainThread() {
     auto links = fin::utils::computeLinks(dummyReader);
-    dummyReader.drop_samples();
+    dummyReader.dropSamples();
 
     std::string json = "[";
     for (auto &link: links) {
-        json += "{\"hash\":" + std::to_string(link.get_hash()) +
-                ",\"window\":" + std::to_string(link.get_time()) + "},";
+        json += "{\"hash\":" + std::to_string(link.getHash()) +
+                ",\"window\":" + std::to_string(link.getTime()) + "},";
     }
     json.pop_back();
     json += "]";

@@ -2,21 +2,21 @@
 #include <cmath>
 #include <algorithm>
 
-fin::core::links::links(const std::vector<peak> &peak_vec) {
-    float time_step = (float) consts::window::step_size / consts::audio::SAMPLE_RATE; //Time step between each window
+fin::core::Links::Links(const std::vector<Peak> &peakVec) {
+    float timeStep = (float) consts::window::STEP_SIZE / consts::audio::SAMPLE_RATE; //Time step between each window
     //Get the maximum window distance in terms of array index given the float time difference
-    std::int64_t max_win_distance = std::lround(consts::Links::MaxWinDistanceF / time_step);
+    std::int64_t maxWinDistance = std::lround(consts::links::MAX_WIN_DISTANCE_F / timeStep);
 
-    std::vector<peak>::const_iterator left, right;
+    std::vector<Peak>::const_iterator left, right;
 
-    for (auto it = peak_vec.begin(); it != peak_vec.end(); it++) {
+    for (auto it = peakVec.begin(); it != peakVec.end(); it++) {
         //iterator pointing to the first left peak to be considered, if there's enough room
-        left = it - max_win_distance >= peak_vec.begin() ? it - max_win_distance : peak_vec.begin();
+        left = it - maxWinDistance >= peakVec.begin() ? it - maxWinDistance : peakVec.begin();
         //same as above, but pointing to the right most peak
-        right = it + max_win_distance <= peak_vec.end() ? it + max_win_distance : peak_vec.end();
+        right = it + maxWinDistance <= peakVec.end() ? it + maxWinDistance : peakVec.end();
 
         for (; left <= right; left++)
-            if (std::abs(left->get_time() - it->get_time()) >= consts::Links::MinWinDistanceF && left->same_band(*it))
+            if (std::abs(left->getTime() - it->getTime()) >= consts::links::MIN_WIN_DISTANCE_F && left->sameBand(*it))
                 this->emplace_back(*it, *left);
     }
 }

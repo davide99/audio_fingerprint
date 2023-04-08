@@ -6,14 +6,14 @@
 int main(int argc, char **argv) {
     if (argc != 2) return -1;
 
-    fin::readers::wav_reader reader(argv[1]);
+    fin::readers::WavReader reader(argv[1]);
     auto links = fin::utils::computeLinks(reader);
-    reader.drop_samples();
+    reader.dropSamples();
 
     std::string json = "[";
     for (auto &link: links) {
-        json += "{\"hash\":" + std::to_string(link.get_hash()) +
-                ",\"window\":" + std::to_string(link.get_time()) + "},";
+        json += "{\"hash\":" + std::to_string(link.getHash()) +
+                ",\"window\":" + std::to_string(link.getTime()) + "},";
     }
     json.pop_back();
     json += "]";

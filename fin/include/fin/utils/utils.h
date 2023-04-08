@@ -7,14 +7,14 @@
 #include <fin/readers/reader.h>
 
 namespace fin::utils {
-    bool is_big_endian();
+    bool isBigEndian();
 
     /**
     * Compute links given a generic reader
     * @param reader where to read samples from
     * @return computed links
     */
-    fin::core::links computeLinks(fin::readers::reader &reader);
+    fin::core::Links computeLinks(fin::readers::Reader &reader);
 }
 
 #endif

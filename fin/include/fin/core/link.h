@@ -8,16 +8,16 @@ namespace fin::core {
     /**
      * Class to hold a link information
      */
-    class link {
+    class Link {
     private:
         std::uint64_t hash;
         std::uint64_t window;
     public:
-        link(const fin::core::peak &address, const fin::core::peak &peak);
+        Link(const fin::core::Peak &address, const fin::core::Peak &peak);
 
-        [[nodiscard]] std::uint64_t get_hash() const;
+        [[nodiscard]] std::uint64_t getHash() const;
 
-        [[nodiscard]] std::uint64_t get_time() const;
+        [[nodiscard]] std::uint64_t getTime() const;
     };
 }
 

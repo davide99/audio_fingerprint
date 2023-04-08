@@ -9,16 +9,16 @@
 
 namespace fin::core {
     /**
-     * Finds the peaks in the fft_window between band_start and band_end
-     * @param fft_window FFT window to analyze
+     * Finds the peaks in the fftWindow between bandStart and bandEnd
+     * @param fftWindow FFT window to analyze
      * @param window    Number of the window, to be used in the peak initialization
-     * @param band_start Lower boundary included
-     * @param band_end   Upper boundary included
+     * @param bandStart Lower boundary included
+     * @param bandEnd   Upper boundary included
      * @return The found peaks
      */
-    utils::fixed_size_pq<peak, consts::fingerprint::n_peaks>
-    find_peaks(const math::fft_window &fft_window, const std::int64_t &window,
-               const int &band_start, const int &band_end);
+    utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS>
+    findPeaks(const math::FFTWindow &fftWindow, const std::int64_t &window,
+              const int &bandStart, const int &bandEnd);
 }
 
 #endif

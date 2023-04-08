@@ -3,33 +3,33 @@
 #include <fin/math/integers.h>
 #include <xxh3.h>
 
-fin::core::link::link(const peak &address, const peak &peak) {
-    std::int64_t delta_time = peak.get_window() - address.get_window();
-    std::int64_t delta_freq = peak.get_freq_index() - address.get_freq_index();
-    std::uint64_t addr_freq = address.get_freq_index();
+fin::core::Link::Link(const Peak &address, const Peak &peak) {
+    std::int64_t deltaTime = peak.getWindow() - address.getWindow();
+    std::int64_t deltaFreq = peak.getFreqIndex() - address.getFreqIndex();
+    std::uint64_t addrFreq = address.getFreqIndex();
 
     XXH3_state_t state;
     XXH3_64bits_reset(&state);
 
-    if (utils::is_big_endian()) {
-        delta_time = math::integers::byte_swap(delta_time);
-        delta_freq = math::integers::byte_swap(delta_freq);
-        addr_freq = math::integers::byte_swap(addr_freq);
+    if (utils::isBigEndian()) {
+        deltaTime = math::integers::byteSwap(deltaTime);
+        deltaFreq = math::integers::byteSwap(deltaFreq);
+        addrFreq = math::integers::byteSwap(addrFreq);
     }
 
-    XXH3_64bits_update(&state, &delta_time, sizeof(delta_time));
-    XXH3_64bits_update(&state, &delta_freq, sizeof(delta_freq));
-    XXH3_64bits_update(&state, &addr_freq, sizeof(addr_freq));
+    XXH3_64bits_update(&state, &deltaTime, sizeof(deltaTime));
+    XXH3_64bits_update(&state, &deltaFreq, sizeof(deltaFreq));
+    XXH3_64bits_update(&state, &addrFreq, sizeof(addrFreq));
 
     this->hash = XXH3_64bits_digest(&state);
-    this->window = address.get_window();
+    this->window = address.getWindow();
 }
 
-std::uint64_t fin::core::link::get_hash() const {
+std::uint64_t fin::core::Link::getHash() const {
     return this->hash;
 }
 
-std::uint64_t fin::core::link::get_time() const {
+std::uint64_t fin::core::Link::getTime() const {
     return this->window;
 }
 

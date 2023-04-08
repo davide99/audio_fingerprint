@@ -11,15 +11,15 @@ namespace fin::math {
      * Simple container class to store the output of the
      * FFT and the corresponding time
      */
-    class fft_window {
-        friend class spectrogram;
+    class FFTWindow {
+        friend class Spectrogram;
 
     private:
-        std::array<float, consts::window::freq_bins> magnitudes{};
+        std::array<float, consts::window::FREQ_BINS> magnitudes{};
         float time{};
 
     public:
-        [[nodiscard]] const std::array<float, consts::window::freq_bins> &get_magnitudes() const {
+        [[nodiscard]] const std::array<float, consts::window::FREQ_BINS> &getMagnitudes() const {
             return magnitudes;
         }
 

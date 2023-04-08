@@ -2,32 +2,32 @@
 #include <fin/core/peaks_finder.h>
 #include <algorithm>
 
-std::vector<fin::core::peak> fin::core::fingerprint::compute(const math::spectrogram &spectrogram) {
+std::vector<fin::core::Peak> fin::core::fingerprint::compute(const math::Spectrogram &spectrogram) {
     int currBand, nextBand;
-    std::vector<peak> peak_vec; //vector to be returned
-    utils::fixed_size_pq<peak, consts::fingerprint::n_peaks> tmp; //to store the temporary loudest peaks
+    std::vector<Peak> peakVec; //vector to be returned
+    utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS> tmp; //to store the temporary loudest peaks
 
     //For each band
-    for (std::int64_t b = 0; b < static_cast<std::int64_t>(math::window::bands.size()) - 1; b++) {
-        currBand = math::window::bands[b];
-        nextBand = math::window::bands[b + 1];
+    for (std::int64_t b = 0; b < static_cast<std::int64_t>(math::window::BANDS.size()) - 1; b++) {
+        currBand = math::window::BANDS[b];
+        nextBand = math::window::BANDS[b + 1];
 
         //For each window in the spectrogram
         for (std::int64_t i = 0; i < static_cast<std::int64_t>(spectrogram.size()); i++) {
 
-            //Every C, or at the end of the window, add tmp to peak_vec then reset tmp
+            //Every C, or at the end of the window, add tmp to peakVec then reset tmp
             if (i % consts::fingerprint::C == 0 || i == static_cast<std::int64_t>(spectrogram.size()) - 1) {
-                peak_vec.insert(peak_vec.end(), tmp.begin(), tmp.end());
+                peakVec.insert(peakVec.end(), tmp.begin(), tmp.end());
                 tmp.clear();
             }
 
-            //Actually find the peaks between the two bands
-            auto found_peaks = find_peaks(spectrogram[i], i, currBand, nextBand - 1);
+            //Actually find the peaks between the two BANDS
+            auto found_peaks = findPeaks(spectrogram[i], i, currBand, nextBand - 1);
             for (const auto &peak : found_peaks) //Copy the found peaks in the tmp peaks holder
                 tmp.insert(peak);
         }
     }
 
-    std::sort(peak_vec.begin(), peak_vec.end()); //Sort in descending order by loudness
-    return peak_vec;
+    std::sort(peakVec.begin(), peakVec.end()); //Sort in descending order by loudness
+    return peakVec;
 }

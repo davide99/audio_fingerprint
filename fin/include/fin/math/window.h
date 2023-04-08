@@ -6,12 +6,12 @@
 #include "../../../consts.h"
 
 namespace fin::math::window {
-    extern const std::array<float, consts::window::size> window;
-    extern const std::array<float, consts::window::freq_bins> freq_bins;
-    extern const std::vector<int> bands;
-    extern const std::array<int, consts::window::freq_bins> bands_map;
+    extern const std::array<float, consts::window::SIZE> WINDOW;
+    extern const std::array<float, consts::window::FREQ_BINS> FREQ_BINS;
+    extern const std::vector<int> BANDS;
+    extern const std::array<int, consts::window::FREQ_BINS> BANDS_MAP;
 
-    const int &get_band_index(const int &freq_index);
+    const int &getBandIndex(const int &freqIndex);
 }
 
 #endif

@@ -4,45 +4,45 @@
 #include <fin/math/window.h>
 
 //The output length of an FFT for an x real-valued input array is x.length / 2 + 1
-static constexpr std::uint16_t fft_out_size = consts::window::size / 2 + 1;
+static constexpr std::uint16_t fft_out_size = consts::window::SIZE / 2 + 1;
 
-fin::math::spectrogram::spectrogram(const std::vector<float> &data) {
+fin::math::Spectrogram::Spectrogram(const std::vector<float> &data) {
     //Calculation of the winFFT size with integer roundup
-    std::size_t win_fft_size = ((std::size_t) ((data.size() - consts::window::size) / consts::window::step_size)) *
-                               consts::window::step_size;
-    this->fft_windows.reserve(win_fft_size);
+    std::size_t winFFTSize = ((std::size_t) ((data.size() - consts::window::SIZE) / consts::window::STEP_SIZE)) *
+                             consts::window::STEP_SIZE;
+    this->fftWindows.reserve(winFFTSize);
 
-    fft_window fft_window;
-    float timeWindow[consts::window::size]; //fft input
+    FFTWindow fftWindow;
+    float timeWindow[consts::window::SIZE]; //fft input
     fftwf_complex fftOut[fft_out_size];  //fft output
 
-    fftwf_plan p = fftwf_plan_dft_r2c_1d(consts::window::size, timeWindow, fftOut, FFTW_ESTIMATE);
+    fftwf_plan p = fftwf_plan_dft_r2c_1d(consts::window::SIZE, timeWindow, fftOut, FFTW_ESTIMATE);
 
-    for (std::size_t i = 0; i + consts::window::size < data.size(); i += consts::window::step_size) {
+    for (std::size_t i = 0; i + consts::window::SIZE < data.size(); i += consts::window::STEP_SIZE) {
         //Multiply the sliding window by the hamming window
-        math::vector::mul(window::window.data(), data.data() + i, timeWindow, consts::window::size);
+        math::vector::mul(window::WINDOW.data(), data.data() + i, timeWindow, consts::window::SIZE);
         fftwf_execute(p);
 
         /*
          * The first bin in the FFT output is the DC component, get rid of it by starting at fftOut+1
          * and save just the magnitude, not the complex number
          */
-        std::transform(fftOut + 1, fftOut + fft_out_size, fft_window.magnitudes.data(),
+        std::transform(fftOut + 1, fftOut + fft_out_size, fftWindow.magnitudes.data(),
                        [](const fftwf_complex &i) -> float {
                            return std::sqrt(i[0] * i[0] + i[1] * i[1]);
                        });
 
-        fft_window.time = (float) i / consts::audio::SAMPLE_RATE;
-        this->fft_windows.push_back(fft_window);
+        fftWindow.time = (float) i / consts::audio::SAMPLE_RATE;
+        this->fftWindows.push_back(fftWindow);
     }
 
     fftwf_destroy_plan(p);
 }
 
-const fin::math::fft_window &fin::math::spectrogram::operator[](std::size_t pos) const {
-    return this->fft_windows[pos];
+const fin::math::FFTWindow &fin::math::Spectrogram::operator[](std::size_t pos) const {
+    return this->fftWindows[pos];
 }
 
-std::size_t fin::math::spectrogram::size() const {
-    return this->fft_windows.size();
+std::size_t fin::math::Spectrogram::size() const {
+    return this->fftWindows.size();
 }
