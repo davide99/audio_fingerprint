@@ -3,7 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/fin/libs/xxHash" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/server/libs/mariadbpp" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/server/libs/mariadbpp/external/cmake-modules" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/fin_db/libs/mariadbpp" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/fin_db/libs/mariadbpp/external/cmake-modules" vcs="Git" />
   </component>
 </project>
