@@ -1,0 +1,2 @@
+1. Riscrivere la classe per il db con il nuovo connector
+https://mariadb.com/downloads/connectors/connectors-data-access/cpp-connector/
