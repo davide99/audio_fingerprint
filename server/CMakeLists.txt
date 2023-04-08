@@ -3,20 +3,16 @@ cmake_minimum_required(VERSION 3.17)
 project(server)
 
 # find files
-file(GLOB server_HEADERS *.h)
-file(GLOB server_SOURCES *.cpp)
-
-# Mariadbpp
-add_subdirectory(libs/mariadbpp)
-include_directories(libs/mariadbpp/include)
+set(server_HEADERS)
+set(server_SOURCES server.cpp)
 
 # set up target
 add_executable(server ${server_SOURCES} ${server_HEADERS})
 
 # target options
-target_include_directories(server PRIVATE fin)
+target_include_directories(server PRIVATE fin fin_db)
 
-target_link_libraries(server fin mariadbclientpp stdc++fs)
+target_link_libraries(server fin fin_db stdc++fs)
 
 target_compile_features(server PUBLIC cxx_std_17)
 

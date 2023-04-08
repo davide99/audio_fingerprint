@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="inserisci_windows" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-i C:/Users/Davide/Desktop/wav" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="audio_fingerprint" TARGET_NAME="audio_fingerprint" CONFIG_NAME="Debug Mock Wasm" RUN_TARGET_PROJECT_NAME="audio_fingerprint" RUN_TARGET_NAME="audio_fingerprint">
-    <method v="2">
-      <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-    </method>
-  </configuration>
-</component>

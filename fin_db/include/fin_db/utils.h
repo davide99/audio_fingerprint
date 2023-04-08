@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace utils {
+namespace fin::utils {
     bool ends_with(const std::string &str, const std::string &ending);
 
     /**

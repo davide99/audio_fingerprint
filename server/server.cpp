@@ -1,9 +1,9 @@
 #include <vector>
 #include <iostream>
 #include <chrono>
-#include "utils.h"
-#include "db.h"
-#include "wrapper.h"
+#include <fin_db/utils.h>
+#include <fin_db/db.h>
+#include <fin_db/wrapper.h>
 
 int main(int argc, char **argv) {
     if (argc != 3) {
@@ -11,10 +11,10 @@ int main(int argc, char **argv) {
                   << "-i <path to wav directory>" << std::endl
                   << "-d database => drop database" << std::endl;
     } else {
-        auto command = utils::trim(std::string(argv[1]));
-        auto argument = utils::trim(std::string(argv[2]));
+        auto command = fin::utils::trim(std::string(argv[1]));
+        auto argument = fin::utils::trim(std::string(argv[2]));
 
-        db db;
+        fin::db db;
 
         if (command == "-i") {
 #ifdef DEBUG
@@ -22,11 +22,11 @@ int main(int argc, char **argv) {
             db.create();
 #endif
             auto start = std::chrono::high_resolution_clock::now();
-            std::vector<std::string> fileList = utils::list_files(argument, "wav");
+            std::vector<std::string> fileList = fin::utils::list_files(argument, "wav");
 
             for (const auto &fileName:fileList) {
                 std::cout << "Analyzing " << fileName << std::endl;
-                utils::insertSong(fileName, db);
+                fin::utils::insertSong(fileName, db);
             }
 
             if (!fileList.empty()) {

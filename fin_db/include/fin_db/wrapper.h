@@ -1,5 +1,5 @@
-#ifndef SERVER_WRAPPER_H
-#define SERVER_WRAPPER_H
+#ifndef FIN_DB_WRAPPER_H
+#define FIN_DB_WRAPPER_H
 
 #include <string>
 #include <fin/math/spectrogram.h>
@@ -13,7 +13,7 @@
 /*
  * Just a wrapper around the two main functions
  */
-namespace utils {
+namespace fin::utils {
     /**
     * Try to find a match given some links
     * @param links of the recording

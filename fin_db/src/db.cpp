@@ -1,8 +1,9 @@
-#include "db.h"
+#include "../../consts.h"
+#include <fin_db/db.h>
 #include <string>
-#include "utils.h"
+#include <fin_db/utils.h>
 
-db::db() {
+fin::db::db() {
     //Setup the account
     mariadb::account_ref acc = mariadb::account::create(
             consts::db::HOSTNAME,
@@ -24,7 +25,7 @@ db::db() {
             "SELECT name FROM " + consts::db::INFO_TABLE_FULL + " WHERE id = ?");
 }
 
-bool db::exists() {
+bool fin::db::exists() {
     try {
         mariadb::result_set_ref result = this->conn->query(
                 "SELECT table_name FROM information_schema.tables WHERE table_schema='" + consts::db::NAME + "' " +
@@ -38,7 +39,7 @@ bool db::exists() {
     return false;
 }
 
-bool db::create() {
+bool fin::db::create() {
     try {
         this->conn->execute("CREATE DATABASE IF NOT EXISTS " + consts::db::NAME);
 
@@ -61,7 +62,7 @@ bool db::create() {
     return true;
 }
 
-bool db::drop() {
+bool fin::db::drop() {
     try {
         this->conn->execute("DROP DATABASE IF EXISTS " + consts::db::NAME);
     } catch (const std::exception &e) {
@@ -72,7 +73,7 @@ bool db::drop() {
     return true;
 }
 
-bool db::insertSong(const std::string &name, const fin::core::links &links) {
+bool fin::db::insertSong(const std::string &name, const fin::core::links &links) {
     mariadb::u64 id;
 
     //Insert song details into INFO_TABLE
@@ -109,7 +110,7 @@ bool db::insertSong(const std::string &name, const fin::core::links &links) {
     return true;
 }
 
-std::string db::getSongNameById(const std::uint64_t &id) {
+std::string fin::db::getSongNameById(const std::uint64_t &id) {
     mariadb::result_set_ref result;
 
     try {
@@ -125,7 +126,7 @@ std::string db::getSongNameById(const std::uint64_t &id) {
         return "";
 }
 
-bool db::searchIdGivenLinks(const fin::core::links &links, std::uint64_t &id, std::uint64_t *commonLinks) {
+bool fin::db::searchIdGivenLinks(const fin::core::links &links, std::uint64_t &id, std::uint64_t *commonLinks) {
     //Create the temporary in memory table
     try {
         this->conn->execute("CREATE TEMPORARY TABLE " + consts::db::TMP_RECORD_TABLE_FULL + " (" +
@@ -195,6 +196,6 @@ bool db::searchIdGivenLinks(const fin::core::links &links, std::uint64_t &id, st
     return true;
 }
 
-db::~db() {
+fin::db::~db() {
     this->conn->disconnect();
 }

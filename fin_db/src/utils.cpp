@@ -1,18 +1,18 @@
-#include "utils.h"
+#include <fin_db/utils.h>
 #include <filesystem>
 #include <algorithm>
 #include <cstring>
 
 
 //https://stackoverflow.com/a/2072890/6441490
-bool utils::ends_with(const std::string &str, const std::string &ending) {
+bool fin::utils::ends_with(const std::string &str, const std::string &ending) {
     if (ending.size() > str.size())
         return false;
 
     return std::equal(ending.rbegin(), ending.rend(), str.rbegin());
 }
 
-std::vector<std::string> utils::list_files(const std::string &path, const std::string &extension) {
+std::vector<std::string> fin::utils::list_files(const std::string &path, const std::string &extension) {
     namespace fs = std::filesystem;
     std::vector<std::string> files;
 
@@ -23,7 +23,7 @@ std::vector<std::string> utils::list_files(const std::string &path, const std::s
     return files;
 }
 
-std::string utils::trim(const std::string &str) {
+std::string fin::utils::trim(const std::string &str) {
     std::string s = str;
 
     s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](int ch) {
@@ -58,7 +58,7 @@ static constexpr char hexTable[] = "000102030405060708090A0B0C0D0E0F"
                                    "E0E1E2E3E4E5E6E7E8E9EAEBECEDEEEF"
                                    "F0F1F2F3F4F5F6F7F8F9FAFBFCFDFEFF";
 
-std::string_view utils::to_hex(std::uint64_t x) {
+std::string_view fin::utils::to_hex(std::uint64_t x) {
     int i;
     std::uint_fast8_t byte;
 
