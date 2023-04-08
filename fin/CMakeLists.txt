@@ -16,6 +16,7 @@ set(fin_HEADERS
 
         include/fin/readers/reader.h
         include/fin/readers/wav_reader.h
+        include/fin/readers/dummy_reader.h
 
         include/fin/utils/fixed_size_pq.h
         include/fin/utils/utils.h
@@ -30,6 +31,7 @@ set(fin_SOURCES
         src/math/window.cpp
 
         src/readers/wav_reader.cpp
+        src/readers/dummy_reader.cpp
 
         src/utils/utils.cpp
         )

@@ -1,7 +1,7 @@
 #include "../consts.h"
 #include <emscripten/webaudio.h>
 #include <string>
-#include "dummy_reader.h"
+#include <fin/readers/dummy_reader.h>
 #include <fin/utils/utils.h>
 
 //shared variable between main thread and audio thread
@@ -12,7 +12,7 @@ constexpr auto SAMPLE_SEC = 4; //numero secondi durata sample
 constexpr auto NUM_SAMPLES = consts::audio::SAMPLE_RATE * SAMPLE_SEC;
 constexpr auto PROCESS_SAMPLES = 128;
 
-dummy_reader dummyReader;
+fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
 
 void messageReceivedOnMainThread() {
@@ -45,9 +45,9 @@ EM_BOOL processAudio(
     //Se non l'ho avviato allora esco subito
     if (!start) return EM_TRUE;
 
-    if (dummyReader.get_len() < NUM_SAMPLES) {
+    if (dummyReader.getLen() < NUM_SAMPLES) {
         //Assumiamo numero input == 1
-        dummyReader.add_samples(inputs->data, PROCESS_SAMPLES);
+        dummyReader.addSamples(inputs->data, PROCESS_SAMPLES);
     } else if (first_time) {
         first_time = 0;
 
