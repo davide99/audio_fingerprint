@@ -1,3 +1,10 @@
+#Esegui con:
+#   -docker composer up
+#   -control+c
+#oppure:
+#   -docker compose up -d
+#   -docker compose down
+
 version: '3.1'
 
 services:
