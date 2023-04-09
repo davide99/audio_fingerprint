@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.17)
 
-project(server)
+project(server_entry)
 
 # find files
-set(server_HEADERS)
-set(server_SOURCES main.cpp)
+set(server_entry_HEADERS)
+set(server_entry_SOURCES main.cpp)
 
 # set up target
-add_executable(server ${server_SOURCES} ${server_HEADERS})
+add_executable(server_entry ${server_entry_SOURCES} ${server_entry_HEADERS})
 
 # target options
-target_include_directories(server PRIVATE fin fin_db)
+target_include_directories(server_entry PRIVATE fin fin_db)
 
-target_link_libraries(server fin fin_db stdc++fs)
+target_link_libraries(server_entry fin fin_db stdc++fs)
 
-target_compile_features(server PUBLIC cxx_std_17)
+target_compile_features(server_entry PUBLIC cxx_std_17)
 
 if (MSVC)
-    target_compile_options(server PRIVATE /W4)
+    target_compile_options(server_entry PRIVATE /W4)
 else ()
-    target_compile_options(server PRIVATE -Wall -Wextra)
+    target_compile_options(server_entry PRIVATE -Wall -Wextra)
 endif ()
