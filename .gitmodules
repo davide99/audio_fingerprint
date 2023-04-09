@@ -4,3 +4,6 @@
 [submodule "fin_db/libs/mariadbpp"]
 	path = fin_db/libs/mariadbpp
 	url = https://github.com/viaduck/mariadbpp.git
+[submodule "server_rest/libs/cpp-httplib"]
+	path = server_rest/libs/cpp-httplib
+	url = https://github.com/yhirose/cpp-httplib.git

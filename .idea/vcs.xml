@@ -5,5 +5,6 @@
     <mapping directory="$PROJECT_DIR$/fin/libs/xxHash" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/fin_db/libs/mariadbpp" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/fin_db/libs/mariadbpp/external/cmake-modules" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/server_rest/libs/cpp-httplib" vcs="Git" />
   </component>
 </project>

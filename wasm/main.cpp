@@ -1,8 +1,9 @@
 #include "../consts.h"
 #include <emscripten/webaudio.h>
-#include <string>
+#include <emscripten/fetch.h>
 #include <fin/readers/dummy_reader.h>
 #include <fin/fin.h>
+#include <cstring>
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;
@@ -19,17 +20,32 @@ void messageReceivedOnMainThread() {
     auto links = fin::computeLinks(dummyReader);
     dummyReader.dropSamples();
 
-    std::string json = "[";
-    for (auto &link: links) {
-        json += "{\"hash\":" + std::to_string(link.getHash()) +
-                ",\"window\":" + std::to_string(link.getTime()) + "},";
-    }
-    json.pop_back();
-    json += "]";
+    auto byteBuffer = links.toByteBuffer();
 
-    EM_ASM({
-               console.log(UTF8ToString($0));
-           }, json.c_str());
+    emscripten_fetch_attr_t attr;
+    emscripten_fetch_attr_init(&attr);
+
+    static const char* const headers[] = {
+            "Content-Type",
+            "application/octet-stream",
+            nullptr //fine
+    };
+    attr.requestHeaders = headers;
+    attr.requestData = reinterpret_cast<const char*>(byteBuffer.getData());
+    attr.requestDataSize = byteBuffer.getSize();
+    std::strcpy(attr.requestMethod, "POST");
+    attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
+    attr.onsuccess = [](emscripten_fetch_t *fetch) {
+        printf("Finished downloading %lu bytes from URL %s.\n", fetch->numBytes, fetch->url);
+        printf("%s\n", fetch->data);
+        // The data is now available at fetch->data[0] through fetch->data[fetch->numBytes-1];
+        emscripten_fetch_close(fetch); // Free data associated with the fetch.
+    };
+    attr.onerror = [](emscripten_fetch_t *fetch) {
+        printf("Downloading %s failed, HTTP failure status code: %d.\n", fetch->url, fetch->status);
+        emscripten_fetch_close(fetch); // Also free data on failure.
+    };
+    emscripten_fetch(&attr, "http://localhost:8080/songByLinks");
 }
 
 
