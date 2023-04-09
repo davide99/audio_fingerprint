@@ -4,7 +4,7 @@ project(server)
 
 # find files
 set(server_HEADERS)
-set(server_SOURCES server.cpp)
+set(server_SOURCES main.cpp)
 
 # set up target
 add_executable(server ${server_SOURCES} ${server_HEADERS})
