@@ -23,10 +23,6 @@ int main() {
                          return true;
                      });
 
-                     res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin"));
-                     res.set_header("Allow", "POST, OPTIONS");
-                     res.set_header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Origin, Authorization");
-                     res.set_header("Access-Control-Allow-Methods", "POST, OPTIONS");
                      res.set_content("{'ok': 'a'}", "application/json");
                  } else {
                      res.set_content("{'message': 'no'}", "application/json");
@@ -34,12 +30,20 @@ int main() {
                  }
              });
 
-    svr.Options("/songByLinks", [](const auto& req, auto& res) {
-        res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin"));
-        res.set_header("Allow", "POST, OPTIONS");
-        res.set_header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Origin, Authorization");
-        res.set_header("Access-Control-Allow-Methods", "POST, OPTIONS");
+    svr.set_pre_routing_handler([](const auto& req, auto& res) {
+        if (req.method == "OPTIONS")
+            return httplib::Server::HandlerResponse::Handled;
+
+        return httplib::Server::HandlerResponse::Unhandled;
     });
+
+    svr.set_post_routing_handler([](const auto &req, auto &res) {
+        res.set_header("Access-Control-Allow-Origin", req.get_header_value("Origin"));
+        res.set_header("Allow", "GET, POST, HEAD, OPTIONS");
+        res.set_header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Origin, Authorization");
+        res.set_header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS");
+    });
+
     svr.listen("0.0.0.0", 8080);
 
     return 0;
