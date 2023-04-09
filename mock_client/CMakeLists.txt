@@ -6,9 +6,9 @@ project(mock_client)
 add_executable(mock_client main.cpp)
 
 # target options
-target_include_directories(mock_client PRIVATE fin)
+target_include_directories(mock_client PRIVATE fin fin_db)
 
-target_link_libraries(mock_client fin)
+target_link_libraries(mock_client fin fin_db)
 
 target_compile_features(mock_client PUBLIC cxx_std_17)
 
