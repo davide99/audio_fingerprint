@@ -193,6 +193,13 @@ bool fin::DB::searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &i
         return false;
     }
 
+    try {
+        conn->execute("DROP TABLE " + consts::db::TMP_RECORD_TABLE_FULL);
+    } catch (const std::exception &e) {
+        e.what();
+        return false;
+    }
+
     return true;
 }
 
