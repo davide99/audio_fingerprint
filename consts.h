@@ -41,7 +41,7 @@ namespace consts {
 
     namespace db {
         //Credentials
-        const std::string HOSTNAME = "localhost";
+        const std::string HOSTNAME = "127.0.0.1";
         const std::string USERNAME = "root";
         const std::string PASSWORD = "davide";
         const std::string NAME = "musiclibrary";
