@@ -23,9 +23,9 @@ int main() {
                          return true;
                      });
 
-                     res.set_content("{'ok': 'a'}", "application/json");
+                     res.set_content(R"({"ok": "a"})", "application/json");
                  } else {
-                     res.set_content("{'message': 'no'}", "application/json");
+                     res.set_content(R"({"message": "no"})", "application/json");
                      res.status = 500;
                  }
              });

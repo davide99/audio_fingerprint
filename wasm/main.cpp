@@ -12,6 +12,7 @@ std::int8_t start = 0;
 constexpr auto SAMPLE_SEC = 4; //numero secondi durata sample
 constexpr auto NUM_SAMPLES = consts::audio::SAMPLE_RATE * SAMPLE_SEC;
 constexpr auto PROCESS_SAMPLES = 128;
+constexpr auto REST_SERVER_ENDPOINT = "http://localhost:8080/songByLinks";
 
 fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
@@ -22,30 +23,31 @@ void messageReceivedOnMainThread() {
 
     auto byteBuffer = links.toByteBuffer();
 
+    //Post verso server con links
     emscripten_fetch_attr_t attr;
     emscripten_fetch_attr_init(&attr);
 
-    static const char* const headers[] = {
+    static const char *const headers[] = {
             "Content-Type",
             "application/octet-stream",
             nullptr //fine
     };
     attr.requestHeaders = headers;
-    attr.requestData = reinterpret_cast<const char*>(byteBuffer.getData());
+    attr.requestData = reinterpret_cast<const char *>(byteBuffer.getData());
     attr.requestDataSize = byteBuffer.getSize();
     std::strcpy(attr.requestMethod, "POST");
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
     attr.onsuccess = [](emscripten_fetch_t *fetch) {
-        printf("Finished downloading %lu bytes from URL %s.\n", fetch->numBytes, fetch->url);
-        printf("%s\n", fetch->data);
-        // The data is now available at fetch->data[0] through fetch->data[fetch->numBytes-1];
+        EM_ASM({
+                   console.log(JSON.parse(UTF8ToString($0)));
+               }, fetch->data);
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
     };
     attr.onerror = [](emscripten_fetch_t *fetch) {
         printf("Downloading %s failed, HTTP failure status code: %d.\n", fetch->url, fetch->status);
         emscripten_fetch_close(fetch); // Also free data on failure.
     };
-    emscripten_fetch(&attr, "http://localhost:8080/songByLinks");
+    emscripten_fetch(&attr, REST_SERVER_ENDPOINT);
 }
 
 
