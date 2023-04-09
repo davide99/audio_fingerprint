@@ -9,7 +9,7 @@
 std::int8_t start = 0;
 
 //variabili del solo audio thread
-constexpr auto SAMPLE_SEC = 4; //numero secondi durata sample
+constexpr auto SAMPLE_SEC = 8; //numero secondi durata sample
 constexpr auto NUM_SAMPLES = consts::audio::SAMPLE_RATE * SAMPLE_SEC;
 constexpr auto PROCESS_SAMPLES = 128;
 constexpr auto REST_SERVER_ENDPOINT = "http://localhost:8080/songByLinks";
@@ -22,7 +22,7 @@ void messageReceivedOnMainThread() {
     dummyReader.dropSamples();
 
     auto byteBuffer = links.toByteBuffer();
-    char* data = new char[byteBuffer.getSize()];
+    char *data = new char[byteBuffer.getSize()];
     std::memcpy(data, byteBuffer.getData(), byteBuffer.getSize());
 
     //Post verso server con links
@@ -43,15 +43,17 @@ void messageReceivedOnMainThread() {
     std::strcpy(attr.requestMethod, "POST");
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
     attr.onsuccess = [](emscripten_fetch_t *fetch) {
+        std::string ret(fetch->data, fetch->totalBytes);
+
         EM_ASM({
-                   console.log(JSON.parse(UTF8ToString($0)));
-               }, fetch->data);
-        delete[] reinterpret_cast<char*>(fetch->userData);
+                   console.log(UTF8ToString($0));
+               }, ret.c_str());
+        delete[] reinterpret_cast<char *>(fetch->userData);
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
     };
     attr.onerror = [](emscripten_fetch_t *fetch) {
         printf("Downloading %s failed, HTTP failure status code: %d.\n", fetch->url, fetch->status);
-        delete[] reinterpret_cast<char*>(fetch->userData);
+        delete[] reinterpret_cast<char *>(fetch->userData);
         emscripten_fetch_close(fetch); // Also free data on failure.
     };
     emscripten_fetch(&attr, REST_SERVER_ENDPOINT);
@@ -102,31 +104,37 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
     );
 
     EM_ASM({
-               const audioContext = emscriptenGetAudioObject($0);
-               audioContext.suspend();
+               function init(stream){
+                   const audioContext = emscriptenGetAudioObject($0);
+                   audioContext.suspend();
 
-               // Add a button on the page to toggle playback as a response to user click.
-               const startButton = document.createElement('button');
-               startButton.innerHTML = 'Toggle playback';
-               document.body.appendChild(startButton);
+                   // Add a button on the page to toggle playback as a response to user click.
+                   const startButton = document.createElement('button');
+                   startButton.innerHTML = 'Toggle playback';
+                   document.body.appendChild(startButton);
 
-               const audioWorkletNode = emscriptenGetAudioObject($1);
-               const oscillator = new OscillatorNode(audioContext, {type: 'sine', frequency: 440});
-               oscillator.start();
+                   const audioWorkletNode = emscriptenGetAudioObject($1);
+                   const mic = audioContext.createMediaStreamSource(stream);
 
-               oscillator.connect(audioWorkletNode);
-               oscillator.connect(audioContext.destination);
+                   let track = stream.getAudioTracks()[0];
+                   console.log(track.getCapabilities());
 
-               startButton.onclick = () => {
-            if (audioContext.state != 'running') {
-                audioContext.resume();
-                HEAP8[$2] = 1;
-            } else {
-                audioContext.suspend();
-                HEAP8[$2] = 0;
-            }
-        };
-           }, audioContext, wasmAudioWorklet, &start);
+                   mic.connect(audioWorkletNode);
+
+                   startButton.onclick = () => {
+                       if (audioContext.state != 'running') {
+                           audioContext.resume();
+                           HEAP8[$2] = 1;
+                       } else {
+                           audioContext.suspend();
+                           HEAP8[$2] = 0;
+                       }
+                   };
+               }
+
+        navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}}).then((stream) => init(stream));
+
+        }, audioContext, wasmAudioWorklet, &start);
 }
 
 /*
