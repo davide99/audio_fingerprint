@@ -22,6 +22,8 @@ void messageReceivedOnMainThread() {
     dummyReader.dropSamples();
 
     auto byteBuffer = links.toByteBuffer();
+    char* data = new char[byteBuffer.getSize()];
+    std::memcpy(data, byteBuffer.getData(), byteBuffer.getSize());
 
     //Post verso server con links
     emscripten_fetch_attr_t attr;
@@ -33,7 +35,10 @@ void messageReceivedOnMainThread() {
             nullptr //fine
     };
     attr.requestHeaders = headers;
-    attr.requestData = reinterpret_cast<const char *>(byteBuffer.getData());
+    printf("%lu\n", byteBuffer.getSize());
+    printf("%lu\n", links.size());
+    attr.requestData = data;
+    attr.userData = data;
     attr.requestDataSize = byteBuffer.getSize();
     std::strcpy(attr.requestMethod, "POST");
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
@@ -41,10 +46,12 @@ void messageReceivedOnMainThread() {
         EM_ASM({
                    console.log(JSON.parse(UTF8ToString($0)));
                }, fetch->data);
+        delete[] reinterpret_cast<char*>(fetch->userData);
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
     };
     attr.onerror = [](emscripten_fetch_t *fetch) {
         printf("Downloading %s failed, HTTP failure status code: %d.\n", fetch->url, fetch->status);
+        delete[] reinterpret_cast<char*>(fetch->userData);
         emscripten_fetch_close(fetch); // Also free data on failure.
     };
     emscripten_fetch(&attr, REST_SERVER_ENDPOINT);

@@ -2,15 +2,19 @@
 #include <httplib.h>
 #include <fin/utils/byte_buffer.h>
 #include <fin/core/links.h>
+#include <fin_db/fin_db.h>
 
 int main() {
     httplib::Server svr;
+    fin::DB db;
 
     svr.Post("/songByLinks",
              [&](
                      const httplib::Request &req, httplib::Response &res,
                      const httplib::ContentReader &content_reader) {
                  if (req.get_header_value("Content-Type") == "application/octet-stream") {
+                     std::string song;
+
                      content_reader([&](const char *data, size_t data_length) {
                          fin::utils::ByteBuffer buffer;
 
@@ -19,11 +23,12 @@ int main() {
                          }
 
                          fin::core::Links links = fin::core::Links::fromByteBuffer(buffer);
+                         song = fin::searchFromLinks(links,db);
 
                          return true;
                      });
 
-                     res.set_content(R"({"ok": "a"})", "application/json");
+                     res.set_content("{\"song\": " + song + "\"}", "application/json");
                  } else {
                      res.set_content(R"({"message": "no"})", "application/json");
                      res.status = 500;
