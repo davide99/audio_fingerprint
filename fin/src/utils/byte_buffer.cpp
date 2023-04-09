@@ -67,7 +67,7 @@ std::uint8_t fin::utils::ByteBuffer::remove8() {
 
 std::uint16_t fin::utils::ByteBuffer::remove16() {
     const std::uint16_t value =
-            static_cast<std::uint16_t>(data_[read_pos_]) &
+            static_cast<std::uint16_t>(data_[read_pos_]) |
             static_cast<std::uint16_t>(data_[read_pos_ + 1]) << 8u;
     read_pos_ += 2;
     return value;
@@ -75,9 +75,9 @@ std::uint16_t fin::utils::ByteBuffer::remove16() {
 
 std::uint32_t fin::utils::ByteBuffer::remove32() {
     const std::uint32_t value =
-            static_cast<std::uint32_t>(data_[read_pos_]) &
-            static_cast<std::uint32_t>(data_[read_pos_ + 1]) << 8u &
-            static_cast<std::uint32_t>(data_[read_pos_ + 2]) << 16u &
+            static_cast<std::uint32_t>(data_[read_pos_]) |
+            static_cast<std::uint32_t>(data_[read_pos_ + 1]) << 8u |
+            static_cast<std::uint32_t>(data_[read_pos_ + 2]) << 16u |
             static_cast<std::uint32_t>(data_[read_pos_ + 3]) << 24u;
     read_pos_ += 4;
     return value;
@@ -85,13 +85,13 @@ std::uint32_t fin::utils::ByteBuffer::remove32() {
 
 std::uint64_t fin::utils::ByteBuffer::remove64() {
     const std::uint64_t value =
-            static_cast<std::uint64_t>(data_[read_pos_]) &
-            static_cast<std::uint64_t>(data_[read_pos_ + 1]) << 8u &
-            static_cast<std::uint64_t>(data_[read_pos_ + 2]) << 16u &
-            static_cast<std::uint64_t>(data_[read_pos_ + 3]) << 24u &
-            static_cast<std::uint64_t>(data_[read_pos_ + 4]) << 32u &
-            static_cast<std::uint64_t>(data_[read_pos_ + 5]) << 40u &
-            static_cast<std::uint64_t>(data_[read_pos_ + 6]) << 48u &
+            static_cast<std::uint64_t>(data_[read_pos_]) |
+            static_cast<std::uint64_t>(data_[read_pos_ + 1]) << 8u |
+            static_cast<std::uint64_t>(data_[read_pos_ + 2]) << 16u |
+            static_cast<std::uint64_t>(data_[read_pos_ + 3]) << 24u |
+            static_cast<std::uint64_t>(data_[read_pos_ + 4]) << 32u |
+            static_cast<std::uint64_t>(data_[read_pos_ + 5]) << 40u |
+            static_cast<std::uint64_t>(data_[read_pos_ + 6]) << 48u |
             static_cast<std::uint64_t>(data_[read_pos_ + 7]) << 56u;
     read_pos_ += 8;
     return value;
