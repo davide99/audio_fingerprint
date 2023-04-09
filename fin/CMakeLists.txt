@@ -20,6 +20,7 @@ set(fin_HEADERS
 
         include/fin/utils/fixed_size_pq.h
         include/fin/utils/utils.h
+        include/fin/utils/byte_buffer.h
 
         include/fin/fin.h
         )
@@ -36,6 +37,8 @@ set(fin_SOURCES
         src/readers/dummy_reader.cpp
 
         src/utils/utils.cpp
+        src/utils/byte_buffer.cpp
+
         src/fin.cpp)
 
 # set up target

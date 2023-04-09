@@ -15,6 +15,8 @@ namespace fin::core {
     public:
         Link(const fin::core::Peak &address, const fin::core::Peak &peak);
 
+        Link(const std::uint64_t &hash, const std::uint64_t &window);
+
         [[nodiscard]] std::uint64_t getHash() const;
 
         [[nodiscard]] std::uint64_t getTime() const;

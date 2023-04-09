@@ -4,6 +4,7 @@
 #include <vector>
 #include <fin/core/link.h>
 #include <fin/core/peak.h>
+#include <fin/utils/byte_buffer.h>
 
 namespace fin::core {
     /**
@@ -16,6 +17,13 @@ namespace fin::core {
          * @param peakVec Computed peaks
          */
         explicit Links(const std::vector<fin::core::Peak> &peakVec);
+
+        fin::utils::ByteBuffer toByteBuffer();
+
+        static fin::core::Links fromByteBuffer(utils::ByteBuffer &byteBuffer);
+
+    private:
+        Links() = default;
     };
 }
 

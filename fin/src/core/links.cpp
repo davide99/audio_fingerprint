@@ -20,3 +20,26 @@ fin::core::Links::Links(const std::vector<Peak> &peakVec) {
                 this->emplace_back(*it, *left);
     }
 }
+
+fin::utils::ByteBuffer fin::core::Links::toByteBuffer() {
+    fin::utils::ByteBuffer byteBuffer;
+
+    byteBuffer.add64(this->size());
+    for (auto const &link: *this) {
+        byteBuffer.add64(link.getTime());
+        byteBuffer.add64(link.getHash());
+    }
+
+    return byteBuffer;
+}
+
+fin::core::Links fin::core::Links::fromByteBuffer(utils::ByteBuffer &byteBuffer) {
+    Links links;
+
+    auto len = byteBuffer.remove64();
+    for (decltype(len) i = 0; i < len; i++) {
+        links.emplace_back(byteBuffer.remove64(), byteBuffer.remove64());
+    }
+
+    return links;
+}

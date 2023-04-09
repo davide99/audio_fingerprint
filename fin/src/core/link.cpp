@@ -25,6 +25,11 @@ fin::core::Link::Link(const Peak &address, const Peak &peak) {
     this->window = address.getWindow();
 }
 
+fin::core::Link::Link(const uint64_t &hash, const uint64_t &window) {
+    this->hash = hash;
+    this->window = window;
+}
+
 std::uint64_t fin::core::Link::getHash() const {
     return this->hash;
 }
@@ -32,4 +37,3 @@ std::uint64_t fin::core::Link::getHash() const {
 std::uint64_t fin::core::Link::getTime() const {
     return this->window;
 }
-
