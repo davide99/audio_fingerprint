@@ -50,7 +50,8 @@ static bool checkFmtChunk(const FmtChunk &fmtChunk) {
 
 //Iterate through the WAV file to find a chunk given the id
 bool
-fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian,
+fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wav_file,
+                                   const bool &is_big_endian,
                                    bool iterate = true) {
     bool found;
 
@@ -82,6 +83,11 @@ fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::if
 fin::readers::WavReader::WavReader(const std::string &filename) {
     Chunk chunk{};
     bool isBigEndian = fin::utils::isBigEndian();
+    this->basename = fin::utils::getBasename(filename);
+
+    if (this->basename.empty()) {
+        throw std::runtime_error("Can't extract basename from: " + filename);
+    }
 
     std::ifstream wavFile(filename, std::ios::binary);
     wavFile.exceptions(std::ifstream::failbit | std::ifstream::badbit | std::ifstream::eofbit);
@@ -149,4 +155,8 @@ const std::vector<float> &fin::readers::WavReader::getData() {
 
 void fin::readers::WavReader::dropSamples() {
     this->data.resize(0);
+}
+
+const std::string &fin::readers::WavReader::getBasename() {
+    return basename;
 }

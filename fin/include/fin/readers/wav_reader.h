@@ -15,7 +15,7 @@ namespace fin::readers {
     class WavReader : public fin::readers::Reader {
 
     private:
-        std::string filename;
+        std::string basename;
 
     private:
         std::vector<float> data;
@@ -25,6 +25,8 @@ namespace fin::readers {
         const std::vector<float> &getData() override;
 
         void dropSamples() override;
+
+        const std::string & getBasename();
 
     private:
         static bool

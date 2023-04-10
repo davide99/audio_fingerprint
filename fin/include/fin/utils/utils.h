@@ -6,6 +6,8 @@
 
 namespace fin::utils {
     bool isBigEndian();
+
+    std::string getBasename(const std::string &path);
 }
 
 #endif

@@ -30,14 +30,14 @@ namespace fin {
 
     /**
     * Insert a song in the database
-    * @param fileName of the song
+    * @param filename of the song
     * @param db initialized db object
     */
-    void insertSong(const std::string &fileName, DB &db) {
-        fin::readers::WavReader wavReader(fileName);
+    void insertSong(const std::string &filename, DB &db) {
+        fin::readers::WavReader wavReader(filename);
         fin::core::Links links = fin::computeLinks(wavReader);
 
-        db.insertSong(fileName, links);
+        db.insertSong(wavReader.getBasename(), links);
     }
 }
 
