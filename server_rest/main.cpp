@@ -1,3 +1,4 @@
+#include "../consts.h"
 #include <iostream>
 #include <httplib.h>
 #include <fin/utils/byte_buffer.h>
@@ -8,33 +9,40 @@ int main() {
     httplib::Server svr;
     fin::DB db;
 
-    svr.Post("/songByLinks",
+    svr.Post(consts::rest::SEARCH_ENDPOINT,
              [&](
-                     const httplib::Request &req, httplib::Response &res,
-                     const httplib::ContentReader &content_reader) {
-                 if (req.get_header_value("Content-Type") == "application/octet-stream") {
+                     const auto &req, auto &res,
+                     const auto &content_reader) {
+                 if (req.get_header_value("Content-Type") == consts::rest::CONTENT_TYPE_BINARY) {
                      fin::utils::ByteBuffer buffer;
 
-                     content_reader([&](const char *data, size_t data_length) {
-                         for (size_t i = 0; i < data_length; i++) {
+                     content_reader([&](const char *data, std::size_t data_length) {
+                         for (decltype(data_length) i = 0; i < data_length; i++)
                              buffer.add8(static_cast<std::uint8_t>(data[i]));
-                         }
 
                          return true;
                      });
 
                      fin::core::Links links = fin::core::Links::fromByteBuffer(buffer);
-                     std::cout << "Ricevuti " << buffer.getSize() << " bytes, " << links.size() << " Link" << std::endl;
-                     std::string song = fin::searchFromLinks(links, db);
+                     std::cout << buffer.getSize() << " bytes received, "
+                               << links.size() << " links received" << std::endl;
 
-                     res.set_content("{\"song\": \"" + song + "\"}", "application/json");
+                     std::string song = fin::searchFromLinks(links, db);
+                     if (!song.empty()) {
+                         res.set_content(R"({"song_name": ")" + song + "\"}", consts::rest::CONTENT_TYPE_JSON);
+                     } else {
+                         res.set_content(R"({"error": "song not found"})", consts::rest::CONTENT_TYPE_JSON);
+                         res.status = 404;
+                     }
                  } else {
-                     res.set_content(R"({"message": "no"})", "application/json");
+                     res.set_content(R"({"message": "no"})", consts::rest::CONTENT_TYPE_JSON);
                      res.status = 500;
                  }
              });
 
     svr.set_pre_routing_handler([](const auto &req, auto &res) {
+        (void) res;
+
         if (req.method == "OPTIONS")
             return httplib::Server::HandlerResponse::Handled;
 
@@ -48,7 +56,7 @@ int main() {
         res.set_header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS");
     });
 
-    svr.listen("0.0.0.0", 8080);
+    svr.listen("0.0.0.0", consts::rest::PORT);
 
     return 0;
 }

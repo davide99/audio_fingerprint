@@ -12,7 +12,6 @@ std::int8_t start = 0;
 constexpr auto SAMPLE_SEC = 8; //numero secondi durata sample
 constexpr auto NUM_SAMPLES = consts::audio::SAMPLE_RATE * SAMPLE_SEC;
 constexpr auto PROCESS_SAMPLES = 128;
-constexpr auto REST_SERVER_ENDPOINT = "http://localhost:8080/songByLinks";
 
 fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
@@ -31,7 +30,7 @@ void messageReceivedOnMainThread() {
 
     static const char *const headers[] = {
             "Content-Type",
-            "application/octet-stream",
+            consts::rest::CONTENT_TYPE_BINARY.c_str(),
             nullptr //fine
     };
     attr.requestHeaders = headers;
@@ -56,7 +55,7 @@ void messageReceivedOnMainThread() {
         delete[] reinterpret_cast<char *>(fetch->userData);
         emscripten_fetch_close(fetch); // Also free data on failure.
     };
-    emscripten_fetch(&attr, REST_SERVER_ENDPOINT);
+    emscripten_fetch(&attr, consts::rest::FULL_SEARCH_ENDPOINT.c_str());
 }
 
 

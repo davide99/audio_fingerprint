@@ -59,6 +59,16 @@ namespace consts {
         const std::string UINT64 = "BIGINT UNSIGNED";
         const std::string UINT = "INT UNSIGNED";
     }
+
+    namespace rest {
+        const std::string ADDRESS = "localhost";
+        constexpr auto PORT = 8080;
+        const std::string SEARCH_ENDPOINT = "/songByLinks";
+        const std::string FULL_SEARCH_ENDPOINT =
+                "http://" + ADDRESS + ":" + std::to_string(PORT) + consts::rest::SEARCH_ENDPOINT;
+        const std::string CONTENT_TYPE_BINARY = "application/octet-stream";
+        const std::string CONTENT_TYPE_JSON = "application/json";
+    }
 }
 
 #endif

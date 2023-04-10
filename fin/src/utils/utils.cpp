@@ -10,12 +10,13 @@ bool fin::utils::isBigEndian() {
 }
 
 std::string fin::utils::getBasename(const std::string &path) {
-    std::regex regex(R"([/\\]([^/\\]*)\.wav$)", std::regex_constants::icase);
-    std::smatch matches;
+    auto last_backslash_pos = path.find_last_of('\\');
+    auto last_slash_pos = path.find_last_of('/');
 
-    if (std::regex_search(path, matches, regex) && matches.size() == 2) {
-        return matches[1].str();
-    }
+    auto start = last_backslash_pos == std::string::npos ? last_slash_pos : last_backslash_pos;
 
-    return "";
+    if (start == std::string::npos)
+        return "";
+
+    return path.substr(start + 1);
 }
