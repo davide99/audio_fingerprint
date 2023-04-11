@@ -15,10 +15,9 @@ namespace fin::readers {
     class WavReader : public fin::readers::Reader {
 
     private:
-        std::string basename;
-
-    private:
+        std::string basename_;
         std::vector<float> data;
+
     public:
         explicit WavReader(const std::string &filename);
 
@@ -26,11 +25,11 @@ namespace fin::readers {
 
         void dropSamples() override;
 
-        const std::string & getBasename();
+        const std::string &getBasename();
 
     private:
         static bool
-        findChunk(const uint8_t *id, Chunk &chunk, std::ifstream &wav_file, const bool &is_big_endian, bool iterate);
+        findChunk(const uint8_t *id, Chunk &chunk, std::ifstream &wavFile, const bool &isBigEndian, bool iterate);
     };
 }
 #endif

@@ -10,7 +10,7 @@ fin::math::Spectrogram::Spectrogram(const std::vector<float> &data) {
     //Calculation of the winFFT size with integer roundup
     std::size_t winFFTSize = ((std::size_t) ((data.size() - consts::window::SIZE) / consts::window::STEP_SIZE)) *
                              consts::window::STEP_SIZE;
-    this->fftWindows.reserve(winFFTSize);
+    fftWindows_.reserve(winFFTSize);
 
     FFTWindow fftWindow;
     float timeWindow[consts::window::SIZE]; //fft input
@@ -27,22 +27,22 @@ fin::math::Spectrogram::Spectrogram(const std::vector<float> &data) {
          * The first bin in the FFT output is the DC component, get rid of it by starting at fftOut+1
          * and save just the magnitude, not the complex number
          */
-        std::transform(fftOut + 1, fftOut + fft_out_size, fftWindow.magnitudes.data(),
+        std::transform(fftOut + 1, fftOut + fft_out_size, fftWindow.magnitudes_.data(),
                        [](const fftwf_complex &i) -> float {
                            return std::sqrt(i[0] * i[0] + i[1] * i[1]);
                        });
 
-        fftWindow.time = (float) i / consts::audio::SAMPLE_RATE;
-        this->fftWindows.push_back(fftWindow);
+        fftWindow.time_ = (float) i / consts::audio::SAMPLE_RATE;
+        fftWindows_.push_back(fftWindow);
     }
 
     fftwf_destroy_plan(p);
 }
 
 const fin::math::FFTWindow &fin::math::Spectrogram::operator[](std::size_t pos) const {
-    return this->fftWindows[pos];
+    return fftWindows_[pos];
 }
 
 std::size_t fin::math::Spectrogram::size() const {
-    return this->fftWindows.size();
+    return fftWindows_.size();
 }

@@ -10,10 +10,10 @@ bool fin::utils::isBigEndian() {
 }
 
 std::string fin::utils::getBasename(const std::string &path) {
-    auto last_backslash_pos = path.find_last_of('\\');
-    auto last_slash_pos = path.find_last_of('/');
+    auto lastBackslashPos = path.find_last_of('\\');
+    auto lastSlashPos = path.find_last_of('/');
 
-    auto start = last_backslash_pos == std::string::npos ? last_slash_pos : last_backslash_pos;
+    auto start = lastBackslashPos == std::string::npos ? lastSlashPos : lastBackslashPos;
 
     if (start == std::string::npos)
         return "";

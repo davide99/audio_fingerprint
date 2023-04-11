@@ -15,16 +15,16 @@ namespace fin::math {
         friend class Spectrogram;
 
     private:
-        std::array<float, consts::window::FREQ_BINS> magnitudes{};
-        float time{};
+        std::array<float, consts::window::FREQ_BINS> magnitudes_{};
+        float time_{};
 
     public:
         [[nodiscard]] const std::array<float, consts::window::FREQ_BINS> &getMagnitudes() const {
-            return magnitudes;
+            return magnitudes_;
         }
 
         [[nodiscard]] const float &getTime() const {
-            return time;
+            return time_;
         }
     };
 }

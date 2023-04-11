@@ -10,18 +10,17 @@ namespace fin::core {
      */
     class Link {
     private:
-        std::uint64_t hash;
-        std::uint64_t window;
+        std::uint64_t hash_;
+        std::uint64_t window_;
     public:
         Link(const fin::core::Peak &address, const fin::core::Peak &peak);
 
         Link(const std::uint64_t &hash, const std::uint64_t &window);
 
-        [[nodiscard]] std::uint64_t getHash() const;
+        [[nodiscard]] const std::uint64_t &getHash() const;
 
-        [[nodiscard]] std::uint64_t getTime() const;
+        [[nodiscard]] const std::uint64_t &getTime() const;
     };
 }
-
 
 #endif

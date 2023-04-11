@@ -17,14 +17,14 @@ fin::core::Links::Links(const std::vector<Peak> &peakVec) {
 
         for (; left <= right; left++)
             if (std::abs(left->getTime() - it->getTime()) >= consts::links::MIN_WIN_DISTANCE_F && left->sameBand(*it))
-                this->emplace_back(*it, *left);
+                emplace_back(*it, *left);
     }
 }
 
 fin::utils::ByteBuffer fin::core::Links::toByteBuffer() {
     fin::utils::ByteBuffer byteBuffer;
 
-    byteBuffer.add(static_cast<std::uint64_t>(this->size()));
+    byteBuffer.add(static_cast<std::uint64_t>(size()));
     for (auto const &link: *this) {
         byteBuffer.add(link.getTime());
         byteBuffer.add(link.getHash());

@@ -1,25 +1,25 @@
 #include <fin/core/peak.h>
 
 const int &fin::core::Peak::getFreqIndex() const {
-    return this->freqIndex;
+    return freqIndex_;
 }
 
 const std::int64_t &fin::core::Peak::getWindow() const {
-    return this->window;
+    return window_;
 }
 
 bool fin::core::Peak::sameBand(const Peak &peak) const {
-    return this->bandIndex == peak.bandIndex;
+    return bandIndex_ == peak.bandIndex_;
 }
 
 bool fin::core::Peak::operator<(const Peak &peak) const {
-    return this->power < peak.power;
+    return power_ < peak.power_;
 }
 
 bool fin::core::Peak::operator>(const core::Peak &peak) const {
-    return this->power > peak.power;
+    return power_ > peak.power_;
 }
 
 const float &fin::core::Peak::getTime() const {
-    return this->time;
+    return time_;
 }

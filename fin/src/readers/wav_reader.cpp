@@ -24,11 +24,11 @@ struct Chunk { //Generic chunk
 #pragma pack(push, 1)
 struct FmtChunk {
     //chunk defined above
-    std::uint16_t audio_format;
+    std::uint16_t audioFormat;
     std::uint16_t channels;
-    std::uint32_t sample_rate;
-    [[maybe_unused]] std::uint32_t average_byte_per_sec;
-    [[maybe_unused]] std::uint16_t block_align;
+    std::uint32_t sampleRate;
+    [[maybe_unused]] std::uint32_t averageBytePerSec;
+    [[maybe_unused]] std::uint16_t blockAlign;
     std::uint16_t bits_per_sample;
 };
 #pragma pack(pop)
@@ -42,27 +42,27 @@ constexpr std::uint8_t dataId[] = {0x64u, 0x61u, 0x74u, 0x61u}; //DATA
 
 //Check if the WAV has the correct characteristics
 static bool checkFmtChunk(const FmtChunk &fmtChunk) {
-    return (fmtChunk.audio_format == 1u) &&                  //PCM
+    return (fmtChunk.audioFormat == 1u) &&                  //PCM
            (fmtChunk.channels == consts::audio::CHANNELS) &&
-           (fmtChunk.sample_rate == consts::audio::SAMPLE_RATE) &&
+           (fmtChunk.sampleRate == consts::audio::SAMPLE_RATE) &&
            (fmtChunk.bits_per_sample == consts::audio::BITS_PER_SAMPLE);
 }
 
 //Iterate through the WAV file to find a chunk given the id
 bool
-fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wav_file,
-                                   const bool &is_big_endian,
+fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::ifstream &wavFile,
+                                   const bool &isBigEndian,
                                    bool iterate = true) {
     bool found;
 
     do {
         try {
-            wav_file.read(reinterpret_cast<char *>(&chunk), sizeof(chunk)); //Read a chunk
+            wavFile.read(reinterpret_cast<char *>(&chunk), sizeof(chunk)); //Read a chunk
         } catch (const std::ifstream::failure &e) {
             return false;
         }
 
-        if (is_big_endian)
+        if (isBigEndian)
             chunk.size = fin::math::integers::byteSwap(chunk.size);
 
         found = !std::memcmp(chunk.id, id, idSize); //Compare with the given id
@@ -70,7 +70,7 @@ fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::if
         if (!found)
             try {
                 //seek from the current position ahead of chunk.size bytes
-                wav_file.seekg(chunk.size, std::ios_base::cur);
+                wavFile.seekg(chunk.size, std::ios_base::cur);
             } catch (const std::ifstream::failure &e) {
                 return false;
             }
@@ -83,9 +83,9 @@ fin::readers::WavReader::findChunk(const std::uint8_t *id, Chunk &chunk, std::if
 fin::readers::WavReader::WavReader(const std::string &filename) {
     Chunk chunk{};
     bool isBigEndian = fin::utils::isBigEndian();
-    this->basename = fin::utils::getBasename(filename);
+    basename_ = fin::utils::getBasename(filename);
 
-    if (this->basename.empty()) {
+    if (basename_.empty()) {
         throw std::runtime_error("Can't extract basename from: " + filename);
     }
 
@@ -97,7 +97,7 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
 
     //Read riff chunk
     {
-        if (!this->findChunk(riffId, chunk, wavFile, isBigEndian, false))
+        if (!findChunk(riffId, chunk, wavFile, isBigEndian, false))
             throw std::runtime_error(filename + " is not a WAV file");
 
         std::uint8_t riffType[idSize];
@@ -109,7 +109,7 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
 
     //Read fmt chunk, it might not be immediately after the riff chunk
     {
-        if (!this->findChunk(fmtId, chunk, wavFile, isBigEndian))
+        if (!findChunk(fmtId, chunk, wavFile, isBigEndian))
             throw std::runtime_error(filename + " is malformed");
 
         FmtChunk fmtChunk{};
@@ -123,7 +123,7 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
 
     //Read data chunk
     {
-        if (!this->findChunk(dataId, chunk, wavFile, isBigEndian))
+        if (!findChunk(dataId, chunk, wavFile, isBigEndian))
             throw std::runtime_error(filename + " is malformed");
 
         numberOfSamples = (chunk.size << 3u) / (consts::audio::CHANNELS * consts::audio::BITS_PER_SAMPLE);
@@ -132,7 +132,7 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
     //For whatever reason using a vector instead of a plain old array makes valgrind not complain
     std::vector<std::int16_t> iData;
     iData.resize(numberOfSamples); //Resize to avoid relocations
-    this->data.resize(numberOfSamples);
+    data.resize(numberOfSamples);
 
     //Read the samples
     wavFile.read(reinterpret_cast<char *>(iData.data()), numberOfSamples * consts::audio::BITS_PER_SAMPLE >> 3u);
@@ -142,7 +142,7 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
             sample = fin::math::integers::byteSwap(sample);
 
     //Convert the int16 to a float
-    std::transform(iData.begin(), iData.end(), this->data.data(), [](const std::int16_t &i) -> float {
+    std::transform(iData.begin(), iData.end(), data.data(), [](const std::int16_t &i) -> float {
         return i;
     });
 
@@ -150,13 +150,13 @@ fin::readers::WavReader::WavReader(const std::string &filename) {
 }
 
 const std::vector<float> &fin::readers::WavReader::getData() {
-    return this->data;
+    return data;
 }
 
 void fin::readers::WavReader::dropSamples() {
-    this->data.resize(0);
+    data.resize(0);
 }
 
 const std::string &fin::readers::WavReader::getBasename() {
-    return basename;
+    return basename_;
 }

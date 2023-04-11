@@ -7,7 +7,7 @@
 namespace fin::readers {
     class DummyReader : public fin::readers::Reader {
     private:
-        std::vector<float> data{};
+        std::vector<float> data_{};
 
     public:
         void addSamples(float *samples, std::size_t size);

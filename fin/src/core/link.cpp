@@ -21,19 +21,19 @@ fin::core::Link::Link(const Peak &address, const Peak &peak) {
     XXH3_64bits_update(&state, &deltaFreq, sizeof(deltaFreq));
     XXH3_64bits_update(&state, &addrFreq, sizeof(addrFreq));
 
-    this->hash = XXH3_64bits_digest(&state);
-    this->window = address.getWindow();
+    hash_ = XXH3_64bits_digest(&state);
+    window_ = address.getWindow();
 }
 
 fin::core::Link::Link(const uint64_t &hash, const uint64_t &window) {
-    this->hash = hash;
-    this->window = window;
+    hash_ = hash;
+    window_ = window;
 }
 
-std::uint64_t fin::core::Link::getHash() const {
-    return this->hash;
+const std::uint64_t &fin::core::Link::getHash() const {
+    return hash_;
 }
 
-std::uint64_t fin::core::Link::getTime() const {
-    return this->window;
+const std::uint64_t &fin::core::Link::getTime() const {
+    return window_;
 }

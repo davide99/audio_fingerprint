@@ -6,7 +6,7 @@ fin::core::findPeaks(const math::FFTWindow &fftWindow, const int64_t &window, co
     utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS> peaks;
     float magCurrent, freqCurrent;
     int indexLeft, indexRight, j;
-    bool ok;
+    bool ok = false;
 
     for (int i = bandStart; i <= bandEnd; i++) {
         freqCurrent = math::window::FREQ_BINS[i];
