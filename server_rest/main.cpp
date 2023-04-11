@@ -35,8 +35,8 @@ int main() {
                          res.status = 404;
                      }
                  } else {
-                     res.set_content(R"({"message": "no"})", consts::rest::CONTENT_TYPE_JSON);
-                     res.status = 500;
+                     res.set_content(R"({"error": "wrong Content-Type"})", consts::rest::CONTENT_TYPE_JSON);
+                     res.status = 415;
                  }
              });
 
