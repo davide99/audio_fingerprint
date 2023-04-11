@@ -5,6 +5,7 @@
 #include <mariadb++/statement.hpp>
 #include <cstdint>
 #include <fin/core/links.h>
+#include <tuple>
 
 /**
  * Class to manage the database
@@ -12,8 +13,8 @@
 namespace fin {
     class DB {
     private:
-        mariadb::connection_ref conn;
-        mariadb::statement_ref insSongInfoStmt, selSongById;
+        mariadb::connection_ref conn_;
+        mariadb::statement_ref insSongInfoStmt_, selSongById_;
 
     public:
         DB();
@@ -29,13 +30,7 @@ namespace fin {
          * Create the database
          * @return true if no errors occurred, false otherwise
          */
-        bool create();
-
-        /**
-         * Drop the database
-         * @return true if no errors occurred, false otherwise
-         */
-        bool drop();
+        void create();
 
         /**
          * Insert a song in the database
@@ -48,12 +43,9 @@ namespace fin {
         /**
          * Try to find a match for a recording
          * @param links         Recoding's links
-         * @param id            Output: found id, untouched if not found
-         * @param commonLinks   Output: optional, pointer to common links found
-         * @return true if a match is found, false otherwise
+         * @return the song id, 0 if not found
          */
-        bool
-        searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &id, std::uint64_t *commonLinks = nullptr);
+        std::uint64_t searchIdGivenLinks(const fin::core::Links &links);
 
         /**
          * Find the name of a song

@@ -12,22 +12,22 @@ fin::DB::DB() {
     );
 
     //Create connection
-    this->conn = mariadb::connection::create(acc);
+    conn_ = mariadb::connection::create(acc);
 
     //Create the database if it doesn't exist
     if (!exists())
         create();
 
     //Prepare the statements
-    this->insSongInfoStmt = this->conn->create_statement(
+    insSongInfoStmt_ = conn_->create_statement(
             "INSERT INTO " + consts::db::INFO_TABLE_FULL + " (name) VALUES (?)");
-    this->selSongById = this->conn->create_statement(
+    selSongById_ = conn_->create_statement(
             "SELECT name FROM " + consts::db::INFO_TABLE_FULL + " WHERE id = ?");
 }
 
 bool fin::DB::exists() {
     try {
-        mariadb::result_set_ref result = this->conn->query(
+        mariadb::result_set_ref result = conn_->query(
                 "SELECT table_name FROM information_schema.tables WHERE table_schema='" + consts::db::NAME + "' " +
                 "OR table_name='" + consts::db::RECORDINGS_TABLE + "' " +
                 "OR table_name='" + consts::db::INFO_TABLE + "' " +
@@ -39,38 +39,19 @@ bool fin::DB::exists() {
     return false;
 }
 
-bool fin::DB::create() {
-    try {
-        this->conn->execute("CREATE DATABASE IF NOT EXISTS " + consts::db::NAME);
+void fin::DB::create() {
+    conn_->execute("CREATE DATABASE IF NOT EXISTS " + consts::db::NAME);
 
-        this->conn->execute("CREATE TABLE IF NOT EXISTS " + consts::db::INFO_TABLE_FULL + " (" +
-                            "id " + consts::db::UINT + " NOT NULL AUTO_INCREMENT PRIMARY KEY," +
-                            "name VARCHAR(200) NOT NULL)");
+    conn_->execute("CREATE TABLE IF NOT EXISTS " + consts::db::INFO_TABLE_FULL + " (" +
+                   "id " + consts::db::UINT + " NOT NULL AUTO_INCREMENT PRIMARY KEY," +
+                   "name VARCHAR(200) NOT NULL)");
 
-        this->conn->execute("CREATE TABLE IF NOT EXISTS " + consts::db::RECORDINGS_TABLE_FULL + " (" +
-                            "hash " + consts::db::UINT64 + " NOT NULL, " +
-                            "songId " + consts::db::UINT + " NOT NULL, " +
-                            "time " + consts::db::UINT64 + " NOT NULL, " +
-                            "PRIMARY KEY (hash, songId, time), " +
-                            "FOREIGN KEY (songId) REFERENCES " + consts::db::INFO_TABLE_FULL + "(id))");
-
-    } catch (const std::exception &e) {
-        e.what();
-        return false;
-    }
-
-    return true;
-}
-
-bool fin::DB::drop() {
-    try {
-        this->conn->execute("DROP DATABASE IF EXISTS " + consts::db::NAME);
-    } catch (const std::exception &e) {
-        e.what();
-        return false;
-    }
-
-    return true;
+    conn_->execute("CREATE TABLE IF NOT EXISTS " + consts::db::RECORDINGS_TABLE_FULL + " (" +
+                   "hash " + consts::db::UINT64 + " NOT NULL, " +
+                   "songId " + consts::db::UINT + " NOT NULL, " +
+                   "time " + consts::db::UINT64 + " NOT NULL, " +
+                   "PRIMARY KEY (hash, songId, time), " +
+                   "FOREIGN KEY (songId) REFERENCES " + consts::db::INFO_TABLE_FULL + "(id))");
 }
 
 bool fin::DB::insertSong(const std::string &name, const fin::core::Links &links) {
@@ -78,17 +59,17 @@ bool fin::DB::insertSong(const std::string &name, const fin::core::Links &links)
 
     //Insert song details into INFO_TABLE
     try {
-        this->insSongInfoStmt->set_string(0, name);
-        id = this->insSongInfoStmt->insert(); //PK, id of the song
+        insSongInfoStmt_->set_string(0, name);
+        id = insSongInfoStmt_->insert(); //PK, id of the song
     } catch (const std::exception &e) {
-        e.what();
+        std::cerr << e.what();
         return false;
     }
 
     //Insert links
     std::string s = "INSERT INTO " + consts::db::RECORDINGS_TABLE_FULL + " (hash, songId, time) VALUES ";
 
-    for (const auto &link : links) {
+    for (const auto &link: links) {
         s += "(";
         s += utils::toHex(link.getHash()); //hex for speed purposes
         s += ",";
@@ -101,9 +82,9 @@ bool fin::DB::insertSong(const std::string &name, const fin::core::Links &links)
     s.pop_back(); //Remove last (useless) ","
 
     try {
-        conn->insert(s);
+        conn_->insert(s);
     } catch (const std::exception &e) {
-        e.what();
+        std::cerr << e.what();
         return false;
     }
 
@@ -114,8 +95,8 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
     mariadb::result_set_ref result;
 
     try {
-        this->selSongById->set_unsigned64(0, id);
-        result = this->selSongById->query();
+        selSongById_->set_unsigned64(0, id);
+        result = selSongById_->query();
     } catch (const std::exception &e) {
         return "";
     }
@@ -126,23 +107,24 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
         return "";
 }
 
-bool fin::DB::searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &id, std::uint64_t *commonLinks) {
+std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
     //Create the temporary in memory table
     try {
-        this->conn->execute("CREATE TEMPORARY TABLE " + consts::db::TMP_RECORD_TABLE_FULL + " (" +
-                            "hash " + consts::db::UINT64 + " NOT NULL, " +
-                            "start " + consts::db::UINT64 + " NOT NULL, " +
-                            "PRIMARY KEY (hash, start)" +
-                            ") ENGINE = MEMORY");
+        conn_->execute("DROP TABLE IF EXISTS " + consts::db::TMP_RECORD_TABLE_FULL);
+        conn_->execute("CREATE TEMPORARY TABLE " + consts::db::TMP_RECORD_TABLE_FULL + " (" +
+                       "hash " + consts::db::UINT64 + " NOT NULL, " +
+                       "start " + consts::db::UINT64 + " NOT NULL, " +
+                       "PRIMARY KEY (hash, start)" +
+                       ") ENGINE = MEMORY");
     } catch (const std::exception &e) {
-        e.what();
-        return false;
+        std::cerr << e.what();
+        return 0;
     }
 
     //Insert recording links in the temporary table
     std::string s = "INSERT INTO " + consts::db::TMP_RECORD_TABLE_FULL + " VALUES ";
 
-    for (const auto &link : links) {
+    for (const auto &link: links) {
         s += "(";
         s += utils::toHex(link.getHash());
         s += ",";
@@ -153,17 +135,17 @@ bool fin::DB::searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &i
     s.pop_back(); //Remove last (useless) ","
 
     try {
-        conn->insert(s);
+        conn_->insert(s);
     } catch (const std::exception &e) {
-        e.what();
-        return false;
+        std::cerr << e.what();
+        return 0;
     }
 
     //Perform the real query to find similarities
     mariadb::result_set_ref result;
 
     try {
-        result = this->conn->query(
+        result = conn_->query(
                 //selected songId, number of common links
                 "SELECT " + consts::db::RECORDINGS_TABLE_FULL + ".songId, COUNT(*) AS n " +
                 //inner join the songs table and the temporary table
@@ -172,37 +154,35 @@ bool fin::DB::searchIdGivenLinks(const fin::core::Links &links, std::uint64_t &i
                 "ON " + consts::db::RECORDINGS_TABLE_FULL + ".hash=" + consts::db::TMP_RECORD_TABLE_FULL + ".hash " +
                 //since the recording is a piece of the full song, so the whole recording has to be shifted of a non
                 //negative amount of time w.r.t. to original song
-                "WHERE " + consts::db::RECORDINGS_TABLE_FULL + ".time>=" + consts::db::TMP_RECORD_TABLE_FULL + ".start " +
+                "WHERE " + consts::db::RECORDINGS_TABLE_FULL + ".time>=" + consts::db::TMP_RECORD_TABLE_FULL +
+                ".start " +
                 //the common links are grouped if the time difference between the original song links and the recording
                 //ones is the same
                 "GROUP BY " + consts::db::RECORDINGS_TABLE_FULL + ".time-" + consts::db::TMP_RECORD_TABLE_FULL +
                 ".start, songId " +
                 //the more links in common the better
                 "ORDER BY n DESC");
-
-        //found something && is it above the minimum threshold
-        if (result->next() && result->get_unsigned64(1) > consts::links::MIN_HINT)
-            id = result->get_unsigned32(0);
-
-        //should we return the number of common links?
-        if (commonLinks != nullptr)
-            *commonLinks = result->get_unsigned64(1);
-
     } catch (const std::exception &e) {
-        e.what();
-        return false;
+        std::cerr << e.what();
+        return 0;
     }
+
+    std::uint64_t id = 0;
+
+    //found something && is it above the minimum threshold
+    if (result->next() && result->get_unsigned64(1) > consts::links::MIN_HINT)
+        id = result->get_unsigned32(0);
 
     try {
-        conn->execute("DROP TABLE " + consts::db::TMP_RECORD_TABLE_FULL);
+        conn_->execute("DROP TABLE " + consts::db::TMP_RECORD_TABLE_FULL);
     } catch (const std::exception &e) {
-        e.what();
-        return false;
+        std::cerr << e.what();
+        return 0;
     }
 
-    return true;
+    return id;
 }
 
 fin::DB::~DB() {
-    this->conn->disconnect();
+    conn_->disconnect();
 }

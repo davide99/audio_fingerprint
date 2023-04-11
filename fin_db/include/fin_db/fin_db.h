@@ -21,8 +21,9 @@ namespace fin {
     * @return the name of the song if found, an empty string otherwise
     */
     std::string searchFromLinks(const fin::core::Links &links, DB &db) {
-        std::uint64_t id;
-        if (db.searchIdGivenLinks(links, id))
+        auto id = db.searchIdGivenLinks(links);
+
+        if (id)
             return db.getSongNameById(id);
         else
             return "";
