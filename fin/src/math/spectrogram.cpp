@@ -29,7 +29,7 @@ fin::math::Spectrogram::Spectrogram(const std::vector<float> &data) {
          */
         std::transform(fftOut + 1, fftOut + fft_out_size, fftWindow.magnitudes_.data(),
                        [](const fftwf_complex &i) -> float {
-                           return std::sqrt(i[0] * i[0] + i[1] * i[1]);
+                           return 10 * std::log10(i[0] * i[0] + i[1] * i[1]);
                        });
 
         fftWindow.time_ = (float) i / consts::audio::SAMPLE_RATE;
