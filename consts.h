@@ -61,7 +61,7 @@ namespace consts {
     }
 
     namespace rest {
-        const std::string ADDRESS = "localhost";
+        const std::string ADDRESS = "127.0.0.1";
         constexpr auto PORT = 8080;
         const std::string SEARCH_ENDPOINT = "/songByLinks";
         const std::string FULL_SEARCH_ENDPOINT =

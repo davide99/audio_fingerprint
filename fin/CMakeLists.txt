@@ -37,7 +37,6 @@ set(fin_SOURCES
         src/readers/dummy_reader.cpp
 
         src/utils/utils.cpp
-        src/utils/byte_buffer.cpp
 
         src/fin.cpp)
 

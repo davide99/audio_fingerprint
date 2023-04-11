@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="mock_test" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="$ProjectFileDir$/mi1.wav" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="audio_fingerprint" TARGET_NAME="mock_client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="audio_fingerprint" RUN_TARGET_NAME="mock_client">
+  <configuration default="false" name="mock_test" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="$ProjectFileDir$/mic.wav" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" WORKING_DIR="file://$ProjectFileDir$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="audio_fingerprint" TARGET_NAME="mock_client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="audio_fingerprint" RUN_TARGET_NAME="mock_client">
     <method v="2">
       <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
     </method>

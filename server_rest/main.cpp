@@ -17,9 +17,7 @@ int main() {
                      fin::utils::ByteBuffer buffer;
 
                      content_reader([&](const char *data, std::size_t data_length) {
-                         for (decltype(data_length) i = 0; i < data_length; i++)
-                             buffer.add8(static_cast<std::uint8_t>(data[i]));
-
+                         buffer.add(reinterpret_cast<const std::uint8_t*>(data), data_length);
                          return true;
                      });
 

@@ -4,6 +4,7 @@
 #include <fin/readers/dummy_reader.h>
 #include <fin/fin.h>
 #include <cstring>
+#include <memory>
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;
@@ -15,14 +16,14 @@ constexpr auto PROCESS_SAMPLES = 128;
 
 fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
+std::unique_ptr<std::uint8_t[]> data;
 
 void messageReceivedOnMainThread() {
     auto links = fin::computeLinks(dummyReader);
     dummyReader.dropSamples();
 
     auto byteBuffer = links.toByteBuffer();
-    char *data = new char[byteBuffer.getSize()];
-    std::memcpy(data, byteBuffer.getData(), byteBuffer.getSize());
+    data = std::move(byteBuffer.getPtr());
 
     //Post verso server con links
     emscripten_fetch_attr_t attr;
@@ -36,8 +37,7 @@ void messageReceivedOnMainThread() {
     attr.requestHeaders = headers;
     printf("%lu\n", byteBuffer.getSize());
     printf("%lu\n", links.size());
-    attr.requestData = data;
-    attr.userData = data;
+    attr.requestData = reinterpret_cast<const char *>(data.get());
     attr.requestDataSize = byteBuffer.getSize();
     std::strcpy(attr.requestMethod, "POST");
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
@@ -47,12 +47,13 @@ void messageReceivedOnMainThread() {
         EM_ASM({
                    console.log(UTF8ToString($0));
                }, ret.c_str());
-        delete[] reinterpret_cast<char *>(fetch->userData);
+
+        //data.reset();
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
     };
     attr.onerror = [](emscripten_fetch_t *fetch) {
         printf("Downloading %s failed, HTTP failure status code: %d.\n", fetch->url, fetch->status);
-        delete[] reinterpret_cast<char *>(fetch->userData);
+        //data.reset();
         emscripten_fetch_close(fetch); // Also free data on failure.
     };
     emscripten_fetch(&attr, consts::rest::FULL_SEARCH_ENDPOINT.c_str());

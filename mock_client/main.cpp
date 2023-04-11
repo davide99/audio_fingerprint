@@ -5,7 +5,7 @@
 #include <fin_db/fin_db.h>
 #include <fin_db/db.h>
 
-#define TO_FILE
+//#define TO_FILE
 
 int main(int argc, char **argv) {
     if (argc != 2) return -1;
