@@ -1,0 +1,398 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass tufte-book
+\use_default_options true
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+title[Identificazione audio resistente al rumote in WebAssembly]{
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{Identificazione} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{audio resistente} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{al rumore} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{in WebAssembly}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+Davide Pisanò - Antonio Servetti
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Introduzione
+\end_layout
+
+\begin_layout Standard
+Negli ultimi anni si è notato un trend sempre crescente nell'utilizzo di
+ JavaScript per la creazione di applicazioni desktop.
+\end_layout
+
+\begin_layout Standard
+Ci sono diversi fattori che hanno contribuito alla popolarità di JavaScript,
+ primo fra tutti è che rappresenta il linguaggio standard, de facto, per
+ l'implementazione di funzionalità dinamiche su pagine web.
+ Nello specifico, JavaScript è l'unico linguaggio di scripting supportato
+ nativamente da tutti i browser web moderni.
+\end_layout
+
+\begin_layout Standard
+Ci sono stati dei tentativi per introdurre alcune novità in questo ambito,
+ seguendo principalmente due approcci:
+\end_layout
+
+\begin_layout Enumerate
+l'inclusione di una nuova macchina virtuale all'interno di un browser web
+ che supportasse un nuovo linguaggio
+\end_layout
+
+\begin_layout Enumerate
+la realizzazione di un nuovo linguaggio ma eseguito sulla stessa macchina
+ virtuale JavaScript già presente in un web browser
+\end_layout
+
+\begin_layout Standard
+Ricade nella prima categoria VBScript di Microsoft, basato su Visual Basic,
+ introdotto a metà degli anni '90, oggi non più supportato da nessun browser
+ moderno.
+\end_layout
+
+\begin_layout Standard
+Nella seconda categoria possiamo annoverare, più recentemente, TypeScript
+ (sempre di Microsoft), CoffeeScript e Dart (di Google).
+ Questi linguaggi sono basati su un cosiddetto 
+\emph on
+transpiler
+\emph default
+, ovvero un compilatore che prende in input il codice sorgente scritto ad
+ esempio in TypeScript e lo converte in codice JavaScript, mantenendo le
+ stesse funzionalità del codice originale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+Un altro punto di forza di JavaScript è la sua facilità di apprendimento,
+ soprattutto rispetto ad altri linguaggi di programmazione più a basso livello
+ come C o C++, permettendo agli sviluppatori di iniziare a scrivere codice
+ più rapidamente, senza dover investire troppo tempo nell'apprendimento
+ di una nuova tecnologia.
+ Oggi, infatti, si assiste ad una quantià sempre crescente di librerie e
+ framework per JavaScript, atti a semplificare lo sviluppo di applicazioni
+ web complesse e a migliorarne la qualità, giusto per citarne alcuni: React,
+ Angular, Vue.js, ma anche il più 
+\begin_inset Quotes eld
+\end_inset
+
+anziano
+\begin_inset Quotes erd
+\end_inset
+
+ jQuery.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per questi ed altri motivi, durante la fine degli anni 2000, ci si è iniziati
+ a porre una domanda: 
+\begin_inset Quotes eld
+\end_inset
+
+è possibile eseguire codice JavaScript al di fuori del contesto web browser?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ La risposta (affermativa) a questa domanda è stata la nascita di Node.js
+ che ha dato il via al paradigma del 
+\emph on
+JavaScript everywhere
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Del quale non mancano i detrattori
+\end_layout
+
+\end_inset
+
+.
+ Questo vuol dire, in estrema sintesi, poter utilizzare lo stesso linguaggio
+ per creare applicazioni web, sia lato front-end sia lato back-end.
+ In teoria si potrebbe così ridurre il tempo necessario per il processo
+ di sviluppo di un'applicazione, riducendo il portfolio di tecnologie che
+ un programmatore deve conoscere.
+\end_layout
+
+\begin_layout Standard
+Nei primi anni 2010, quando Node.js iniziava a prendere piede, ci si è posti
+ un'altra domanda 
+\begin_inset Quotes eld
+\end_inset
+
+è possibile scrivere e distribuire applicazioni desktop/mobile scritte in
+ JavaScript?
+\begin_inset Quotes erd
+\end_inset
+
+.
+ La risposta, ancora una volta è stata affermativa.
+ Nasce Electron: un framework open-source che consente agli sviluppatori
+ di creare applicazioni desktop multi-piattaforma utilizzando tecnologie
+ web standard come HTML, CSS e JavaScript.
+ Dal lato mobile nascono tecnologie analoghe a Electron come Ionic, React
+ Native e PhoneGap, tutte con obiettivi abbastanza simili.
+ Man mano l'ecosistema JavaScript ha iniziato a diventare quello che Java
+ era nei primi anni 2000 per la scrittura di applicazioni desktop consumer
+ multipiattaforma.
+\end_layout
+
+\begin_layout Standard
+Il motivo principale dietro alla popolarità di questo ecosistema basato
+ su JavaScript è la possibilità di utilizzare un'unica codebase (in JavaScript)
+ che può essere eseguita su piattaforme molto diverse tra loro, problematica
+ che è molto sentita nell'ambito mobile dove si hanno due piattaforme completame
+nte diverse: Android e iOS
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+All'epoca della prima apparizione di queste tecnologie bisognava supportare
+ anche Windows Phone
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il trend di scrivere applicazioni in Javascript è stato amplificato dalla
+ crescente importanza del web come piattaforma per la distribuzione di applicazi
+oni software.
+ Software utilizzati quotidianamente da miliardi di utenti sono basati sul
+ web e, per forza di cose, devono essere scritti in JavaScript.
+\end_layout
+
+\begin_layout Standard
+Da qui la nascita delle cosiddette 
+\emph on
+Rich Internet Applications
+\emph default
+ (RIA), ovvero applicazioni web che offrono un'esperienza utente interattiva
+ e avanzata simile a quella di un'applicazione desktop tradizionale.
+ Le RIA sono caratterizzate da una vasta gamma di funzionalità e interattività
+ che le distinguono dalla semplici pagine web statiche.
+ Oltre alla classica triade HTML + CSS + JavaScript le RIA possono fare
+ uso di tecnologie più avanzate e recenti come WebSockets, WebAudio, WebAssembly
+, WebRTC, WebVR, WebGPU, Web Animations API.
+ In sostanza il browser diventa un'interfaccia o un'astrazione della macchina
+ sottostante, alla quale si può accedere utilizzando JavaScript.
+\end_layout
+
+\begin_layout Standard
+Nello specifico WebAudio è un'API JavaScript avanzata che consente di manipolare
+ e generare audio all'interno del browser.
+ È stata progettata per consentire agli sviluppatori di creare RIA che includono
+ funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
+ di suoni.
+ L'API è basata su un'architettura a nodi, dove ogni nodo rappresenta una
+ singola operazione di elaborazione del suono.
+ I nodi possono essere collegati tra loro per creare una catena di elaborazione,
+ in cui il suono viene elaborato in successione da ogni nodo che attraversa.
+ La manipolazione del suono avviene in real time.
+ WebAudio è oggi supportato su tutti i browser recenti basati sugli engine
+ JavaScript V8 e SpiderMonkey.
+\end_layout
+
+\begin_layout Standard
+La necessità di scrivere applicazioni real time ha portato la necessità
+ di dover eseguire codice ad alta efficienza, obiettivo non realizzabile
+ completamente con un linguaggio interpretato quale JavaScript.
+ Alla fine degli anni 2010 nasce quindi 
+\emph on
+WebAssembly
+\emph default
+ (Wasm): un formato di codice binario portabile che consente di eseguire
+ codice di basso livello all'interno del browser web.
+ È stato progettato per essere compatibile con i linguaggi di programmazione
+ come C, C++ e Rust.
+ In pratica, quindi, Wasm permette di creare applicazioni web che eseguono
+ codice più velocemente e con maggiore efficienza rispetto a soluzioni basate
+ su JavaScript.
+ Wasm è stato pensato per essere altamente interoperabile con JavaScript:
+ codice JavaScript può richiamare codice Wasm e viceversa, creando quindi
+ soluzioni ibride che combinano il meglio di entrambi i mondi.
+\end_layout
+
+\begin_layout Standard
+Sfruttando tutte queste tecnologie e un ecosistema ormai maturo, l'obiettivo
+ di questa tesi è quello di discutere la realizzazione di un sistema per
+ l'identificazione di audio: un utente sottopone uno spezzone di un brano
+ audio di pochi secondi al sistema, il quale risponde col nome di quel brano.
+ L'obiettivo principale è quello di eseguire l'algoritmo di identificazione
+ su dispositivi eterogenei all'interno di un web browser, utilizzando Wasm
+ e WebAudio.
+ Questo presenta numerosi vantaggi, tra i più importanti si possono individuare:
+\end_layout
+
+\begin_layout Itemize
+l'evitare all'utente il download di un'app addizionale, potendo sfruttare
+ le funzionalità dell'algoritmo di riconoscimento direttamente dal suo web
+ browser
+\end_layout
+
+\begin_layout Itemize
+la notevole riduzione del carico lato server: grazie alla sua architettura
+ distribuita parte della complessità viene spostata sul dispositivo dell'utente
+ finale, il quale porta a termine buona parte del processo di identificazione.
+ Questo rende possibile un riconoscimento musicale più veloce ed efficiente
+ rispetto ad altre applicazioni simili
+\end_layout
+
+\begin_layout Standard
+In definitiva, si renderà l'esperienza dell'utente ancora più piacevole
+ e soddisfacente, mantenendo le stesse funzionalità e carattestiche di una
+ classica app eseguita nativamente su un dispositivo dell'utente.
+\end_layout
+
+\end_body
+\end_document
