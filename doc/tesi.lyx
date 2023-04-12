@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass tufte-book
+\begin_preamble
+\usepackage{tikz}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language italian
@@ -274,7 +277,7 @@ Nei primi anni 2010, quando Node.js iniziava a prendere piede, ci si è posti
 \end_inset
 
 .
- La risposta, ancora una volta è stata affermativa.
+ La risposta, ancora una volta, è stata affermativa.
  Nasce Electron: un framework open-source che consente agli sviluppatori
  di creare applicazioni desktop multi-piattaforma utilizzando tecnologie
  web standard come HTML, CSS e JavaScript.
@@ -382,16 +385,233 @@ l'evitare all'utente il download di un'app addizionale, potendo sfruttare
 
 \begin_layout Itemize
 la notevole riduzione del carico lato server: grazie alla sua architettura
- distribuita parte della complessità viene spostata sul dispositivo dell'utente
- finale, il quale porta a termine buona parte del processo di identificazione.
- Questo rende possibile un riconoscimento musicale più veloce ed efficiente
- rispetto ad altre applicazioni simili
+ distribuita, parte della complessità viene spostata sul dispositivo dell'utente
+ finale, il quale porta a termine buona parte del processo di identificazione,
+ rendendo possibile un'identificazione più veloce ed efficiente rispetto
+ ad altre applicazioni simili
 \end_layout
 
 \begin_layout Standard
 In definitiva, si renderà l'esperienza dell'utente ancora più piacevole
  e soddisfacente, mantenendo le stesse funzionalità e caratteristiche di
  una classica app eseguita nativamente su un dispositivo dell'utente.
+\end_layout
+
+\begin_layout Section
+Architettura generale
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/architettura_generale.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schema-architettura-generale"
+
+\end_inset
+
+Schema architettura generale
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'architettura di base del sistema (in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), seppur ispirata al modello client/server, si discosta dalla tradizionale
+ asimmetria tra i due attori, in cui il primo agisce come mero terminale
+ passivo
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In gergo tecnico è ciò che si definisce 
+\emph on
+dumb terminal
+\end_layout
+
+\end_inset
+
+, limitandosi a interagire con l'API del server.
+ La nuova soluzione adottata, invece, si propone di spostare parte della
+ logica di business dal server al client, in un'ottica distribuita che avvicina
+ la computazione all'utente e alleggerisce, al contempo, il carico sul server
+ centrale, riducendo così i costi correlati.
+ Tale approccio innovativo sfrutta le risorse disponibili sui dispositivi
+ dell'utente, aumentando la scalabilità del sistema e garantendo prestazioni
+ elevate e una maggiore efficienza.
+ Questa soluzione rappresenta un notevole passo avanti nella progettazione
+ di applicazioni web avanzate, fornendo un'esperienza utente fluida e gradevole.
+\end_layout
+
+\begin_layout Subsection
+Scomposizione dell'architettura
+\end_layout
+
+\begin_layout Standard
+\noindent
+L'architettura (in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) può essere scomposta come segue:
+\end_layout
+
+\begin_layout Enumerate
+Si inizia dai brani originali, la canzone nella sua interezza, salvata su
+ una memoria di massa.
+ La canzone è sottoposta ad una algoritmo di 
+\emph on
+fingerprinting
+\emph default
+, in cui vengono estratte alcune features
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In seguito queste features prenderanno il nome di 
+\emph on
+Links
+\end_layout
+
+\end_inset
+
+ caratterizzanti.
+\end_layout
+
+\begin_layout Enumerate
+Le features estratte vengono memorizzate all'interno di un database insieme
+ al nome della canzone alla quale appartengono.
+\end_layout
+
+\begin_layout Enumerate
+Si immagini quindi che, ad un certo punto, un client voglia avviare il processo
+ di riconoscimento di un brano: viene registrato uno spezzone audio di pochi
+ secondi e viene innescata la stessa procedura di 
+\emph on
+fingerprinting
+\emph default
+ al punto 1 sul client, ma in questo caso le features estratte vengono inviate
+ ad un endpoint REST.
+\end_layout
+
+\begin_layout Enumerate
+Il server REST cerca di individuare delle similarità tra le features già
+ presenti nel database e quelle appena inviategli dal client.
+\end_layout
+
+\begin_layout Enumerate
+Se la ricerca ha successo, il server REST estrae dal database il nome della
+ corrispondenza migliore.
+\end_layout
+
+\begin_layout Enumerate
+Se la ricerca ha successo, il server REST invia al client il nome della
+ corrispondenza migliore.
+\end_layout
+
+\begin_layout Standard
+Si noti, anzitutto, che la parte più intesiva dal punto di vista computazionale
+ è l'estrazione delle featues, al contrario la ricerca delle similarità,
+ sebbene impegnativa, non lo è quanto l'estrazione delle features stesse
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ulteriori considerazioni sull'argomento verranno fatte in seguito
+\end_layout
+
+\end_inset
+
+.
+ In altre parole, il momento di maggior carico computazionale si verifica
+ in due fasi:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Lato server
+\emph default
+: solo nella fase iniziale che porta al popolamento del database, durante
+ l'analisi dei brani originali (ovvero fasi 1 e 2)
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Lato client
+\emph default
+: nell'estrazione delle features della registrazione del brano da riconoscere
+\end_layout
+
+\begin_layout Standard
+In altre parole, l'operazione più onerosa per il server viene eseguita una
+ sola volta: all'atto del fingerprinting dei brani originali.
+ Sarà poi il client a farsi carico dell'operazione di fingerprinting per
+ l'identificazione del singolo brano.
+\end_layout
+
+\begin_layout Standard
+Il server REST ha una duplice funzione:
+\end_layout
+
+\begin_layout Itemize
+Presentare i dati nel formato corretto sia lato client che lato database,
+ fungendo quindi da una sorta di relay e disaccoppiando la rappresentazione
+ interna dei dati a quella esposta al client
+\end_layout
+
+\begin_layout Itemize
+Individuare similarità con le features già presenti nel database
+\end_layout
+
+\begin_layout Standard
+L'intero sistema verrà descritto in modo più dettagliato nei capitoli successivi.
 \end_layout
 
 \end_body
