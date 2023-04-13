@@ -6,7 +6,7 @@
 \origin unavailable
 \textclass tufte-book
 \begin_preamble
-\usepackage{tikz}
+
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -555,8 +555,8 @@ Se la ricerca ha successo, il server REST invia al client il nome della
 \end_layout
 
 \begin_layout Standard
-Si noti, anzitutto, che la parte più intesiva dal punto di vista computazionale
- è l'estrazione delle featues, al contrario la ricerca delle similarità,
+Si noti, anzitutto, che la parte più intensiva dal punto di vista computazionale
+ è l'estrazione delle features, al contrario la ricerca delle similarità,
  sebbene impegnativa, non lo è quanto l'estrazione delle features stesse
 \begin_inset Foot
 status open
@@ -612,6 +612,145 @@ Individuare similarità con le features già presenti nel database
 
 \begin_layout Standard
 L'intero sistema verrà descritto in modo più dettagliato nei capitoli successivi.
+\end_layout
+
+\begin_layout Section
+Organizzazione del codice
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/organizzazione_codice.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Organizzazione-codice"
+
+\end_inset
+
+Schema organizzazione codice
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Il codice sorgente del sistema è suddiviso nei seguenti componenti:
+\end_layout
+
+\begin_layout Itemize
+La libreria 
+\emph on
+fin
+\emph default
+, deputata all'estrazione delle features (ovvero fare 
+\emph on
+fingerprinting
+\emph default
+) dei brani in esame.
+\end_layout
+
+\begin_layout Itemize
+La libreria 
+\emph on
+fin_db
+\emph default
+ preposta all'interazione con il database, svolgendo i compiti di inserimento
+ e ricerca delle features.
+ Dipende da 
+\emph on
+fin
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile 
+\emph on
+mock_client
+\emph default
+, riservato esclusivamente ad attività di testing, il quale riceve in input
+ un segmento noto di un brano, al fine di verificare la corretta identificazione
+ del brano stesso.
+ Dipende da entrambe le librerie.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile 
+\emph on
+server_entry
+\emph default
+,
+\emph on
+ 
+\emph default
+in grado di elaborare i brani completi per estrarne le features, per poi
+ memorizzarle nel database insieme al nome del brano associato
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\emph on
+ server_rest
+\emph default
+ che espone l'endpoint REST per l'individuazione dei brani: riceve le features
+ del segmento audio estratte dal client, effettua una ricerca di un brano
+ compatibile all'interno del database e, in caso di esito positivo, restituisce
+ al client il nome del brano individuato.
+ Dipende da entrambe le librerie.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In realtà l'eseguibile è la RIA, contenente HTML, il modulo Wasm e il codice
+ JavaScript necessario al caricamento del modulo Wasm
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+wasm
+\emph default
+, ovvero il client, in grado di acquisire il segmento audio tramite microfono
+ del client, estraendone le features per poi inviarle a 
+\emph on
+server_rest
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Successivamente, nei prossimi capitoli, verranno esaminate in dettaglio
+ le specifiche funzionalità di ciascun componente sopracitato.
+\end_layout
+
+\begin_layout Chapter
+La libreria fin
 \end_layout
 
 \end_body
