@@ -6,7 +6,9 @@
 \origin unavailable
 \textclass tufte-book
 \begin_preamble
-
+\usepackage{pgfplots}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -769,9 +771,9 @@ La libreria
 \emph on
 fin
 \emph default
- è il componente principale del sistema.
- Il suo compito è quello di estrarre le features caratterizzanti di un brano,
- garantendo, per quanto possibile che audio simili abbiamo features simili.
+ è il componente principale del sistema e ha il compito di estrarre le features
+ caratterizzanti di un brano, garantendo il più possibile, che audio simili
+ abbiano features simili.
  D'ora in avanti ci si riferirà alle features indicandole come 
 \emph on
 Links
@@ -802,11 +804,11 @@ status open
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Organizzazione-codice-1"
+name "fig:Architettura-fin"
 
 \end_inset
 
-Schema organizzazione codice
+Schema architettura libreria fin
 \end_layout
 
 \end_inset
@@ -816,7 +818,688 @@ Schema organizzazione codice
 
 \end_inset
 
+Il punto di ingresso della libreria è un 
+\emph on
+Reader
+\emph default
+, ovvero un contenitore dei campioni che compongono un audio; in uscita
+ si hanno i 
+\emph on
+Links
+\emph default
+ che caratterizzano quell'audio.
+ Analizzando più dettagliatamente lo schema in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Architettura-fin"
+plural "false"
+caps "false"
+noprefix "false"
 
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Reader
+\series default
+ è una classe astratta del namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+readers
+\end_layout
+
+\end_inset
+
+, la rappresentazione di un audio nel dominio del tempo.
+ La classe definisce un metodo virtuale puro 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+getData()
+\end_layout
+
+\end_inset
+
+ che restituisce i campioni dell'audio.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Spectrogram
+\series default
+ è una classe del namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+math
+\end_layout
+
+\end_inset
+
+, rappresenta lo spettrogramma di un audio.
+ Riceve i campioni dal 
+\emph on
+Reader
+\emph default
+ e procede come segue:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Finestra il segnale ottenendone un segmento
+\end_layout
+
+\begin_layout Enumerate
+Calcola la DFT per ogni segmento
+\end_layout
+
+\begin_layout Enumerate
+Calcola il modulo dell'output della DFT per ogni segmento
+\end_layout
+
+\begin_layout Enumerate
+Salva il risultato del punto precedente in una struttura chiamata 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fftWindow
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Le varie 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fftWindow
+\end_layout
+
+\end_inset
+
+ compongono lo spettrogramma, in altre parole una rappresentazione in frequenza
+ dell'audio
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+findPeaks
+\series default
+ è una funziona nel namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+core
+\end_layout
+
+\end_inset
+
+ che estrae i picchi più alti
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nonchè i più significativi per il sistema in analisi
+\end_layout
+
+\end_inset
+
+ dallo spettrogramma.
+ Ogni picco è rappresentato da un oggetto 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Peak
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+i 
+\series bold
+Links 
+\series default
+sono il risultato dell'operazione di 
+\emph on
+fingerprinting
+\emph default
+, ovvero le features che caratterizzano l'audio.
+ Vengono creati a partire dai vari 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Peak
+\end_layout
+
+\end_inset
+
+ estratti da 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaks
+\end_layout
+
+\end_inset
+
+ e fanno parte del namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+core
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Tutte le classi e le funzioni della libreria 
+\emph on
+fin
+\emph default
+ sono contenute nel namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+La classe Reader e le sue sottoclassi
+\end_layout
+
+\begin_layout Standard
+La classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Reader
+\end_layout
+
+\end_inset
+
+ generica rappresenta un contenitore di campioni audio.
+ Definisce due metodi puri virtuali:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+getData()
+\end_layout
+
+\end_inset
+
+ che ritorna un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+std::vector<float>
+\end_layout
+
+\end_inset
+
+ contenente i campioni
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+dropSamples()
+\end_layout
+
+\end_inset
+
+ che svuota il 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+vector
+\end_layout
+
+\end_inset
+
+ dei campioni
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float marginfigure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/readers.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Ereditarieta-readers"
+
+\end_inset
+
+Schema ereditarietà tra readers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+La classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Reader
+\end_layout
+
+\end_inset
+
+ viene estesa da due classi 
+\emph on
+reader
+\emph default
+ concrete (vedi figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Ereditarieta-readers"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+WavReader
+\end_layout
+
+\end_inset
+
+, in grado di leggere i file Wave.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+DummyReader
+\end_layout
+
+\end_inset
+
+, un mero wrapper attorno al contenitore 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+std::vector
+\end_layout
+
+\end_inset
+
+, con un metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+addSamples
+\end_layout
+
+\end_inset
+
+ per inserire nuovi samples nel vettore.
+\end_layout
+
+\begin_layout Section
+Lo spettrogramma
+\end_layout
+
+\begin_layout Standard
+Lo 
+\emph on
+spettrogramma
+\emph default
+ è una rappresentazione tridimensionale del contenuto in frequenza di un
+ segnale nel tempo.
+\end_layout
+
+\begin_layout Subsection
+La finestratura
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float marginfigure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		domain=0:.08,
+\end_layout
+
+\begin_layout Plain Layout
+
+		samples=100,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = .08,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin =  -2, ymax = 2,
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid = major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = ampiezza,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis x line=bottom,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis y line=left
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[color=red,mark=x] coordinates { (0,1) (0.02,1) };
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[color=red,mark=x] coordinates { (0.02,0) (0.1,0) };
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+			color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+			line width=1pt
+\end_layout
+
+\begin_layout Plain Layout
+
+		]{
+\end_layout
+
+\begin_layout Plain Layout
+
+			sin(deg(pi*120*x))/2 - sin(deg(pi*60*x))/3 - sin(deg(pi*20*x))/6
+\end_layout
+
+\begin_layout Plain Layout
+
+		};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Finestratura-con-finestra"
+
+\end_inset
+
+Finestratura con finestra rettangolare
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il primo passo per ottenere uno spettrogramma è finestrare il segnale: il
+ caso più semplice consiste nel utilizzare una finestra rettangolare come
+ indicato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Finestratura-con-finestra"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \end_body
