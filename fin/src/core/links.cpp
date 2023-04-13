@@ -3,19 +3,18 @@
 #include <algorithm>
 
 fin::core::Links::Links(const std::vector<Peak> &peakVec) {
-    std::vector<Peak>::const_iterator left, right;
+    for (auto peakIt = peakVec.begin(); peakIt != peakVec.end(); peakIt++) {
+        for (auto it = peakIt + 1; it != peakVec.end(); it++) {
+            //peakIt is the current peak under analysis, the anchor point candidate
+            //it is a candidate peak which could be expressed wrt to peakIt
 
-    for (auto it = peakVec.begin(); it != peakVec.end(); it++) {
-        //iterator pointing to the first left peak to be considered, if there's enough room
-        left = it - consts::links::MAX_WIN_DISTANCE >= peakVec.begin() ?
-               it - consts::links::MAX_WIN_DISTANCE : peakVec.begin();
-        //same as above, but pointing to the right most peak
-        right = it + consts::links::MAX_WIN_DISTANCE <= peakVec.end() ?
-                it + consts::links::MAX_WIN_DISTANCE : peakVec.end();
+            if ((it->sameBand(*peakIt)) &&
+                (it->getWindow() - peakIt->getWindow() >= consts::links::MIN_WIN_DISTANCE) &&
+                (it->getWindow() - peakIt->getWindow() < consts::links::MAX_WIN_DISTANCE)) {
 
-        for (; left <= right; left++)
-            if (std::abs(left->getWindow() - it->getWindow()) >= consts::links::MIN_WIN_DISTANCE && left->sameBand(*it))
-                emplace_back(*it, *left);
+                emplace_back(*peakIt, *it);
+            }
+        }
     }
 }
 
