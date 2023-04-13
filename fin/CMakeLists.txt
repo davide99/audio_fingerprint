@@ -4,7 +4,6 @@ project(fin LANGUAGES CXX)
 
 # find files
 set(fin_HEADERS
-        include/fin/core/fingerprint.h
         include/fin/core/link.h include/fin/core/links.h
         include/fin/core/peak.h include/fin/core/peaks_finder.h
 
@@ -25,7 +24,6 @@ set(fin_HEADERS
         include/fin/fin.h
         )
 set(fin_SOURCES
-        src/core/fingerprint.cpp
         src/core/link.cpp src/core/links.cpp
         src/core/peak.cpp src/core/peaks_finder.cpp
 

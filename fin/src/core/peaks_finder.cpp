@@ -1,15 +1,18 @@
 #include <fin/core/peaks_finder.h>
+#include <fin/utils/fixed_size_pq.h>
+#include <fin/math/fft_window.h>
+#include <algorithm>
 
-fin::utils::FixedSizePQ<fin::core::Peak, consts::fingerprint::N_PEAKS>
-fin::core::findPeaks(const math::FFTWindow &fftWindow, const int64_t &window, const int &bandStart,
-                     const int &bandEnd) {
-    utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS> peaks;
+static fin::utils::FixedSizePQ<fin::core::Peak, consts::fingerprint::N_PEAKS>
+findPeaksInWindow(const fin::math::FFTWindow &fftWindow, const std::int64_t &window, const int &bandStart,
+                  const int &bandEnd) {
+    fin::utils::FixedSizePQ <fin::core::Peak, consts::fingerprint::N_PEAKS> peaks;
     float magCurrent, freqCurrent;
     int indexLeft, indexRight, j;
     bool ok = false;
 
     for (int i = bandStart; i <= bandEnd; i++) {
-        freqCurrent = math::window::FREQ_BINS[i];
+        freqCurrent = fin::math::window::FREQ_BINS[i];
 
         //The peak freq must be between the two boundaries
         if ((freqCurrent < consts::fingerprint::MIN_FREQ) || (freqCurrent > consts::fingerprint::MAX_FREQ))
@@ -39,8 +42,38 @@ fin::core::findPeaks(const math::FFTWindow &fftWindow, const int64_t &window, co
             continue;
         }
 
-        peaks.insert(Peak(i, magCurrent, window, fftWindow.getTime()));
+        peaks.insert(fin::core::Peak(i, magCurrent, window, fftWindow.getTime()));
     }
 
     return peaks;
+}
+
+std::vector<fin::core::Peak> fin::core::findPeaks(const math::Spectrogram &spectrogram) {
+    int currBand, nextBand;
+    std::vector<Peak> peakVec; //vector to be returned
+    utils::FixedSizePQ<Peak, consts::fingerprint::N_PEAKS> tmp; //to store the temporary loudest peaks
+
+    //For each band
+    for (std::int64_t b = 0; b < static_cast<std::int64_t>(math::window::BANDS.size()) - 1; b++) {
+        currBand = math::window::BANDS[b];
+        nextBand = math::window::BANDS[b + 1];
+
+        //For each window in the spectrogram
+        for (std::int64_t i = 0; i < static_cast<std::int64_t>(spectrogram.size()); i++) {
+
+            //Every C, or at the end of the window, add tmp to peakVec then reset tmp
+            if (i % consts::fingerprint::C == 0 || i == static_cast<std::int64_t>(spectrogram.size()) - 1) {
+                peakVec.insert(peakVec.end(), tmp.begin(), tmp.end());
+                tmp.clear();
+            }
+
+            //Actually find the peaks between the two BANDS
+            auto found_peaks = findPeaksInWindow(spectrogram[i], i, currBand, nextBand - 1);
+            for (const auto &peak: found_peaks) //Copy the found peaks in the tmp peaks holder
+                tmp.insert(peak);
+        }
+    }
+
+    std::sort(peakVec.begin(), peakVec.end()); //Sort in descending order by loudness
+    return peakVec;
 }

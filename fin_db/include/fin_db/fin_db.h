@@ -3,7 +3,6 @@
 
 #include <string>
 #include <fin/math/spectrogram.h>
-#include <fin/core/fingerprint.h>
 #include <fin/core/links.h>
 #include <fin/readers/reader.h>
 #include <fin/readers/wav_reader.h>
