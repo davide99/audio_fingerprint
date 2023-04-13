@@ -16,15 +16,10 @@ namespace fin::math {
 
     private:
         std::array<float, consts::window::FREQ_BINS> magnitudes_{};
-        float time_{};
 
     public:
         [[nodiscard]] const std::array<float, consts::window::FREQ_BINS> &getMagnitudes() const {
             return magnitudes_;
-        }
-
-        [[nodiscard]] const float &getTime() const {
-            return time_;
         }
     };
 }

@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <string>
 #include <array>
+#include <cmath>
 
 namespace consts {
     namespace audio {
@@ -17,6 +18,7 @@ namespace consts {
         constexpr std::uint16_t OVERLAP = 256u;
         constexpr std::uint16_t STEP_SIZE = SIZE - OVERLAP;
         constexpr std::uint16_t FREQ_BINS = SIZE / 2;
+        constexpr float TIME_STEP = (float) STEP_SIZE / consts::audio::SAMPLE_RATE; //Time step between each window
 
         constexpr std::uint16_t MEL_START = 250u;
         constexpr std::uint16_t MEL_STEP = 200u;
@@ -33,8 +35,11 @@ namespace consts {
     }
 
     namespace links {
-        constexpr float MIN_WIN_DISTANCE_F = 1.0f;
-        constexpr float MAX_WIN_DISTANCE_F = 3.0f;
+        constexpr float MIN_TIME_DISTANCE_F = 1.0f;
+        constexpr float MAX_TIME_DISTANCE_F = 3.0f;
+
+        const std::int64_t MAX_WIN_DISTANCE = std::lround(consts::links::MAX_TIME_DISTANCE_F / window::TIME_STEP);
+        const std::int64_t MIN_WIN_DISTANCE = std::lround(consts::links::MIN_TIME_DISTANCE_F / window::TIME_STEP);
 
         constexpr std::uint64_t MIN_HINT = 15;
     }

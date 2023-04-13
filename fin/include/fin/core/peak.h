@@ -15,19 +15,16 @@ namespace fin::core {
         int freqIndex_;       //index referring to an element of window::FREQ_BINS
         float power_;         //magnitude
         std::int64_t window_; //window the peak belongs to
-        float time_;          //time in the audio file, related to the window member
         int bandIndex_;       //index referring to an element of window::BANDS (getBandsIndex)
 
     public:
-        Peak(const int &freqIndex, const float &power, const std::int64_t &window, const float &time) :
-                freqIndex_(freqIndex), power_(power), window_(window), time_(time),
+        Peak(const int &freqIndex, const float &power, const std::int64_t &window) :
+                freqIndex_(freqIndex), power_(power), window_(window),
                 bandIndex_(math::window::getBandIndex(freqIndex)) {};
 
         [[nodiscard]] const int &getFreqIndex() const;
 
         [[nodiscard]] const std::int64_t &getWindow() const;
-
-        [[nodiscard]] const float &getTime() const;
 
         /**
          * Check whether the current peak and the other belong to

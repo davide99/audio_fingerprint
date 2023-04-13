@@ -42,7 +42,7 @@ findPeaksInWindow(const fin::math::FFTWindow &fftWindow, const std::int64_t &win
             continue;
         }
 
-        peaks.insert(fin::core::Peak(i, magCurrent, window, fftWindow.getTime()));
+        peaks.insert(fin::core::Peak(i, magCurrent, window));
     }
 
     return peaks;

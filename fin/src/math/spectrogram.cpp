@@ -32,7 +32,6 @@ fin::math::Spectrogram::Spectrogram(const std::vector<float> &data) {
                            return 10 * std::log10(i[0] * i[0] + i[1] * i[1]);
                        });
 
-        fftWindow.time_ = (float) i / consts::audio::SAMPLE_RATE;
         fftWindows_.push_back(fftWindow);
     }
 

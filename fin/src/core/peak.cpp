@@ -19,7 +19,3 @@ bool fin::core::Peak::operator<(const Peak &peak) const {
 bool fin::core::Peak::operator>(const core::Peak &peak) const {
     return power_ > peak.power_;
 }
-
-const float &fin::core::Peak::getTime() const {
-    return time_;
-}
