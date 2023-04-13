@@ -655,7 +655,18 @@ Schema organizzazione codice
 
 \end_inset
 
-Il codice sorgente del sistema è suddiviso nei seguenti componenti:
+Il codice sorgente del sistema è suddiviso nei seguenti componenti (figura
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Organizzazione-codice"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
 \end_layout
 
 \begin_layout Itemize
@@ -751,6 +762,61 @@ Successivamente, nei prossimi capitoli, verranno esaminate in dettaglio
 
 \begin_layout Chapter
 La libreria fin
+\end_layout
+
+\begin_layout Standard
+La libreria 
+\emph on
+fin
+\emph default
+ è il componente principale del sistema.
+ Il suo compito è quello di estrarre le features caratterizzanti di un brano,
+ garantendo, per quanto possibile che audio simili abbiamo features simili.
+ D'ora in avanti ci si riferirà alle features indicandole come 
+\emph on
+Links
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/fin_architettura.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Organizzazione-codice-1"
+
+\end_inset
+
+Schema organizzazione codice
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
