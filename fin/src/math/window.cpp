@@ -5,7 +5,7 @@ static std::array<float, consts::window::SIZE> makeWindow() noexcept {
     std::array<float, consts::window::SIZE> tmp{};
 
     for (int i = 0; i < consts::window::SIZE; i++)
-        tmp[i] = (float) (0.5f * (1 - std::cos(2 * M_PI * i / (consts::window::SIZE - 1)))); //Hanning
+        tmp[i] = (float) (0.5f * (1 - std::cos(2 * M_PI * i / (consts::window::SIZE - 1)))); //Hann
 
     return tmp;
 }
