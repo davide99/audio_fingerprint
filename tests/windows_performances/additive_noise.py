@@ -64,7 +64,7 @@ if __name__ == '__main__':
         i += 1
         print(f">>{i * 100 / len(songs)}%")
 
-    success_rate = [snr_d[snr_value] * 1.0 / len(songs) for snr_value in snrs_list]
+    success_rate = [snr_d[snr_value] * 100.0 / len(songs) for snr_value in snrs_list]
 
     with open('data.csv', 'w') as f:
         for i in range(len(success_rate)):

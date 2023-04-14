@@ -7,8 +7,12 @@
 \textclass tufte-book
 \begin_preamble
 \usepackage{pgfplots}
+\usepackage{filecontents}
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{2}
+
+\begin{filecontents*}{data/windows_success_rate.csv}
+\end{filecontents*}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -1285,6 +1289,57 @@ spettrogramma
 \emph default
  è una rappresentazione tridimensionale del contenuto in frequenza di un
  segnale nel tempo.
+ Questa rappresentazione di un segnale audio viene calcolata e memorizzata
+ all'interno della classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Spectrogram
+\end_layout
+
+\end_inset
+
+ del namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+math
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il costruttore riceve in input come parametro un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+std::vector<float>
+\end_layout
+
+\end_inset
+
+ di campioni nel dominio del tempo dell'audio da analizzare: il primo passo
+ da compiere è 
+\emph on
+finestrare il segnale
+\emph default
+.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -1500,6 +1555,601 @@ noprefix "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+L'utilizzo di una funzione finestra, tuttavia, porta al fenomeno dello 
+\emph on
+spectral leakage
+\emph default
+, ovvero la comparsa nello spettro di new frequenze che non esistono realmente
+ all'interno del segnale audio originale.
+ Nello specifico l'energia di un picco di frequenza confluisce parzialmente
+ nelle frequenze vicine (da cui il termine leakage), 
+\begin_inset Quotes fld
+\end_inset
+
+sporcando
+\begin_inset Quotes frd
+\end_inset
+
+ la rappresentazione in frequenza dello spettro.
+\end_layout
+
+\begin_layout Standard
+Lo 
+\emph on
+spectral leakage
+\emph default
+ non può essere del tutto evitato, ma può essere tenuto sotto controllo
+ e ridotto utilizzando una funzione finestra più complessa rispetto a quella
+ rettangolare.
+\end_layout
+
+\begin_layout Standard
+Il vantaggio principale della finestra rettangolare è la sua risposta in
+ frequenza piatta, il che si traduce in una buona risoluzione spettrale,
+ ovvero è in grado di rilevare con precisione la presenza di diverse componenti
+ di frequenza nel segnale.
+ Tuttavia, la finestra rettangolare ha una bassa attenuazione laterale,
+ ovvero non è in grado di attenuare il rumore presente nelle frequenze circostan
+ti, il che limita il suo range dinamico.
+\end_layout
+
+\begin_layout Standard
+Per ovviare a questo problema, sono state sviluppate altre finestre come
+ quella di 
+\emph on
+Blackman
+\emph default
+, 
+\emph on
+Hann
+\emph default
+ e 
+\emph on
+Hamming
+\emph default
+.
+ La finestra di 
+\emph on
+Blackman
+\emph default
+ ha una risposta in frequenza simile alla finestra rettangolare, ma ha un'attenu
+azione laterale maggiore, il che la rende più adatta a segnali con un alto
+ rapporto segnale-rumore.
+ Le finestre di 
+\emph on
+Hann
+\emph default
+ e 
+\emph on
+Hamming
+\emph default
+ si collocano un po' a metà tra la finestra rettangolare e quella di 
+\emph on
+Blackman
+\emph default
+: hanno una risposta in frequenza meno piatta rispetto alla finestra rettangolar
+e, ma una maggiore attenuazione laterale rispetto a quest'ultima.
+\end_layout
+
+\begin_layout Standard
+La scelta della finestra da utilizzare dipende dalle caratteristiche del
+ segnale e degli obiettivi dell'analisi.
+ In questo caso di studio si avrà a che fare potenzialmente con un segnale
+ molto rumoroso, quindi potrebbe essere più adatto utilizzare la finestra
+ di 
+\emph on
+Blackman
+\emph default
+ o una delle finestre di 
+\emph on
+Hann
+\emph default
+ o 
+\emph on
+Hamming
+\emph default
+ per ottenere una buona risoluzione spettrale e al tempo stesso ridurre
+ il rumore presente nelle frequenze circostanti.
+ Dall'altro lato però si deve considerare che il segnale da analizzare ha
+ un elevato range dinamico, potrebbe essere preferibile utilizzare la finestra
+ rettangolare per massimizzare la risoluzione spettrale e quindi individuare
+ con precisione le componenti di frequenza presenti nel segnale.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={SNR ($dB$)},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={Recognition rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend pos=south east,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=blackman, col sep=comma] {data/windows_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Blackman}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=hann, col sep=comma] {data/windows_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Hann}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=rectangular, col sep=comma] {data/windows_success_rate.csv
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Rettangolare}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Recognition-rate-in"
+
+\end_inset
+
+Recognition rate in funzione dell SNR per le varie finestre
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\series bold
+pag17
+\series default
+ A questo punto risulta necessario valutare 
+\emph on
+sul campo 
+\emph default
+le performance di queste finestre.
+ Per questo motivo è stato predisposto un 
+\emph on
+ambiente di test
+\emph default
+ composto da circa 400 brani di generi molto diversi
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+I generi inclusi sono stati il metal, il rock, il blues e la musica classica
+\end_layout
+
+\end_inset
+
+, per ognuno di questi brani:
+\end_layout
+
+\begin_layout Enumerate
+è stato estratto un segmento di pochi secondi.
+\end_layout
+
+\begin_layout Enumerate
+il segmento è stato distorto, sommando del rumore non bianco e introdocendo
+ del clipping.
+\end_layout
+
+\begin_layout Enumerate
+nota l'energia del segmento del segnale è stato possibile sommare un rumore
+ per ottenere un SNR target.
+\end_layout
+
+\begin_layout Standard
+Si è quindi fatto variare per ogni brano l'SNR tra 
+\begin_inset Formula $-40dB$
+\end_inset
+
+ e 
+\begin_inset Formula $+40dB$
+\end_inset
+
+ con passo di 
+\begin_inset Formula $1dB$
+\end_inset
+
+ per le tre finestre considerate, contando quante volte l'algorimo era in
+ grado di individuare il brano corretto.
+ Si è ottenuto il grafico in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Recognition-rate-in"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+La DFT
+\end_layout
+
+\begin_layout Standard
+La 
+\emph on
+trasformata di Fourier discreta 
+\emph default
+viene calcolata facendo ricorso alla libreria 
+\series bold
+fftw
+\series default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Reperibile all'indirizzo 
+\begin_inset CommandInset href
+LatexCommand href
+name "https://www.fftw.org/"
+target "https://www.fftw.org/"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+È importante sottolineare che lo spettro ottenuto dalla DFT risulta essere
+ discreto e che la libreria fin è configurata per trattare segnali audio
+ campionati a 
+\begin_inset Formula $8000Hz$
+\end_inset
+
+, utilizzando finestre di dimensione pari a 
+\begin_inset Formula $512$
+\end_inset
+
+ campioni
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Successivamente verranno fatte delle considerazioni su queste scelte
+\end_layout
+
+\end_inset
+
+.
+ La 
+\emph on
+risoluzione in frequenza
+\emph default
+ della DFT è pertanto pari a:
+\begin_inset Formula 
+\[
+B_{S}=\frac{F_{S}}{N}=\frac{8000Hz}{512}=15.625Hz
+\]
+
+\end_inset
+
+Dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $B_{S}$
+\end_inset
+
+ è la 
+\emph on
+risoluzione in frequenza
+\emph default
+, anche detta 
+\emph on
+dimensione del bin di frequenze
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $F_{S}$
+\end_inset
+
+ è la 
+\emph on
+frequenza di campionamento
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N$
+\end_inset
+
+ sono il numero di campioni in una finestra
+\end_layout
+
+\begin_layout Standard
+In altre parole, lo spettro viene discretizzato a passi di circa 
+\begin_inset Formula $16Hz$
+\end_inset
+
+.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Inoltre, è necessario fare alcune osservazioni aggiuntive:
+\end_layout
+
+\begin_layout Enumerate
+Il primo bin non contiene informazioni rilevanti riguardo la rappresentazione
+ in frequenza del segnale
+\end_layout
+
+\begin_layout Enumerate
+L'output della DFT su segnali reali è simmetrico
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A dimostrazione del primo fatto si può partire dalla definizione della DFT:
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}X[n]:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}\end{aligned}
+\label{eq:def_dft}
+\end{equation}
+
+\end_inset
+
+e valutarla in 
+\begin_inset Formula $n=0$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\begin{aligned}X[n]|_{n=0}:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}|_{n=0}\\
+= & \sum_{t=0}^{N-1}x(t)e^{0}\\
+= & \sum_{t=0}^{N-1}x(t)=\mu_{x}
+\end{aligned}
+\]
+
+\end_inset
+
+In altre parole, il primo bin dell'output della DFT corrisponde alla 
+\emph on
+componente DC 
+\emph default
+del segnale in ingresso, ovvero il suo valor medio, che può assunto pari
+ a 
+\begin_inset Formula $0$
+\end_inset
+
+ e quindi ignorato nel caso di segnali audio.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Per dimostrare il secondo fatto, si deve dimostrare che se 
+\begin_inset Formula $x(t)$
+\end_inset
+
+ è un segnale a valori reali allora:
+\begin_inset Formula 
+\begin{equation}
+X[N-n]=X^{*}[n]\label{eq:simmetria_dft}
+\end{equation}
+
+\end_inset
+
+dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $X(\astrosun)$
+\end_inset
+
+ è l'output della DFT applicata a 
+\begin_inset Formula $x(t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $(\astrosun)^{*}$
+\end_inset
+
+ denota il coniugato di 
+\begin_inset Formula $\astrosun$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Si sostituisce 
+\begin_inset Formula $n$
+\end_inset
+
+ con 
+\begin_inset Formula $N-n$
+\end_inset
+
+ nella definizione della DFT 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def_dft"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, proveniente dalla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simmetria_dft"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\begin{aligned}X[N-n]:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi t(N-n)}{N}}\\
+= & \sum_{t=0}^{N-1}x(t)\underbrace{e^{-i2\pi t}}_{1\forall t}e^{i\frac{2\pi tn}{N}}\\
+= & \sum_{t=0}^{N-1}x(t)e^{i\frac{2\pi tn}{N}}\\
+= & \left(\sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}\right)^{*}\\
+= & X^{*}[n]
+\end{aligned}
+\]
+
+\end_inset
+
+Dove il passggio al coniugato è invariante per 
+\begin_inset Formula $x(t)$
+\end_inset
+
+ dato che è a valori reali.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le due precedenti considerazioni permettono quindi all'algoritmo di lavorare
+ in maniera più efficiente, escludendo la componente DC dai calcoli ed impiegand
+o una versione ottimizzata della DFT per input reali, con soli 
+\begin_inset Formula $\frac{N}{2}-1$
+\end_inset
+
+ coefficienti utili in output.
 \end_layout
 
 \end_body
