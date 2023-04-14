@@ -16,7 +16,7 @@ std::string fin::utils::getBasename(const std::string &path) {
     auto start = lastBackslashPos == std::string::npos ? lastSlashPos : lastBackslashPos;
 
     if (start == std::string::npos)
-        return "";
+        return path;
 
     return path.substr(start + 1);
 }
