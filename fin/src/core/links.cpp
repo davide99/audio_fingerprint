@@ -6,7 +6,7 @@ fin::core::Links::Links(const std::vector<Peak> &peakVec) {
     for (auto peakIt = peakVec.begin(); peakIt != peakVec.end(); peakIt++) {
         for (auto it = peakIt + 1; it != peakVec.end(); it++) {
             //peakIt is the current peak under analysis, the anchor point candidate
-            //it is a candidate peak which could be expressed wrt to peakIt
+            //*it* is a candidate peak which could be expressed wrt to peakIt
 
             if ((it->sameBand(*peakIt)) &&
                 (it->getWindow() - peakIt->getWindow() >= consts::links::MIN_WIN_DISTANCE) &&
