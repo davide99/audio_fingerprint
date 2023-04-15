@@ -13,6 +13,9 @@
 
 \begin{filecontents*}{data/windows_success_rate.csv}
 \end{filecontents*}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -1964,6 +1967,347 @@ intermedio
 \emph default
 tra la finestra rettangolare e quella di Blackman, ottenendo un buon equilibrio
  tra risoluzione spettrale e range dinamico rilevato.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il segnale audio viene finestrato con un overlap del 
+\begin_inset Formula $50\%$
+\end_inset
+
+ (vedi figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Audio-windowing-with-overlap"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) per due motivi:
+\end_layout
+
+\begin_layout Enumerate
+Sopperire all'attenuazione agli estremi della finestra introdotti dalla
+ funzione finestra di Hann
+\end_layout
+
+\begin_layout Enumerate
+Analizzare meglio il contenuto in frequenza a cavallo tra due finestre senza
+ overlap
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		samples=200,
+\end_layout
+
+\begin_layout Plain Layout
+
+		domain=0:10,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 10,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = -1, ymax = 1,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = ampiezza
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (0,0) rectangle (10,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (10,0) rectangle (20,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (20,0) rectangle (30,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (30,0) rectangle (40,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (40,0) rectangle (50,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (50,0) rectangle (60,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (60,0) rectangle (70,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (70,0) rectangle (80,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (80,0) rectangle (90,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [red, very thick, fill=red, fill opacity=0.2] (90,0) rectangle (100,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (5,0) rectangle (15,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (15,0) rectangle (25,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (25,0) rectangle (35,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (35,0) rectangle (45,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (45,0) rectangle (55,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (55,0) rectangle (65,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (65,0) rectangle (75,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (75,0) rectangle (85,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw [green, fill=green, fill opacity=0.2] (85,0) rectangle (95,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+			blue,
+\end_layout
+
+\begin_layout Plain Layout
+
+			smooth
+\end_layout
+
+\begin_layout Plain Layout
+
+		]
+\end_layout
+
+\begin_layout Plain Layout
+
+		{(0.3*gauss(0,0.2) + 0.5*rand) * sin(deg(x)) * 2};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Audio-windowing-with-overlap"
+
+\end_inset
+
+Finestratura audio con overlap
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2270,11 +2614,113 @@ o una versione ottimizzata della DFT per input reali, con soli
 \end_layout
 
 \begin_layout Subsection
-Il calcolo del modulo dello spettrogramma
+Il modulo dello spettrogramma e le 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fftWindow
+\end_layout
+
+\end_inset
+
+s
 \end_layout
 
 \begin_layout Standard
+L'output della DFT è un vettore di 
+\begin_inset Formula $\frac{N}{2}-1$
+\end_inset
 
+ numeri complessi, ma l'algoritmo necessita solo del loro modulo in 
+\begin_inset Formula $dB$
+\end_inset
+
+, calcolato come:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+20\log_{10}\sqrt{a^{2}+b^{2}}=10\log_{10}\left(a^{2}+b^{2}\right)
+\]
+
+\end_inset
+
+Dove 
+\begin_inset Formula $a$
+\end_inset
+
+ e 
+\begin_inset Formula $b$
+\end_inset
+
+ sono rispettivamente la parte reale e immaginaria del numero complesso.
+\end_layout
+
+\begin_layout Standard
+I vari moduli, per ogni finestra considerata, vengono memorizzati all'interno
+ di un oggetto 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fftWindow
+\end_layout
+
+\end_inset
+
+.
+ Ogni 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fftWindow
+\end_layout
+
+\end_inset
+
+ viene inserita in un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+std::vector
+\end_layout
+
+\end_inset
+
+ che verrà utilizzato dalla funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaks
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+I Peaks
 \end_layout
 
 \end_body
