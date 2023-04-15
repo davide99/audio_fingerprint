@@ -61,13 +61,13 @@ std::vector<fin::core::Peak> fin::core::findPeaks(const math::Spectrogram &spect
         //For each window in the spectrogram
         for (std::int64_t i = 0; i < static_cast<std::int64_t>(spectrogram.size()); i++) {
 
-            //Every C, or at the end of the window, add tmp to peakVec then reset tmp
+            //Every C, or in the last window, add tmp to peakVec then reset tmp
             if (i % consts::fingerprint::C == 0 || i == static_cast<std::int64_t>(spectrogram.size()) - 1) {
                 peakVec.insert(peakVec.end(), tmp.begin(), tmp.end());
                 tmp.clear();
             }
 
-            //Actually find the peaks between the two BANDS
+            //Actually find the peaks between the two bands
             auto found_peaks = findPeaksInWindow(spectrogram[i], i, currBand, nextBand - 1);
             for (const auto &peak: found_peaks) //Copy the found peaks in the tmp peaks holder
                 tmp.insert(peak);
