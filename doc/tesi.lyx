@@ -4010,5 +4010,543 @@ Si è scelto di scartare le frequenze inferiori a
 I Links
 \end_layout
 
+\begin_layout Standard
+A questo punto ci sono a disposizione alcune features (i 
+\emph on
+picchi
+\emph default
+) che, in teoria, potrebbero essere utilizzate per identificare un brano:
+ ogni picco del segmento registrato dal client andrebbe comparato con i
+ picchi del brano nella versione completa.
+ Sebbene probabilmente funzionante, questo approccio è troppo semplice e
+ richiederebbe tanto tempo di elaborazione prima di ottenere un match.
+ Infatti, in questo caso, la complessità sarabbe dell'ordine della lunghezza
+ totale di tutti i brani presenti nel database: paradossalmente più brani
+ l'algoritmo riuscirebbe a individuare, più lento diventerebbe.
+\end_layout
+
+\begin_layout Standard
+La libreria fin utilizza quindi un altro algoritmo.
+ Per prima cosa viene individuato tra i picchi un 
+\emph on
+anchor point
+\emph default
+ o un 
+\emph on
+indirizzo
+\emph default
+, ogni anchor point definisce una 
+\emph on
+target zone
+\emph default
+, ovvero una porzione della costellazione dei picchi.
+ Sia 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ un anchor point, 
+\begin_inset Formula $A$
+\end_inset
+
+ un insieme di picchi inizialmente vuoto, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ un generico picco, allora:
+\begin_inset Formula 
+\[
+\beta\in A\iff\left(1\leq\beta.\mathrm{window}-\alpha.\mathrm{window}<3\right)\land\left(\beta.\mathrm{band}=\alpha.\mathrm{band}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Formula $A$
+\end_inset
+
+ sarà quindi l'insieme dei punti che fanno parte della target zone.
+ La bande sono le stesse definite sulla base della scala Mel (vedi 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Scelta-della-dimensione"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Si ottiene qualcosa di simile a quanto illustrato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anchor-target"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\lang english
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(1.2337624452119649,156)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.35010304565267,253)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.177029724681008,116)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(7.256587195538682,472)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(2.4197754035932766,253)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(3.706892420762254,294)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(9.859084153519337,252)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.53495230903478,49)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(11.49611021144223,322)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(9.464007176483538,561)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.6697999467081948,1769)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(4.026956852208946,1302)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(5.936343337187637,1144)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.6650481493475238,1174)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(6.461964839223465,1183)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(11.853904443933935,1143)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(5.739713325186329,1541)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.0155036031597597,1118)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(7.689312333706191,1665)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(11.70364789096238,1616)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.523615767930713,2545)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(1.0848245428151932,2659)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(10.129650705452748,2383)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.970368763958769,2520)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(7.532556747022665,2595)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.553257221637658,2275)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(1.164954468021365,2180)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(5.860749713924608,2487)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.8631716522570008,2458)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(6.739810860494329,2305)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(7.560235078417245,3829)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(7.697392888392581,3145)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(6.66181336299463,3323)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(11.308449523876288,3184)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(3.209950802394781,3259)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(2.935104227985603,3601)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(11.688375153800843,3878)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(8.107012587028235,3143)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(8.518029171169964,3777)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(0.2129169186634634,3812)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(3.523615767930713,2545)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (7.532556747022665,2595)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(7.532556747022665,2595)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (5.860749713924608,2487)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(5.860749713924608,2487)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (6.739810860494329,2305)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(6.739810860494329,2305)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=yellow, fill opacity=0.2] (50,200) rectangle (80,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Anchor-target"
+
+\end_inset
+
+Selezione dell'anchor point e della target zone
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
