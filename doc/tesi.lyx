@@ -1343,6 +1343,12 @@ finestrare il segnale
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:La-finestratura"
+
+\end_inset
+
 La finestratura
 \end_layout
 
@@ -1558,22 +1564,26 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-L'utilizzo di una funzione finestra, tuttavia, porta al fenomeno dello 
+L'utilizzo di una 
+\emph on
+funzione finestra
+\emph default
+, tuttavia, porta al fenomeno dello 
 \emph on
 spectral leakage
 \emph default
-, ovvero la comparsa nello spettro di new frequenze che non esistono realmente
- all'interno del segnale audio originale.
- Nello specifico l'energia di un picco di frequenza confluisce parzialmente
- nelle frequenze vicine (da cui il termine leakage), 
-\begin_inset Quotes fld
-\end_inset
-
+, ovvero la comparsa nello spettro di nuove frequenze che non esistono realmente
+ nello spettro del segnale audio originale.
+ Nello specifico, l'energia di un picco di frequenza confluisce parzialmente
+ nelle frequenze vicine (da cui il termine 
+\emph on
+leakage
+\emph default
+), 
+\emph on
 sporcando
-\begin_inset Quotes frd
-\end_inset
-
- la rappresentazione in frequenza dello spettro.
+\emph default
+ la rappresentazione dello spettrogramma.
 \end_layout
 
 \begin_layout Standard
@@ -1584,79 +1594,122 @@ spectral leakage
  non può essere del tutto evitato, ma può essere tenuto sotto controllo
  e ridotto utilizzando una funzione finestra più complessa rispetto a quella
  rettangolare.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Il vantaggio principale della finestra rettangolare è la sua risposta in
- frequenza piatta, il che si traduce in una buona risoluzione spettrale,
- ovvero è in grado di rilevare con precisione la presenza di diverse componenti
- di frequenza nel segnale.
+La scelta della finestra implica un trade-off tra la 
+\emph on
+risoluzione spettrale
+\emph default
+ e il 
+\emph on
+range dinamico
+\emph default
+ del sistema.
+ Infatti, l'utilizzo di una finestra con banda passante stretta consente
+ di ottenere una maggiore risoluzione spettrale, ovvero di distinguere frequenze
+ molto vicine tra loro, ma allo stesso tempo comporta una riduzione del
+ range dinamico del sistema, ovvero della capacità di distinguere segnali
+ di ampiezza molto differente tra loro.
+ Al contrario, l'utilizzo di una finestra con banda passante ampia, comporta
+ una maggiore sensibilità ai segnali con un ampio range dinamico, ma al
+ costo di una riduzione della risoluzione spettrale.
+\end_layout
+
+\begin_layout Standard
+Inoltre, è importante considerare che la scelta della finestra deve essere
+ fatta in base alle specifiche caratteristiche del segnale che si intende
+ analizzare, come ad esempio la presenza di rumore o la distribuzione di
+ energia spettrale.
+ Pertanto, la scelta dev'essere attentamente valutata in base alle esigenze
+ specifiche dell'applicazione.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il vantaggio principale della 
+\emph on
+finestra rettangolare
+\emph default
+ è la sua risposta in frequenza piatta, risultando quindi la migliore in
+ termini di risoluzione spettrale.
  Tuttavia, la finestra rettangolare ha una bassa attenuazione laterale,
  ovvero non è in grado di attenuare il rumore presente nelle frequenze circostan
 ti, il che limita il suo range dinamico.
 \end_layout
 
 \begin_layout Standard
-Per ovviare a questo problema, sono state sviluppate altre finestre come
- quella di 
+Per ovviare a questo problema, sono state sviluppate altre finestre, come
+ quelle di 
 \emph on
 Blackman
 \emph default
-, 
-\emph on
-Hann
-\emph default
  e 
 \emph on
-Hamming
+Hann
 \emph default
 .
  La finestra di 
 \emph on
+Hann
+\emph default
+ è una scelta intermedia tra la finestra
+\emph on
+ rettangolare
+\emph default
+ e la finestra di 
+\emph on
 Blackman
 \emph default
- ha una risposta in frequenza simile alla finestra rettangolare, ma ha un'attenu
-azione laterale maggiore, il che la rende più adatta a segnali con un alto
- rapporto segnale-rumore.
- Le finestre di 
+.
+ Infatti, la finestra di 
 \emph on
 Hann
 \emph default
- e 
+ presenta una risoluzione spettrale inferiore rispetto alla finestra 
 \emph on
-Hamming
+rettangolare
 \emph default
- si collocano un po' a metà tra la finestra rettangolare e quella di 
+ ma un range dinamico migliore.
+ La finestra di 
 \emph on
 Blackman
 \emph default
-: hanno una risposta in frequenza meno piatta rispetto alla finestra rettangolar
-e, ma una maggiore attenuazione laterale rispetto a quest'ultima.
+, invece, è la scelta migliore in termini di range dinamico, poiché, tra
+ quelle citate, è quella che riduce maggiormente la diffusione dell'energia
+ in altre frequenze vicine.
+ Tuttavia, la sua risoluzione spettrale è la peggiore.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 La scelta della finestra da utilizzare dipende dalle caratteristiche del
  segnale e degli obiettivi dell'analisi.
  In questo caso di studio si avrà a che fare potenzialmente con un segnale
- molto rumoroso, quindi potrebbe essere più adatto utilizzare la finestra
- di 
+ rumoroso, quindi si è portati ad utilizzare la finestra di 
 \emph on
 Blackman
 \emph default
- o una delle finestre di 
-\emph on
-Hann
-\emph default
- o 
-\emph on
-Hamming
-\emph default
- per ottenere una buona risoluzione spettrale e al tempo stesso ridurre
- il rumore presente nelle frequenze circostanti.
- Dall'altro lato però si deve considerare che il segnale da analizzare ha
- un elevato range dinamico, potrebbe essere preferibile utilizzare la finestra
- rettangolare per massimizzare la risoluzione spettrale e quindi individuare
- con precisione le componenti di frequenza presenti nel segnale.
+.
+ D'altro canto, però, si deve considerare che, anticipando il contenuto
+ dei prossimi paragrafi, l'estrazione dei Links risulta migliore tanto migliore
+ è l'analisi in frequenza del segnale e, quindi, si dovrebbe predilgere
+ la massima risoluzione spettrale, individuando con precisione le componenti
+ di frequenza presenti nel segnale, a discapito del range dinamico.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1812,11 +1865,7 @@ Recognition rate in funzione dell SNR per le varie finestre
 
 \end_inset
 
-
-\series bold
-pag17
-\series default
- A questo punto risulta necessario valutare 
+A questo punto risulta necessario valutare 
 \emph on
 sul campo 
 \emph default
@@ -1825,7 +1874,7 @@ le performance di queste finestre.
 \emph on
 ambiente di test
 \emph default
- composto da circa 400 brani di generi molto diversi
+ composto da circa 400 brani di generi molto diversi tra loro
 \begin_inset Foot
 status open
 
@@ -1835,7 +1884,7 @@ I generi inclusi sono stati il metal, il rock, il blues e la musica classica
 
 \end_inset
 
-, per ognuno di questi brani:
+ e per ognuno di questi brani:
 \end_layout
 
 \begin_layout Enumerate
@@ -1848,12 +1897,12 @@ il segmento è stato distorto, sommando del rumore non bianco e introdocendo
 \end_layout
 
 \begin_layout Enumerate
-nota l'energia del segmento del segnale è stato possibile sommare un rumore
- per ottenere un SNR target.
+nota l'energia del segmento del segnale, è stato sommato un rumore per ottenere
+ un SNR target.
 \end_layout
 
 \begin_layout Standard
-Si è quindi fatto variare per ogni brano l'SNR tra 
+Si è quindi fatto variare, per ogni brano, l'SNR tra 
 \begin_inset Formula $-40dB$
 \end_inset
 
@@ -1865,9 +1914,9 @@ Si è quindi fatto variare per ogni brano l'SNR tra
 \begin_inset Formula $1dB$
 \end_inset
 
- per le tre finestre considerate, contando quante volte l'algorimo era in
- grado di individuare il brano corretto.
- Si è ottenuto il grafico in figura 
+, per le tre finestre considerate, contando quante volte l'algorimo fosse
+ in grado di individuare il brano correttamente: si è ottenuto il grafico
+ in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Recognition-rate-in"
@@ -1878,6 +1927,43 @@ noprefix "false"
 \end_inset
 
 .
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si potrebbe conlcudere, allora, che la finestra 
+\emph on
+migliore
+\emph default
+ è quella rettangolare, ma non esiste una finestra "migliore" in assoluto,
+ ma solo la finestra più adatta alle specifiche del problema che si vuole
+ risolvere.
+\end_layout
+
+\begin_layout Standard
+Anche se la finestra rettangolare sembra funzionare 
+\emph on
+meglio
+\emph default
+ nei test, è importante considerare che gli stessi sono stati effettuati
+ in un ambiente di prova artificiale e che il rumore non bianco e il clipping
+ introdotti potrebbero non modellare accuratamente una situazione reale.
+ Inoltre, i risultati potrebbero dipendere parzialmente dalle caratteristiche
+ specifiche dei brani considerati che potrebbero rappresentare un campione
+ poco eterogeneo.
+\end_layout
+
+\begin_layout Standard
+La scelta è pertanto ricaduta sulla finestra di Hann, dato il suo comportamento
+ 
+\emph on
+intermedio 
+\emph default
+tra la finestra rettangolare e quella di Blackman, ottenendo un buon equilibrio
+ tra risoluzione spettrale e range dinamico rilevato.
 \end_layout
 
 \begin_layout Subsection
@@ -1916,22 +2002,29 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-È importante sottolineare che lo spettro ottenuto dalla DFT risulta essere
- discreto e che la libreria fin è configurata per trattare segnali audio
- campionati a 
-\begin_inset Formula $8000Hz$
-\end_inset
-
-, utilizzando finestre di dimensione pari a 
-\begin_inset Formula $512$
-\end_inset
-
- campioni
+In prima analisi è necessario introdurre il concetto di 
+\emph on
+risoluzione spettrale, 
+\emph default
+ossia la capacità di un'analisi spettrale di distinguere due componenti
+ di frequenza vicine nel dominio della frequenza.
+ Dipende dal numero di campioni utilizzati nella finestra e dalla finestra
+ utilizzata
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Successivamente verranno fatte delle considerazioni su queste scelte
+Vedere paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:La-finestratura"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ sulla risoluzione spettrale delle finestre
 \end_layout
 
 \end_inset
@@ -1941,10 +2034,10 @@ Successivamente verranno fatte delle considerazioni su queste scelte
 \emph on
 risoluzione in frequenza
 \emph default
- della DFT è pertanto pari a:
+ della DFT può essere calcolata come segue:
 \begin_inset Formula 
 \[
-B_{S}=\frac{F_{S}}{N}=\frac{8000Hz}{512}=15.625Hz
+\Delta f=\frac{F_{S}}{N}
 \]
 
 \end_inset
@@ -1953,12 +2046,12 @@ Dove:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $B_{S}$
+\begin_inset Formula $\Delta f$
 \end_inset
 
  è la 
 \emph on
-risoluzione in frequenza
+risoluzione spettrale
 \emph default
 , anche detta 
 \emph on
@@ -1982,11 +2075,36 @@ frequenza di campionamento
 \end_layout
 
 \begin_layout Standard
-In altre parole, lo spettro viene discretizzato a passi di circa 
-\begin_inset Formula $16Hz$
+La libreria fin è configurata per trattare segnali audio campionati a 
+\begin_inset Formula $8000Hz$
 \end_inset
 
-.
+, utilizzando finestre di dimensione pari a 
+\begin_inset Formula $512$
+\end_inset
+
+ campioni
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Successivamente verranno fatte delle considerazioni su queste scelte
+\end_layout
+
+\end_inset
+
+, quindi:
+\begin_inset Formula 
+\[
+\Delta f=\frac{8000Hz}{512}=15.625Hz
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1994,6 +2112,7 @@ In altre parole, lo spettro viene discretizzato a passi di circa
 \end_layout
 
 \begin_layout Standard
+\noindent
 Inoltre, è necessario fare alcune osservazioni aggiuntive:
 \end_layout
 
@@ -2004,13 +2123,12 @@ Il primo bin non contiene informazioni rilevanti riguardo la rappresentazione
 
 \begin_layout Enumerate
 L'output della DFT su segnali reali è simmetrico
-\begin_inset VSpace defskip
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
 A dimostrazione del primo fatto si può partire dalla definizione della DFT:
 \begin_inset Formula 
 \begin{equation}
@@ -2029,7 +2147,7 @@ e valutarla in
 \[
 \begin{aligned}X[n]|_{n=0}:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}|_{n=0}\\
 = & \sum_{t=0}^{N-1}x(t)e^{0}\\
-= & \sum_{t=0}^{N-1}x(t)=\mu_{x}
+= & \sum_{t=0}^{N-1}x(t)
 \end{aligned}
 \]
 
@@ -2039,8 +2157,7 @@ In altre parole, il primo bin dell'output della DFT corrisponde alla
 \emph on
 componente DC 
 \emph default
-del segnale in ingresso, ovvero il suo valor medio, che può assunto pari
- a 
+del segnale in ingresso che può assunto pari a 
 \begin_inset Formula $0$
 \end_inset
 
@@ -2052,7 +2169,7 @@ del segnale in ingresso, ovvero il suo valor medio, che può assunto pari
 \end_layout
 
 \begin_layout Standard
-Per dimostrare il secondo fatto, si deve dimostrare che se 
+Per quanto riguarda il secondo fatto, si deve dimostrare che se 
 \begin_inset Formula $x(t)$
 \end_inset
 
@@ -2131,7 +2248,7 @@ noprefix "false"
 
 \end_inset
 
-Dove il passggio al coniugato è invariante per 
+Dove il passaggio al coniugato è invariante per 
 \begin_inset Formula $x(t)$
 \end_inset
 
@@ -2150,6 +2267,14 @@ o una versione ottimizzata della DFT per input reali, con soli
 \end_inset
 
  coefficienti utili in output.
+\end_layout
+
+\begin_layout Subsection
+Il calcolo del modulo dello spettrogramma
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
