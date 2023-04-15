@@ -7,6 +7,7 @@
 \textclass tufte-book
 \begin_preamble
 \usepackage{pgfplots}
+\usetikzlibrary{patterns}
 \usepackage{filecontents}
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{2}
@@ -2721,6 +2722,895 @@ findPeaks
 
 \begin_layout Section
 I Peaks
+\end_layout
+
+\begin_layout Standard
+Pronto lo spettrogramma lo si deve processare per ottenere i picchi di frequeze
+ più significativi e scartare tutto il resto: questo permette di avere una
+ prima rappresentazione più combatta del segnale audio.
+\end_layout
+
+\begin_layout Standard
+Lo spettrogramma è diviso in una sorta di griglia, in cui ogni cella ha
+ le seguenti dimensioni:
+\end_layout
+
+\begin_layout Itemize
+Larghezza pari a 
+\begin_inset Formula $C$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Definita nel file 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Altezza pari ad un range di frequenze, chiamato 
+\emph on
+banda
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=blue, line width=1pt] (0,0)
+ rectangle (40,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=blue, line width=1pt] (40,0)
+ rectangle (80,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=blue, line width=1pt] (80,0)
+ rectangle (120,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=green, line width=1pt] (0,100)
+ rectangle (40,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=green, line width=1pt] (40,100)
+ rectangle (80,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=green, line width=1pt] (80,100)
+ rectangle (120,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=red, line width=1pt] (0,200)
+ rectangle (40,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=red, line width=1pt] (40,200)
+ rectangle (80,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=red, line width=1pt] (80,200)
+ rectangle (120,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=orange, line width=1pt] (0,300)
+ rectangle (40,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north west lines, pattern color=orange, line width=1pt] (40,300)
+ rectangle (80,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[pattern=north east lines, pattern color=orange, line width=1pt] (80,300)
+ rectangle (120,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[decoration={brace,mirror,raise=15pt},decorate]   (0,0) -- node[below=16pt]
+ {
+\backslash
+textbf{C}} (2.9,0);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[decoration={brace,mirror},decorate]   (9.7,0) -- node[xshift=10pt] {
+\backslash
+rotatebox{-90}{
+\backslash
+textbf{banda}}} (9.7,1.4);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Spectrum-division"
+
+\end_inset
+
+Suddivisione dello spettro (ogni colore è una banda)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+Si prenda la suddivisione semplificata della figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Spectrum-division"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $C=4$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+La banda ha dimensione fissa pari a 
+\begin_inset Formula $100Hz$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nell'algoritmo questi parametri sono scelti diversamente: 
+\begin_inset Formula $C$
+\end_inset
+
+ è uguale a 
+\begin_inset Formula $32$
+\end_inset
+
+ e la suddivisione in bande segue una scala logaritmica (vedere 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Scelta-della-dimensione"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Per ogni cella, attraverso la funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaksInWindow
+\end_layout
+
+\end_inset
+
+ definita nel file 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+peaks_finder.cpp
+\end_layout
+
+\end_inset
+
+, l'algoritmo individua e memorizza le 
+\begin_inset Formula $3$
+\end_inset
+
+ frequenze
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Costante 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+N_PEAKS
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ più prominenti.
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=1pt] (0,0) rectangle (40,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=1pt] (40,0) rectangle (80,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=1pt] (80,0) rectangle (120,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=1pt] (0,100) rectangle (40,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=1pt] (40,100) rectangle (80,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=1pt] (80,100) rectangle (120,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=1pt] (0,200) rectangle (40,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=1pt] (40,200) rectangle (80,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=1pt] (80,200) rectangle (120,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=1pt] (0,300) rectangle (40,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=1pt] (40,300) rectangle (80,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=1pt] (80,300) rectangle (120,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 0.745560224337 , 378.5992651
+97 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 3.35149848633 , 885.69642912
+8 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 1.36552968092 , 687.79506248
+ ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 3.73052621593 , 1521.618562
+76 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 2.24021149438 , 1286.762539
+77 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 2.31025446998 , 1759.585072
+66 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 0.367038182557 , 2640.0077863
+8 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 2.60223704132 , 2543.51959691
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 3.29030455474 , 2857.42356211
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 3.06012887649 , 3859.57073
+579 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 1.04281482521 , 3310.98256
+132 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 0.342092598793 ,
+ 3187.00295803 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 6.13965840628 , 346.37314184
+4 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 6.18220033666 , 151.14467838
+3 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 5.10152863505 , 640.55570001
+8 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 6.25598325224 , 1797.769092
+61 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 7.08091233708 , 1668.626795
+36 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 5.30064456137 , 1131.850638
+39 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 7.2544573697 , 2751.61392809
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 6.8872104256 , 2267.19959314
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 7.45001350539 , 2289.19953153
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 5.64148867695 , 3139.99246
+694 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 5.80868333293 , 3160.84633
+384 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 4.68927142292 , 3263.16366
+007 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.50986878705 , 653.82012721
+1 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.94884609281 , 539.46336189
+3 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.44637953657 , 707.94351178
+6 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 9.49315824083 , 1563.597638
+99 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 9.74759745215 , 1888.112335
+31 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 10.7844077137 , 1477.871231
+18 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 8.899479235 , 2856.56308609
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 9.50730112412 , 2796.10602412
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 11.6806723738 , 2173.69277417
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 9.28333255686 , 3800.01058
+487 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 9.87529616782 , 3162.85741
+608 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 10.5805497799 , 3704.10829
+642 ) }; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Three-points-per"
+
+\end_inset
+
+Spettrogramma con 
+\begin_inset Formula $3$
+\end_inset
+
+ picchi per cella
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaks
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Sempre in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+peaks_finder.cpp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ si occupa di divedere lo spettro in celle, per ogni cella richiama 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaksInWindow
+\end_layout
+
+\end_inset
+
+ e ne memorizza il risultato, ottenendo qualcosa di simile a quanto visibile
+ in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Three-points-per"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Alla fine dell'esecuzione di 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+findPeaks
+\end_layout
+
+\end_inset
+
+ sarà disponibile un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+std::vector<Peak>
+\end_layout
+
+\end_inset
+
+ ordinato per intensità del picco.
+ Questi picchi verrano utilizzati in seguito per creare i 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Link
+\end_layout
+
+\end_inset
+
+s.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Scelta-della-dimensione"
+
+\end_inset
+
+Scelta della dimensione delle bande
 \end_layout
 
 \end_body
