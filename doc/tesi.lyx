@@ -2725,9 +2725,9 @@ I Peaks
 \end_layout
 
 \begin_layout Standard
-Pronto lo spettrogramma lo si deve processare per ottenere i picchi di frequeze
- più significativi e scartare tutto il resto: questo permette di avere una
- prima rappresentazione più combatta del segnale audio.
+Pronto lo spettrogramma, lo si deve processare per ottenere i picchi di
+ frequeze più significativi e scartare tutto il resto: questo permette di
+ avere una prima rappresentazione più compatta del segnale audio.
 \end_layout
 
 \begin_layout Standard
@@ -3611,6 +3611,403 @@ name "subsec:Scelta-della-dimensione"
 \end_inset
 
 Scelta della dimensione delle bande
+\end_layout
+
+\begin_layout Standard
+Esistono diversi modi per suddividere uno spettrogramma in range di frequenze
+ significativi, ma quello che la libreria fin utilizza è la 
+\emph on
+scala Mel
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+La scala Mel è stata sviluppata per emulare il modo in cui l'orecchio umano
+ percepisce le frequenze dei suoni: è basata sulla scoperta sperimentale
+ che più alta è la frequenza di due suoni più è difficile per l'orecchio
+ umano discriminarli.
+ Questa scala è, quindi, stata creata per mappare le frequenze del suono
+ in modo che la loro rappresentazione sia più in linea con la percezione
+ dell'orecchio umano.
+\end_layout
+
+\begin_layout Standard
+È definita come segue:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f(m):=700\left(10^{\frac{m}{2595}}-1\right)\label{eq:mel-def}
+\end{equation}
+
+\end_inset
+
+dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $m$
+\end_inset
+
+ è la 
+\emph on
+frequenza Mel
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $f$
+\end_inset
+
+ è la frequenza in Hertz
+\end_layout
+
+\begin_layout Standard
+Si può anche ricavare la duale:
+\begin_inset Formula 
+\begin{equation}
+m(f)=2595\log_{10}\left(\frac{f}{700}+1\right)\label{eq:mel-inv}
+\end{equation}
+
+\end_inset
+
+rappresentata in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Mapping-tra-Hertz"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float marginfigure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		domain=0:8000,
+\end_layout
+
+\begin_layout Plain Layout
+
+		samples=100,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 8000,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin =  0, ymax = 3000,
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid = major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Mel,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis x line=bottom,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis y line=left
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+			color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+			line width=1pt
+\end_layout
+
+\begin_layout Plain Layout
+
+		]{
+\end_layout
+
+\begin_layout Plain Layout
+
+			2595*log10(x/700 +1)
+\end_layout
+
+\begin_layout Plain Layout
+
+		};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\lang italian
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Mapping-tra-Hertz"
+
+\end_inset
+
+Mapping tra Hertz e scala Mel
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset VSpace defskip
+\end_inset
+
+La libreria fin crea le varie bande seguendo l'algoritmo descritto di seguito:
+\end_layout
+
+\begin_layout Enumerate
+Parte dalla frequenza Mel 
+\begin_inset Formula $\alpha_{M}=250$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Costante 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+MEL_START
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ che se valutata nella 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mel-def"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ corrisponde a 
+\begin_inset Formula $f(\alpha_{M})=\alpha_{F}\cong174Hz$
+\end_inset
+
+: questo vuol dire che tutte le frequenze inferiori a 
+\begin_inset Formula $\alpha_{F}$
+\end_inset
+
+ vengono scartate.
+\end_layout
+
+\begin_layout Enumerate
+Si è definito un 
+\begin_inset Formula $\delta_{M}=200$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Costante 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+MEL_STEP
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, in modo tale che gli estremi delle bande sulla scala Mel saranno a:
+\begin_inset Formula 
+\[
+\left\{ \alpha_{M},\alpha_{M}+\delta_{M},\alpha_{M}+2\delta_{M},...,\alpha_{M}+k\delta_{M}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Si convertono gli estremi in frequenze in Hertz usando la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:mel-def"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, in modo tale che gli estemi delle bande siano a:
+\begin_inset Formula 
+\[
+\left\{ f\left(\alpha_{M}\right),f\left(\alpha_{M}+\delta_{M}\right),f\left(\alpha_{M}+2\delta_{M}\right),...,f\left(\alpha_{M}+k\delta_{M}\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Si è scelto di scartare le frequenze inferiori a 
+\begin_inset Formula $174Hz$
+\end_inset
+
+ poichè rappresentano frequenze troppo basse, spesso molto rumorose, che
+ non fanno altro che sprecare complessità computazione, dato che non contengono
+ informazioni rilevanti.
+\end_layout
+
+\begin_layout Section
+I Links
 \end_layout
 
 \end_body
