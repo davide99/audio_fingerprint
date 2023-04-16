@@ -16,7 +16,7 @@ namespace fin::core {
          * Constructs the links given the peaks
          * @param peakVec Computed peaks
          */
-        explicit Links(const std::vector<fin::core::Peak> &peakVec);
+        explicit Links(std::vector<Peak> &peakVec);
 
         fin::utils::ByteBuffer toByteBuffer();
 

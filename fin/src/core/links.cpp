@@ -2,7 +2,9 @@
 #include <cmath>
 #include <algorithm>
 
-fin::core::Links::Links(const std::vector<Peak> &peakVec) {
+fin::core::Links::Links(std::vector<Peak> &peakVec) {
+    std::sort(peakVec.begin(), peakVec.end()); //Sort in descending order by loudness
+
     for (auto peakIt = peakVec.begin(); peakIt != peakVec.end(); peakIt++) {
         for (auto it = peakIt + 1; it != peakVec.end(); it++) {
             //peakIt is the current peak under analysis, the anchor point candidate

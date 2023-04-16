@@ -6,7 +6,7 @@
 static fin::utils::FixedSizePQ<fin::core::Peak, consts::fingerprint::N_PEAKS>
 findPeaksInWindow(const fin::math::FFTWindow &fftWindow, const std::int64_t &window, const int &bandStart,
                   const int &bandEnd) {
-    fin::utils::FixedSizePQ <fin::core::Peak, consts::fingerprint::N_PEAKS> peaks;
+    fin::utils::FixedSizePQ<fin::core::Peak, consts::fingerprint::N_PEAKS> peaks;
     float magCurrent, freqCurrent;
     int indexLeft, indexRight, j;
     bool ok = false;
@@ -74,6 +74,5 @@ std::vector<fin::core::Peak> fin::core::findPeaks(const math::Spectrogram &spect
         }
     }
 
-    std::sort(peakVec.begin(), peakVec.end()); //Sort in descending order by loudness
     return peakVec;
 }
