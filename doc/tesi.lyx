@@ -1830,6 +1830,20 @@ addlegendentry{Rettangolare}
 
 
 \backslash
+addplot table [x=db, y=alg2, col sep=comma] {data/windows_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{alg2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 end{axis}
 \end_layout
 
@@ -4011,23 +4025,31 @@ I Links
 \end_layout
 
 \begin_layout Standard
-A questo punto ci sono a disposizione alcune features (i 
+A questo punto si disposizione di alcune features (i 
 \emph on
 picchi
 \emph default
-) che, in teoria, potrebbero essere utilizzate per identificare un brano:
- ogni picco del segmento registrato dal client andrebbe comparato con i
- picchi del brano nella versione completa.
- Sebbene probabilmente funzionante, questo approccio è troppo semplice e
- richiederebbe tanto tempo di elaborazione prima di ottenere un match.
+) che, in teoria, potrebbero essere utilizzate per identificare un brano.
+ Ogni picco del segmento registrato dal client dovrebbe essere confrontato
+ con i picchi del brano completo.
+ Tuttavia, questo approccio, anche se semplice e probabilmente funzionante,
+ risulterebbe troppo lento.
  Infatti, in questo caso, la complessità sarabbe dell'ordine della lunghezza
- totale di tutti i brani presenti nel database: paradossalmente più brani
+ totale di tutti i brani presenti nel database: paradossalmente, più brani
  l'algoritmo riuscirebbe a individuare, più lento diventerebbe.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-La libreria fin utilizza quindi un altro algoritmo.
- Per prima cosa viene individuato tra i picchi un 
+\noindent
+Per questo motivo, la libreria fin utilizza un altro algoritmo:
+\end_layout
+
+\begin_layout Enumerate
+In primo luogo, viene individuato tra i picchi un 
 \emph on
 anchor point
 \emph default
@@ -4035,37 +4057,57 @@ anchor point
 \emph on
 indirizzo
 \emph default
-, ogni anchor point definisce una 
+.
+\end_layout
+
+\begin_layout Enumerate
+Ogni anchor point definisce una 
 \emph on
 target zone
 \emph default
-, ovvero una porzione della costellazione dei picchi.
- Sia 
+, ovvero una porzione della costellazione dei picchi: sia 
 \begin_inset Formula $\alpha$
 \end_inset
 
  un anchor point, 
-\begin_inset Formula $A$
+\begin_inset Formula $A_{\alpha}$
 \end_inset
 
- un insieme di picchi inizialmente vuoto, 
+ l'insieme di picchi
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Inizialmente vuoto
+\end_layout
+
+\end_inset
+
+ associato ad 
+\begin_inset Formula $\alpha$
+\end_inset
+
+, 
 \begin_inset Formula $\beta$
 \end_inset
 
  un generico picco, allora:
 \begin_inset Formula 
 \[
-\beta\in A\iff\left(1\leq\beta.\mathrm{window}-\alpha.\mathrm{window}<3\right)\land\left(\beta.\mathrm{band}=\alpha.\mathrm{band}\right)
+\beta\in A_{\alpha}\iff\left(1\leq\beta.\mathrm{window}-\alpha.\mathrm{window}<3\right)\land\left(\beta.\mathrm{band}=\alpha.\mathrm{band}\right)
 \]
 
 \end_inset
 
 
-\begin_inset Formula $A$
+\begin_inset Formula $A_{\alpha}$
 \end_inset
 
  sarà quindi l'insieme dei punti che fanno parte della target zone.
- La bande sono le stesse definite sulla base della scala Mel (vedi 
+\end_layout
+
+\begin_layout Standard
+La bande sono le stesse definite in base della scala Mel (vedi 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Scelta-della-dimensione"
@@ -4087,8 +4129,11 @@ noprefix "false"
 \end_inset
 
 .
-\lang english
+\end_layout
 
+\begin_layout Standard
+
+\lang english
 \begin_inset Float figure
 wide false
 sideways false
@@ -4443,8 +4488,8 @@ addplot [orange,only marks,mark=star] coordinates {(0.2129169186634634,3812)};
 
 
 \backslash
-addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
- as node=true] coordinates {(3.523615767930713,2545)};
+addplot[only marks,mark=o,mark options={solid,scale=2, red},text mark as
+ node=true] coordinates {(3.523615767930713,2545)};
 \end_layout
 
 \begin_layout Plain Layout
@@ -4545,7 +4590,282 @@ Selezione dell'anchor point e della target zone
 
 \end_inset
 
+La coppia 
+\emph on
+anchor point
+\emph default
+ e 
+\emph on
+picco
+\emph default
+ prende il nome di 
+\emph on
+Link
+\emph default
+.
+ Il Link, quindi, viene costruito a partire dalla coppia 
+\begin_inset Formula $(\alpha,\beta)$
+\end_inset
 
+ in questo modo:
+\begin_inset Formula 
+\[
+Link\left\{ \begin{aligned}hash= & h(\delta_{w},\delta_{f},\alpha.frequency)\\
+window= & \alpha.window
+\end{aligned}
+\right.
+\]
+
+\end_inset
+
+Dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\delta_{w}=\beta.window-\alpha.window$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\delta_{f}=\beta.frequency-\alpha.frequency$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h(\astrosun)$
+\end_inset
+
+ è una funzione di hash
+\end_layout
+
+\begin_layout Standard
+
+\lang english
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [ only marks,mark=star,nodes near coords={($w_
+\backslash
+alpha$,$f_
+\backslash
+alpha$)}] coordinates { ( 4 , 2100 ) };
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [ only marks,mark=star,nodes near coords={($w_
+\backslash
+beta$,$f_
+\backslash
+beta$)}] coordinates { ( 7 , 2700 ) };
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, red},text mark as
+ node=true] coordinates {( 4, 2100 )};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [no marks] coordinates { (4,2100) (7,2700) };
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+node[above,align=left] at (axis cs:8,1600) {hash$=
+\backslash
+delta_w:
+\backslash
+delta_f:f_
+\backslash
+alpha$
+\backslash
+
+\backslash
+window=$w_
+\backslash
+alpha$};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Link-structure"
+
+\end_inset
+
+Struttura dei link
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\lang italian
+Nella 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Link-structure"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ è mostrato un esempio di Link.
+ Notare che viene memorizzata anche la finestra dell'anchor point: questo
+ dettaglio ritornerà utile in seguito
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+RICORDATI DI METTERE IL RIFERIMENTO AL CAP.
+ DELL'INDIVIDUAZIONE
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+I Link generati in questo modo sono molto riproducibili, soprattutto in
+ presenza di rumore o artefatti di codifica dell'audio.
+\end_layout
+
+\begin_layout Standard
+Un altro grande vantaggio di questa rappresentazione risiede nel fatto che
+ tutti i tempi
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Gli indici delle finestre ad essere precisi
+\end_layout
+
+\end_inset
+
+ sono relativi, in quanto espressi rispetto all'anchor point: in altre parole,
+ non importa quando l'utente inizia a registrare il segmento audio, l'algoritmo
+ riuscirà comunque ad individuare il match.
+\end_layout
+
+\begin_layout Chapter
+La libreria fin_db
 \end_layout
 
 \end_body
