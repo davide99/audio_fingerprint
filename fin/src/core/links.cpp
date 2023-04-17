@@ -9,20 +9,12 @@ fin::core::Links::Links(std::vector<Peak> &peakVec) {
     });
 
     for (auto anchorIt = peakVec.begin(); anchorIt != peakVec.end(); anchorIt++) {
-        decltype(anchorIt) leftBoundaryIt, rightBoundaryIt;
-
-        for (leftBoundaryIt = anchorIt + 1;
-             (leftBoundaryIt->getWindow() - anchorIt->getWindow() < consts::links::MIN_WIN_DISTANCE) &&
-             (leftBoundaryIt != peakVec.end());
-             leftBoundaryIt++);
-
-        for (rightBoundaryIt = leftBoundaryIt;
-             (rightBoundaryIt->getWindow() - anchorIt->getWindow() < consts::links::MAX_WIN_DISTANCE) &&
-             (rightBoundaryIt != peakVec.end());
-             rightBoundaryIt++);
-
-        for (auto it = leftBoundaryIt; it != rightBoundaryIt; it++) {
-            if (it->sameBand(*anchorIt)) {
+        for (auto it = anchorIt + 1;
+             (it->getWindow() - anchorIt->getWindow() < consts::links::MAX_WIN_DISTANCE) &&
+             (it != peakVec.end());
+             it++) {
+            if (it->sameBand(*anchorIt) &&
+                (it->getWindow() - anchorIt->getWindow() >= consts::links::MIN_WIN_DISTANCE)) {
                 emplace_back(*anchorIt, *it);
             }
         }
