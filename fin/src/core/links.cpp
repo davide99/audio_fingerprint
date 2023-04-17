@@ -3,18 +3,27 @@
 #include <algorithm>
 
 fin::core::Links::Links(std::vector<Peak> &peakVec) {
-    std::sort(peakVec.begin(), peakVec.end()); //Sort in descending order by loudness
+    //Sort in ascending order by window
+    std::sort(peakVec.begin(), peakVec.end(), [](const auto &lhs, const auto &rhs) {
+        return lhs.getWindow() < rhs.getWindow();
+    });
 
-    for (auto peakIt = peakVec.begin(); peakIt != peakVec.end(); peakIt++) {
-        for (auto it = peakIt + 1; it != peakVec.end(); it++) {
-            //peakIt is the current peak under analysis, the anchor point candidate
-            //*it* is a candidate peak which could be expressed wrt to peakIt
+    for (auto anchorIt = peakVec.begin(); anchorIt != peakVec.end(); anchorIt++) {
+        decltype(anchorIt) leftBoundaryIt, rightBoundaryIt;
 
-            if ((it->sameBand(*peakIt)) &&
-                (it->getWindow() - peakIt->getWindow() >= consts::links::MIN_WIN_DISTANCE) &&
-                (it->getWindow() - peakIt->getWindow() < consts::links::MAX_WIN_DISTANCE)) {
+        for (leftBoundaryIt = anchorIt + 1;
+             (leftBoundaryIt->getWindow() - anchorIt->getWindow() < consts::links::MIN_WIN_DISTANCE) &&
+             (leftBoundaryIt != peakVec.end());
+             leftBoundaryIt++);
 
-                emplace_back(*peakIt, *it);
+        for (rightBoundaryIt = leftBoundaryIt;
+             (rightBoundaryIt->getWindow() - anchorIt->getWindow() < consts::links::MAX_WIN_DISTANCE) &&
+             (rightBoundaryIt != peakVec.end());
+             rightBoundaryIt++);
+
+        for (auto it = leftBoundaryIt; it != rightBoundaryIt; it++) {
+            if (it->sameBand(*anchorIt)) {
+                emplace_back(*anchorIt, *it);
             }
         }
     }
