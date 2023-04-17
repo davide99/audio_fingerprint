@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
             wavfile.write("out.wav", sample_rate, (noisy_signal * 32768.0).astype(np.int16))
 
-            process = Popen(["./mock_client", "out.wav"], stdout=PIPE)
+            process = Popen(["../../cmake-build-release/mock_client/mock_client", "out.wav"], stdout=PIPE)
             (output, err) = process.communicate()
             exit_code = process.wait()
             output = output.decode('utf-8').strip()
