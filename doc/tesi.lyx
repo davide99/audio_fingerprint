@@ -8,6 +8,7 @@
 \begin_preamble
 \usepackage{pgfplots}
 \usetikzlibrary{patterns}
+\usetikzlibrary{er,positioning}
 \usepackage{filecontents}
 \setcounter{tocdepth}{2}
 \setcounter{secnumdepth}{2}
@@ -4862,6 +4863,453 @@ Gli indici delle finestre ad essere precisi
 
 \begin_layout Chapter
 La libreria fin_db
+\end_layout
+
+\begin_layout Standard
+La libreria 
+\emph on
+fin_db
+\emph default
+ è il secondo dei componenti più importanti del sistema.
+ Il suo compito principale è quello di interfacciarsi con il database per
+ effettuare le seguenti operazioni:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Ricerca
+\emph default
+:
+\emph on
+ 
+\emph default
+gestire il processo di individuazione del brano a partire dal Links che
+ lo caratterizzano
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Inserimento
+\emph default
+: inserire i Links di un nuovo brano nel database insieme al suo nome
+\end_layout
+
+\begin_layout Standard
+In secondo luogo, fin_db può essere vista come una sorta di livello di astrazion
+e dal database: la libreria è basata sul connector 
+\emph on
+mariadb++
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/viaduck/mariadbpp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\emph default
+ e sul database 
+\emph on
+MariaDB
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://mariadb.org/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, ma può essere facilmente riconfigurata per utilizzare altri database e
+ altri connector.
+ In particolare, 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+DB
+\end_layout
+
+\end_inset
+
+ è la classe
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedere il file 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.cpp
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ che si occupa di dialogare con l'instanza del database.
+\end_layout
+
+\begin_layout Section
+L'inserimento di un brano
+\end_layout
+
+\begin_layout Standard
+Il primo passo per rendere un brano individuabile è quello di memorizzare
+ i Links che lo caratterizzano e il suo nome nel database.
+ A questo scopo sono state predisposte due enitià rappresentate in figura
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Modello-ER-database-ricerca"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[auto,node distance=1.5cm]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[entity] (node1) {
+\backslash
+textbf{musicinfo}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		[grow=up,sibling distance=2cm]
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {name}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {
+\backslash
+underline{id}}};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[relationship] (rel1) [right = of node1] {
+\backslash
+textit{referito a}};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[entity] (node2) [right = of rel1] {
+\backslash
+textbf{recordings}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		[grow=down,sibling distance=2cm]
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {
+\backslash
+underline{hash}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {
+\backslash
+underline{time}}};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+path (rel1) edge node {1,
+\backslash
+(n
+\backslash
+)} (node1)
+\end_layout
+
+\begin_layout Plain Layout
+
+	edge node {1,1} (node2);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Modello-ER-database-ricerca"
+
+\end_inset
+
+Modello ER database, ricerca
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+musicinfo
+\emph default
+ contiene le informazioni del brano, nello specifico il suo nome e un id
+ che funge da chiave primaria
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+recordings
+\emph default
+ contiene i Links insieme alla foreign key 
+\emph on
+songId
+\emph default
+ che punta ad un record di musicinfo; la tupla 
+\begin_inset Formula $\{hash,time,songId\}$
+\end_inset
+
+ funge da chiave primaria
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+L'inserimento di un nuovo brano nel database avviene richiamando la funzione
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+void insertSong(
+\end_layout
+
+\begin_layout Plain Layout
+
+    const std::string &filename,
+\end_layout
+
+\begin_layout Plain Layout
+
+    DB &db
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\end_inset
+
+definita nel file 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin_db.h
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La funzione prende in input il nome del file audio da leggere e un oggetto
+ 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+DB
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Già instanziato dal caller
+\end_layout
+
+\end_inset
+
+ e:
+\end_layout
+
+\begin_layout Enumerate
+Crea un oggetto 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+WavReader
+\end_layout
+
+\end_inset
+
+ per leggere il file passatogli come parametro
+\end_layout
+
+\begin_layout Enumerate
+Estrare i Links utilizzando la funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+computeLinks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Richiama la funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.insertSong
+\end_layout
+
+\end_inset
+
+ che prende come parametri il nome del brano e i Links del brano stesso
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Spigare che db.insertSong inserisce nelle due tabelle in fig.
+ 10 eccecc, mettere magari uno sltralcio delle due tabelle
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
