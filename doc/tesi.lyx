@@ -1830,20 +1830,6 @@ addlegendentry{Rettangolare}
 
 
 \backslash
-addplot table [x=db, y=alg2, col sep=comma] {data/windows_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{alg2}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 end{axis}
 \end_layout
 
@@ -1952,36 +1938,45 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-Si potrebbe conlcudere, allora, che la finestra 
+Analizzando dal grafico le prestazioni delle finestre di Hann, rettangolare
+ e di Blackman, si può notare che:
+\end_layout
+
+\begin_layout Itemize
+per un SNR fino a 
+\begin_inset Formula $-15dB$
+\end_inset
+
+ la finestra con le performances migliori è quella di Hann
+\end_layout
+
+\begin_layout Itemize
+nel tratto tra 
+\begin_inset Formula $-15dB$
+\end_inset
+
+ in poi la finestra rettangolare e quella di Hann sono comparabili
+\end_layout
+
+\begin_layout Itemize
+la finestra di Blackman fa ottenere un recognition rate sempre minore o
+ di quello della finestra di Hann o di quella rettangolare
+\end_layout
+
+\begin_layout Standard
+L'efficacia della finestra di Hann rispetto alle altre due è quindi dimostrata.
+ Tuttavia, non esiste una finestra 
 \emph on
 migliore
 \emph default
- è quella rettangolare, ma non esiste una finestra "migliore" in assoluto,
- ma solo la finestra più adatta alle specifiche del problema che si vuole
- risolvere.
-\end_layout
-
-\begin_layout Standard
-Anche se la finestra rettangolare sembra funzionare 
+ in assoluto e la scelta della finestra più adatta dipende dalle specifiche
+ del problema in esame.
+ Nel caso in analisi la finestra di Hann è stata selezionata poiché ha ottenuto
+ complessivamente le performance migliori, raggiungendo mediamente il 
 \emph on
-meglio
+recognition rate 
 \emph default
- nei test, è importante considerare che gli stessi sono stati effettuati
- in un ambiente di prova artificiale e che il rumore non bianco e il clipping
- introdotti potrebbero non modellare accuratamente una situazione reale.
- Inoltre, i risultati potrebbero dipendere parzialmente dalle caratteristiche
- specifiche dei brani considerati che potrebbero rappresentare un campione
- poco eterogeneo.
-\end_layout
-
-\begin_layout Standard
-La scelta è pertanto ricaduta sulla finestra di Hann, dato il suo comportamento
- 
-\emph on
-intermedio 
-\emph default
-tra la finestra rettangolare e quella di Blackman, ottenendo un buon equilibrio
- tra risoluzione spettrale e range dinamico rilevato.
+più alto.
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1989,7 +1984,7 @@ tra la finestra rettangolare e quella di Blackman, ottenendo un buon equilibrio
 \end_layout
 
 \begin_layout Standard
-Il segnale audio viene finestrato con un overlap del 
+La libreria fin finestra il segnale audio con un overlap del 
 \begin_inset Formula $50\%$
 \end_inset
 
@@ -2003,7 +1998,8 @@ noprefix "false"
 
 \end_inset
 
-) per due motivi:
+).
+ Questa scelta è dovuta a due motivi:
 \end_layout
 
 \begin_layout Enumerate
@@ -2516,7 +2512,7 @@ In altre parole, il primo bin dell'output della DFT corrisponde alla
 \emph on
 componente DC 
 \emph default
-del segnale in ingresso che può assunto pari a 
+del segnale in ingresso che può essere assunto pari a 
 \begin_inset Formula $0$
 \end_inset
 
@@ -4016,8 +4012,8 @@ Si è scelto di scartare le frequenze inferiori a
 \end_inset
 
  poichè rappresentano frequenze troppo basse, spesso molto rumorose, che
- non fanno altro che sprecare complessità computazione, dato che non contengono
- informazioni rilevanti.
+ non fanno altro che sprecare complessità computazionale, dato che non contengon
+o informazioni rilevanti.
 \end_layout
 
 \begin_layout Section
@@ -4025,7 +4021,7 @@ I Links
 \end_layout
 
 \begin_layout Standard
-A questo punto si disposizione di alcune features (i 
+A questo punto si dispone di alcune features (i 
 \emph on
 picchi
 \emph default
