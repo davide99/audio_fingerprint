@@ -15,6 +15,8 @@
 
 \begin{filecontents*}{data/windows_success_rate.csv}
 \end{filecontents*}
+\begin{filecontents*}{data/matching_time_difference.csv}
+\end{filecontents*}
 \pgfmathdeclarefunction{gauss}{2}{%
   \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
 }
@@ -99,7 +101,7 @@ status open
 
 
 \backslash
-title[Identificazione audio resistente al rumote in WebAssembly]{
+title[Identificazione audio resistente al rumore in WebAssembly]{
 \end_layout
 
 \begin_layout Plain Layout
@@ -4826,12 +4828,21 @@ noprefix "false"
  è mostrato un esempio di Link.
  Notare che viene memorizzata anche la finestra dell'anchor point: questo
  dettaglio ritornerà utile in seguito
-\begin_inset Note Note
+\begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-RICORDATI DI METTERE IL RIFERIMENTO AL CAP.
- DELL'INDIVIDUAZIONE
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Il-metodo-db.searchIdGivenLinks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4878,6 +4889,14 @@ fin_db
 \begin_layout Itemize
 
 \emph on
+Inserimento
+\emph default
+: inserire i Links di un nuovo brano nel database insieme al suo nome
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
 Ricerca
 \emph default
 :
@@ -4888,17 +4907,9 @@ gestire il processo di individuazione del brano a partire dal Links che
  lo caratterizzano
 \end_layout
 
-\begin_layout Itemize
-
-\emph on
-Inserimento
-\emph default
-: inserire i Links di un nuovo brano nel database insieme al suo nome
-\end_layout
-
 \begin_layout Standard
 In secondo luogo, fin_db può essere vista come una sorta di livello di astrazion
-e dal database: la libreria è basata sul connector 
+e del database: la libreria è basata sul connector 
 \emph on
 mariadb++
 \begin_inset Foot
@@ -4922,7 +4933,7 @@ https://github.com/viaduck/mariadbpp
 
 
 \emph default
- e sul database 
+ e il database utilizzato è 
 \emph on
 MariaDB
 \emph default
@@ -4993,7 +5004,7 @@ L'inserimento di un brano
 
 \begin_layout Standard
 Il primo passo per rendere un brano individuabile è quello di memorizzare
- i Links che lo caratterizzano e il suo nome nel database.
+ i Links che lo caratterizzano e il suo nome all'interno database.
  A questo scopo sono state predisposte due enitià rappresentate in figura
  
 \begin_inset CommandInset ref
@@ -5126,7 +5137,7 @@ name "fig:Modello-ER-database-ricerca"
 
 \end_inset
 
-Modello ER database, ricerca
+Modello ER database, inserimento
 \end_layout
 
 \end_inset
@@ -5149,7 +5160,7 @@ Modello ER database, ricerca
 musicinfo
 \emph default
  contiene le informazioni del brano, nello specifico il suo nome e un id
- che funge da chiave primaria
+ che lo identifica univocamente.
 \end_layout
 
 \begin_layout Itemize
@@ -5157,15 +5168,22 @@ musicinfo
 \emph on
 recordings
 \emph default
- contiene i Links insieme alla foreign key 
+ contiene i Links.
+ Utilizzando il modello relazionale, oltre ai Links, verrà memorizzata anche
+ la foreign key 
 \emph on
 songId
 \emph default
- che punta ad un record di musicinfo; la tupla 
-\begin_inset Formula $\{hash,time,songId\}$
+ che punta ad un record di musicinfo.
+ La tupla
+\begin_inset Formula 
+\[
+\{\underbrace{hash,time}_{Link},songId\}
+\]
+
 \end_inset
 
- funge da chiave primaria
+fungerà da chiave primaria.
 \end_layout
 
 \begin_layout Standard
@@ -5282,7 +5300,7 @@ computeLinks
 \end_layout
 
 \begin_layout Enumerate
-Richiama la funzione 
+Richiama il metodo 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -5295,16 +5313,1249 @@ db.insertSong
 
 \end_inset
 
- che prende come parametri il nome del brano e i Links del brano stesso
+ passando come parametri il nome del brano e i Links del brano stesso
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Note
+A sua volta il metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
 status open
 
 \begin_layout Plain Layout
-Spigare che db.insertSong inserisce nelle due tabelle in fig.
- 10 eccecc, mettere magari uno sltralcio delle due tabelle
+
+db.insertSong
+\end_layout
+
+\end_inset
+
+ inserisce nella tabella 
+\series bold
+musicinfo
+\series default
+ il nome del brano e nella tabella 
+\series bold
+recordings
+\series default
+ i Links che lo caratterizzano (vedi figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Modello-ER-database-ricerca"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Uno stralcio delle due tabelle è visibile nelle tabelle a margine 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Stralcio-musicinfo"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Stralcio-recordings"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Float margintable
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+id
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+name
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Arabella
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Polly
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The Jeweller's Hand
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Fight Fire with Fire
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ride the Lightning
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Stralcio-musicinfo"
+
+\end_inset
+
+Stralcio 
+\series bold
+musicinfo
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float margintable
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+hash
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+songId
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+time
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+93141319434145
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+625
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+154709161072387
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3180
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+411179850164819
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7399
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+454176498247512
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9637
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+770548217553156
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8544
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Stralcio-recordings"
+
+\end_inset
+
+Stralcio 
+\series bold
+recordings
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+L'identificazione di un brano
+\end_layout
+
+\begin_layout Standard
+Si assuma ora che:
+\end_layout
+
+\begin_layout Itemize
+i Links e i nomi dei brani completi siano già nel database
+\end_layout
+
+\begin_layout Itemize
+i Links siano già stati estratti dal segmento da identificare
+\end_layout
+
+\begin_layout Standard
+Allo scopo di facilitare il processo di identificazione, viene introdotta
+ una nuova tabella, rappresentata in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Modello-ER-database-inserimento"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, per contenere i Links del segmento registrato.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}[auto,node distance=1.5cm]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+node[entity] (node1) {
+\backslash
+textbf{
+\backslash
+_recording}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		[grow=down,sibling distance=2cm]
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {
+\backslash
+underline{hash}}}
+\end_layout
+
+\begin_layout Plain Layout
+
+		child {node[attribute] {
+\backslash
+underline{start}}};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Modello-ER-database-inserimento"
+
+\end_inset
+
+Modello ER database, ricerca
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Si noti come questa tabella sia molto simile alla tabella 
+\series bold
+recordings
+\series default
+, ma con alcune differenze:
+\end_layout
+
+\begin_layout Itemize
+Non esiste alcuna relazione con la tabella 
+\series bold
+musicinfo
+\series default
+, in quanto 
+\series bold
+_recording
+\series default
+ conterrà i Links di un solo audio.
+\end_layout
+
+\begin_layout Itemize
+Il campo 
+\bar under
+time
+\bar default
+ è stato rinominato in 
+\bar under
+start
+\bar default
+, questo è dovuto al fatto che nel caso dei brani completi 
+\bar under
+time
+\bar default
+ rappresenta un valore assoluto
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+L'inizio del brano
+\end_layout
+
+\end_inset
+
+, mentre 
+\bar under
+start
+\bar default
+ è un riferimento relativo
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Rispetto all'inizio del segmento registrato
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+In più, la tabella 
+\series bold
+_recording
+\series default
+ viene creata con alcune particolari accortezze:
+\end_layout
+
+\begin_layout Enumerate
+È una come 
+\emph on
+temporary table
+\emph default
+, ovvero una tabella che esiste solo per la durata della connessione al
+ database.
+\end_layout
+
+\begin_layout Enumerate
+Viene specificato 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ENGINE=MEMORY
+\end_layout
+
+\end_inset
+
+, ovvero la tabella viene mantenuta interamente in memoria RAM e non viene
+ scritta su disco.
+\end_layout
+
+\begin_layout Standard
+In generale, l'utilizzo di una temporary table con 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ENGINE=MEMORY
+\end_layout
+
+\end_inset
+
+ è quindi molto utile in situazioni in cui è necessario mantenere temporaneament
+e i dati in memoria per migliorare le prestazioni, ma non è necessario preservar
+li per un lungo periodo di tempo, come nel caso in analisi.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La funzione che si occupa di identificare un segmento registrato dati i
+ suoi Links è
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+std::string searchFromLinks(
+\end_layout
+
+\begin_layout Plain Layout
+
+    const fin::core::Links &links,
+\end_layout
+
+\begin_layout Plain Layout
+
+    DB &db
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\end_inset
+
+definita in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin_db.h
+\end_layout
+
+\end_inset
+
+.
+ Prende in input i Links dela registrazione e un oggetto 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+DB
+\end_layout
+
+\end_inset
+
+ e:
+\end_layout
+
+\begin_layout Enumerate
+Cerca di ottenere l'id del brano originale richiamando il metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.searchIdGivenLinks
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Se l'id ritornato è:
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Diverso da 0, ovvero se è stato trovato un match, viene convertito nel nome
+ del brano, facendo ricorso al metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.getSongNameById
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Uguale a 0, ovvero se non è stato trovato un match, viene ritornata una
+ stringa vuota.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Nello specifico 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.getSongNameById
+\end_layout
+
+\end_inset
+
+ consiste, essenzialmente, in una query su 
+\series bold
+musicinfo
+\series default
+ per ottenere il nome associato all'id.
+\end_layout
+
+\begin_layout Standard
+Il metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.searchIdGivenLinks
+\end_layout
+
+\end_inset
+
+ richiede una trattazione specifica nel paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Il-metodo-db.searchIdGivenLinks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Il-metodo-db.searchIdGivenLinks"
+
+\end_inset
+
+Il metodo db.searchIdGivenLinks
+\end_layout
+
+\begin_layout Standard
+Il metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.searchIdGivenLinks
+\end_layout
+
+\end_inset
+
+ è il cuore della parte di identificazione di un brano.
+ Si basa su tre idee di base:
+\end_layout
+
+\begin_layout Enumerate
+Tra i Links dello brano originale 
+\begin_inset Formula $Links_{O}$
+\end_inset
+
+ e quelli del segmento registrato 
+\begin_inset Formula $Links_{R}$
+\end_inset
+
+ dev'esserci una differenza temporale 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ costante se si riferiscono allo stesso brano.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Se l'utente ha iniziato a registrare il brano dopo 
+\begin_inset Formula $15s$
+\end_inset
+
+ è ragionevole pensare che la differenza temporale tra 
+\series bold
+recordings
+\series default
+.
+\bar under
+time
+\bar default
+ e 
+\series bold
+_recording
+\series default
+.
+\bar under
+start
+\bar default
+ sia costante e pari a 
+\begin_inset Formula $15s$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+La stessa differenza 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ dev'essere non negativa
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+
+\series bold
+recordings
+\series default
+.
+\bar under
+time
+\bar default
+ 
+\begin_inset Formula $-$
+\end_inset
+
+ 
+\series bold
+_recording
+\series default
+.
+\bar under
+start
+\bar default
+ 
+\begin_inset Formula $\geq0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Gli hash di 
+\begin_inset Formula $Links_{O}$
+\end_inset
+
+ e di 
+\begin_inset Formula $Links_{R}$
+\end_inset
+
+ devono corrispondere
+\end_layout
+
+\begin_layout Standard
+A questo punto basterebbe quindi:
+\end_layout
+
+\begin_layout Enumerate
+Raggruppare per 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ e per id del brano originale, definendo con 
+\begin_inset Formula $n$
+\end_inset
+
+ il numero di elementi che ricadono nello stesso gruppo
+\end_layout
+
+\begin_layout Enumerate
+Ordinare per 
+\begin_inset Formula $n$
+\end_inset
+
+ decrescente
+\end_layout
+
+\begin_layout Enumerate
+Estrarre il primo gruppo che rappresenta il match migliore
+\end_layout
+
+\begin_layout Standard
+Queste operazioni sono state realizzate in SQL con la query riportata di
+ seguito:
+\begin_inset listings
+lstparams "language=SQL,basicstyle={\ttfamily},tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+SELECT recordings.songId, COUNT(*) AS n
+\end_layout
+
+\begin_layout Plain Layout
+
+	FROM recordings INNER JOIN _recording
+\end_layout
+
+\begin_layout Plain Layout
+
+	ON recordings.hash=_recording.hash
+\end_layout
+
+\begin_layout Plain Layout
+
+	WHERE recordings.time>=_recording.start
+\end_layout
+
+\begin_layout Plain Layout
+
+	GROUP BY recordings.time-_recording.start, recordings.songId
+\end_layout
+
+\begin_layout Plain Layout
+
+	ORDER BY n DESC
+\end_layout
+
+\end_inset
+
+Una volta eseguita la query, il metodo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+db.searchIdGivenLinks
+\end_layout
+
+\end_inset
+
+ estrae la prima prima riga del recordset e se 
+\begin_inset Formula $n>15$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Costante 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts::links::MIN_HINT
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, ovvero se il numero di Links in comune è maggiore di 15, ritorna l'id
+ del brano originale.
+\end_layout
+
+\begin_layout Standard
+In figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Scatter-match"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ è stato riportato un grafico in cui sull'asse delle ascisse è presente
+ il numero di finestra nella quale è contenuto un Link della registrazione
+ originale, analogamente accade per l'asse delle ordinate ma per il segmento
+ registrato.
+ Si nota facilmente la diagonale a densità maggiore intorno al valore 
+\begin_inset Formula $2000$
+\end_inset
+
+ sulle x, questo vuol dire che:
+\end_layout
+
+\begin_layout Itemize
+Un match è stato trovato
+\end_layout
+
+\begin_layout Itemize
+La registrazione è iniziata circa 2000 finestre dopo l'inizio del brano
+ originale
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={
+\backslash
+# finestra brano originale},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={
+\backslash
+# finestra registrazione},
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+textwidth
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+	scatter,
+\end_layout
+
+\begin_layout Plain Layout
+
+	only marks,
+\end_layout
+
+\begin_layout Plain Layout
+
+	scatter/use mapped color={red},
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark options={scale=1.5, opacity=0.2}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [x=original, y=recording, col sep=comma] {data/matching_time_difference.c
+sv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Scatter-match"
+
+\end_inset
+
+Scatterplot di un match
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
