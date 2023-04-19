@@ -985,7 +985,7 @@ core
 status open
 
 \begin_layout Plain Layout
-Nonchè i più significativi per il sistema in analisi
+Nonché i più significativi per il sistema in analisi
 \end_layout
 
 \end_inset
@@ -1710,7 +1710,7 @@ Blackman
 .
  D'altro canto, però, si deve considerare che, anticipando il contenuto
  dei prossimi paragrafi, l'estrazione dei Links risulta migliore tanto migliore
- è l'analisi in frequenza del segnale e, quindi, si dovrebbe predilgere
+ è l'analisi in frequenza del segnale e, quindi, si dovrebbe prediligere
  la massima risoluzione spettrale, individuando con precisione le componenti
  di frequenza presenti nel segnale, a discapito del range dinamico.
 \begin_inset VSpace defskip
@@ -1858,7 +1858,7 @@ name "fig:Recognition-rate-in"
 
 \end_inset
 
-Recognition rate in funzione dell SNR per le varie finestre
+Recognition rate in funzione dell'SNR per le varie finestre
 \end_layout
 
 \end_inset
@@ -1899,7 +1899,7 @@ I generi inclusi sono stati il metal, il rock, il blues e la musica classica
 \end_layout
 
 \begin_layout Enumerate
-il segmento è stato distorto, sommando del rumore non bianco e introdocendo
+il segmento è stato distorto, sommando del rumore non bianco e introducendo
  del clipping.
 \end_layout
 
@@ -1921,7 +1921,7 @@ Si è quindi fatto variare, per ogni brano, l'SNR tra
 \begin_inset Formula $1dB$
 \end_inset
 
-, per le tre finestre considerate, contando quante volte l'algorimo fosse
+, per le tre finestre considerate, contando quante volte l'algoritmo fosse
  in grado di individuare il brano correttamente: si è ottenuto il grafico
  in figura 
 \begin_inset CommandInset ref
@@ -2739,8 +2739,8 @@ I Peaks
 
 \begin_layout Standard
 Pronto lo spettrogramma, lo si deve processare per ottenere i picchi di
- frequeze più significativi e scartare tutto il resto: questo permette di
- avere una prima rappresentazione più compatta del segnale audio.
+ frequenze più significativi e scartare tutto il resto: questo permette
+ di avere una prima rappresentazione più compatta del segnale audio.
 \end_layout
 
 \begin_layout Standard
@@ -3034,7 +3034,39 @@ name "fig:Spectrum-division"
 
 \end_inset
 
-Suddivisione dello spettro (ogni colore è una banda)
+
+\lang italian
+Suddivisione
+\lang english
+ 
+\lang italian
+dello
+\lang english
+ 
+\lang italian
+spettro
+\lang english
+ (
+\lang italian
+ogni
+\lang english
+ 
+\lang italian
+colore
+\lang english
+ 
+\lang italian
+è
+\lang english
+ 
+\lang italian
+una
+\lang english
+ 
+\lang italian
+banda
+\lang english
+)
 \end_layout
 
 \end_inset
@@ -3494,11 +3526,19 @@ name "fig:Three-points-per"
 
 \end_inset
 
-Spettrogramma con 
+
+\lang italian
+Spettrogramma
+\lang english
+ con 
 \begin_inset Formula $3$
 \end_inset
 
- picchi per cella
+ 
+\lang italian
+picchi
+\lang english
+ per cella
 \end_layout
 
 \end_inset
@@ -3548,7 +3588,7 @@ peaks_finder.cpp
 
 \end_inset
 
- si occupa di divedere lo spettro in celle, per ogni cella richiama 
+ si occupa di dividere lo spettro in celle, per ogni cella richiama 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -3600,7 +3640,7 @@ std::vector<Peak>
 \end_inset
 
  ordinato per intensità del picco.
- Questi picchi verrano utilizzati in seguito per creare i 
+ Questi picchi verranno utilizzati in seguito per creare i 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -3998,7 +4038,7 @@ noprefix "false"
 
 \end_inset
 
-, in modo tale che gli estemi delle bande siano a:
+, in modo tale che gli estremi delle bande siano a:
 \begin_inset Formula 
 \[
 \left\{ f\left(\alpha_{M}\right),f\left(\alpha_{M}+\delta_{M}\right),f\left(\alpha_{M}+2\delta_{M}\right),...,f\left(\alpha_{M}+k\delta_{M}\right)\right\} 
@@ -4014,7 +4054,7 @@ Si è scelto di scartare le frequenze inferiori a
 \begin_inset Formula $174Hz$
 \end_inset
 
- poichè rappresentano frequenze troppo basse, spesso molto rumorose, che
+ poiché rappresentano frequenze troppo basse, spesso molto rumorose, che
  non fanno altro che sprecare complessità computazionale, dato che non contengon
 o informazioni rilevanti.
 \end_layout
@@ -4033,7 +4073,7 @@ picchi
  con i picchi del brano completo.
  Tuttavia, questo approccio, anche se semplice e probabilmente funzionante,
  risulterebbe troppo lento.
- Infatti, in questo caso, la complessità sarabbe dell'ordine della lunghezza
+ Infatti, in questo caso, la complessità sarebbe dell'ordine della lunghezza
  totale di tutti i brani presenti nel database: paradossalmente, più brani
  l'algoritmo riuscirebbe a individuare, più lento diventerebbe.
 \begin_inset VSpace defskip
@@ -4579,7 +4619,19 @@ name "fig:Anchor-target"
 
 \end_inset
 
-Selezione dell'anchor point e della target zone
+
+\lang italian
+Selezione
+\lang english
+ 
+\lang italian
+dell'anchor
+\lang english
+ point e 
+\lang italian
+della
+\lang english
+ target zone
 \end_layout
 
 \end_inset
@@ -4589,6 +4641,8 @@ Selezione dell'anchor point e della target zone
 
 \end_inset
 
+
+\lang italian
 La coppia 
 \emph on
 anchor point
@@ -4607,6 +4661,8 @@ Link
 \end_inset
 
  in questo modo:
+\lang english
+
 \begin_inset Formula 
 \[
 Link\left\{ \begin{aligned}hash= & h(\delta_{w},\delta_{f},\alpha.frequency)\\
@@ -4995,7 +5051,7 @@ db.cpp
 
 \end_inset
 
- che si occupa di dialogare con l'instanza del database.
+ che si occupa di dialogare con l'istanza del database.
 \end_layout
 
 \begin_layout Section
@@ -5005,7 +5061,7 @@ L'inserimento di un brano
 \begin_layout Standard
 Il primo passo per rendere un brano individuabile è quello di memorizzare
  i Links che lo caratterizzano e il suo nome all'interno database.
- A questo scopo sono state predisposte due enitià rappresentate in figura
+ A questo scopo sono state predisposte due entità rappresentate in figura
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -5257,7 +5313,7 @@ DB
 status open
 
 \begin_layout Plain Layout
-Già instanziato dal caller
+Già istanziato dal caller
 \end_layout
 
 \end_inset
@@ -5283,7 +5339,7 @@ WavReader
 \end_layout
 
 \begin_layout Enumerate
-Estrare i Links utilizzando la funzione 
+Estrae i Links utilizzando la funzione 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -6040,7 +6096,7 @@ fin_db.h
 \end_inset
 
 .
- Prende in input i Links dela registrazione e un oggetto 
+ Prende in input i Links della registrazione e un oggetto 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -6179,7 +6235,7 @@ db.searchIdGivenLinks
 \end_layout
 
 \begin_layout Enumerate
-Tra i Links dello brano originale 
+Tra i Links del brano originale 
 \begin_inset Formula $Links_{O}$
 \end_inset
 
