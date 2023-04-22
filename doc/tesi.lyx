@@ -7734,6 +7734,186 @@ fromByteBuffer(ByteBuffer &byteBuffer)
 L'eseguibile mock_client
 \end_layout
 
+\begin_layout Standard
+L'eseguibile 
+\emph on
+mock_client
+\emph default
+ (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:architettura-mock-client"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) viene utilizzato esclusivamente nelle attività di test, il suo scopo è
+ verificare il corretto funzionamento del sistema.
+ È l'equivalente del Wasm client, ma:
+\end_layout
+
+\begin_layout Itemize
+Dialoga direttamente col database senza passare per il rest_server
+\end_layout
+
+\begin_layout Itemize
+Non utilizza il microfono per registrare un segmento audio da identificare
+\end_layout
+
+\begin_layout Itemize
+È un eseguibile 
+\emph on
+standard
+\emph default
+ e non una RIA
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/architettura_generale_mock_client.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:architettura-mock-client"
+
+\end_inset
+
+Schema architettura 
+\emph on
+mock_client
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Mock_client dipende da entrambe le librerie fin e fin_db.
+ Prende in input il percorso di un file Wav da identificare e:
+\end_layout
+
+\begin_layout Enumerate
+Carica i sample del file Wav utilizzando la classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+WavReader
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Calcola i Links a partire dai sample utilizzando la funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin::computeLinks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Serializza i Links in un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+L'unico scopo di questo passaggio è verificare il corretto funzionamento
+ della serializzazione/deserializzazione
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Deserializza i Links dal 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Dati i Links cerca nel database un match facendo ricorso a 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin::searchFromLinks
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Stampa a video il nome del brano identificato
+\end_layout
+
 \begin_layout Chapter
 \begin_inset CommandInset label
 LatexCommand label
@@ -7741,7 +7921,7 @@ name "chap:L'eseguibile-wasm"
 
 \end_inset
 
-L'eseguibile wasm
+L'eseguibile Wasm
 \end_layout
 
 \end_body
