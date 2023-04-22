@@ -6795,5 +6795,954 @@ noprefix "false"
 .
 \end_layout
 
+\begin_layout Chapter
+L'eseguibile server_rest
+\end_layout
+
+\begin_layout Standard
+Riprendendo lo schema già presentato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ ed evidenziando lo scope di 
+\emph on
+server_rest
+\emph default
+, si ottiene quando riportato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale-server_rest"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/architettura_generale_server_rest.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schema-architettura-generale-server_rest"
+
+\end_inset
+
+Schema architettura generale, dettaglio 
+\emph on
+server_rest
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il compito dell'eseguibile server_rest è, quindi, quello di mettere a disposizio
+ne un endpoint REST per l'identificazione delle registrazioni audio.
+\end_layout
+
+\begin_layout Standard
+Questo componente è basato sulla libreria open-source 
+\emph on
+cpp-httplib
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/yhirose/cpp-httplib
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ che implementa un semplice server HTTP bloccante.
+ Server_rest sfrutta funzionalità sia della libreria fin, sia della libreria
+ fin_db.
+\end_layout
+
+\begin_layout Section
+Il problema del CORS
+\end_layout
+
+\begin_layout Standard
+Il protocollo 
+\emph on
+CORS
+\emph default
+, ovvero Cross-Origin Resource Sharing, è stato introdotto per prevenire
+ che un sito web malintenzionato possa accedere ai dati degli utenti di
+ un altro sito web legittimo.
+ In altre parole si vuole evitare, o quantomeno regolare, il resource sharing
+ tra entità differenti per questioni di sicurezza.
+\end_layout
+
+\begin_layout Standard
+I browser moderni che supportano CORS, prima di inviare la vera e propria
+ richiesta
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Una classica GET, POST, PUT o DELETE
+\end_layout
+
+\end_inset
+
+ verso un'origin esterna, inviano una 
+\emph on
+preflight
+\emph default
+ 
+\emph on
+request
+\emph default
+.
+ La preflight request è una richiesta OPTIONS inviata dal browser al server
+ esterno per verificare se le richieste cross-domain sono ammissibili e
+ entro che limiti lo sono.
+ Se il server risponde positivamente alla richiesta OPTIONS, il browser
+ effettuerà la richiesta effettiva.
+\end_layout
+
+\begin_layout Standard
+In questo modo, il protocollo CORS garantisce che solo le richieste provenienti
+ da origine sicure e autorizzate possano accedere alle risorse del server
+ esterno, garantendo la sicurezza nello scambio di informazioni tra origin
+ diverse.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+È stato necessario tener conto delle policy di sicurezza imposte dal protocollo
+ CORS nella comunicazione tra il client wasm e il server_rest (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:CORS"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/cors.svg
+	width 70col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:CORS"
+
+\end_inset
+
+Schema richieste cross-origin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Anticipando quanto verrà trattato nel capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-wasm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, nello scenario presentato, il client Wasm invia al server REST i Links
+ che ha estratto dalla registrazione.
+ Si noti, però, che la RIA Wasm viene servita da un server HTTP eseguito
+ localmente al client.
+ Di fatto, quindi, il server HTTP sul client (
+\emph on
+origin 1
+\emph default
+) vuole dialogare con il server HTTP REST (
+\emph on
+origin 2
+\emph default
+): si ha una richiesta cross-origin.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A questo punto, nel server_rest, si è reso necessario introdurre un 
+\emph on
+pre routing handler
+\emph default
+ che gestisca le richieste preflight OPTIONS, insieme ad un 
+\emph on
+post routing handler
+\emph default
+ che aggiunga alcuni header alla risposta del server, previsti dalle specifiche
+ del protocollo CORS.
+\end_layout
+
+\begin_layout Standard
+Tra gli header aggiunti, vale la pena citare 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Access-Control-Allow-Origin
+\end_layout
+
+\end_inset
+
+, che indica da quali domini un server può ricevere richieste cross-origin.
+ Mentre in passato era possibile specificare un asterisco (*) come valore
+ di questo header per consentire l'accesso a tutte le origin, oggi questa
+ pratica è stata limitata per ragioni di sicurezza.
+ Infatti, l'uso dell'asterisco potrebbe aprire la porta a attacchi di tipo
+ 
+\emph on
+cross-site request forgery
+\emph default
+ (CSRF) e a violazioni della politica di sicurezza del browser.
+\end_layout
+
+\begin_layout Standard
+Invece di utilizzare l'asterisco, è necessario specificare l'origin corretta,
+ ovvero l'indirizzo dell'entità
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In questo caso del server HTTP sul client
+\end_layout
+
+\end_inset
+
+ che sta facendo la richiesta.
+ Per questo motivo, non conoscendo a priori l'origin di una richiesta, il
+ server estrae l'origin dalla richiesta ricevuta, per poi impostare l'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Access-Control-Allow-Origin
+\end_layout
+
+\end_inset
+
+ di conseguenza.
+\end_layout
+
+\begin_layout Section
+La serializzazione dei Links
+\end_layout
+
+\begin_layout Standard
+Giunti a questo punto nasce un altro problema: il client invia i Links calcolati
+ al server, ma in che formato? I Links dovranno essere serializzati e deserializ
+zati durante il transito tra client e server, così come indicato in figura
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:serializzazione"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/serializzazione.svg
+	width 80col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:serializzazione"
+
+\end_inset
+
+Schema serializzazione e deserializzazione Links
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Si è deciso di evitare l'utilizzo di JSON, poiché il suo vantaggio dell'essere
+ human-readable non compensa la sua scarsa efficienza nel trasportare dati.
+\end_layout
+
+\begin_layout Standard
+Basti pensare che, mediamente, i Links estratti da una registrazione di
+ 6/7 secondi sono circa 900.
+ Ogni Link contiene due interi a 64 bit, ovvero 20 cifre decimali, che rappresen
+tano rispettivamente l'hash e il numero della finestra di appartenenza.
+ Se si rappresenta un Link in JSON come segue
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ovvero come un array di due elementi
+\end_layout
+
+\end_inset
+
+:
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	745129879060042, //hash
+\end_layout
+
+\begin_layout Plain Layout
+
+	307862961066999  //window
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\end_inset
+
+allora lo spazio occupato ammonta a:
+\begin_inset Formula 
+\[
+len("[")+len(hash)+len(",")+len(window)+len("]")=43B
+\]
+
+\end_inset
+
+Quindi 900 Links contenuti in un array JSON occuperanno:
+\begin_inset Formula 
+\[
+len("[")+(len(Link)+len(","))\cdot900+len("]")=39602B\cong39KB
+\]
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+    [%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+        box/.style={rectangle,draw=black, minimum size=1cm},
+\end_layout
+
+\begin_layout Plain Layout
+
+    ]%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+foreach 
+\backslash
+x/
+\backslash
+y in {0/9, 1/5,2/13,3/19,4/
+\backslash
+dots,5/
+\backslash
+dots,6/
+\backslash
+dots,7/
+\backslash
+dots,8/21,9/2}
+\end_layout
+
+\begin_layout Plain Layout
+
+        
+\backslash
+node[box] at (
+\backslash
+x,0){
+\backslash
+y};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[decorate,decoration={brace,mirror},thick] (-.5,-.7) -- node[below,yshift=-2mm
+]{Link 
+\backslash
+#1} (1.5,-.7); 
+\backslash
+draw[decorate,decoration={brace,mirror},thick] (1.5,-.7) -- node[below,yshift=-2mm
+]{Link 
+\backslash
+#2} (3.5,-.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[decorate,decoration={brace,mirror},thick] (7.5,-.7) -- node[below,yshift=-2mm
+]{Link 
+\backslash
+#n} (9.5,-.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[->,thick] (1,1.2) --  node[above,yshift=2mm,anchor=south west]{hash}
+ (0,.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[->,thick] (2,1.2) --  node[above,yshift=2mm,anchor=south west]{window}
+ (1,.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[->,thick] (1,1.2) --  node[above,yshift=2mm,anchor=south west]{} (2,.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[->,thick] (2,1.2) --  node[above,yshift=2mm,anchor=south west]{} (3,.7);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Rappresentazione-serializzazione"
+
+\end_inset
+
+Rappresentazione serializzazione binaria Links
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Al contrario, se si utilizza una serializzazione binaria, in cui si giustappongo
+no i due interi Link in uno stream di byte (vedi figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Rappresentazione-serializzazione"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), si occuperanno:
+\begin_inset Formula 
+\[
+\mathtt{sizeof}(\mathtt{uint64\_t})\cdot2\cdot900=8B\cdot1800=14400B\cong14KB
+\]
+
+\end_inset
+
+Si ottiene quindi un risparmio pari al:
+\begin_inset Formula 
+\[
+\left(1-\frac{14400B}{39602B}\right)\cdot100\cong64\%
+\]
+
+\end_inset
+
+Esistono diverse librerie che gestiscono questo tipo di serializzazione
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ad esempio: ProtoBuf di Google o Apache Thrift
+\end_layout
+
+\end_inset
+
+, tuttavia si è scelto di scrivere un'implementazione custom.
+ Questa scelta è stata dettata dal fatto di non voler aggiungere ulteriori
+ dipendenze nel progetto, ma soprattutto dal fatto che la serializzazione/deseri
+alizzazione viene utilizzata una sola volta nell'intero sistema, ossia solo
+ per inviare e riceve i Links.
+\end_layout
+
+\begin_layout Standard
+A questo scopo è stata definita la classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+ nel namespace 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fin::utils
+\end_layout
+
+\end_inset
+
+ della libreria fin.
+ La classe rappresenta un contenitore di bytes
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nello specifico 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+uint8_t
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ che permette di:
+\end_layout
+
+\begin_layout Itemize
+aggiungere un dato arbitraro nel buffer stesso, attraverso il metodo:
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+template<typename T>
+\end_layout
+
+\begin_layout Plain Layout
+
+void add(const T &data)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+rimuovere un dato dal buffer, con:
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+template<typename T>
+\end_layout
+
+\begin_layout Plain Layout
+
+void remove(T &data)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+ viene utilizzata all'interno della classe 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+Links
+\end_layout
+
+\end_inset
+
+ nei metodi 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+toByteBuffer()
+\end_layout
+
+\end_inset
+
+ e 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fromByteBuffer(ByteBuffer &byteBuffer)
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Itemize
+Il primo si occupa di serializzare i Links in un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Il secondo, una factory, deserializza i Links presenti nel 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ne segue che il dialogo tra client Wasm e rest_server avverrà come di seguito
+ descritto:
+\end_layout
+
+\begin_layout Enumerate
+Il client Wasm calcola i Links
+\end_layout
+
+\begin_layout Enumerate
+Il client Wasm serializza i Links in un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+ richiamando 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+toByteBuffer()
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Il client Wasm estrae lo stream di byte dal 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Il client Wasm invia lo stream di byte al rest_server
+\end_layout
+
+\begin_layout Enumerate
+Il rest_server riceve lo stream di byte
+\end_layout
+
+\begin_layout Enumerate
+Il rest_server converte lo stream di byte in un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Il rest_server deserializza i Links nel 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+ByteBuffer
+\end_layout
+
+\end_inset
+
+ Links richiamando 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+fromByteBuffer(ByteBuffer &byteBuffer)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+L'eseguibile mock_client
+\end_layout
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:L'eseguibile-wasm"
+
+\end_inset
+
+L'eseguibile wasm
+\end_layout
+
 \end_body
 \end_document
