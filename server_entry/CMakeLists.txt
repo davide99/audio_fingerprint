@@ -10,9 +10,9 @@ set(server_entry_SOURCES main.cpp)
 add_executable(server_entry ${server_entry_SOURCES} ${server_entry_HEADERS})
 
 # target options
-target_include_directories(server_entry PRIVATE fin fin_db)
+target_include_directories(server_entry PRIVATE fin_db)
 
-target_link_libraries(server_entry fin fin_db stdc++fs)
+target_link_libraries(server_entry fin_db stdc++fs)
 
 target_compile_features(server_entry PUBLIC cxx_std_17)
 
