@@ -110,7 +110,7 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
 
                    // Add a button on the page to toggle playback as a response to user click.
                    const startButton = document.createElement('button');
-                   startButton.innerHTML = 'Toggle playback';
+                   startButton.innerHTML = 'Record';
                    document.body.appendChild(startButton);
 
                    const audioWorkletNode = emscriptenGetAudioObject($1);
