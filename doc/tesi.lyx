@@ -20,6 +20,8 @@
 \pgfmathdeclarefunction{gauss}{2}{%
   \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
 }
+
+\usepackage[htt]{hyphenat}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -1081,6 +1083,12 @@ fin
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:La-classe-Reader"
+
+\end_inset
+
 La classe Reader e le sue sottoclassi
 \end_layout
 
@@ -7922,6 +7930,851 @@ name "chap:L'eseguibile-wasm"
 \end_inset
 
 L'eseguibile Wasm
+\end_layout
+
+\begin_layout Standard
+Il compito principale dell'eseguibile 
+\emph on
+Wasm
+\emph default
+ è quello acquisire un breve segmento audio attraverso il microfono del
+ client, estrarne i Links e inviarli al server_rest per avviare il processo
+ di identificazione.
+ Lo scope del client Wasm è quindi quello rappresentato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale-wasm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/architettura_generale_wasm.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schema-architettura-generale-wasm"
+
+\end_inset
+
+Schema architettura generale, dettaglio 
+\emph on
+wasm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+L'entry point
+\end_layout
+
+\begin_layout Standard
+L'entry point del client Wasm è la funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+main
+\end_layout
+
+\end_inset
+
+ che si occupa di:
+\end_layout
+
+\begin_layout Enumerate
+Creare un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioContext
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Instanziare il 
+\emph on
+render thread
+\emph default
+ nel quale verrà eseguito il codice dell'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioWorklet
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+È stato infatti definito un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioWorklet
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nient'altro che un 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioNode
+\end_layout
+
+\end_inset
+
+ custom
+\end_layout
+
+\end_inset
+
+ per l'estrazione dei Links.
+\end_layout
+
+\begin_layout Standard
+La creazione del render thread è, in realtà, un'operazione asincrona: una
+ volta terminata viene richiamata la callback 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{audioWorkletProcessorCreated}
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+La callback audioWorkletProcessorCreated
+\end_layout
+
+\begin_layout Standard
+La callback 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{audioWorkletProcessorCreated}
+\end_layout
+
+\end_inset
+
+ si occupa della creazione vera e propria dell'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioWorklet
+\end_layout
+
+\end_inset
+
+ per l'estrazione dei Links e della preparazione dell'interfaccia da proporre
+ all'utente.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il primo passo è la creazione dell'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioWorklet
+\end_layout
+
+\end_inset
+
+ configurato come segue:
+\end_layout
+
+\begin_layout Itemize
+Un solo input
+\end_layout
+
+\begin_layout Itemize
+Nessun output
+\end_layout
+
+\begin_layout Itemize
+Una funzione per il processamento custom chiamata 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{processAudio}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+A questo punto può essere creata la pagina HTML da mostrare all'utente.
+\end_layout
+
+\begin_layout Standard
+Per prima cosa viene richiesto l'accesso al microfono dell'utente attraverso
+ le API navigator JavaScript, richiedendo la disabilitazione dell'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+echoCancellation
+\end_layout
+
+\end_inset
+
+ e del 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+noiseSuppression
+\end_layout
+
+\end_inset
+
+, al fine di ottenere uno stream audio quanto più 
+\emph on
+raw
+\emph default
+ possibile.
+ Inoltre è stato impostato il 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+channelCount
+\end_layout
+
+\end_inset
+
+ a 1 per avere uno stream mono
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Esistono microfoni stereo
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Viene quindi configurato il routing dei nodi nell'
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioContext
+\end_layout
+
+\end_inset
+
+ già creato come indicato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Routing-audionodes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+node (mic)[rectangle, draw, minimum height=1cm]{Microfono};
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+node (worklet)[rectangle, draw, right of=mic, minimum height=1cm, xshift=3cm]{Au
+dioWorklet};
+\end_layout
+
+\begin_layout Plain Layout
+
+    
+\backslash
+draw[->] (mic) -- node[below] {} (worklet);
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Routing-audionodes"
+
+\end_inset
+
+Routing 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+AudioNode
+\end_layout
+
+\end_inset
+
+s
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Infine viene aggiunto un bottone 
+\emph on
+Record
+\emph default
+ che innesca il processo di registrazione del segmento audio e la sua identifica
+zione.
+\end_layout
+
+\begin_layout Section
+La funzione processAudio
+\end_layout
+
+\begin_layout Standard
+Nello scope globale del client Wasm è stato dichiarato un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DummyReader}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedere la sezione 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:La-classe-Reader"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ che conterrà i vari campioni audio prodotti dal microfono.
+\end_layout
+
+\begin_layout Standard
+La funzione 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{processAudio}
+\end_layout
+
+\end_inset
+
+ è responsabile di leggere i campioni audio inviati all'
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AudioWorklet}
+\end_layout
+
+\end_inset
+
+ dal microfono e memorizzarli all'interno del 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DummyReader}
+\end_layout
+
+\end_inset
+
+.
+ Una volta che il 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DummyReader}
+\end_layout
+
+\end_inset
+
+ contiene abbastanza campioni il processo di estrazione dei Links può essere
+ avviato.
+\end_layout
+
+\begin_layout Standard
+Si noti però che una volta estratti i Links questi dovranno essere inviati
+ al server, il che presuppone il poter utilizzare l'API JavaScript 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fetch}
+\end_layout
+
+\end_inset
+
+.
+ Tuttavia non è possibile usare questa API all'interno del rendering thread
+ dell'
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{AudioWorklet}
+\end_layout
+
+\end_inset
+
+: bisogna ritornare nel main thread JavaScript.
+ A questo scopo viene richiamata la funzione
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+void emscripten_audio_worklet_post_function_v(
+\end_layout
+
+\begin_layout Plain Layout
+
+	EMSCRIPTEN_WEBAUDIO_T id,
+\end_layout
+
+\begin_layout Plain Layout
+
+	void (*funcPtr)(void)
+\end_layout
+
+\begin_layout Plain Layout
+
+)
+\end_layout
+
+\end_inset
+
+passando come primo parametro 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{EMSCRIPTEN
+\backslash
+_AUDIO
+\backslash
+_MAIN
+\backslash
+_THREAD}
+\end_layout
+
+\end_inset
+
+ ad indicare di voler dialogare con il main thread e come secondo parametro
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{messageReceivedOnMainThread}
+\end_layout
+
+\end_inset
+
+, un puntatore a funzione di una callback che verrà eseguita nel main thread.
+\end_layout
+
+\begin_layout Section
+La callback messageReceivedOnMainThread
+\end_layout
+
+\begin_layout Standard
+Ritornati nel main thread JavaScript e con abbastanza campioni, si può avviare
+ il processo di identificazione.
+ Si procede come segue:
+\end_layout
+
+\begin_layout Enumerate
+Vengono calcolati i Links dal 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{DummyReader}
+\end_layout
+
+\end_inset
+
+ utilizzando la funzione 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fin::computeLinks}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+I Links vengono serializzati in un 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ByteBuffer}
+\end_layout
+
+\end_inset
+
+ attraverso 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{toByteBuffer}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Viene estratto lo stream di byte dal 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{ByteBuffer}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Viene configurata la 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fetch}
+\end_layout
+
+\end_inset
+
+ per eseguire una POST verso il server REST che ha come body lo stream di
+ byte
+\end_layout
+
+\begin_layout Enumerate
+Viene effettuata la 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fetch}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Se la 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+texttt{fetch}
+\end_layout
+
+\end_inset
+
+ ha successo e la registrazione viene identificata allora viene mostrato
+ il nome del brano
+\end_layout
+
+\begin_layout Section
+Ulteriori problemi col CORS
+\end_layout
+
+\begin_layout Standard
+Wasm utilizza l'oggetto 
+\family typewriter
+SharedArrayBuffer
+\family default
+ per consentire una comunicazione efficiente tra thread e migliorare le
+ prestazioni.
+ 
+\family typewriter
+SharedArrayBuffer
+\family default
+ è un tipo di buffer condiviso, utilizzato, ad esempio, per la comunicazione
+ tra main thread e rendering thread, permettendo contemporaneamente a entrambi
+ di poter accedere in modo sincronizzato ai dati in esso contenuti.
+\end_layout
+
+\begin_layout Standard
+Tuttavia, 
+\family typewriter
+SharedArrayBuffer
+\family default
+ può rappresentare anche una minaccia per la sicurezza se utilizzato in
+ modo improprio, poiché può essere utilizzato per attacchi di tipo side-channel
+ tipo Spectre, che consentono a un sito web malintenzionato di accedere
+ ai dati sensibili di altri siti web aperti contemporaneamente nella stessa
+ finestra del browser.
+ Per questo motivo, l'utilizzo di 
+\family typewriter
+SharedArrayBuffer
+\family default
+ è subordinato all'implementazione di due policy di sicurezza sul server
+ che ospita la RIA, anch'esse definite nel protocollo CORS: Cross-Origin-Embedde
+r-Policy (COEP) e Cross-Origin-Opener-Policy (COOP).
+\end_layout
+
+\begin_layout Standard
+In particolare, COEP con il valore 
+\emph on
+require-corp
+\emph default
+ specifica che l'origin dev'essere la stessa tra l'ambiente in cui è stato
+ creato lo 
+\family typewriter
+SharedArrayBuffer
+\family default
+ e l'ambiente in cui viene utilizzato.
+\end_layout
+
+\begin_layout Standard
+È possibile saperne di più visitando la pagina 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://web.dev/coop-coep/
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \end_body
