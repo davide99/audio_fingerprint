@@ -108,6 +108,10 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
 }
 
 std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
+    if (links.empty()){
+        return 0;
+    }
+
     //Create the temporary in memory table
     try {
         conn_->execute("DROP TABLE IF EXISTS " + consts::db::TMP_RECORD_TABLE_FULL);
