@@ -9,7 +9,10 @@ import matplotlib.pyplot as plt
 input_dir = "/home/davide/Scrivania/wav/"
 
 if __name__ == '__main__':
-    lengths_list = list(range(1, 10, 1))  # db
+    lengths_list = [.5]
+    while lengths_list[-1] < 6.0:
+        lengths_list.append(lengths_list[-1] + 0.5)
+
     lengths_d = defaultdict(int)
 
     songs = glob.glob(os.path.join(input_dir, "*.wav"))
