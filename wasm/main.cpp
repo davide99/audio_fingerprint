@@ -106,24 +106,19 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
     EM_ASM({
                function init(stream){
                    const audioContext = emscriptenGetAudioObject($0);
-                   audioContext.suspend();
+                   const mic = audioContext.createMediaStreamSource(stream);
 
                    // Add a button on the page to toggle playback as a response to user click.
                    const startButton = document.createElement('button');
                    startButton.innerHTML = 'Record';
                    document.body.appendChild(startButton);
 
-                   const audioWorkletNode = emscriptenGetAudioObject($1);
-                   const mic = audioContext.createMediaStreamSource(stream);
-
-                   let track = stream.getAudioTracks()[0];
-                   console.log(track.getCapabilities());
-
-                   mic.connect(audioWorkletNode);
-
                    startButton.onclick = () => {
                        if (audioContext.state != 'running') {
                            audioContext.resume();
+                           const audioWorkletNode = emscriptenGetAudioObject($1);
+                           mic.connect(audioWorkletNode);
+
                            HEAP8[$2] = 1;
                        } else {
                            audioContext.suspend();
