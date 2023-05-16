@@ -38,3 +38,7 @@ if [[ $machine == Linux ]]; then
 else
   mingw32-make
 fi
+
+#Copio la pagina html per lyrics nella cartella giusta
+cd ..
+find "$BUILD_DIR/lyrics" -type f -name 'lyrics*' -exec cp {} lyrics/templates/ \;
