@@ -41,4 +41,4 @@ fi
 
 #Copio la pagina html per lyrics nella cartella giusta
 cd ..
-find "$BUILD_DIR/lyrics" -type f -name 'lyrics*' -exec cp {} lyrics/templates/ \;
+find "$BUILD_DIR/lyrics" -type f -name 'lyrics*' -exec cp {} lyrics/static/ \;

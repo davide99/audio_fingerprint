@@ -8,8 +8,8 @@ if (UNIX AND DEFINED ENV{CLION_IDE})
 endif ()
 
 # find files
-file(GLOB lyrics_HEADERS templates/*.h)
-file(GLOB lyrics_SOURCES templates/*.cpp)
+file(GLOB lyrics_HEADERS static/*.h)
+file(GLOB lyrics_SOURCES static/*.cpp)
 
 # set up target
 add_executable(lyrics ${lyrics_SOURCES} ${lyrics_HEADERS})
