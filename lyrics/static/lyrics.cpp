@@ -45,7 +45,7 @@ void messageReceivedOnMainThread() {
         std::string ret(fetch->data, fetch->totalBytes);
 
         EM_ASM({
-                   console.log(JSON.parse(UTF8ToString($0)));
+                   console.log(JSON.parse(UTF8ToString($0)).song_name);
                }, ret.c_str());
 
         data.reset();
