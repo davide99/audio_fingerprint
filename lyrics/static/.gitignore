@@ -1,1 +1,3 @@
-lyrics.*
+*
+!lyrics.cpp
+!subs_old.html
