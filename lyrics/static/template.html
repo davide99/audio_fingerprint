@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Lyrics</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #20262E;
+            color: #E9E8E8;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .content {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        #lyrics-text:hover {
+            cursor: pointer;
+        }
+
+        #lyrics-text-next {
+            padding-top: 0.5em;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+<div class="emscripten" id="status">Downloading...</div>
+
+<div id="container">
+    <div id="lyrics-text" class="content">Cliccare per avviare</div>
+    <div id="lyrics-text-next" class="content"></div>
+</div>
+
+<script type='text/javascript'>
+    const statusElement = document.getElementById('status');
+
+    var Module = {
+        preRun: [],
+        postRun: [],
+        print: (function () {
+            return function (text) {
+                if (arguments.length > 1)
+                    text = Array.prototype.slice.call(arguments).join(' ');
+                console.log(text);
+            };
+        })(),
+        setStatus: function (text) {
+            if (!Module.setStatus.last)
+                Module.setStatus.last = {time: Date.now(), text: ''};
+            if (text === Module.setStatus.last.text)
+                return;
+            const m = text.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/);
+            const now = Date.now();
+            if (m && now - Module.setStatus.last.time < 30)
+                return; // if this is a progress update, skip it if too soon
+            Module.setStatus.last.time = now;
+            Module.setStatus.last.text = text;
+            if (m)
+                text = m[1];
+            statusElement.innerHTML = text;
+        },
+        totalDependencies: 0,
+        monitorRunDependencies: function (left) {
+            this.totalDependencies = Math.max(this.totalDependencies, left);
+            if (left) {
+                Module.setStatus('Preparing... (' + (this.totalDependencies - left) + '/' + this.totalDependencies + ')');
+            } else {
+                Module.setStatus('All downloads complete.');
+            }
+        }
+    };
+    Module.setStatus('Downloading...');
+    window.onerror = function () {
+        Module.setStatus('Exception thrown, see JavaScript console');
+        Module.setStatus = function (text) {
+            if (text)
+                console.error('[post-exception status] ' + text);
+        };
+    };
+</script>
+{{{ SCRIPT }}}
+</body>
+</html>

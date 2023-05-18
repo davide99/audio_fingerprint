@@ -104,32 +104,72 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
     );
 
     EM_ASM({
-               function init(stream){
-                   const audioContext = emscriptenGetAudioObject($0);
-                   const mic = audioContext.createMediaStreamSource(stream);
+       function init(stream){
+           const audioContext = emscriptenGetAudioObject($0);
+           const mic = audioContext.createMediaStreamSource(stream);
 
-                   // Add a button on the page to toggle playback as a response to user click.
-                   const startButton = document.createElement('button');
-                   startButton.innerHTML = 'Record';
-                   document.body.appendChild(startButton);
+           // Add a button on the page to toggle playback as a response to user click.
+           const startButton = document.createElement('button');
+           startButton.innerHTML = 'Record';
+           //document.body.appendChild(startButton);
 
-                   startButton.onclick = () => {
-                       if (audioContext.state != 'running') {
-                           audioContext.resume();
-                           const audioWorkletNode = emscriptenGetAudioObject($1);
-                           mic.connect(audioWorkletNode);
+           startButton.onclick = () => {
+               if (audioContext.state != 'running') {
+                   audioContext.resume();
+                   const audioWorkletNode = emscriptenGetAudioObject($1);
+                   mic.connect(audioWorkletNode);
 
-                           HEAP8[$2] = 1;
-                       } else {
-                           audioContext.suspend();
-                           HEAP8[$2] = 0;
-                       }
-                   };
+                   HEAP8[$2] = 1;
+               } else {
+                   audioContext.suspend();
+                   HEAP8[$2] = 0;
                }
+           };
+       }
 
-        navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}}).then((stream) => init(stream));
+       navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}}).then((stream) => init(stream));
+    }, audioContext, wasmAudioWorklet, &start);
 
-        }, audioContext, wasmAudioWorklet, &start);
+    EM_ASM({
+       const lyricsText = document.getElementById("lyrics-text");
+       const lyricsTextNext = document.getElementById("lyrics-text-next");
+       lyricsTextNext.style.display = "none";
+
+       const songId = 1;
+       const url = `/lyrics/${songId}`;
+
+       async function fetchLyrics() {
+            const response = await fetch(url);
+            const json = await response.json();
+            const lyrics = json['lyrics'];
+
+            const clickListener = (event) => {
+                event.currentTarget.removeEventListener('click', clickListener);
+                lyricsText.style.cursor = "auto";
+                lyricsText.innerHTML = "Sto riconoscendo la canzone...";
+
+                //per ogni oggetto nell'array stampo la string dopo l'offset temporale
+                for (let i = 0; i < lyrics.length; i++) {
+                    const currentLine = lyrics[i];
+                    const nextLine = i < lyrics.length - 1 ? lyrics[i + 1] : "";
+
+                    setTimeout(() => {
+                            lyricsText.innerHTML = currentLine.text;
+                            if (nextLine !== "") {
+                                lyricsTextNext.style.display = "block";
+                                lyricsTextNext.innerHTML = nextLine.text;
+                            } else {
+                                lyricsTextNext.style.display = "none";
+                            }
+                    }, currentLine.offset * 1000); //dev'essere in millisecondi
+                }
+            };
+
+            lyricsText.addEventListener('click', clickListener);
+       }
+
+       fetchLyrics();
+    });
 }
 
 /*
