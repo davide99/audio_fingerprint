@@ -29,5 +29,6 @@ endif ()
 
 set_target_properties(lyrics
         PROPERTIES
-        LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -sFETCH")
+        LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 \
+    -s FETCH --shell-file ${CMAKE_CURRENT_SOURCE_DIR}/static/shell.html")
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
