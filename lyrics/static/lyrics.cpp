@@ -71,7 +71,7 @@ void messageReceivedOnMainThread() {
                            const currentLine = lyrics[i];
                            const nextLine = i < lyrics.length - 1 ? lyrics[i + 1] : "";
 
-                           const millisAt = (currentLine.offset - $1 - delta1) * 1000; //dev'essere in millisecondi
+                           const millisAt = (currentLine.offset - $1 - delta1 - 1) * 1000; //dev'essere in millisecondi
                            if (millisAt >= 0) {
                                setTimeout(() => {
                                        lyricsText.innerHTML = currentLine.text;
