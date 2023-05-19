@@ -5,6 +5,7 @@
 #include <fin/fin.h>
 #include <memory>
 #include <iostream>
+#include <chrono>
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;
@@ -17,6 +18,7 @@ constexpr auto PROCESS_SAMPLES = 128;
 fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
 std::unique_ptr<std::uint8_t[]> data;
+std::chrono::system_clock::time_point firstSampleTime = std::chrono::system_clock::time_point::min();
 
 void messageReceivedOnMainThread() {
     auto links = fin::computeLinks(dummyReader);
@@ -43,6 +45,8 @@ void messageReceivedOnMainThread() {
     attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
     attr.onsuccess = [](emscripten_fetch_t *fetch) {
         std::string ret(fetch->data, fetch->totalBytes);
+        std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+        std::chrono::duration<float> diff = now - firstSampleTime;
 
         EM_ASM({
            const response_string = UTF8ToString($0);
@@ -51,9 +55,10 @@ void messageReceivedOnMainThread() {
 
                if (Object.hasOwn(response_json, 'song_name')) {
                    console.log(response_json);
+                   console.log($1);
                }
            }
-        }, ret.c_str());
+        }, ret.c_str(), diff.count());
 
         data.reset();
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
@@ -80,6 +85,9 @@ EM_BOOL processAudio(
     if (!start) return EM_TRUE;
 
     if (dummyReader.getLen() < NUM_SAMPLES) {
+        if (firstSampleTime == std::chrono::system_clock::time_point::min())
+            firstSampleTime = std::chrono::system_clock::now();
+
         //Assumiamo numero input == 1
         dummyReader.addSamples(inputs->data, PROCESS_SAMPLES);
     } else if (first_time) {
