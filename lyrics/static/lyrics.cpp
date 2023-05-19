@@ -45,8 +45,15 @@ void messageReceivedOnMainThread() {
         std::string ret(fetch->data, fetch->totalBytes);
 
         EM_ASM({
-                   console.log(JSON.parse(UTF8ToString($0)).song_name);
-               }, ret.c_str());
+           const response_string = UTF8ToString($0);
+           if (response_string) {
+               const response_json = JSON.parse(response_string);
+
+               if (Object.hasOwn(response_json, 'song_name')) {
+                   console.log(response_json.song_name);
+               }
+           }
+        }, ret.c_str());
 
         data.reset();
         emscripten_fetch_close(fetch); // Free data associated with the fetch.
