@@ -18,16 +18,16 @@ constexpr auto PROCESS_SAMPLES = 128;
 fin::readers::DummyReader dummyReader;
 std::int8_t first_time = 1;
 std::unique_ptr<std::uint8_t[]> data;
-std::chrono::system_clock::time_point firstSampleTime = std::chrono::system_clock::time_point::min();
+std::chrono::system_clock::time_point firstSampleTime;
 
-float getElapsedTime() {
+float getElapsedTimeSinceFirstSample() {
     std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
     std::chrono::duration<float> diff = now - firstSampleTime;
     return diff.count();
 }
 
 EMSCRIPTEN_BINDINGS(my_module){
-    emscripten::function("getElapsedTime", &getElapsedTime);
+    emscripten::function("getElapsedTimeSinceFirstSample", &getElapsedTimeSinceFirstSample);
 }
 
 void messageReceivedOnMainThread() {
@@ -60,6 +60,12 @@ void messageReceivedOnMainThread() {
         })
         .then(jsonData => {
             //Qui abbiamo le informazioni sulla canzone: dobbiamo scaricare il testo
+            console.log("Server replied with:");
+            console.log(`Song: ${jsonData.song_name}`);
+            console.log(`Id: ${jsonData.id}`);
+            console.log(`Time delta: ${jsonData.time_delta}`);
+            console.log(`Common links: ${jsonData.common_links}`);
+
             const songId = 1;
             const lyricsUrl = `/lyrics/${songId}`;
 
@@ -75,7 +81,7 @@ void messageReceivedOnMainThread() {
             .then(lyrics => {
                 const lyricsText = document.getElementById("lyrics-text");
                 const lyricsTextNext = document.getElementById("lyrics-text-next");
-                const elapsedTime = Module.getElapsedTime();
+                const elapsedTime = Module.getElapsedTimeSinceFirstSample();
 
                 for (let i = 0; i < lyrics.length; i++){
                     const currentLine = lyrics[i];
@@ -98,10 +104,7 @@ void messageReceivedOnMainThread() {
         })
         .catch(error => console.error(error));
     }, consts::rest::FULL_SEARCH_ENDPOINT.c_str(), data.get(), byteBuffer.getSize(), consts::rest::CONTENT_TYPE_BINARY.c_str());
-
-
 }
-
 
 EM_BOOL processAudio(
         int numInputs, const AudioSampleFrame *inputs,
@@ -116,8 +119,11 @@ EM_BOOL processAudio(
     if (!start) return EM_TRUE;
 
     if (dummyReader.getLen() < NUM_SAMPLES) {
-        if (firstSampleTime == std::chrono::system_clock::time_point::min())
-            firstSampleTime = std::chrono::system_clock::now();
+        if (dummyReader.getLen() == 0) {
+            //Dobbiamo tener conto che questa funzione viene richiamata dopo che 128 campioni sono già pronti
+            std::chrono::milliseconds samples128Delta(PROCESS_SAMPLES * 1000 / consts::audio::SAMPLE_RATE);
+            firstSampleTime = std::chrono::system_clock::now() - samples128Delta;
+        }
 
         //Assumiamo numero input == 1
         dummyReader.addSamples(inputs->data, PROCESS_SAMPLES);
