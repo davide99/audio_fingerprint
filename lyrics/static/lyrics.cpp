@@ -103,7 +103,11 @@ void messageReceivedOnMainThread() {
             .catch(error => console.error(error));
         })
         .catch(error => console.error(error));
-    }, consts::rest::FULL_SEARCH_ENDPOINT.c_str(), data.get(), byteBuffer.getSize(), consts::rest::CONTENT_TYPE_BINARY.c_str());
+    },
+        consts::rest::FULL_SEARCH_ENDPOINT.c_str(),
+        data.get(), byteBuffer.getSize(),
+        consts::rest::CONTENT_TYPE_BINARY.c_str()
+    );
 }
 
 EM_BOOL processAudio(
