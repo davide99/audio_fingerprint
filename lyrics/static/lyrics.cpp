@@ -128,9 +128,7 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
        }
 
        navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}}).then((stream) => init(stream));
-    }, audioContext, wasmAudioWorklet, &start);
 
-    EM_ASM({
        const lyricsText = document.getElementById("lyrics-text");
        const lyricsTextNext = document.getElementById("lyrics-text-next");
        lyricsTextNext.style.display = "none";
@@ -169,7 +167,7 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
        }
 
        fetchLyrics();
-    });
+    }, audioContext, wasmAudioWorklet, &start);
 }
 
 /*
