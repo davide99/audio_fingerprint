@@ -1,10 +1,8 @@
 #include "../consts.h"
 #include <emscripten/webaudio.h>
-#include <emscripten/fetch.h>
 #include <fin/readers/dummy_reader.h>
 #include <fin/fin.h>
 #include <memory>
-#include <iostream>
 
 //shared variable between main thread and audio thread
 std::int8_t start = 0;
@@ -26,44 +24,38 @@ void messageReceivedOnMainThread() {
     data = std::move(byteBuffer.getPtr());
 
     //Post verso server con links
-    emscripten_fetch_attr_t attr;
-    emscripten_fetch_attr_init(&attr);
+    EM_ASM({
+        const searchEndpointUrl = UTF8ToString($0);
+        const data = new Uint8Array(HEAPU8.buffer, $1, $2);
 
-    static const char *const headers[] = {
-            "Content-Type",
-            consts::rest::CONTENT_TYPE_BINARY.c_str(),
-            nullptr //fine
-    };
-    attr.requestHeaders = headers;
-    std::cout << "Bytes: " << byteBuffer.getSize() << std::endl;
-    std::cout << "Links: " << links.size() << std::endl;
-    attr.requestData = reinterpret_cast<const char *>(data.get());
-    attr.requestDataSize = byteBuffer.getSize();
-    std::strcpy(attr.requestMethod, "POST");
-    attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
-    attr.onsuccess = [](emscripten_fetch_t *fetch) {
-        std::string ret(fetch->data, fetch->totalBytes);
-
-        EM_ASM({
-            const response_string = UTF8ToString($0);
-            if (response_string) {
-                const response_json = JSON.parse(response_string);
-
-                if (Object.hasOwn(response_json, 'song_name')) {
-                    console.log(response_json.song_name);
-                }
+        fetch(searchEndpointUrl, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': UTF8ToString($3)
             }
-        }, ret.c_str());
-
-        data.reset();
-        emscripten_fetch_close(fetch); // Free data associated with the fetch.
-    };
-    attr.onerror = [](emscripten_fetch_t *fetch) {
-        std::cout << "POST at " << fetch->url << " failed" << std::endl;
-        data.reset();
-        emscripten_fetch_close(fetch); // Also free data on failure.
-    };
-    emscripten_fetch(&attr, consts::rest::FULL_SEARCH_ENDPOINT.c_str());
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error searching song');
+            }
+        })
+        .then(jsonData => {
+            //Qui abbiamo le informazioni sulla canzone: dobbiamo scaricare il testo
+            console.log("Server replied with:");
+            console.log(`Song: ${jsonData.song_name}`);
+            console.log(`Id: ${jsonData.id}`);
+            console.log(`Time delta: ${jsonData.time_delta}`);
+            console.log(`Common links: ${jsonData.common_links}`);
+        })
+        .catch(error => console.error(error));
+    },
+       consts::rest::FULL_SEARCH_ENDPOINT.c_str(),
+       data.get(), byteBuffer.getSize(),
+       consts::rest::CONTENT_TYPE_BINARY.c_str()
+    );
 }
 
 
@@ -111,32 +103,33 @@ void audioWorkletProcessorCreated(EMSCRIPTEN_WEBAUDIO_T audioContext, EM_BOOL su
     );
 
     EM_ASM({
-               function init(stream){
-                   const audioContext = emscriptenGetAudioObject($0);
-                   const mic = audioContext.createMediaStreamSource(stream);
+        function init(stream){
+            const audioContext = emscriptenGetAudioObject($0);
+            const mic = audioContext.createMediaStreamSource(stream);
 
-                   // Add a button on the page to toggle playback as a response to user click.
-                   const startButton = document.createElement('button');
-                   startButton.innerHTML = 'Record';
-                   document.body.appendChild(startButton);
+            // Add a button on the page to toggle playback as a response to user click.
+            const startButton = document.createElement('button');
+            startButton.innerHTML = 'Record';
+            document.body.appendChild(startButton);
 
-                   startButton.onclick = () => {
-                       if (audioContext.state != 'running') {
-                           audioContext.resume();
-                           const audioWorkletNode = emscriptenGetAudioObject($1);
-                           mic.connect(audioWorkletNode);
+            startButton.onclick = () => {
+                if (audioContext.state != 'running') {
+                    audioContext.resume();
+                    const audioWorkletNode = emscriptenGetAudioObject($1);
+                    mic.connect(audioWorkletNode);
 
-                           HEAP8[$2] = 1;
-                       } else {
-                           audioContext.suspend();
-                           HEAP8[$2] = 0;
-                       }
-                   };
-               }
+                    HEAP8[$2] = 1;
+                } else {
+                    audioContext.suspend();
+                    HEAP8[$2] = 0;
+                }
+            };
+        }
 
-        navigator.mediaDevices.getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}}).then((stream) => init(stream));
-
-        }, audioContext, wasmAudioWorklet, &start);
+        navigator.mediaDevices
+           .getUserMedia({audio: {echoCancellation: false, noiseSuppression: false, channelCount: 1}})
+           .then((stream) => init(stream));
+    }, audioContext, wasmAudioWorklet, &start);
 }
 
 /*

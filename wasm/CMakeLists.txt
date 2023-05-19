@@ -29,5 +29,5 @@ endif ()
 
 set_target_properties(wasm_client
         PROPERTIES
-        LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1 -sFETCH")
+        LINK_FLAGS "-s AUDIO_WORKLET=1 -s WASM_WORKERS=1 -s ALLOW_MEMORY_GROWTH=1")
 set(CMAKE_EXECUTABLE_SUFFIX ".html")
