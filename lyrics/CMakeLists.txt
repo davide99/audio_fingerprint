@@ -17,7 +17,7 @@ add_executable(lyrics ${lyrics_SOURCES} ${lyrics_HEADERS})
 # target options
 target_include_directories(lyrics PRIVATE fin)
 
-target_link_libraries(lyrics fin)
+target_link_libraries(lyrics fin embind)
 
 target_compile_features(lyrics PUBLIC cxx_std_17)
 

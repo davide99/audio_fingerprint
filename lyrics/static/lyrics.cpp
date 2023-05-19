@@ -1,6 +1,6 @@
 #include "../../consts.h"
 #include <emscripten/webaudio.h>
-#include <emscripten/fetch.h>
+#include <emscripten/bind.h>
 #include <fin/readers/dummy_reader.h>
 #include <fin/fin.h>
 #include <memory>
@@ -20,85 +20,86 @@ std::int8_t first_time = 1;
 std::unique_ptr<std::uint8_t[]> data;
 std::chrono::system_clock::time_point firstSampleTime = std::chrono::system_clock::time_point::min();
 
+float getElapsedTime() {
+    std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
+    std::chrono::duration<float> diff = now - firstSampleTime;
+    return diff.count();
+}
+
+EMSCRIPTEN_BINDINGS(my_module){
+    emscripten::function("getElapsedTime", &getElapsedTime);
+}
+
 void messageReceivedOnMainThread() {
     auto links = fin::computeLinks(dummyReader);
     dummyReader.dropSamples();
 
     auto byteBuffer = links.toByteBuffer();
     data = std::move(byteBuffer.getPtr());
-
-    //Post verso server con links
-    emscripten_fetch_attr_t attr;
-    emscripten_fetch_attr_init(&attr);
-
-    static const char *const headers[] = {
-            "Content-Type",
-            consts::rest::CONTENT_TYPE_BINARY.c_str(),
-            nullptr //fine
-    };
-    attr.requestHeaders = headers;
     std::cout << "Bytes: " << byteBuffer.getSize() << std::endl;
     std::cout << "Links: " << links.size() << std::endl;
-    attr.requestData = reinterpret_cast<const char *>(data.get());
-    attr.requestDataSize = byteBuffer.getSize();
-    std::strcpy(attr.requestMethod, "POST");
-    attr.attributes = EMSCRIPTEN_FETCH_LOAD_TO_MEMORY;
-    attr.onsuccess = [](emscripten_fetch_t *fetch) {
-        std::string ret(fetch->data, fetch->totalBytes);
-        std::chrono::system_clock::time_point now = std::chrono::system_clock::now();
-        std::chrono::duration<float> diff = now - firstSampleTime;
 
-        EM_ASM({
-           const response_string = UTF8ToString($0);
-           if (response_string) {
-               const response_json = JSON.parse(response_string);
+    //Post verso server con links
+    EM_ASM({
+        const searchEndpointUrl = UTF8ToString($0);
+        const data = new Uint8Array(HEAPU8.buffer, $1, $2);
 
-               if (Object.hasOwn(response_json, 'song_name')) {
-                   const delta1 = response_json.time_delta;
+        fetch(searchEndpointUrl, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Content-Type': UTF8ToString($3)
+            }
+        })
+        .then(response => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Error searching song');
+            }
+        })
+        .then(jsonData => {
+            //Qui abbiamo le informazioni sulla canzone: dobbiamo scaricare il testo
+            const songId = 1;
+            const lyricsUrl = `/lyrics/${songId}`;
 
-                   const songId = 1;
-                   const url = `/lyrics/${songId}`;
+            fetch(lyricsUrl)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error('Error fetching lyrics');
+                }
+            })
+            .then(lyricsJson => lyricsJson.lyrics)
+            .then(lyrics => {
+                const lyricsText = document.getElementById("lyrics-text");
+                const lyricsTextNext = document.getElementById("lyrics-text-next");
+                const elapsedTime = Module.getElapsedTime();
 
-                   async function fetchLyrics() {
-                       const lyricsText = document.getElementById("lyrics-text");
-                       const lyricsTextNext = document.getElementById("lyrics-text-next");
-                       const response = await fetch(url);
-                       const json = await response.json();
-                       const lyrics = json['lyrics'];
+                for (let i = 0; i < lyrics.length; i++){
+                    const currentLine = lyrics[i];
+                    const nextLine = i < lyrics.length - 1 ? lyrics[i+1] : "";
+                    const millisAt = (currentLine.offset - elapsedTime - jsonData.time_delta) * 1000;
+                    if (millisAt >= 0) {
+                        setTimeout(() => {
+                            lyricsText.innerHTML = currentLine.text;
+                            if (nextLine) {
+                                lyricsTextNext.style.display = "block";
+                                lyricsTextNext.innerHTML = nextLine.text;
+                            } else {
+                                lyricsTextNext.style.display = "none";
+                            }
+                        }, millisAt);
+                    }
+                }
+            })
+            .catch(error => console.error(error));
+        })
+        .catch(error => console.error(error));
+    }, consts::rest::FULL_SEARCH_ENDPOINT.c_str(), data.get(), byteBuffer.getSize(), consts::rest::CONTENT_TYPE_BINARY.c_str());
 
-                       //per ogni oggetto nell'array stampo la string dopo l'offset temporale
-                       for (let i = 0; i < lyrics.length; i++) {
-                           const currentLine = lyrics[i];
-                           const nextLine = i < lyrics.length - 1 ? lyrics[i + 1] : "";
 
-                           const millisAt = (currentLine.offset - $1 - delta1 - 1) * 1000; //dev'essere in millisecondi
-                           if (millisAt >= 0) {
-                               setTimeout(() => {
-                                       lyricsText.innerHTML = currentLine.text;
-                                       if (nextLine !== "") {
-                                           lyricsTextNext.style.display = "block";
-                                           lyricsTextNext.innerHTML = nextLine.text;
-                                       } else {
-                                           lyricsTextNext.style.display = "none";
-                                       }
-                               }, millisAt);
-                           }
-                       }
-                   }
-                   fetchLyrics();
-               }
-           }
-        }, ret.c_str(), diff.count());
-
-        data.reset();
-        emscripten_fetch_close(fetch); // Free data associated with the fetch.
-    };
-    attr.onerror = [](emscripten_fetch_t *fetch) {
-        std::cout << "POST at " << fetch->url << " failed" << std::endl;
-        data.reset();
-        emscripten_fetch_close(fetch); // Also free data on failure.
-    };
-    emscripten_fetch(&attr, consts::rest::FULL_SEARCH_ENDPOINT.c_str());
 }
 
 
