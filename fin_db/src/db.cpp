@@ -107,9 +107,17 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
         return "";
 }
 
-std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
-    if (links.empty()){
-        return 0;
+struct fin::DB::SearchResult fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
+    struct SearchResult searchResult = {
+            .found = false,
+            .id = 0,
+            .timeDelta = 0,
+            .commonLinks = 0,
+            .name = ""
+    };
+
+    if (links.empty()) {
+        return searchResult;
     }
 
     //Create the temporary in memory table
@@ -122,7 +130,7 @@ std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
                        ") ENGINE = MEMORY");
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        return 0;
+        return searchResult;
     }
 
     //Insert recording links in the temporary table
@@ -142,7 +150,7 @@ std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
         conn_->insert(s);
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        return 0;
+        return searchResult;
     }
 
     //Perform the real query to find similarities
@@ -151,40 +159,45 @@ std::uint64_t fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
     try {
         result = conn_->query(
                 //selected songId, number of common links
-                "SELECT " + consts::db::RECORDINGS_TABLE_FULL + ".songId, COUNT(*) AS n " +
+                "SELECT " +
+                consts::db::RECORDINGS_TABLE_FULL + ".songId, " +
+                "COUNT(*) AS n, " +
+                consts::db::RECORDINGS_TABLE_FULL + ".time-" + consts::db::TMP_RECORD_TABLE_FULL + ".start AS delta " +
                 //inner join the songs table and the temporary table
-                "FROM " + consts::db::RECORDINGS_TABLE_FULL + " INNER JOIN " + consts::db::TMP_RECORD_TABLE_FULL + " " +
+                "FROM " +
+                consts::db::RECORDINGS_TABLE_FULL + " INNER JOIN " + consts::db::TMP_RECORD_TABLE_FULL + " " +
                 //join condition: the hash has to be the same
                 "ON " + consts::db::RECORDINGS_TABLE_FULL + ".hash=" + consts::db::TMP_RECORD_TABLE_FULL + ".hash " +
                 //since the recording is a piece of the full song, so the whole recording has to be shifted of a non
                 //negative amount of time w.r.t. to original song
-                "WHERE " + consts::db::RECORDINGS_TABLE_FULL + ".time>=" + consts::db::TMP_RECORD_TABLE_FULL +
-                ".start " +
+                "WHERE " +
+                consts::db::RECORDINGS_TABLE_FULL + ".time>=" + consts::db::TMP_RECORD_TABLE_FULL + ".start " +
                 //the common links are grouped if the time difference between the original song links and the recording
                 //ones is the same
-                "GROUP BY " + consts::db::RECORDINGS_TABLE_FULL + ".time-" + consts::db::TMP_RECORD_TABLE_FULL +
-                ".start, songId " +
+                "GROUP BY delta, " +
+                "songId " +
                 //the more links in common the better
                 "ORDER BY n DESC");
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        return 0;
+        return searchResult;
     }
 
-    std::uint64_t id = 0;
-
     //found something && is it above the minimum threshold
-    if (result->next() && result->get_unsigned64(1) > consts::links::MIN_HINT)
-        id = result->get_unsigned32(0);
+    if (result->next() && result->get_unsigned64(1) > consts::links::MIN_HINT) {
+        searchResult.found = true;
+        searchResult.id = result->get_unsigned32(0);
+        searchResult.commonLinks = result->get_unsigned64(1);
+        searchResult.timeDelta = static_cast<float>(result->get_unsigned64(2)) * consts::window::TIME_STEP;
+    }
 
     try {
         conn_->execute("DROP TABLE " + consts::db::TMP_RECORD_TABLE_FULL);
     } catch (const std::exception &e) {
         std::cerr << e.what();
-        return 0;
     }
 
-    return id;
+    return searchResult;
 }
 
 fin::DB::~DB() {

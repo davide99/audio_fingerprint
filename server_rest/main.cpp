@@ -17,7 +17,7 @@ int main() {
                      fin::utils::ByteBuffer buffer;
 
                      content_reader([&](const char *data, std::size_t data_length) {
-                         buffer.add(reinterpret_cast<const std::uint8_t*>(data), data_length);
+                         buffer.add(reinterpret_cast<const std::uint8_t *>(data), data_length);
                          return true;
                      });
 
@@ -25,9 +25,17 @@ int main() {
                      std::cout << buffer.getSize() << " bytes received, "
                                << links.size() << " links received" << std::endl;
 
-                     std::string song = fin::searchFromLinks(links, db);
-                     if (!song.empty()) {
-                         res.set_content(R"({"song_name": ")" + song + "\"}", consts::rest::CONTENT_TYPE_JSON);
+                     auto result = fin::searchFromLinks(links, db);
+                     if (result.found) {
+                         std::string json_result;
+                         json_result = "{";
+                         json_result += R"("song_name": ")" + result.name + R"(",)";
+                         json_result += R"("id": ")" + std::to_string(result.id) + R"(",)";
+                         json_result += R"("time_delta": ")" + std::to_string(result.timeDelta) + R"(",)";
+                         json_result += R"("common_links": ")" + std::to_string(result.commonLinks) + R"(")";
+                         json_result += "}";
+
+                         res.set_content(json_result, consts::rest::CONTENT_TYPE_JSON);
                      } else {
                          res.set_content(R"({"error": "song not found"})", consts::rest::CONTENT_TYPE_JSON);
                          res.status = 404;

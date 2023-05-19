@@ -19,13 +19,13 @@ namespace fin {
     * @param db initialized db object
     * @return the name of the song if found, an empty string otherwise
     */
-    std::string searchFromLinks(const fin::core::Links &links, DB &db) {
-        auto id = db.searchIdGivenLinks(links);
+    fin::DB::SearchResult searchFromLinks(const fin::core::Links &links, DB &db) {
+        auto result = db.searchIdGivenLinks(links);
 
-        if (id)
-            return db.getSongNameById(id);
-        else
-            return "";
+        if (result.found)
+            result.name = db.getSongNameById(result.id);
+
+        return result;
     }
 
     /**

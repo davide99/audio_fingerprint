@@ -40,12 +40,20 @@ namespace fin {
          */
         bool insertSong(const std::string &name, const fin::core::Links &links);
 
+        struct SearchResult {
+            bool found;
+            std::uint32_t id;
+            float timeDelta;
+            std::uint64_t commonLinks;
+            std::string name;
+        };
+
         /**
          * Try to find a match for a recording
          * @param links         Recoding's links
          * @return the song id, 0 if not found
          */
-        std::uint64_t searchIdGivenLinks(const fin::core::Links &links);
+        struct SearchResult searchIdGivenLinks(const fin::core::Links &links);
 
         /**
          * Find the name of a song

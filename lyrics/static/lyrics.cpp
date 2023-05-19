@@ -50,7 +50,7 @@ void messageReceivedOnMainThread() {
                const response_json = JSON.parse(response_string);
 
                if (Object.hasOwn(response_json, 'song_name')) {
-                   console.log(response_json.song_name);
+                   console.log(response_json);
                }
            }
         }, ret.c_str());

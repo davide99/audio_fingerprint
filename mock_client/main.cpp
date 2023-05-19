@@ -26,9 +26,9 @@ int main(int argc, char **argv) {
     auto links_out = fin::core::Links::fromByteBuffer(buf);
 
     fin::DB db;
-    std::string song = fin::searchFromLinks(links, db);
+    auto result = fin::searchFromLinks(links, db);
 
-    std::cout << song << std::endl;
+    std::cout << result.name << std::endl;
 
     return 0;
 }
