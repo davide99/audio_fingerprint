@@ -54,8 +54,38 @@ void messageReceivedOnMainThread() {
                const response_json = JSON.parse(response_string);
 
                if (Object.hasOwn(response_json, 'song_name')) {
-                   console.log(response_json);
-                   console.log($1);
+                   const delta1 = response_json.time_delta;
+
+                   const songId = 1;
+                   const url = `/lyrics/${songId}`;
+
+                   async function fetchLyrics() {
+                       const lyricsText = document.getElementById("lyrics-text");
+                       const lyricsTextNext = document.getElementById("lyrics-text-next");
+                       const response = await fetch(url);
+                       const json = await response.json();
+                       const lyrics = json['lyrics'];
+
+                       //per ogni oggetto nell'array stampo la string dopo l'offset temporale
+                       for (let i = 0; i < lyrics.length; i++) {
+                           const currentLine = lyrics[i];
+                           const nextLine = i < lyrics.length - 1 ? lyrics[i + 1] : "";
+
+                           const millisAt = (currentLine.offset - $1 - delta1) * 1000; //dev'essere in millisecondi
+                           if (millisAt >= 0) {
+                               setTimeout(() => {
+                                       lyricsText.innerHTML = currentLine.text;
+                                       if (nextLine !== "") {
+                                           lyricsTextNext.style.display = "block";
+                                           lyricsTextNext.innerHTML = nextLine.text;
+                                       } else {
+                                           lyricsTextNext.style.display = "none";
+                                       }
+                               }, millisAt);
+                           }
+                       }
+                   }
+                   fetchLyrics();
                }
            }
         }, ret.c_str(), diff.count());
