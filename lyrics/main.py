@@ -1,4 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask
+
 from subs_converter import convert
 
 app = Flask(__name__)
