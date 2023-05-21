@@ -9385,7 +9385,216 @@ textcircled{6}
 
 \begin_layout Standard
 Le uniche differenze introdotte sono dovute al fatto che è necessario sincronizz
-are il brano registrato col relativo testo: verranno analizzate di seguito.
+are il brano che l'utente sta ascoltando col relativo testo: verranno analizzate
+ di seguito.
+\end_layout
+
+\begin_layout Section
+Il server REST lyrics
+\end_layout
+
+\begin_layout Standard
+Il 
+\emph on
+server REST lyrics
+\emph default
+ si occupa di fornire il testo di un determinato brano.
+ Espone un unico endpoint: 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+/lyrics/{song_id}
+\end_layout
+
+\end_inset
+
+, dove 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+song_id
+\end_layout
+
+\end_inset
+
+ è l'id del brano del quale si vuole ottenere il testo.
+\end_layout
+
+\begin_layout Standard
+La risposta ritornata è in formato JSON e segue uno schema come quello indicato
+ di seguito:
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,showstringspaces=false,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\begin_inset Quotes fld
+\end_inset
+
+song_id
+\begin_inset Quotes frd
+\end_inset
+
+: song_id,
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\begin_inset Quotes fld
+\end_inset
+
+lyrics
+\begin_inset Quotes frd
+\end_inset
+
+: [
+\end_layout
+
+\begin_layout Plain Layout
+
+		{
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\begin_inset Quotes fld
+\end_inset
+
+offset
+\begin_inset Quotes frd
+\end_inset
+
+: 1.2,
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\begin_inset Quotes fld
+\end_inset
+
+text
+\begin_inset Quotes frd
+\end_inset
+
+: 
+\begin_inset Quotes fld
+\end_inset
+
+Line 1
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		}, {
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\begin_inset Quotes fld
+\end_inset
+
+offset
+\begin_inset Quotes frd
+\end_inset
+
+: 2.2,
+\end_layout
+
+\begin_layout Plain Layout
+
+			
+\begin_inset Quotes fld
+\end_inset
+
+text
+\begin_inset Quotes frd
+\end_inset
+
+: 
+\begin_inset Quotes fld
+\end_inset
+
+Line 2
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		},
+\end_layout
+
+\begin_layout Plain Layout
+
+		...
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+Dove 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+offset
+\end_layout
+
+\end_inset
+
+ indica l'offset temporale in secondi, rispetto all'inizio del brano originale,
+ in cui viene cantato il testo 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+text
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
@@ -9835,173 +10044,6 @@ noprefix "false"
 
 \begin_layout Standard
 La risposta del server lyrics sarà del tipo:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,showstringspaces=false,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-{
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\begin_inset Quotes fld
-\end_inset
-
-song_id
-\begin_inset Quotes frd
-\end_inset
-
-: song_id,
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\begin_inset Quotes fld
-\end_inset
-
-lyrics
-\begin_inset Quotes frd
-\end_inset
-
-: [
-\end_layout
-
-\begin_layout Plain Layout
-
-		{
-\end_layout
-
-\begin_layout Plain Layout
-
-			
-\begin_inset Quotes fld
-\end_inset
-
-offset
-\begin_inset Quotes frd
-\end_inset
-
-: 1.2,
-\end_layout
-
-\begin_layout Plain Layout
-
-			
-\begin_inset Quotes fld
-\end_inset
-
-text
-\begin_inset Quotes frd
-\end_inset
-
-: 
-\begin_inset Quotes fld
-\end_inset
-
-Line 1
-\begin_inset Quotes frd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-		}, {
-\end_layout
-
-\begin_layout Plain Layout
-
-			
-\begin_inset Quotes fld
-\end_inset
-
-offset
-\begin_inset Quotes frd
-\end_inset
-
-: 2.2,
-\end_layout
-
-\begin_layout Plain Layout
-
-			
-\begin_inset Quotes fld
-\end_inset
-
-text
-\begin_inset Quotes frd
-\end_inset
-
-: 
-\begin_inset Quotes fld
-\end_inset
-
-Line 2
-\begin_inset Quotes frd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-		},
-\end_layout
-
-\begin_layout Plain Layout
-
-		...
-\end_layout
-
-\begin_layout Plain Layout
-
-	]
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-Dove 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-offset
-\end_layout
-
-\end_inset
-
- indica l'offset temporale in secondi, rispetto all'inizio del brano originale,
- in cui viene cantato il testo 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-text
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Standard
