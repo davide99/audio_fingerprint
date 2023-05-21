@@ -7739,7 +7739,7 @@ uint8_t
 \end_layout
 
 \begin_layout Itemize
-aggiungere un dato arbitraro nel buffer stesso, attraverso il metodo:
+aggiungere un dato arbitrario nel buffer stesso, attraverso il metodo:
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
@@ -9178,7 +9178,7 @@ In altre parole, con
 
 \begin_layout Standard
 Tuttavia, è opportuno considerare, ancora una volta, che le condizioni di
- test potrebbero non corrispondere esattamente a quelle di un ambiene reale.
+ test potrebbero non corrispondere esattamente a quelle di un ambiente reale.
  Pertanto, per tenere conto dell'impossibilità di simulare perfettamente
  l'ambiente reale, sarebbe ragionevole scegliere una durata superiore ai
  
@@ -9380,7 +9380,7 @@ textcircled{6}
 
 \end_inset
 
- è pressochè identico a quanto già presentato per wasm_client.
+ è pressoché identico a quanto già presentato per wasm_client.
 \end_layout
 
 \begin_layout Standard
@@ -9804,7 +9804,7 @@ firstSampleTime =
 \end_layout
 
 \begin_layout Standard
-È necessario, infatti, sottrare 
+È necessario, infatti, sottrarre 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
@@ -9971,8 +9971,8 @@ messageReceivedOnMainThread
 
 \end_inset
 
- si comportamente esattamente come quella già presentata per wasm_client
- nel paragrafo 
+ si comporta esattamente come quella già presentata per wasm_client nel
+ paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:La-callback-messageReceivedOnMai"
