@@ -4090,6 +4090,12 @@ o informazioni rilevanti.
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:I-Links"
+
+\end_inset
+
 I Links
 \end_layout
 
@@ -5864,6 +5870,12 @@ recordings
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:L'identificazione-di-un"
+
+\end_inset
+
 L'identificazione di un brano
 \end_layout
 
@@ -6090,7 +6102,7 @@ li per un lungo periodo di tempo, come nel caso in analisi.
 
 \begin_layout Standard
 La funzione che si occupa di identificare un segmento registrato dati i
- suoi Links è
+ suoi Links è:
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
@@ -6098,7 +6110,7 @@ status open
 
 \begin_layout Plain Layout
 
-std::string searchFromLinks(
+fin::DB::SearchResult searchFromLinks(
 \end_layout
 
 \begin_layout Plain Layout
@@ -6145,11 +6157,8 @@ DB
 
 \end_inset
 
- e:
-\end_layout
-
-\begin_layout Enumerate
-Cerca di ottenere l'id del brano originale richiamando il metodo 
+.
+ Richiama il metodo 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -6157,22 +6166,179 @@ status open
 
 \begin_layout Plain Layout
 
-db.searchIdGivenLinks
+db.searchSongGivenLinks
 \end_layout
 
 \end_inset
 
-.
+ che ritorna una struct 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+SearchResult
 \end_layout
 
-\begin_layout Enumerate
-Se l'id ritornato è:
+\end_inset
+
+, composta come segue:
 \end_layout
 
-\begin_deeper
-\begin_layout Enumerate
-Diverso da 0, ovvero se è stato trovato un match, viene convertito nel nome
- del brano, facendo ricorso al metodo 
+\begin_layout Standard
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+struct SearchResult {
+\end_layout
+
+\begin_layout Plain Layout
+
+	bool found;
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::uint32_t id;
+\end_layout
+
+\begin_layout Plain Layout
+
+	float timeDelta;
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::uint64_t commonLinks;
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::string name;
+\end_layout
+
+\begin_layout Plain Layout
+
+};
+\end_layout
+
+\end_inset
+
+Dove:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+found
+\end_layout
+
+\end_inset
+
+ indica se il segmento è stato identificato correttamente, ovvero se è stato
+ trovato un match nel database
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+id
+\end_layout
+
+\end_inset
+
+ è l'identificativo del brano originale identificato
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+timeDelta
+\end_layout
+
+\end_inset
+
+ è la differenza temporale in secondi tra il segmento registrato e la sua
+ posizione nel brano originale
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+commonLinks
+\end_layout
+
+\end_inset
+
+ è il numero di Link
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:I-Links"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ in comune tra il segmento e il brano originale
+\end_layout
+
+\begin_layout Itemize
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+name
+\end_layout
+
+\end_inset
+
+ è il nome del brano originale
+\end_layout
+
+\begin_layout Standard
+Quindi, se il brano viene identificato, vengono popolati di conseguenza
+ i primi 4 campi della struct.
+ Per reperire il nome del brano viene richiamato un ulteriore metodo: 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -6188,12 +6354,6 @@ db.getSongNameById
 .
 \end_layout
 
-\begin_layout Enumerate
-Uguale a 0, ovvero se non è stato trovato un match, viene ritornata una
- stringa vuota.
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 Nello specifico 
 \begin_inset listings
@@ -6208,7 +6368,7 @@ db.getSongNameById
 
 \end_inset
 
- consiste, essenzialmente, in una query su 
+ consiste, in una query su 
 \series bold
 musicinfo
 \series default
@@ -6224,7 +6384,7 @@ status open
 
 \begin_layout Plain Layout
 
-db.searchIdGivenLinks
+db.searchSongGivenLinks
 \end_layout
 
 \end_inset
@@ -6249,7 +6409,7 @@ name "subsec:Il-metodo-db.searchIdGivenLinks"
 
 \end_inset
 
-Il metodo db.searchIdGivenLinks
+Il metodo db.searchSongGivenLinks
 \end_layout
 
 \begin_layout Standard
@@ -6261,7 +6421,7 @@ status open
 
 \begin_layout Plain Layout
 
-db.searchIdGivenLinks
+db.searchSongGivenLinks
 \end_layout
 
 \end_inset
@@ -6412,32 +6572,72 @@ status open
 
 \begin_layout Plain Layout
 
-SELECT recordings.songId, COUNT(*) AS n
+SELECT
 \end_layout
 
 \begin_layout Plain Layout
 
-	FROM recordings INNER JOIN _recording
+	recordings.songId,
 \end_layout
 
 \begin_layout Plain Layout
 
-	ON recordings.hash=_recording.hash
+	COUNT(*) AS n,
 \end_layout
 
 \begin_layout Plain Layout
 
-	WHERE recordings.time>=_recording.start
+	recordings.time-_recording.start AS delta
 \end_layout
 
 \begin_layout Plain Layout
 
-	GROUP BY recordings.time-_recording.start, recordings.songId
+FROM
 \end_layout
 
 \begin_layout Plain Layout
 
-	ORDER BY n DESC
+	recordings INNER JOIN _recording
+\end_layout
+
+\begin_layout Plain Layout
+
+ON
+\end_layout
+
+\begin_layout Plain Layout
+
+	recordings.hash=_recording.hash
+\end_layout
+
+\begin_layout Plain Layout
+
+WHERE
+\end_layout
+
+\begin_layout Plain Layout
+
+	recordings.time>=_recording.start
+\end_layout
+
+\begin_layout Plain Layout
+
+GROUP BY
+\end_layout
+
+\begin_layout Plain Layout
+
+	delta,
+\end_layout
+
+\begin_layout Plain Layout
+
+	recordings.songId
+\end_layout
+
+\begin_layout Plain Layout
+
+ORDER BY n DESC
 \end_layout
 
 \end_inset
@@ -6450,7 +6650,7 @@ status open
 
 \begin_layout Plain Layout
 
-db.searchIdGivenLinks
+db.searchSongGivenLinks
 \end_layout
 
 \end_inset
@@ -6495,8 +6695,31 @@ consts.h
 
 \end_inset
 
-, ovvero se il numero di Links in comune è maggiore di 15, ritorna l'id
- del brano originale.
+, ovvero se il numero di Links in comune è maggiore di 15, popola la struct
+ 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+SearchResult
+\end_layout
+
+\end_inset
+
+, come riportato nel paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:L'identificazione-di-un"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

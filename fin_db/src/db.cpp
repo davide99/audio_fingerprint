@@ -107,7 +107,7 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
         return "";
 }
 
-struct fin::DB::SearchResult fin::DB::searchIdGivenLinks(const fin::core::Links &links) {
+struct fin::DB::SearchResult fin::DB::searchSongGivenLinks(const fin::core::Links &links) {
     struct SearchResult searchResult = {
             .found = false,
             .id = 0,

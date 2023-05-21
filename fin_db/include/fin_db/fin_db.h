@@ -20,7 +20,7 @@ namespace fin {
     * @return the name of the song if found, an empty string otherwise
     */
     fin::DB::SearchResult searchFromLinks(const fin::core::Links &links, DB &db) {
-        auto result = db.searchIdGivenLinks(links);
+        auto result = db.searchSongGivenLinks(links);
 
         if (result.found)
             result.name = db.getSongNameById(result.id);
