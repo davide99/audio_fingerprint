@@ -9864,11 +9864,8 @@ getElapsedTimeSinceFirstSample
 
 \end_inset
 
- si occupa di calcolare la differenza in secondi tra:
-\end_layout
-
-\begin_layout Itemize
-la variabile globale 
+ si occupa di calcolare quanti secondi sono passati da quando è stata valorizzat
+a la variabile globale 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
@@ -9881,37 +9878,16 @@ firstSampleTime
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Itemize
-l'istante in cui viene richiamata la funzione stessa
-\end_layout
-
-\begin_layout Standard
-Il risultato viene ritornato come 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-float
-\end_layout
-
-\end_inset
-
 .
 \end_layout
 
 \begin_layout Standard
 È stato fatto in modo che questa funzione possa essere richiamata anche
- da JavaScript, creando un cosiddetto 
+ da JavaScript, sfruttando il meccanismo del 
 \emph on
 binding
 \emph default
- come segue:
+:
 \end_layout
 
 \begin_layout Standard
@@ -9964,7 +9940,12 @@ status open
 
 \begin_layout Plain Layout
 
-const elapsedTime = getElapsedTimeSinceFirstSample();
+const elapsedTime =
+\end_layout
+
+\begin_layout Plain Layout
+
+	Module.getElapsedTimeSinceFirstSample();
 \end_layout
 
 \end_inset
@@ -10001,8 +9982,21 @@ noprefix "false"
 
 \end_inset
 
-, ma oltre all'id del brano riconosciuto viene ritornato l'offset temporale
- 
+.
+ Tuttavia, dopo il processo di riconoscimento, oltre all'id 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+song_id
+\end_layout
+
+\end_inset
+
+ del brano riconosciuto, viene memorizzato anche l'offset temporale 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -10039,48 +10033,11 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-A questo punto è necessario reperire il testo del brano.
- Per fare questo è stato predisposto un semplice server REST lyrics
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Vedi figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Schema-architettura-generale-lyrics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
+A questo punto:
 \end_layout
 
-\end_inset
-
-, il quale espone l'endpoint:
-\end_layout
-
-\begin_layout Standard
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
-inline false
-status open
-
-\begin_layout Plain Layout
-
-/lyrics/{song_id}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Dove 
+\begin_layout Enumerate
+Viene reperito il testo del brano con id 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -10093,48 +10050,11 @@ song_id
 
 \end_inset
 
- rappresenta l'identificativo del brano originale, ritornato da Server REST
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Vedi punto 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-textcircled{6}
+, facendo una richiesta verso il server REST lyrics
 \end_layout
 
-\end_inset
-
- figura 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "fig:Schema-architettura-generale-lyrics"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-La risposta del server lyrics sarà del tipo:
-\end_layout
-
-\begin_layout Standard
-A questo punto viene richiamata la funzione 
+\begin_layout Enumerate
+Viene richiamata la funzione 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
@@ -10147,24 +10067,77 @@ getElapsedTimeSinceFirstSample
 
 \end_inset
 
- e viene schedulata la visualizzazione del testo al tempo corretto.
- Il 
+
+\end_layout
+
+\begin_layout Enumerate
+Viene schedulata la visualizzazione del testo al tempo corretto: il 
 \begin_inset Formula $\mathtt{text}_{i}$
 \end_inset
 
-, ovvero il testo i-esimo, dovrà essere visualizzato all'istante:
+, ovvero il testo i-esimo, dovrà essere visualizzato all'istante (vedi figura
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Timeline-lyrics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
 \end_layout
 
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\mathtt{offset}_{i}-\mathtt{elapsedTime}-\mathtt{time\_delta}
+\alpha=\mathtt{offset}_{i}-\mathtt{elapsedTime}-\mathtt{time\_delta}
 \]
 
 \end_inset
 
-ammesso che sia una quantità di tempo positiva.
- La schedulazione avverrà facendo ricorso alla funzione 
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/timeline_lyrics.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Timeline-lyrics"
+
+\end_inset
+
+Timeline visualizzazione lyrics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+La schedulazione avviene facendo ricorso alla funzione 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
