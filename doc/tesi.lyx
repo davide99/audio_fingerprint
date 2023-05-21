@@ -762,7 +762,7 @@ In realtà l'eseguibile è la RIA, contenente HTML, il modulo Wasm e il codice
 
  
 \emph on
-wasm
+wasm_client
 \emph default
 , ovvero il client, in grado di acquisire il segmento audio tramite microfono
  del client, estraendone le features per poi inviarle a 
@@ -770,6 +770,26 @@ wasm
 server_rest
 \emph default
 .
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Anche in questo caso si ha a che fare con una RIA
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+lyrics
+\emph default
+, costruito sulla base di wasm_client, aggiunge la possibilità di visualizzare
+ il testo sincronizzato (in tempo reale) del brano riconosciuto.
+ 
 \end_layout
 
 \begin_layout Standard
