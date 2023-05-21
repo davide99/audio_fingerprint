@@ -4,7 +4,7 @@ project(audio_fingerprint)
 option(JUST_WASM "Build only wasm projects" OFF)
 
 add_subdirectory(fin)
-add_subdirectory(wasm)
+add_subdirectory(wasm_client)
 add_subdirectory(lyrics)
 if (NOT JUST_WASM)
     add_subdirectory(fin_db)

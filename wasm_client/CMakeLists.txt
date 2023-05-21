@@ -8,8 +8,8 @@ if (UNIX AND DEFINED ENV{CLION_IDE})
 endif ()
 
 # find files
-file(GLOB wasm_HEADERS *.h)
-file(GLOB wasm_SOURCES *.cpp)
+file(GLOB wasm_HEADERS static/*.h)
+file(GLOB wasm_SOURCES static/*.cpp)
 
 # set up target
 add_executable(wasm_client ${wasm_SOURCES} ${wasm_HEADERS})

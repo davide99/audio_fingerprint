@@ -41,4 +41,5 @@ fi
 
 #Copio la pagina html per lyrics nella cartella giusta
 cd ..
+find "$BUILD_DIR/wasm_client" -type f -name 'wasm_client*' -exec cp {} wasm_client/static/ \;
 find "$BUILD_DIR/lyrics" -type f -name 'lyrics*' -exec cp {} lyrics/static/ \;

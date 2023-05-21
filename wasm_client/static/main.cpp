@@ -1,4 +1,4 @@
-#include "../consts.h"
+#include "../../consts.h"
 #include <emscripten/webaudio.h>
 #include <fin/readers/dummy_reader.h>
 #include <fin/fin.h>
