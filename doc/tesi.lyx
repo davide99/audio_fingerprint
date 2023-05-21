@@ -63,8 +63,8 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine natbib
-\cite_engine_type authoryear
+\cite_engine basic
+\cite_engine_type default
 \biblio_style plain
 \use_bibtopic false
 \use_indices false
@@ -10094,8 +10094,15 @@ messageReceivedOnMainThread
 
 \end_inset
 
- si comporta esattamente come quella già presentata per wasm_client nel
- paragrafo 
+ si comporta
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jobs95"
+literal "true"
+
+\end_inset
+
+ esattamente come quella già presentata per wasm_client nel paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:La-callback-messageReceivedOnMai"
@@ -10274,6 +10281,18 @@ setTimeout
 \end_inset
 
  di JavaScript.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "biblio"
+options "plainnat"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
