@@ -9602,7 +9602,7 @@ La funzione processAudio
 \end_layout
 
 \begin_layout Standard
-Le uniche differenze significative introdotta rispetto alla funzione 
+La funzione 
 \begin_inset ERT
 status open
 
@@ -9615,7 +9615,7 @@ texttt{processAudio}
 
 \end_inset
 
- già discussa per wasm_client nel paragrafo 
+ è molto simile a quella già discussa per wasm_client nel paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:La-funzione-processAudio"
@@ -9625,7 +9625,7 @@ noprefix "false"
 
 \end_inset
 
- sono le seguenti:
+, le uniche differenze significative sono riportate di seguito:
 \end_layout
 
 \begin_layout Itemize
@@ -9691,10 +9691,70 @@ firstSampleTime
 
  è un riferimento temporale a quando è stato acquisito il primo campione
  audio della registrazione da identificare.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/timeline_firstSampleTime.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Timeline-firstSampleTime"
+
+\end_inset
+
+Timeline con dettaglio 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+firstSampleTime
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Si noti inoltre che 
+Con riferimento alla figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Timeline-firstSampleTime"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
@@ -9709,19 +9769,33 @@ firstSampleTime
 
  viene valorizzato come segue:
 \begin_inset listings
-lstparams "language={C++},numbers=left,basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
 status open
 
 \begin_layout Plain Layout
 
-std::chrono::milliseconds samples128Delta(PROCESS_SAMPLES * 1000 / consts::audio
-::SAMPLE_RATE);
+std::chrono::milliseconds samples128Delta(
 \end_layout
 
 \begin_layout Plain Layout
 
-firstSampleTime = std::chrono::system_clock::now() - samples128Delta;
+	PROCESS_SAMPLES * 1000 / SAMPLE_RATE
+\end_layout
+
+\begin_layout Plain Layout
+
+);
+\end_layout
+
+\begin_layout Plain Layout
+
+firstSampleTime =
+\end_layout
+
+\begin_layout Plain Layout
+
+	std::chrono::system_clock::now() - samples128Delta;
 \end_layout
 
 \end_inset
@@ -9730,7 +9804,7 @@ firstSampleTime = std::chrono::system_clock::now() - samples128Delta;
 \end_layout
 
 \begin_layout Standard
-È necessario sottrare 
+È necessario, infatti, sottrare 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
@@ -9743,7 +9817,20 @@ samples128Delta
 
 \end_inset
 
- in quanto all'assegnazione 2 l'
+ in quanto all'assegnazione di 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+firstSampleTime
+\end_layout
+
+\end_inset
+
+ l'
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
