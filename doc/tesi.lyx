@@ -8174,13 +8174,13 @@ name "chap:L'eseguibile-wasm"
 
 \end_inset
 
-L'eseguibile Wasm
+L'eseguibile wasm_client
 \end_layout
 
 \begin_layout Standard
 Il compito principale dell'eseguibile 
 \emph on
-Wasm
+wasm_client
 \emph default
  è quello acquisire un breve segmento audio attraverso il microfono del
  client, estrarne i Links e inviarli al server_rest per avviare il processo
@@ -8224,7 +8224,7 @@ name "fig:Schema-architettura-generale-wasm"
 
 Schema architettura generale, dettaglio 
 \emph on
-wasm
+wasm_client
 \end_layout
 
 \end_inset
@@ -9249,6 +9249,10 @@ https://web.dev/coop-coep/
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Chapter
+L'eseguibile lyrics
 \end_layout
 
 \end_body
