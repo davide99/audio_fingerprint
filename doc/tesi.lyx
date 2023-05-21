@@ -9456,6 +9456,62 @@ are il brano che l'utente sta ascoltando col relativo testo: verranno analizzate
  di seguito.
 \end_layout
 
+\begin_layout Standard
+In figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Screenshot-lyrics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ un esempio di funzionamento.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template RasterImage
+	filename img/screenshot_lyrics.png
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Screenshot-lyrics"
+
+\end_inset
+
+Screenshot funzionamento 
+\emph on
+lyrics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Il server REST lyrics
 \end_layout
