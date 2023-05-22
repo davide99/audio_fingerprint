@@ -244,7 +244,15 @@ Introduzione
 
 \begin_layout Standard
 Negli ultimi anni si è notato un trend sempre crescente nell'utilizzo di
- JavaScript per la creazione di applicazioni desktop.
+ JavaScript per la creazione di applicazioni desktop
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rauch2012smashing"
+literal "true"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -252,7 +260,15 @@ Ci sono diversi fattori che hanno contribuito alla popolarità di JavaScript,
  primo fra tutti è che rappresenta il linguaggio standard, de facto, per
  l'implementazione di funzionalità dinamiche su pagine web.
  Nello specifico, JavaScript è l'unico linguaggio di scripting supportato
- nativamente da tutti i browser web moderni.
+ nativamente da tutti i browser web moderni
+\begin_inset CommandInset citation
+LatexCommand cite
+key "severance2012javascript"
+literal "true"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -278,11 +294,26 @@ Ricade nella prima categoria VBScript di Microsoft, basato su Visual Basic,
 
 \begin_layout Standard
 Nella seconda categoria possiamo annoverare, più recentemente, TypeScript
+\begin_inset CommandInset citation
+LatexCommand cite
+key "maharry2013typescript"
+literal "true"
+
+\end_inset
+
  (sempre di Microsoft), CoffeeScript e Dart (di Google).
  Questi linguaggi sono basati su un cosiddetto 
 \emph on
 transpiler
 \emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "nicolini2023usage"
+literal "true"
+
+\end_inset
+
 , ovvero un compilatore che prende in input il codice sorgente scritto ad
  esempio in TypeScript e lo converte in codice JavaScript, mantenendo le
  stesse funzionalità del codice originale.
@@ -292,10 +323,17 @@ transpiler
 \begin_inset VSpace defskip
 \end_inset
 
-Un altro punto di forza di JavaScript è la sua facilità di apprendimento,
- soprattutto rispetto ad altri linguaggi di programmazione più a basso livello
- come C o C++, permettendo agli sviluppatori di iniziare a scrivere codice
- più rapidamente, senza dover investire troppo tempo nell'apprendimento
+Un altro punto di forza di JavaScript è la sua facilità di apprendimento
+\begin_inset CommandInset citation
+LatexCommand cite
+key "abdulkareem2021evaluating"
+literal "true"
+
+\end_inset
+
+, soprattutto rispetto ad altri linguaggi di programmazione più a basso
+ livello come C o C++, permettendo agli sviluppatori di iniziare a scrivere
+ codice più rapidamente, senza dover investire troppo tempo nell'apprendimento
  di una nuova tecnologia.
  Oggi, infatti, si assiste ad una quantità sempre crescente di librerie
  e framework per JavaScript, atti a semplificare lo sviluppo di applicazioni
@@ -327,6 +365,13 @@ Per questi ed altri motivi, durante la fine degli anni 2000, ci si è iniziati
 
 .
  La risposta (affermativa) a questa domanda è stata la nascita di Node.js
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rauch2012smashing"
+literal "true"
+
+\end_inset
+
  che ha dato il via al paradigma del 
 \emph on
 JavaScript everywhere
@@ -362,14 +407,29 @@ Nei primi anni 2010, quando Node.js iniziava a prendere piede, ci si è posti
 
 .
  La risposta, ancora una volta, è stata affermativa.
- Nasce Electron: un framework open-source che consente agli sviluppatori
- di creare applicazioni desktop multi-piattaforma utilizzando tecnologie
- web standard come HTML, CSS e JavaScript.
+ Nasce Electron
+\begin_inset CommandInset citation
+LatexCommand cite
+key "scott2020javascript"
+literal "true"
+
+\end_inset
+
+: un framework open-source che consente agli sviluppatori di creare applicazioni
+ desktop multi-piattaforma utilizzando tecnologie web standard come HTML,
+ CSS e JavaScript.
  Dal lato mobile nascono tecnologie analoghe a Electron come Ionic, React
  Native e PhoneGap, tutte con obiettivi abbastanza simili.
  Man mano l'ecosistema JavaScript ha iniziato a diventare quello che Java
- era nei primi anni 2000 per la scrittura di applicazioni desktop consumer
- multipiattaforma.
+ era nei primi anni 2000
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kamthan1999java"
+literal "true"
+
+\end_inset
+
+ per la scrittura di applicazioni desktop consumer multipiattaforma.
 \end_layout
 
 \begin_layout Standard
@@ -404,8 +464,16 @@ Da qui la nascita delle cosiddette
 \emph on
 Rich Internet Applications
 \emph default
- (RIA), ovvero applicazioni web che offrono un'esperienza utente interattiva
- e avanzata simile a quella di un'applicazione desktop tradizionale.
+ (RIA)
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fraternali2010rich"
+literal "true"
+
+\end_inset
+
+, ovvero applicazioni web che offrono un'esperienza utente interattiva e
+ avanzata simile a quella di un'applicazione desktop tradizionale.
  Le RIA sono caratterizzate da una vasta gamma di funzionalità e interattività
  che le distinguono dalla semplici pagine web statiche.
  Oltre alla classica triade HTML + CSS + JavaScript le RIA possono fare
@@ -416,8 +484,16 @@ Rich Internet Applications
 \end_layout
 
 \begin_layout Standard
-Nello specifico WebAudio è un'API JavaScript avanzata che consente di manipolare
- e generare audio all'interno del browser.
+Nello specifico WebAudio
+\begin_inset CommandInset citation
+LatexCommand cite
+key "choi2018audioworklet"
+literal "true"
+
+\end_inset
+
+ è un'API JavaScript avanzata che consente di manipolare e generare audio
+ all'interno del browser.
  È stata progettata per consentire agli sviluppatori di creare RIA che includono
  funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
  di suoni.
@@ -437,6 +513,14 @@ La necessità di scrivere applicazioni real time ha portato la necessità
  Alla fine degli anni 2010 nasce quindi 
 \emph on
 WebAssembly
+\begin_inset CommandInset citation
+LatexCommand cite
+key "haas2017bringing"
+literal "true"
+
+\end_inset
+
+
 \emph default
  (Wasm): un formato di codice binario portabile che consente di eseguire
  codice di basso livello all'interno del browser web.
@@ -1652,9 +1736,16 @@ Finestratura con finestra rettangolare
 \end_layout
 
 \begin_layout Standard
-Il primo passo per ottenere uno spettrogramma è finestrare il segnale: il
- caso più semplice consiste nel utilizzare una finestra rettangolare come
- indicato in figura 
+Il primo passo per ottenere uno spettrogramma è finestrare il segnale
+\begin_inset CommandInset citation
+LatexCommand cite
+key "podder2014comparative"
+literal "true"
+
+\end_inset
+
+: il caso più semplice consiste nel utilizzare una finestra rettangolare
+ come indicato in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "mar:Finestratura-con-finestra"
@@ -2084,7 +2175,15 @@ più alto.
 \end_layout
 
 \begin_layout Standard
-La libreria fin finestra il segnale audio con un overlap del 
+La libreria fin finestra il segnale audio con un overlap
+\begin_inset CommandInset citation
+LatexCommand cite
+key "trethewey2000window"
+literal "true"
+
+\end_inset
+
+ del 
 \begin_inset Formula $50\%$
 \end_inset
 
@@ -2459,7 +2558,19 @@ literal "false"
 \begin_layout Standard
 In prima analisi è necessario introdurre il concetto di 
 \emph on
-risoluzione spettrale, 
+risoluzione spettrale
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "briggs1995dft"
+literal "true"
+
+\end_inset
+
+
+\emph on
+, 
 \emph default
 ossia la capacità di un'analisi spettrale di distinguere due componenti
  di frequenza vicine nel dominio della frequenza.
@@ -2574,10 +2685,26 @@ Inoltre, è necessario fare alcune osservazioni aggiuntive:
 \begin_layout Enumerate
 Il primo bin non contiene informazioni rilevanti riguardo la rappresentazione
  in frequenza del segnale
+\begin_inset CommandInset citation
+LatexCommand cite
+key "briggs1995dft"
+literal "true"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
 L'output della DFT su segnali reali è simmetrico
+\begin_inset CommandInset citation
+LatexCommand cite
+key "briggs1995dft"
+literal "true"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3769,6 +3896,14 @@ Esistono diversi modi per suddividere uno spettrogramma in range di frequenze
 \emph on
 scala Mel
 \emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pedersen1965mel"
+literal "true"
+
+\end_inset
+
 .
 \end_layout
 
@@ -6114,7 +6249,15 @@ In più, la tabella
 \series bold
 _recording
 \series default
- viene creata con alcune particolari accortezze:
+ viene creata con alcune particolari accortezze
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pan2012study"
+literal "true"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Enumerate
@@ -7230,9 +7373,16 @@ Il protocollo
 \emph on
 CORS
 \emph default
-, ovvero Cross-Origin Resource Sharing, è stato introdotto per prevenire
- che un sito web malintenzionato possa accedere ai dati degli utenti di
- un altro sito web legittimo.
+, ovvero Cross-Origin Resource Sharing
+\begin_inset CommandInset citation
+LatexCommand cite
+key "chen2018we"
+literal "true"
+
+\end_inset
+
+, è stato introdotto per prevenire che un sito web malintenzionato possa
+ accedere ai dati degli utenti di un altro sito web legittimo.
  In altre parole si vuole evitare, o quantomeno regolare, il resource sharing
  tra entità differenti per questioni di sicurezza.
 \end_layout
@@ -7488,7 +7638,15 @@ Schema serializzazione e deserializzazione Links
 \end_inset
 
 Si è deciso di evitare l'utilizzo di JSON, poiché il suo vantaggio dell'essere
- human-readable non compensa la sua scarsa efficienza nel trasportare dati.
+ human-readable non compensa la sua scarsa efficienza nel trasportare dati
+\begin_inset CommandInset citation
+LatexCommand cite
+key "tauro2012object"
+literal "true"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -8357,6 +8515,14 @@ status open
 
 AudioWorklet
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "audioworklet"
+literal "true"
 
 \end_inset
 
@@ -9289,10 +9455,17 @@ Tuttavia,
 SharedArrayBuffer
 \family default
  può rappresentare anche una minaccia per la sicurezza se utilizzato in
- modo improprio, poiché può essere utilizzato per attacchi di tipo side-channel
- tipo Spectre, che consentono a un sito web malintenzionato di accedere
- ai dati sensibili di altri siti web aperti contemporaneamente nella stessa
- finestra del browser.
+ modo improprio
+\begin_inset CommandInset citation
+LatexCommand cite
+key "coop"
+literal "true"
+
+\end_inset
+
+, poiché può essere utilizzato per attacchi di tipo side-channel tipo Spectre,
+ che consentono a un sito web malintenzionato di accedere ai dati sensibili
+ di altri siti web aperti contemporaneamente nella stessa finestra del browser.
  Per questo motivo, l'utilizzo di 
 \family typewriter
 SharedArrayBuffer
@@ -9313,21 +9486,6 @@ require-corp
 SharedArrayBuffer
 \family default
  e l'ambiente in cui viene utilizzato.
-\end_layout
-
-\begin_layout Standard
-È possibile saperne di più visitando la pagina 
-\begin_inset Flex URL
-status open
-
-\begin_layout Plain Layout
-
-https://web.dev/coop-coep/
-\end_layout
-
-\end_inset
-
-.
 \end_layout
 
 \begin_layout Chapter
@@ -10094,15 +10252,8 @@ messageReceivedOnMainThread
 
 \end_inset
 
- si comporta
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Jobs95"
-literal "true"
-
-\end_inset
-
- esattamente come quella già presentata per wasm_client nel paragrafo 
+ si comporta esattamente come quella già presentata per wasm_client nel
+ paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:La-callback-messageReceivedOnMai"
