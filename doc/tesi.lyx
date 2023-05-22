@@ -8501,7 +8501,7 @@ AudioContext
 \end_layout
 
 \begin_layout Enumerate
-Instanziare il 
+Istanziare il 
 \emph on
 render thread
 \emph default
@@ -10232,6 +10232,120 @@ const elapsedTime =
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+L'utilizzo del clock corretto
+\end_layout
+
+\begin_layout Standard
+Nel contesto di calcolo della differenza temporale tra due istanti, normalmente,
+ è essenziale fare affidamento su clock garantiti monotoni crescenti, come
+ ad esempio 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+steady_clock
+\end_layout
+
+\end_inset
+
+ o 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+high_resolution_clock
+\end_layout
+
+\end_inset
+
+.
+ Tuttavia, occorre considerare che la variabile 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+firstSampleTime
+\end_layout
+
+\end_inset
+
+ viene inizializzata nel rendering thread dell'AudioWorklet, mentre la funzione
+ 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+getElapsedTimeSinceFirstSample
+\end_layout
+
+\end_inset
+
+ viene invocata nel main thread di JavaScript: in altre parole non è detto
+ che il clock che valorizza 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+firstSampleTime
+\end_layout
+
+\end_inset
+
+ e quello utilizzato per calcolare la differenza temporale utilizzino lo
+ stesso riferimento nel tempo.
+ La mancanza di sincronizzazione può portare, quindi, a risultati privi
+ di significato nel richiamo di 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+getElapsedTimeSinceFirstSample
+\end_layout
+
+\end_inset
+
+.
+ Pertanto, risulta necessario utilizzare il 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+system_clock
+\end_layout
+
+\end_inset
+
+, che seppur non monotono crescente, garantisce l'utilizzo dello stesso
+ riferimento temporale per ogni sua istanza, ovvero i secondi passati dalla
+ 
+\emph on
+UNIX epoch
+\emph default
+.
 \end_layout
 
 \begin_layout Section
