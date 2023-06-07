@@ -14,6 +14,7 @@ if __name__ == '__main__':
         lengths_list.append(lengths_list[-1] + 0.5)
 
     lengths_d = defaultdict(int)
+    false_d = defaultdict(int)
 
     songs = glob.glob(os.path.join(input_dir, "*.wav"))
     i = 0
@@ -33,17 +34,25 @@ if __name__ == '__main__':
             exit_code = process.wait()
             output = output.decode('utf-8').strip()
 
-            if output == name:
-                lengths_d[length] += 1
+            if exit_code == 0:
+                # ha trovato qualcosa
+                if output == name:
+                    lengths_d[length] += 1
+                    print("Brano corretto")
+                else:
+                    false_d[length] += 1
+                    print("Falso positivo")
 
         i += 1
         print(f">>{i * 100 / len(songs)}%")
 
     success_rate = [lengths_d[length] * 100.0 / len(songs) for length in lengths_list]
+    false_positive_rate = [false_d[length] * 100.0 / len(songs) for length in lengths_list]
 
     with open('data.csv', 'w') as f:
         for i in range(len(success_rate)):
-            f.write(f"{lengths_list[i]},{success_rate[i]}\n")
+            f.write(f"{lengths_list[i]},{success_rate[i]},{false_positive_rate[i]}\n")
 
     plt.plot(lengths_list, success_rate)
+    plt.plot(lengths_list, false_positive_rate)
     plt.show()

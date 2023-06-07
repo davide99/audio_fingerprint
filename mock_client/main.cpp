@@ -28,7 +28,10 @@ int main(int argc, char **argv) {
     fin::DB db;
     auto result = fin::searchFromLinks(links, db);
 
-    std::cout << result.name << std::endl;
-
-    return 0;
+    if (result.found) {
+        std::cout << result.name << std::endl;
+        return 0;
+    } else {
+        return -1;
+    }
 }
