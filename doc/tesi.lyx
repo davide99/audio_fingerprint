@@ -24,6 +24,20 @@
 }
 
 \usepackage[htt]{hyphenat}
+
+%per filtrare dati csv
+\pgfplotsset{
+    discard if not/.style 2 args={
+        x filter/.code={
+            \edef\tempa{\thisrow{#1}}
+            \edef\tempb{#2}
+            \ifx\tempa\tempb
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -9316,7 +9330,7 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	ylabel={Recognition rate},
+	ylabel={Rate},
 \end_layout
 
 \begin_layout Plain Layout
@@ -9339,7 +9353,12 @@ tick}
 
 \begin_layout Plain Layout
 
-	no markers
+	no markers,
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend style={at={(0.02,0.98)},anchor=north west}
 \end_layout
 
 \begin_layout Plain Layout
@@ -9349,10 +9368,884 @@ tick}
 
 \begin_layout Plain Layout
 
+\end_layout
+
+\begin_layout Plain Layout
+
 
 \backslash
-addplot table [x=length, y=percentage, col sep=comma] {data/recording_length_suc
-cess_rate.csv};
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-40}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-40 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-40},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-30}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-30 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-30},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=blue,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-20 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=blue,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-20},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=cyan,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-10 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=cyan,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-10},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=magenta,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{0}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$0 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=magenta,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{0},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=brown,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$10 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=brown,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{10},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=lime,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$20 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=lime,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{20},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=olive,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{30}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$30 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=olive,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{30},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=orange,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{40}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$40 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=orange,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{40},
+\end_layout
+
+\begin_layout Plain Layout
+
+	forget plot
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
