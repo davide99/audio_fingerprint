@@ -1,5 +1,21 @@
-1. Riscrivere la classe per il db con il nuovo connector
-https://mariadb.com/downloads/connectors/connectors-data-access/cpp-connector/
+false positive rate
+numero link
+min_hint
+pag 42 recongition rate/curva per rumore ogni 6db
 
-https://blog.addpipe.com/audio-constraints-getusermedia/
-https://codesandbox.io/s/runtime-frost-7zdiet
+migliorire rispetto ad algoritmi esistenti
+https://github.com/JorenSix/Panako
+
+Second-screen app, nota storica, utilizzi
+
+Fingerprinting audio realizzato in browser
+
+Intro:
+Ci sono già altre soluzioni (shazam)
+	stato dell'arte
+	novità: browser, sincro
+	fingerprinting non sporca il suono
+
+Almeno un confronto
+
+14 alle 9:00
