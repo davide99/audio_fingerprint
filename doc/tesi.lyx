@@ -9258,6 +9258,39 @@ ambiente di test
 \end_layout
 
 \begin_layout Enumerate
+ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
+ un range tra 
+\begin_inset Formula $-40dB$
+\end_inset
+
+ e 
+\begin_inset Formula $40dB$
+\end_inset
+
+ a passo 10
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Similmente a quanto fatto nel paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:La-finestratura"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
 per ogni segmento è stato avviato il processo di identificazione
 \begin_inset Foot
 status open
@@ -10418,9 +10451,28 @@ noprefix "false"
 \end_inset
 
 .
- Questo perchè, in presenza di poche similarità tra il segmento registrato
- e il brano originale, l'algoritmo evita di ritornare un risultato sicuramente
- errato.
+ Questo perchè, in presenza di poche similarità
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:L'identificazione-di-un"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ tra il segmento registrato e il brano originale, l'algoritmo evita di ritornare
+ un risultato sicuramente errato.
 \end_layout
 
 \begin_layout Standard

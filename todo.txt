@@ -1,7 +1,4 @@
-false positive rate
-numero link
 min_hint
-pag 42 recongition rate/curva per rumore ogni 6db
 
 migliorire rispetto ad algoritmi esistenti
 https://github.com/JorenSix/Panako
