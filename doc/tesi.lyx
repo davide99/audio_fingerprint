@@ -9330,7 +9330,7 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	ylabel={Rate},
+	ylabel={Recognition rate},
 \end_layout
 
 \begin_layout Plain Layout
@@ -9427,56 +9427,6 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-40},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
 	solid,
 \end_layout
 
@@ -9510,56 +9460,6 @@ addplot+[
 
 \backslash
 addlegendentry{$-30 dB$};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-30},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -9623,56 +9523,6 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=blue,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-20},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
 	solid,
 \end_layout
 
@@ -9706,56 +9556,6 @@ addplot+[
 
 \backslash
 addlegendentry{$-10 dB$};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=cyan,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-10},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -9819,56 +9619,6 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=magenta,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{0},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
 	solid,
 \end_layout
 
@@ -9902,56 +9652,6 @@ addplot+[
 
 \backslash
 addlegendentry{$10 dB$};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=brown,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{10},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -10015,56 +9715,6 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=lime,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{20},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
 	solid,
 \end_layout
 
@@ -10098,56 +9748,6 @@ addplot+[
 
 \backslash
 addlegendentry{$30 dB$};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=olive,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{30},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -10206,52 +9806,6 @@ addlegendentry{$40 dB$};
 
 
 \backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	dashed,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=orange,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{40},
-\end_layout
-
-\begin_layout Plain Layout
-
-	forget plot
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 end{axis}
 \end_layout
 
@@ -10288,18 +9842,585 @@ Recognition rate in funzione della lunghezza del segmento audio registrato
 \end_inset
 
 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={Lunghezza segmento ($s$)},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={Rate falsi positivi},
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers,
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend style={at={(0.02,0.98)},anchor=north west}
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-40}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-40 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-30}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-30 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=blue,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-20 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=cyan,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$-10 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=magenta,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{0}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$0 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=brown,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$10 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=lime,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$20 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=olive,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{30}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$30 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	dashed,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=orange,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{40}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_false, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{$40 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Rate-falsi-positivi"
+
+\end_inset
+
+Rate falsi positivi in funzione della lunghezza del segmento audio registrato
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 In altre parole, con 
-\begin_inset Formula $3$
+\begin_inset Formula $4$
 \end_inset
 
  secondi si ottiene un recognition rate più che accettabile, vicino al 
 \begin_inset Formula $98\%$
 \end_inset
 
+, se il rapporto segnale-rumore è superiore a 
+\begin_inset Formula $10dB$
+\end_inset
+
 .
+\end_layout
+
+\begin_layout Standard
+Per quanta riguarda il rate dei falsi positivi si rimanda alla figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Rate-falsi-positivi"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+: si può osservare che tale tasso non supera mai l'
+\begin_inset Formula $1\%$
+\end_inset
+
+.
+ Questo perchè, in presenza di poche similarità tra il segmento registrato
+ e il brano originale, l'algoritmo evita di ritornare un risultato sicuramente
+ errato.
 \end_layout
 
 \begin_layout Standard
@@ -10308,7 +10429,7 @@ Tuttavia, è opportuno considerare, ancora una volta, che le condizioni di
  Pertanto, per tenere conto dell'impossibilità di simulare perfettamente
  l'ambiente reale, sarebbe ragionevole scegliere una durata superiore ai
  
-\begin_inset Formula $3$
+\begin_inset Formula $4$
 \end_inset
 
  secondi.
