@@ -107,7 +107,7 @@ std::string fin::DB::getSongNameById(const std::uint64_t &id) {
         return "";
 }
 
-struct fin::DB::SearchResult fin::DB::searchSongGivenLinks(const fin::core::Links &links) {
+struct fin::DB::SearchResult fin::DB::searchSongGivenLinks(const fin::core::Links &links, bool noMinHint) {
     struct SearchResult searchResult = {
             .found = false,
             .id = 0,
@@ -184,7 +184,7 @@ struct fin::DB::SearchResult fin::DB::searchSongGivenLinks(const fin::core::Link
     }
 
     //found something && is it above the minimum threshold
-    if (result->next() && result->get_unsigned64(1) > consts::links::MIN_HINT) {
+    if (result->next() && (noMinHint || (result->get_unsigned64(1) > consts::links::MIN_HINT))) {
         searchResult.found = true;
         searchResult.id = result->get_unsigned32(0);
         searchResult.commonLinks = result->get_unsigned64(1);

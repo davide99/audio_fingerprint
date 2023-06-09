@@ -53,7 +53,7 @@ namespace fin {
          * @param links         Recoding's links
          * @return the song id, 0 if not found
          */
-        struct SearchResult searchSongGivenLinks(const fin::core::Links &links);
+        struct SearchResult searchSongGivenLinks(const fin::core::Links &links, bool noMinHint = false);
 
         /**
          * Find the name of a song
