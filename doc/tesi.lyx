@@ -19,6 +19,8 @@
 \end{filecontents*}
 \begin{filecontents*}{data/recording_length_success_rate.csv}
 \end{filecontents*}
+\begin{filecontents*}{data/min_hint.csv}
+\end{filecontents*}
 \pgfmathdeclarefunction{gauss}{2}{%
   \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
 }
@@ -7090,6 +7092,149 @@ name "fig:Scatter-match"
 \end_inset
 
 Scatterplot di un match
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Il numero di Link comuni
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={Numero Link in comune},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={Rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend pos=north east,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=common_links, y=true_positive, col sep=comma] {data/min_hint.csv
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{True positive}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=common_links, y=false_positive, col sep=comma] {data/min_hint.cs
+v};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{False positive}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Recognition-rate-in-1"
+
+\end_inset
+
+Recognition rate in funzione dell'SNR per le varie finestre
 \end_layout
 
 \end_inset
