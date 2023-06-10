@@ -1,18 +1,13 @@
-min_hint
+-Nuovo titolo: Fingerprinting audio realizzato in browser?
 
-migliorire rispetto ad algoritmi esistenti
-https://github.com/JorenSix/Panako
+-migliorie rispetto ad algoritmi esistenti
+    Almeno un confronto
+    https://github.com/JorenSix/Panako
 
-Second-screen app, nota storica, utilizzi
-
-Fingerprinting audio realizzato in browser
-
-Intro:
-Ci sono già altre soluzioni (shazam)
+-Intro:
+    Ci sono già altre soluzioni (shazam)
 	stato dell'arte
 	novità: browser, sincro
 	fingerprinting non sporca il suono
-
-Almeno un confronto
 
 14 alle 9:00

@@ -529,6 +529,8 @@ La necessità di scrivere applicazioni real time ha portato la necessità
  Alla fine degli anni 2010 nasce quindi 
 \emph on
 WebAssembly
+\emph default
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "haas2017bringing"
@@ -536,8 +538,6 @@ literal "true"
 
 \end_inset
 
-
-\emph default
  (Wasm): un formato di codice binario portabile che consente di eseguire
  codice di basso livello all'interno del browser web.
  È stato progettato per essere compatibile con i linguaggi di programmazione
@@ -579,6 +579,76 @@ la notevole riduzione del carico lato server: grazie alla sua architettura
 In definitiva, si renderà l'esperienza dell'utente ancora più piacevole
  e soddisfacente, mantenendo le stesse funzionalità e caratteristiche di
  una classica app eseguita nativamente su un dispositivo dell'utente.
+\end_layout
+
+\begin_layout Standard
+Verrà discussa anche la realizzazione di una 
+\emph on
+second screen application
+\emph default
+, analizzando come queste applicazioni possano giovare delle soluzioni discusse
+ in questo documento.
+\end_layout
+
+\begin_layout Standard
+Le 
+\emph on
+second screen application
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "holmes2012visual"
+literal "true"
+
+\end_inset
+
+ sono applicazioni o servizi progettati per essere utilizzati su un dispositivo
+ separato, come smartphone o tablet, mentre si fruisce un altro contenuto
+ su un dispositivo di 
+\emph on
+maggiore importanza
+\emph default
+ come la televisione o lo schermo di un PC.
+ Queste applicazioni offrono un'esperienza interattiva e complementare al
+ contenuto principale, arricchendo l'interazione dell'utente e fornendo
+ ulteriori informazioni.
+ Se si volesse tracciare l'origine di tali applicazioni, sicuramente la
+ diffusione di tecnologie mobili, quali smartphone e tablet, ha sicuramente
+ ricoperto un ruolo chiave nello sdoganare questo nuovo tipo di interattività.
+\end_layout
+
+\begin_layout Standard
+Un esempio pionieristico delle second screen application è stato il programma
+ televisivo 
+\emph on
+American Idol
+\emph default
+ negli Stati Uniti, che ha lanciato un'applicazione interattiva in grado
+ di permettere agli spettatori di votare e interagire con il programma in
+ tempo reale.
+ Da allora, le second screen application sono diventate una parte comune
+ dell'esperienza televisiva e offrono nuove opportunità per coinvolgere
+ il pubblico e creare un'esperienza più interattiva e personalizzata.
+\end_layout
+
+\begin_layout Standard
+Nello specifico, nel capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-lyrics"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ verrà trattata la realizzazione di una 
+\emph on
+second-screen application
+\emph default
+ per la presentazione in sincronia con un brano riprodotto del testo del
+ brano stesso.
 \end_layout
 
 \begin_layout Section
@@ -10792,6 +10862,12 @@ SharedArrayBuffer
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:L'eseguibile-lyrics"
+
+\end_inset
+
 L'eseguibile lyrics
 \end_layout
 
@@ -10918,7 +10994,23 @@ are il brano che l'utente sta ascoltando col relativo testo: verranno analizzate
 \end_layout
 
 \begin_layout Standard
-In figura 
+Lo scopo dell'eseguibile lyrics è, in ultima analisi, la realizzazione di
+ una 
+\emph on
+second screen application
+\emph default
+, per fornire un contenuto supplementare
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Il testo del brano
+\end_layout
+
+\end_inset
+
+ ad un contenuto principale, ovvero un brano in riproduzione.
+ In figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Screenshot-lyrics"
