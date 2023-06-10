@@ -6881,38 +6881,23 @@ db.searchSongGivenLinks
 
 \end_inset
 
- estrae la prima prima riga del recordset e se 
-\begin_inset Formula $n>15$
+ estrae la prima prima riga del recordset e se il numero di Link in comune
+ 
+\begin_inset Formula $n$
 \end_inset
 
-
+ supera una determinata soglia
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Costante 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-consts::links::MIN_HINT
-\end_layout
-
-\end_inset
-
- in 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-consts.h
-\end_layout
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:link-comuni"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
@@ -6921,8 +6906,7 @@ consts.h
 
 \end_inset
 
-, ovvero se il numero di Links in comune è maggiore di 15, popola la struct
- 
+ popola la struct 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -7105,7 +7089,80 @@ Scatterplot di un match
 \end_layout
 
 \begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:link-comuni"
+
+\end_inset
+
 Il numero di Link comuni
+\end_layout
+
+\begin_layout Standard
+Qual è la soglia oltre la quale si può dire con 
+\begin_inset Quotes fld
+\end_inset
+
+abbastanza sicurezza
+\begin_inset Quotes frd
+\end_inset
+
+ che un segmento registrato fa parte di un determinato brano? La cosa più
+ ragionevole da fare, è definire sperimentalmente una soglia di Links in
+ comune tra segmento registrato e brano originale, oltre la quale si ottiene
+ un rate di falsi positivi basso.
+\end_layout
+
+\begin_layout Standard
+Intuitivamente quanto più il numero di Links in comune è basso tanto più
+ è probabile che venga identificato un brano errato, d'altro canto, un numero
+ di Links in comune sufficientemente alto porta ad una 
+\emph on
+confidence
+\emph default
+ sull'identificazione alta.
+\end_layout
+
+\begin_layout Standard
+A questo scopo è stato predisposto un ambiente di test:
+\end_layout
+
+\begin_layout Enumerate
+viene estratto un segmento di durata compresa tra 
+\begin_inset Formula $0.5$
+\end_inset
+
+ e 
+\begin_inset Formula $6$
+\end_inset
+
+ secondi dai brani originali
+\end_layout
+
+\begin_layout Enumerate
+per ogni segmento estratto viene eseguito il processo di identificazione
+\end_layout
+
+\begin_layout Enumerate
+per ogni segmento vengono memorizzati in una mappa il numero di Link in
+ comune come chiave e i false positive e i true positive come valore
+\end_layout
+
+\begin_layout Standard
+Ottenute queste informazioni il numero di falsi positivi viene riscalato
+ sul totale di identificazioni.
+ Si può quindi realizzare il grafico in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:False-positive-rate-in-fz-link-comuni"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, che visualizza il rate di falsi positivi al variare del numero di Links
+ in comune individuati.
 \end_layout
 
 \begin_layout Standard
@@ -7139,7 +7196,7 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	ylabel={Rate},
+	ylabel={False positive rate},
 \end_layout
 
 \begin_layout Plain Layout
@@ -7179,30 +7236,8 @@ tick}
 
 
 \backslash
-addplot table [x=common_links, y=true_positive, col sep=comma] {data/min_hint.csv
-};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{True positive}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
 addplot table [x=common_links, y=false_positive, col sep=comma] {data/min_hint.cs
 v};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{False positive}
 \end_layout
 
 \begin_layout Plain Layout
@@ -7230,11 +7265,11 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Recognition-rate-in-1"
+name "fig:False-positive-rate-in-fz-link-comuni"
 
 \end_inset
 
-Recognition rate in funzione dell'SNR per le varie finestre
+False positive rate in funzione del numero di Link in comune
 \end_layout
 
 \end_inset
@@ -7244,7 +7279,68 @@ Recognition rate in funzione dell'SNR per le varie finestre
 
 \end_inset
 
+Si può, quindi, facilmente notare, interpretando il grafico, che la soglia
+ oltre la quale il rate di falsi positivi viene minimizzato è compresa tra
+ 
+\begin_inset Formula $10$
+\end_inset
 
+ e 
+\begin_inset Formula $15$
+\end_inset
+
+.
+ In altre parole: se il segmento registrato ed un determinato brano hanno
+ in comune un numero di Links pari almeno a circa 
+\begin_inset Formula $15$
+\end_inset
+
+, allora si può dire con ragionevole sicurezza che è stato probabilmente
+ individuato il brano corretto.
+\end_layout
+
+\begin_layout Standard
+La soglia di Link in comune è stata dunque impostata a 
+\begin_inset Formula $15$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Costante 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts::links::MIN_HINT
+\end_layout
+
+\end_inset
+
+ in 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+consts.h
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
