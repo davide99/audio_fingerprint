@@ -7100,13 +7100,9 @@ Il numero di Link comuni
 
 \begin_layout Standard
 Qual è la soglia oltre la quale si può dire con 
-\begin_inset Quotes fld
-\end_inset
-
+\emph on
 abbastanza sicurezza
-\begin_inset Quotes frd
-\end_inset
-
+\emph default
  che un segmento registrato fa parte di un determinato brano? La cosa più
  ragionevole da fare, è definire sperimentalmente una soglia di Links in
  comune tra segmento registrato e brano originale, oltre la quale si ottiene
