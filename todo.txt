@@ -7,7 +7,5 @@
 -Intro:
     Ci sono già altre soluzioni (shazam)
 	stato dell'arte
-	novità: browser, sincro
-	fingerprinting non sporca il suono
 
 14 alle 9:00

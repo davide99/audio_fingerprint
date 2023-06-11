@@ -582,18 +582,16 @@ In definitiva, si renderà l'esperienza dell'utente ancora più piacevole
 \end_layout
 
 \begin_layout Standard
-Verrà discussa anche la realizzazione di una 
-\emph on
-second screen application
-\emph default
-, analizzando come queste applicazioni possano giovare delle soluzioni discusse
- in questo documento.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Le 
+Verrà discussa anche la realizzazione di una 
 \emph on
-second screen application
+second-screen application
 \emph default
 
 \begin_inset CommandInset citation
@@ -603,13 +601,13 @@ literal "true"
 
 \end_inset
 
- sono applicazioni o servizi progettati per essere utilizzati su un dispositivo
- separato, come smartphone o tablet, mentre si fruisce un altro contenuto
- su un dispositivo di 
+, ovvero un applicazione o servizio progettato per essere utilizzato su
+ un dispositivo separato, come smartphone o tablet, mentre si fruisce un
+ altro contenuto su un dispositivo di 
 \emph on
 maggiore importanza
 \emph default
- come la televisione o lo schermo di un PC.
+, come la televisione o lo schermo di un PC.
  Queste applicazioni offrono un'esperienza interattiva e complementare al
  contenuto principale, arricchendo l'interazione dell'utente e fornendo
  ulteriori informazioni.
@@ -633,7 +631,114 @@ American Idol
 \end_layout
 
 \begin_layout Standard
-Nello specifico, nel capitolo 
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Questo documento guiderà il lettore attraverso la realizzazione del sistema
+ di identificazione tra i vari capitoli; saranno esaminate in maniera approfondi
+ta le molteplici sfaccettature implementative, corredate da presentazione
+ di dati e grafici, al fine di consentire una comprensione completa delle
+ motivazioni che hanno guidato le scelte dell'autore.
+\end_layout
+
+\begin_layout Standard
+Nei capitoli 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La-libreria-fin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:La-libreria-fin_db"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ verranno trattate le due librerie 
+\emph on
+fin
+\emph default
+ e 
+\emph on
+fin_db
+\emph default
+, che rappresentano le fondamenta del sistema, ovvero l'implementazione
+ dell'algoritmo di estrazione delle features sonore e dell'identificazione
+ dei brani.
+\end_layout
+
+\begin_layout Standard
+Si passerà poi al capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-server_entry"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, nel quale verrà analizzato l'eseguire responsabile di popolare il database
+ con le features dei brani originali.
+\end_layout
+
+\begin_layout Standard
+Il capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-server_rest"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ discuterà la realizzazione di un endpoint REST per effettuare l'identificazione
+ di un segmento audio.
+\end_layout
+
+\begin_layout Standard
+Nel capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-mock_client"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ verrà trattato un eseguibile utilizzato nelle fasi di testing.
+\end_layout
+
+\begin_layout Standard
+La realizzazione della RIA occuperà il capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:L'eseguibile-wasm"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Nel capitolo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "chap:L'eseguibile-lyrics"
@@ -648,7 +753,22 @@ noprefix "false"
 second-screen application
 \emph default
  per la presentazione in sincronia con un brano riprodotto del testo del
- brano stesso.
+ brano stesso, analizzando come questo tipo di applicazioni possano giovare
+ delle soluzioni discusse in questo documento.
+\end_layout
+
+\begin_layout Standard
+Infine, nel capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Utilizzi-futuri"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ verranno analizzati possibili utilizzi futuri del sistema qui presentato.
 \end_layout
 
 \begin_layout Section
@@ -1035,6 +1155,12 @@ Successivamente, nei prossimi capitoli, verranno esaminate in dettaglio
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:La-libreria-fin"
+
+\end_inset
+
 La libreria fin
 \end_layout
 
@@ -5253,6 +5379,12 @@ Gli indici delle finestre ad essere precisi
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:La-libreria-fin_db"
+
+\end_inset
+
 La libreria fin_db
 \end_layout
 
@@ -7410,6 +7542,12 @@ consts.h
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:L'eseguibile-server_entry"
+
+\end_inset
+
 L'eseguibile server_entry
 \end_layout
 
@@ -7580,6 +7718,12 @@ noprefix "false"
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:L'eseguibile-server_rest"
+
+\end_inset
+
 L'eseguibile server_rest
 \end_layout
 
@@ -8530,6 +8674,12 @@ fromByteBuffer(ByteBuffer &byteBuffer)
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:L'eseguibile-mock_client"
+
+\end_inset
+
 L'eseguibile mock_client
 \end_layout
 
@@ -11944,6 +12094,12 @@ setTimeout
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Utilizzi-futuri"
+
+\end_inset
+
 Utilizzi futuri
 \end_layout
 
@@ -12017,13 +12173,9 @@ Un registratore audio acquisisce attraverso un microfono (per esempio un
 
 \begin_layout Standard
 In situazioni di questo tipo è quindi necessario sincronizzare l'audio 
-\begin_inset Quotes fld
-\end_inset
-
+\emph on
 ambientale
-\begin_inset Quotes frd
-\end_inset
-
+\emph default
  registrato dalla videocamera con quello proveniente dal registratore esterno.
 \end_layout
 
@@ -12041,13 +12193,9 @@ o ulteriori sforzi di correzione.
 
 \begin_layout Standard
 Un alternativa, soprattutto in ambienti meno 
-\begin_inset Quotes fld
-\end_inset
-
+\emph on
 professionali
-\begin_inset Quotes frd
-\end_inset
-
+\emph default
 , potrebbe essere quella di utilizzare un sistema basato sull'algoritmo
  descritto precedentemente.
  Si faccia riferimento alla figura 
