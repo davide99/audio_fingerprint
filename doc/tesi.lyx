@@ -10758,7 +10758,7 @@ noprefix "false"
 \end_inset
 
 .
- Questo perchè, in presenza di poche similarità
+ Questo perché, in presenza di poche similarità
 \begin_inset Foot
 status open
 
@@ -12128,7 +12128,7 @@ L'acquisizione audio estratta è disponibile
 \end_layout
 
 \begin_layout Enumerate
-Viene avviato l'algorimo per identificare l'
+Viene avviato l'algoritmo per identificare l'
 \emph on
 offset temporale
 \emph default
@@ -12191,6 +12191,250 @@ noprefix "false"
 \begin_layout Itemize
 Il database dei Link andrebbe creato e distrutto ad ogni esecuzione dell'algorit
 mo
+\end_layout
+
+\begin_layout Section
+Personalizzazione dei segmenti pubblicitari
+\end_layout
+
+\begin_layout Standard
+La personalizzazione della pubblicità per gli utenti rappresenta un'importante
+ strategia di marketing che mira a fornire annunci pubblicitari mirati e
+ rilevanti basati sui dati personali e comportamentali degli individui.
+ Questo approccio si basa sull'idea di offrire agli utenti contenuti promozional
+i che siano maggiormente allineati ai loro interessi, preferenze e comportamenti
+ di consumo.
+\end_layout
+
+\begin_layout Standard
+Come afferma Kotler
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kotler1989mass"
+literal "true"
+
+\end_inset
+
+, il micromarketing consiste nel suddividere un mercato in segmenti specifici
+ di clienti, che possono essere raggiunti in modo più mirato con prodotti,
+ prezzi, messaggi e canali specifici.
+ La personalizzazione della pubblicità si basa proprio su questo concetto,
+ adattando l'approccio promozionale per soddisfare le esigenze specifiche
+ di ciascun individuo o segmento di utenti.
+\end_layout
+
+\begin_layout Standard
+La personalizzazione della pubblicità offre diversi vantaggi sia per gli
+ utenti che per gli inserzionisti:
+\end_layout
+
+\begin_layout Itemize
+Gli utenti possono ricevere annunci pubblicitari che rispecchiano i loro
+ interessi, fornendo loro informazioni pertinenti e promozioni su prodotti
+ e servizi che potrebbero effettivamente interessarli.
+ Ciò può migliorare l'esperienza dell'utente, rendendo la pubblicità meno
+ invasiva e più rilevante.
+\end_layout
+
+\begin_layout Itemize
+D'altra parte, gli inserzionisti possono beneficiare della personalizzazione
+ della pubblicità in quanto possono raggiungere un pubblico più specifico
+ e qualificato.
+ La capacità di selezionare gli utenti in base alle loro caratteristiche
+ e preferenze consente di ottimizzare la spesa pubblicitaria e migliorare
+ l'efficacia delle campagne promozionali.
+\end_layout
+
+\begin_layout Standard
+Una strada innovativa potrebbe consistere nella personalizzazione dei segmenti
+ pubblicitari inseriti all'interno di uno stream audio.
+\end_layout
+
+\begin_layout Standard
+Diverse pubblicazioni hanno esplorato l'audio fingerprinting per la sincronizzaz
+ione e la sostituzione dei contenuti audio
+\begin_inset CommandInset citation
+LatexCommand cite
+key "casagranda2015leveraging"
+literal "true"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "bozios2001advanced"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il sistema di fingerprinting e riconoscimento discusso in questo documento
+ presenta un ottimo candidato per l'implementazione di un sistema simile.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/segmento_personalizzato.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Pubblicita-personalizzata"
+
+\end_inset
+
+Scenario segmento audio pubblicitario personalizzato
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Prendendo come riferimento la figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Pubblicita-personalizzata"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, si potrebbe realizzare un sistema di personalizzazione di un segmento
+ audio pubblicitario come segue:
+\end_layout
+
+\begin_layout Enumerate
+Uno stream audio 
+\emph on
+raw
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Grezzo, non elaborato
+\end_layout
+
+\end_inset
+
+ proveniente da una web radio viene scaricato in modo continuo da un client
+\end_layout
+
+\begin_layout Enumerate
+Lo stream audio contiene un 
+\series bold
+marker audio iniziale
+\series default
+, ovvero un suono 
+\emph on
+specifico
+\emph default
+ che indica che sta per iniziare un segmento pubblicitario
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Subito dopo il marker iniziale viene inserito un segmento pubblicitario
+ standard, ovvero non personalizzato
+\end_layout
+
+\begin_layout Enumerate
+D'altro canto, un client 
+\emph on
+intelligente
+\emph default
+ può rilevare il marker iniziale: verrà analizzato questo scenario
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Viene reperito un segmento pubblicitario personalizzato sulla base dell'ascoltat
+ore da una sorgente terza
+\end_layout
+
+\begin_layout Enumerate
+Il segmento pubblicitario personalizzato viene inserito all'interno dello
+ stream finale che l'utente ascolta
+\end_layout
+
+\begin_layout Enumerate
+Viene inserito un 
+\series bold
+marker audio finale
+\series default
+, che indica che il segmento pubblicitario è terminato
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Il segmento pubblicitario personalizzato dovrebbe essere già stato scelto
+ opportunamente, in modo tale che la durata sia compatibile con quella del
+ segmento pubblicitario non personalizzato
+\end_layout
+
+\begin_layout Enumerate
+Se così non fosse, si ritorna comunque allo stream 
+\emph on
+raw
+\emph default
+ quando viene ricevuto il marker finale
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Si noti che:
+\end_layout
+
+\begin_layout Itemize
+questa soluzione non impatta su un client non intelligente, che fruisce
+ lo stream 
+\emph on
+raw
+\emph default
+, così come ha sempre fatto
+\end_layout
+
+\begin_layout Itemize
+il marker audio finale non è strettamente necessario, si potrebbe utilizzare
+ un marker audio iniziale diverso a seconda del tempo a disposizione per
+ il segmento pubblicitario
+\end_layout
+
+\begin_layout Itemize
+il client dovrà avere un piccolo buffer, atto ad analizzare lo stream per
+ individuare l'eventuale marker iniziale
+\end_layout
+
+\begin_layout Itemize
+potrebbe essere conveniente portare il database dei Link che caratterizzano
+ i marker iniziali in locale sul client, in modo tale che il processo di
+ identificazione sia più reattivo
 \end_layout
 
 \begin_layout Standard
