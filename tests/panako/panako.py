@@ -1,5 +1,7 @@
 import os
 import glob
+import subprocess
+
 from scipy.io import wavfile
 import numpy as np
 from subprocess import Popen, PIPE
@@ -31,10 +33,10 @@ def add_colored_noise(x, target_snr):
 
 
 if __name__ == '__main__':
-    lengths_list = [.5]
+    lengths_list = [0.5]
     while lengths_list[-1] < 6.0:
         lengths_list.append(lengths_list[-1] + 0.5)
-    snrs_list = list(range(-40, 41, 10))  # db
+    snrs_list = list(range(-40, 41, 10))  # db  # db
 
     data = dict()
     for snr_value in snrs_list:
@@ -63,14 +65,22 @@ if __name__ == '__main__':
 
                 wavfile.write("out.wav", sample_rate, noisy_signal)
 
-                process = Popen(["../../cmake-build-release/mock_client/mock_client", "out.wav"], stdout=PIPE)
+                process = Popen([
+                    "java",
+                    "--add-opens=java.base/java.nio=ALL-UNNAMED",
+                    "-jar", "/home/davide/Scrivania/Panako/build/libs/panako-2.1-all.jar",
+                    "query", "out.wav"], stdout=PIPE, stderr=subprocess.DEVNULL)
                 (output, err) = process.communicate()
                 exit_code = process.wait()
                 output = output.decode('utf-8').strip()
+                output_lines = [line for line in output.split("\n") if ";" in line]
+                # scarto prima riga header
+                output_lines = output_lines[1:]
+                matches = [os.path.basename(line.split(";")[5].strip()) for line in output_lines]
+                matches = [match for match in matches if match != "null"]
 
-                if exit_code == 0:
-                    # ha trovato qualcosa
-                    if output == name:
+                if matches:
+                    if name in matches:
                         data[snr_value][length]['true_positive'] += 1
                     else:
                         data[snr_value][length]['false_positive'] += 1
