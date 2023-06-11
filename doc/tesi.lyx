@@ -11943,6 +11943,256 @@ setTimeout
  di JavaScript.
 \end_layout
 
+\begin_layout Chapter
+Utilizzi futuri
+\end_layout
+
+\begin_layout Section
+Sincronizzazione di contenuti provenienti da sorgenti differenti
+\end_layout
+
+\begin_layout Standard
+Uno scenario tipico nella post-produzione di materiale audiovisivo è la
+ sincronizzazione di materiale audiovisivo proveniente da più fonti.
+ Si pensi ad uno scenario come quello in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Acquisizioni-multiple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/acquisizioni_multiple.svg
+	width 75col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Acquisizioni-multiple"
+
+\end_inset
+
+Scenario acquisizioni multiple
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Una videocamera acquisisce un contenuto audio e video, l'audio viene registrato
+ attraverso il microfono interno della videocamera
+\end_layout
+
+\begin_layout Enumerate
+Un registratore audio acquisisce attraverso un microfono (per esempio un
+ lavalier) l'audio di un operatore
+\end_layout
+
+\begin_layout Standard
+In situazioni di questo tipo è quindi necessario sincronizzare l'audio 
+\begin_inset Quotes fld
+\end_inset
+
+ambientale
+\begin_inset Quotes frd
+\end_inset
+
+ registrato dalla videocamera con quello proveniente dal registratore esterno.
+\end_layout
+
+\begin_layout Standard
+Tipicamente si fa ricorso ad un sistema basato su timecode.
+ Il timecode fornisce un riferimento comune di tempo che consente di coordinare
+ con precisione più fonti multimediali, facilitando il montaggio e la post-produ
+zione.
+ Tuttavia, l'impiego del timecode richiede attrezzature specifiche, potenzialmen
+te aumentando i costi e la complessità del processo di produzione.
+ Inoltre, in caso di errori o discrepanze nella generazione o nella lettura
+ del timecode, potrebbero verificarsi problemi di sincronizzazione che richiedon
+o ulteriori sforzi di correzione.
+\end_layout
+
+\begin_layout Standard
+Un alternativa, soprattutto in ambienti meno 
+\begin_inset Quotes fld
+\end_inset
+
+professionali
+\begin_inset Quotes frd
+\end_inset
+
+, potrebbe essere quella di utilizzare un sistema basato sull'algoritmo
+ descritto precedentemente.
+ Si faccia riferimento alla figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Sinc-acquisizioni-multiple"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+:
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/acquisizioni_multiple_sincronizzazione.svg
+	width 50col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Sinc-acquisizioni-multiple"
+
+\end_inset
+
+Sincronizzazione acquisizioni multiple
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+L'acquisizione audio è disponibile
+\end_layout
+
+\begin_layout Enumerate
+L'acquisizione audio/video è disponibile
+\end_layout
+
+\begin_layout Enumerate
+L'audio viene estratto dall'acquisizione
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+La sincronizzazione avviene sul segnale audio e non sui fotogrammi
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+L'acquisizione audio estratta è disponibile
+\end_layout
+
+\begin_layout Enumerate
+Viene avviato l'algorimo per identificare l'
+\emph on
+offset temporale
+\emph default
+ tra le due acquisizioni
+\end_layout
+
+\begin_layout Enumerate
+L'offset temporale viene visualizzato all'utente
+\end_layout
+
+\begin_layout Standard
+A questo punto, l'operatore di post-produzione può sincronizzare le due
+ acquisizioni, evitando di utilizzare sistemi basati su timecode.
+\end_layout
+
+\begin_layout Standard
+Si potrebbe pensare, inoltre, facendo riferimento alla figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, di adottare un'architettura semplificata del sistema:
+\end_layout
+
+\begin_layout Itemize
+Il client, il server REST, il database e i segnali audio da analizzare risiedere
+bbero tutti sulla stessa macchina
+\end_layout
+
+\begin_layout Itemize
+Sebbene si continuerà ad utilizzare un database per le operazioni di memorizzazi
+one dei Link
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:I-Links"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+, si potrebbe utilizzare un DBMS più lightweight come SQLite
+\end_layout
+
+\begin_layout Itemize
+Il database dei Link andrebbe creato e distrutto ad ogni esecuzione dell'algorit
+mo
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
