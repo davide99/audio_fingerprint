@@ -12585,6 +12585,169 @@ potrebbe essere conveniente portare il database dei Link che caratterizzano
  identificazione sia più reattivo
 \end_layout
 
+\begin_layout Chapter
+Ringraziamenti
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Comment
+status open
+
+\begin_layout Plain Layout
+Desidero esprimere la mia più profonda gratitudine a tutte le persone che
+ mi hanno sostenuto durante il mio percorso universitario e durante la realizzaz
+ione di questa tesi.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Prima di tutto, vorrei ringraziare i miei genitori Gianni e Daniela, per
+ il loro amore, il loro costante sostegno e l'incoraggiamento che mi hanno
+ donato lungo tutto il cammino accademico.
+ Senza di loro, tutto questo non sarebbe stato possibile.
+\end_layout
+
+\begin_layout Plain Layout
+A mio padre, un uomo straordinario che ha saputo trasmettermi la passione
+ per l'informatica sin da quando ero bambino.
+ Grazie per aver reso la tecnologia parte integrante della nostra famiglia,
+ per avermi fornito gli strumenti necessari per esplorare questo mondo.
+ Ogni volta che mi portavi con te al lavoro da piccolo, mi hai aperto le
+ porte di un mondo affascinante, permettendomi di affacciarmi sulle sfide
+ e le possibilità dell'informatica.
+ Se oggi posso dedicarmi a ciò che amo, è grazie a te e alla tua dedizione
+ nel coltivare il mio interesse.
+\end_layout
+
+\begin_layout Plain Layout
+A mia madre, confidente instancabile e sostegno incondizionato lungo il
+ mio percorso.
+ Tu hai creduto in me anche quando io stesso avevo dubbi, hai instillato
+ in me fiducia e determinazione.
+ Sei stata al mio fianco in ogni momento, ascoltando le mie gioie e le mie
+ preoccupazioni, incoraggiandomi a superare ogni ostacolo.
+ Hai saputo vedere il mio potenziale e mi hai sostenuto con il tuo amore
+ incondizionato.
+ Grazie, mamma, per il tuo sostegno costante, per avermi dato la forza di
+ credere in me stesso e per avermi insegnato il valore della perseveranza.
+ Senza di te, non avrei potuto realizzare tutto ciò che ho raggiunto.
+ Il mio successo è anche il tuo successo, e per questo ti sono eternamente
+ grato.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Un ringraziamento speciale va al mio relatore, il professor Antonio Servetti,
+ per la sua guida, il suo prezioso supporto, la sua fiducia in me e il tempo
+ dedicatomi.
+ La sua esperienza e il suo entusiasmo hanno reso questo percorso di ricerca
+ ancora più stimolante e gratificante.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Voglio inoltre ringraziare i miei amici, i 
+\emph on
+coki
+\emph default
+, che sono stati al mio fianco durante gli alti e i bassi di questa avventura
+ accademica.
+ Le nostre discussioni, le condivisioni e il sostegno reciproco hanno reso
+ il mio percorso molto più leggero.
+\end_layout
+
+\begin_layout Plain Layout
+A Lorenzo (
+\emph on
+Arabella
+\emph default
+), vorrei esprimere la mia gratitudine per la tua costante presenza, il
+ tuo sostegno incondizionato e l'avermi fatto appassionare alla musica.
+ Hai sempre creduto in me e hai condiviso le mie gioie e le mie sfide.
+ La tua amicizia è un vero tesoro.
+\end_layout
+
+\begin_layout Plain Layout
+A Emmanuel, desidero ringraziarti per le chiacchierate fino alle 3 di notte,
+ le risate, i consigli, i piani diabolici e l'energia positiva.
+ Hai reso i momenti di studio e di svago ancora più significativi con la
+ tua presenza.
+ Si sente quando non ci sei.
+\end_layout
+
+\begin_layout Plain Layout
+A Andrea (
+\emph on
+Felipe
+\emph default
+), desidero ringraziarti per i tuoi preziosi aiuti tecnici e i consigli
+ che mi hai fornito da buon (
+\emph on
+vero
+\emph default
+) informatico.
+ Sono grato per la tua collaborazione e per aver condiviso con te questa
+ passione per l'informatica in questi anni.
+\end_layout
+
+\begin_layout Plain Layout
+Infine, a Gloria, voglio ringraziarti per le risate che abbiamo condiviso
+ e i momenti che hai catturato con le tue preziose polaroid, che custodisco
+ gelosamente.
+ Ricorderò sempre i nostri momenti di spensieratezza e le biciclette rotte.
+ Grazie per la tua allegria, la tua creatività e la tua amicizia.
+\end_layout
+
+\begin_layout Plain Layout
+Non potrei essere più grato per avere amici così straordinari accanto a
+ me.
+ Grazie di cuore per tutto il vostro supporto e amicizia.
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Infine, desidero ringraziare tutti coloro che, in modo diretto o indiretto,
+ hanno contribuito alla realizzazione di questa tesi.
+ Il loro supporto, le loro risorse e il loro apporto hanno arricchito il
+ mio lavoro e reso possibile la sua conclusione con successo.
+\end_layout
+
+\begin_layout Plain Layout
+A tutte queste persone, che hanno condiviso con me gioie e sfide in questa
+ avventura accademica, voglio dedicare il mio più sincero apprezzamento
+ e riconoscimento.
+ Senza il vostro aiuto e il vostro incoraggiamento, questa tesi non sarebbe
+ stata una realtà.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Grazie di cuore a tutti voi.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
