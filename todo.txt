@@ -1,11 +1,8 @@
 -Nuovo titolo: Fingerprinting audio realizzato in browser?
 
 -migliorie rispetto ad algoritmi esistenti
-    Almeno un confronto
-    https://github.com/JorenSix/Panako
 
 -Intro:
     Ci sono già altre soluzioni (shazam)
-	stato dell'arte
 
 14 alle 9:00
