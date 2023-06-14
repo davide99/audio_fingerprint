@@ -12163,188 +12163,7 @@ tick}
 
 \begin_layout Plain Layout
 
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-40}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-40}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -12397,7 +12216,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	discard if not={snr}{-40}
+	discard if not={snr}{-30}
 \end_layout
 
 \begin_layout Plain Layout
@@ -12407,12 +12226,19 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	x=length, y=percentage_false, col sep=comma,
+	x=length, y=percentage_true, col sep=comma,
 \end_layout
 
 \begin_layout Plain Layout
 
 ] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{fin};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12438,7 +12264,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	discard if not={snr}{-40}
+	discard if not={snr}{-30}
 \end_layout
 
 \begin_layout Plain Layout
@@ -12448,7 +12274,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	x=length, y=percentage_false, col sep=comma,
+	x=length, y=percentage_true, col sep=comma,
 \end_layout
 
 \begin_layout Plain Layout
@@ -12460,7 +12286,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12480,45 +12306,6 @@ end{axis}
 \backslash
 end{tikzpicture}
 \end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Panako--40"
-
-\end_inset
-
-Rate positivi con 
-\begin_inset Formula $SNR=-40dB$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -12574,188 +12361,7 @@ tick}
 
 \begin_layout Plain Layout
 
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-30}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-30}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -12808,7 +12414,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	discard if not={snr}{-30}
+	discard if not={snr}{-20}
 \end_layout
 
 \begin_layout Plain Layout
@@ -12818,12 +12424,19 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	x=length, y=percentage_false, col sep=comma,
+	x=length, y=percentage_true, col sep=comma,
 \end_layout
 
 \begin_layout Plain Layout
 
 ] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{fin};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12849,7 +12462,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	discard if not={snr}{-30}
+	discard if not={snr}{-20}
 \end_layout
 
 \begin_layout Plain Layout
@@ -12859,7 +12472,7 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	x=length, y=percentage_false, col sep=comma,
+	x=length, y=percentage_true, col sep=comma,
 \end_layout
 
 \begin_layout Plain Layout
@@ -12871,7 +12484,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12911,414 +12524,7 @@ Rate positivi con
 \begin_inset Formula $SNR=-30dB$
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={True positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_true, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Panako--20"
-
-\end_inset
-
-Rate positivi con 
+ e 
 \begin_inset Formula $SNR=-20dB$
 \end_inset
 
@@ -13396,6 +12602,11 @@ tick}
 
 \begin_layout Plain Layout
 
+	legend cell align={left},
+\end_layout
+
+\begin_layout Plain Layout
+
 	width=0.5
 \backslash
 textwidth,
@@ -13464,6 +12675,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -13507,7 +12725,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13527,231 +12745,6 @@ end{axis}
 \backslash
 end{tikzpicture}
 \end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-10}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{-10}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Panako--10"
-
-\end_inset
-
-Rate positivi con 
-\begin_inset Formula $SNR=-10dB$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -13807,6 +12800,11 @@ tick}
 
 \begin_layout Plain Layout
 
+	legend cell align={left},
+\end_layout
+
+\begin_layout Plain Layout
+
 	width=0.5
 \backslash
 textwidth,
@@ -13875,6 +12873,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -13918,193 +12923,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{0}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{0}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -14136,11 +12955,15 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Panako-0"
+name "fig:Panako--10"
 
 \end_inset
 
 Rate positivi con 
+\begin_inset Formula $SNR=-10dB$
+\end_inset
+
+ e 
 \begin_inset Formula $SNR=0dB$
 \end_inset
 
@@ -14213,7 +13036,12 @@ tick}
 
 \begin_layout Plain Layout
 
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend style={at={(0.98,0.02)},anchor=south east,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -14286,6 +13114,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -14329,7 +13164,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -14349,231 +13184,6 @@ end{axis}
 \backslash
 end{tikzpicture}
 \end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{10}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{10}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Panako-10"
-
-\end_inset
-
-Rate positivi con 
-\begin_inset Formula $SNR=10dB$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -14624,7 +13234,12 @@ tick}
 
 \begin_layout Plain Layout
 
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend style={at={(0.98,0.02)},anchor=south east,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -14697,6 +13312,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -14740,193 +13362,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{20}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -14958,11 +13394,15 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Panako-20"
+name "fig:Panako-10"
 
 \end_inset
 
 Rate positivi con 
+\begin_inset Formula $SNR=10dB$
+\end_inset
+
+ e 
 \begin_inset Formula $SNR=20dB$
 \end_inset
 
@@ -15035,7 +13475,12 @@ tick}
 
 \begin_layout Plain Layout
 
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend style={at={(0.98,0.02)},anchor=south east,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -15108,6 +13553,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -15151,7 +13603,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -15171,231 +13623,6 @@ end{axis}
 \backslash
 end{tikzpicture}
 \end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{30}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{30}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-\begin_inset CommandInset label
-LatexCommand label
-name "fig:Panako-30"
-
-\end_inset
-
-Rate positivi con 
-\begin_inset Formula $SNR=30dB$
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status open
 
 \begin_layout Plain Layout
 
@@ -15446,7 +13673,12 @@ tick}
 
 \begin_layout Plain Layout
 
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+	legend style={at={(0.98,0.02)},anchor=south east,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
 \end_layout
 
 \begin_layout Plain Layout
@@ -15519,6 +13751,13 @@ addplot+[
 
 \begin_layout Plain Layout
 
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -15562,193 +13801,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{panako};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Lunghezza segmento ($s$)},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=0.5
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	xmin=0.5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	ymin=0, ymax=100,
-\end_layout
-
-\begin_layout Plain Layout
-
-	enlarge y limits=0.25
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=red,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{40}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/recording_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot+[
-\end_layout
-
-\begin_layout Plain Layout
-
-	solid,
-\end_layout
-
-\begin_layout Plain Layout
-
-	color=green,
-\end_layout
-
-\begin_layout Plain Layout
-
-	discard if not={snr}{40}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [
-\end_layout
-
-\begin_layout Plain Layout
-
-	x=length, y=percentage_false, col sep=comma,
-\end_layout
-
-\begin_layout Plain Layout
-
-] {data/panako_length_success_rate.csv};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addlegendentry{panako};
+addlegendentry{Panako};
 \end_layout
 
 \begin_layout Plain Layout
@@ -15780,11 +13833,15 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Panako-40"
+name "fig:Panako-30"
 
 \end_inset
 
 Rate positivi con 
+\begin_inset Formula $SNR=30dB$
+\end_inset
+
+ e 
 \begin_inset Formula $SNR=40dB$
 \end_inset
 
