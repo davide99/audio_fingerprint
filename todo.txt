@@ -5,4 +5,39 @@
 -Intro:
     Ci sono già altre soluzioni (shazam)
 
-14 alle 9:00
+21 alle 9:00
+
+
+grafico panako, mio, true positive
+audio fingerprinting running on wasm
+web assm audio fingerprintng running in the browser
+fingerpting audio in wasm per l'esecuzione in browser web
+
+olaf: https://github.com/JorenSix/Olaf (se avanza tempo)
+
+10-12 min, presentazione
+10 slide circa
+-obiettivi (fingerpritng nel browser)
+	-perchè? fino a pochi anni fa capacità browser limitate (audio e realtime) tutto su server, implemntaizoni correnti spediscono audio al server. Ora col browser si può fare gran parte in locale per scaricare il server
+	-schema old/new
+-cos'è audio fingerprinting
+	-cos'è?
+	-hash di spezzoni di audio
+	-applicazioni: riconoscimento (ahzam, acousticid, acrcloud) e sync second screen
+		-citazione su come fanno soldi?
+		-sync audio/video, pubblicità
+-wasm e webaudio
+	-sorgenti compilati eseguiti nel browser
+	-integrazione con webaudio
+		-riferimento covid, ha sdoganato queste tecnologie
+	-acquisizione, passaggio di memoria, gestione thread real time, 128 campioni, invio dati con fetch
+=====circa 4 slide fino a qui======
+-spiegazione algoritmo, sfruttare molto le immagini
+=====4/7 slide======
+-curve di riconoscimento in fz della lunghezza segmento
+-e del rumore
+========
+applicazioni
+:riconoscimento
+:sync
+farla molto a keyword
