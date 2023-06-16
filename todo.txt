@@ -1,21 +1,11 @@
--Nuovo titolo: Fingerprinting audio realizzato in browser?
-
--migliorie rispetto ad algoritmi esistenti
-
--Intro:
-    Ci sono già altre soluzioni (shazam)
-
 21 alle 9:00
 
+Titolo:
+    -web asm audio fingerprintng running in the browser
+    -fingerpring audio in wasm per l'esecuzione in browser web
 
-grafico panako, mio, true positive
-audio fingerprinting running on wasm
-web assm audio fingerprintng running in the browser
-fingerpting audio in wasm per l'esecuzione in browser web
-
-olaf: https://github.com/JorenSix/Olaf (se avanza tempo)
-
-10-12 min, presentazione
+Presentazione:
+10-12 min
 10 slide circa
 -obiettivi (fingerpritng nel browser)
 	-perchè? fino a pochi anni fa capacità browser limitate (audio e realtime) tutto su server, implemntaizoni correnti spediscono audio al server. Ora col browser si può fare gran parte in locale per scaricare il server
