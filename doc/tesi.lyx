@@ -123,25 +123,14 @@ status open
 
 
 \backslash
-title[Identificazione audio resistente al rumore in WebAssembly]{
+title[Audio fingerprinting in WebAssembly per l'esecuzione in browser web]{
 \end_layout
 
 \begin_layout Plain Layout
 
   
 \backslash
-mbox{Identificazione} 
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-  
-\backslash
-mbox{audio resistente} 
+mbox{Audio} 
 \backslash
 
 \backslash
@@ -152,7 +141,7 @@ mbox{audio resistente}
 
   
 \backslash
-mbox{al rumore} 
+mbox{fingerprinting} 
 \backslash
 
 \backslash
@@ -163,7 +152,29 @@ mbox{al rumore}
 
   
 \backslash
-mbox{in WebAssembly}
+mbox{in WebAssembly} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{per l'esecuzione} 
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+  
+\backslash
+mbox{in browser web}
 \end_layout
 
 \begin_layout Plain Layout
@@ -757,6 +768,21 @@ second-screen application
  per la presentazione in sincronia con un brano riprodotto del testo del
  brano stesso, analizzando come questo tipo di applicazioni possano giovare
  delle soluzioni discusse in questo documento.
+\end_layout
+
+\begin_layout Standard
+Il capitolo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Confronto-con-OLAF"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ analizzerà le differenze e il funzionamento di un altro algoritmo concorrente
+ open-source.
 \end_layout
 
 \begin_layout Standard
@@ -12108,6 +12134,12 @@ setTimeout
 \end_layout
 
 \begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Confronto-con-OLAF"
+
+\end_inset
+
 Confronto con OLAF
 \end_layout
 
@@ -12771,7 +12803,7 @@ noprefix "false"
 \begin_inset Formula $SNR=-40dB$
 \end_inset
 
- in quanto entrambi gli algoritmi presentavano un true positive rate pressocchè
+ in quanto entrambi gli algoritmi presentavano un true positive rate pressoché
  nullo.
 \end_layout
 
@@ -14569,11 +14601,11 @@ per segmenti di durata superiore a circa
 \end_layout
 
 \begin_layout Itemize
-per segmenti di dutata inferiore a circa 
+per segmenti di durata inferiore a circa 
 \begin_inset Formula $2s$
 \end_inset
 
- OLAF ha un rate di ricoscimento più elevato
+ OLAF ha un rate di riconoscimento più elevato
 \end_layout
 
 \end_deeper
