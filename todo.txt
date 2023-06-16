@@ -1,8 +1,8 @@
 21 alle 9:00
 
 Titolo:
-    -web asm audio fingerprintng running in the browser
-    -fingerpring audio in wasm per l'esecuzione in browser web
+    -WebAssembly-based audio fingerprinting running in the browser
+    -Audio fingerprinting in WebAssembly per l'esecuzione in browser web
 
 Presentazione:
 10-12 min
