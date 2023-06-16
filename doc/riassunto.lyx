@@ -1,0 +1,572 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{pgfplots}
+\usetikzlibrary{patterns}
+\usetikzlibrary{er,positioning}
+\usepackage{filecontents}
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{2}
+
+\begin{filecontents*}{data/windows_success_rate.csv}
+\end{filecontents*}
+\begin{filecontents*}{data/matching_time_difference.csv}
+\end{filecontents*}
+\begin{filecontents*}{data/recording_length_success_rate.csv}
+\end{filecontents*}
+\begin{filecontents*}{data/min_hint.csv}
+\end{filecontents*}
+\begin{filecontents*}{data/panako_length_success_rate.csv}
+\end{filecontents*}
+\pgfmathdeclarefunction{gauss}{2}{%
+  \pgfmathparse{1/(#2*sqrt(2*pi))*exp(-((x-#1)^2)/(2*#2^2))}%
+}
+
+\usepackage[htt]{hyphenat}
+
+%per filtrare dati csv
+\pgfplotsset{
+    discard if not/.style 2 args={
+        x filter/.code={
+            \edef\tempa{\thisrow{#1}}
+            \edef\tempb{#2}
+            \ifx\tempa\tempb
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language italian
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 3cm
+\rightmargin 3cm
+\bottommargin 3cm
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Audio fingerprinting in WebAssembly per l'esecuzione in browser web
+\end_layout
+
+\begin_layout Author
+Davide Pisanò - Antonio Servetti
+\end_layout
+
+\begin_layout Part*
+Introduzione
+\end_layout
+
+\begin_layout Standard
+Negli ultimi anni si è notato un trend sempre crescente nell'utilizzo di
+ JavaScript per la creazione di applicazioni desktop.
+\end_layout
+
+\begin_layout Standard
+Il motivo principale dietro alla popolarità di questo ecosistema basato
+ su JavaScript è la possibilità di utilizzare un'unica codebase che può
+ essere eseguita su piattaforme molto diverse tra loro, problematica che
+ è molto sentita nell'ambito mobile dove si hanno due piattaforme completamente
+ diverse: Android e iOS.
+\end_layout
+
+\begin_layout Standard
+Il trend di scrivere applicazioni in JavaScript è stato amplificato dalla
+ crescente importanza del web come piattaforma per la distribuzione di applicazi
+oni software.
+ Software utilizzati quotidianamente da miliardi di utenti sono basati sul
+ web e, per forza di cose, devono essere scritti in JavaScript.
+\end_layout
+
+\begin_layout Standard
+Da qui la nascita delle cosiddette 
+\emph on
+Rich Internet Applications
+\emph default
+ (RIA), ovvero applicazioni web che offrono un'esperienza utente interattiva
+ e avanzata simile a quella di un'applicazione desktop tradizionale.
+ Oltre alla classica triade HTML + CSS + JavaScript le RIA possono fare
+ uso di tecnologie più avanzate e recenti come WebAudio e WebAssembly.
+ In sostanza il browser diventa un'interfaccia o un'astrazione della macchina
+ sottostante, alla quale si può accedere utilizzando JavaScript.
+\end_layout
+
+\begin_layout Standard
+Nello specifico WebAudio è un'API JavaScript avanzata che consente di manipolare
+ e generare audio all'interno del browser.
+ È stata progettata per consentire agli sviluppatori di creare RIA che includono
+ funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
+ di suoni.
+\end_layout
+
+\begin_layout Standard
+La necessità di scrivere applicazioni real time ha portato la necessità
+ di dover eseguire codice ad alta efficienza, obiettivo non realizzabile
+ completamente con un linguaggio interpretato quale JavaScript.
+ Alla fine degli anni 2010 nasce quindi 
+\emph on
+WebAssembly
+\emph default
+ (Wasm): un formato di codice binario portabile che consente di eseguire
+ codice di basso livello all'interno del browser web.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sfruttando tutte queste tecnologie e un ecosistema ormai maturo, l'obiettivo
+ della tesi è quello di discutere la realizzazione di un sistema per l'identific
+azione di audio: un utente sottopone uno spezzone di un brano audio di pochi
+ secondi al sistema, il quale risponde col nome di quel brano.
+ L'obiettivo principale è quello di eseguire l'algoritmo di identificazione
+ su dispositivi eterogenei all'interno di un web browser, utilizzando Wasm
+ e WebAudio.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Verrà discussa anche la realizzazione di una 
+\emph on
+second-screen application
+\emph default
+, ovvero un applicazione o servizio progettato per essere utilizzato su
+ un dispositivo separato, come smartphone o tablet, mentre si fruisce un
+ altro contenuto su un dispositivo di 
+\emph on
+maggiore importanza
+\emph default
+, come la televisione o lo schermo di un PC.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La tesi guiderà il lettore attraverso la realizzazione del sistema di identifica
+zione tra i vari capitoli; saranno esaminate in maniera approfondita le
+ molteplici sfaccettature implementative, corredate da presentazione di
+ dati e grafici, al fine di consentire una comprensione completa delle motivazio
+ni che hanno guidato le scelte dell'autore.
+\end_layout
+
+\begin_layout Part*
+Architettura generale
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/architettura_generale.svg
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Schema-architettura-generale"
+
+\end_inset
+
+Schema architettura generale
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'architettura di base del sistema (in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), seppur ispirata al modello client/server, si discosta dalla tradizionale
+ asimmetria tra i due attori, in cui il primo agisce come mero terminale
+ passivo, limitandosi a interagire con l'API del server.
+ La nuova soluzione adottata, invece, si propone di spostare parte della
+ logica di business dal server al client, in un'ottica distribuita che avvicina
+ la computazione all'utente e alleggerisce, al contempo, il carico sul server
+ centrale, riducendo così i costi correlati.
+\end_layout
+
+\begin_layout Section*
+Scomposizione dell'architettura
+\end_layout
+
+\begin_layout Standard
+\noindent
+L'architettura (in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Schema-architettura-generale"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) può essere scomposta come segue:
+\end_layout
+
+\begin_layout Enumerate
+Si inizia dai brani originali, la canzone nella sua interezza, salvata su
+ una memoria di massa.
+ La canzone è sottoposta ad una algoritmo di 
+\emph on
+fingerprinting
+\emph default
+, in cui vengono estratte alcune features caratterizzanti.
+\end_layout
+
+\begin_layout Enumerate
+Le features estratte vengono memorizzate all'interno di un database insieme
+ al nome della canzone alla quale appartengono.
+\end_layout
+
+\begin_layout Enumerate
+Si immagini quindi che, ad un certo punto, un client voglia avviare il processo
+ di riconoscimento di un brano: viene registrato uno spezzone audio di pochi
+ secondi e viene innescata la stessa procedura di 
+\emph on
+fingerprinting
+\emph default
+ al punto 1 sul client, ma in questo caso le features estratte vengono inviate
+ ad un endpoint REST.
+\end_layout
+
+\begin_layout Enumerate
+Il server REST cerca di individuare delle similarità tra le features già
+ presenti nel database e quelle appena inviategli dal client.
+\end_layout
+
+\begin_layout Enumerate
+Se la ricerca ha successo, il server REST estrae dal database il nome della
+ corrispondenza migliore.
+\end_layout
+
+\begin_layout Enumerate
+Se la ricerca ha successo, il server REST invia al client il nome della
+ corrispondenza migliore.
+\end_layout
+
+\begin_layout Standard
+Si noti, anzitutto, che la parte più intensiva dal punto di vista computazionale
+ è l'estrazione delle features.
+ In altre parole, il momento di maggior carico computazionale si verifica
+ in due fasi:
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Lato server
+\emph default
+: solo nella fase iniziale che porta al popolamento del database, durante
+ l'analisi dei brani originali (ovvero fasi 1 e 2)
+\end_layout
+
+\begin_layout Itemize
+
+\emph on
+Lato client
+\emph default
+: nell'estrazione delle features della registrazione del brano da riconoscere
+\end_layout
+
+\begin_layout Standard
+Quindi, l'operazione più onerosa per il server viene eseguita una sola volta:
+ all'atto del fingerprinting dei brani originali.
+ Sarà poi il client a farsi carico dell'operazione di fingerprinting per
+ l'identificazione del singolo brano.
+\end_layout
+
+\begin_layout Standard
+Il server REST ha una duplice funzione:
+\end_layout
+
+\begin_layout Itemize
+Presentare i dati nel formato corretto sia lato client che lato database,
+ fungendo quindi da una sorta di relay e disaccoppiando la rappresentazione
+ interna dei dati a quella esposta al client
+\end_layout
+
+\begin_layout Itemize
+Individuare similarità con le features già presenti nel database
+\end_layout
+
+\begin_layout Part*
+Organizzazione del codice
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/organizzazione_codice.svg
+	width 60col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Organizzazione-codice"
+
+\end_inset
+
+Schema organizzazione codice
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Il codice sorgente del sistema è suddiviso nei seguenti componenti (figura
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Organizzazione-codice"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Itemize
+La libreria 
+\emph on
+fin
+\emph default
+, deputata all'estrazione delle features (ovvero fare 
+\emph on
+fingerprinting
+\emph default
+) dei brani in esame.
+\end_layout
+
+\begin_layout Itemize
+La libreria 
+\emph on
+fin_db
+\emph default
+ preposta all'interazione con il database, svolgendo i compiti di inserimento
+ e ricerca delle features.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile 
+\emph on
+mock_client
+\emph default
+, riservato esclusivamente ad attività di testing, il quale riceve in input
+ un segmento noto di un brano, al fine di verificare la corretta identificazione
+ del brano stesso.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile 
+\emph on
+server_entry
+\emph default
+,
+\emph on
+ 
+\emph default
+in grado di elaborare i brani completi per estrarne le features, per poi
+ memorizzarle nel database insieme al nome del brano associato.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\emph on
+ server_rest
+\emph default
+ che espone l'endpoint REST per l'individuazione dei brani: riceve le features
+ del segmento audio estratte dal client, effettua una ricerca di un brano
+ compatibile all'interno del database e, in caso di esito positivo, restituisce
+ al client il nome del brano individuato.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+In realtà l'eseguibile è la RIA, contenente HTML, il modulo Wasm e il codice
+ JavaScript necessario al caricamento del modulo Wasm
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+wasm_client
+\emph default
+, ovvero il client, in grado di acquisire il segmento audio tramite microfono
+ del client, estraendone le features per poi inviarle a 
+\emph on
+server_rest
+\emph default
+.
+\end_layout
+
+\begin_layout Itemize
+L'eseguibile
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Anche in questo caso si ha a che fare con una RIA
+\end_layout
+
+\end_inset
+
+ 
+\emph on
+lyrics
+\emph default
+ è la second-screen application, costruita sulla base di wasm_client, aggiunge
+ la possibilità di visualizzare il testo sincronizzato (in tempo reale)
+ del brano riconosciuto.
+ 
+\end_layout
+
+\end_body
+\end_document
