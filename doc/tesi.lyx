@@ -3172,6 +3172,12 @@ findPeaks
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:I-Peaks"
+
+\end_inset
+
 I Peaks
 \end_layout
 
@@ -9674,6 +9680,12 @@ texttt{fetch}
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:La-durata-del-segmento-audio"
+
+\end_inset
+
 La durata del segmento audio
 \end_layout
 
@@ -12096,7 +12108,671 @@ setTimeout
 \end_layout
 
 \begin_layout Chapter
-Confronto con Panako
+Confronto con OLAF
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+OLAF
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/JorenSix/Olaf
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ è un'applicazione per l'identificazione audio, simile, nello scopo, all'algorit
+mo già presentato in questo documento.
+\end_layout
+
+\begin_layout Standard
+Il progetto è pensato principalmente per essere utilizzato su piattaforme
+ embedded, ma può essere eseguito anche su computer tradizionali.
+ È implementato in C e i suoi obiettivi sono quelli di essere efficiente,
+ ma allo stesso tempo facilmente portabile su architetture diverse.
+\end_layout
+
+\begin_layout Standard
+Nella tabella 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Principali-differenze-tra"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ sono elencate, a colpo d'occhio, alcune delle differenze tra l'algoritmo
+ presentato in questo documento e OLAF: questi dati sono stati ottenuti
+ analizzando il codice sorgente dell'applicazione e in particolare il file
+ 
+\family typewriter
+olaf_config.c
+\family default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<column alignment="center" valignment="top" width="0pt">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+fin
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+OLAF
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Funzione finestra
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hann
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Hamming
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Dimensione finestra
+\emph default
+ (campioni)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+512
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1024
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Sample rate
+\emph default
+ (Hz)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Step size finestra
+\emph default
+ (campioni)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+256
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+128
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Frequenza minima 
+\emph default
+(Hz)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+174
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+140
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Frequenza massima 
+\emph default
+(Hz)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3616
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Distanza picco-anchor minima 
+\emph default
+(ms)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Distanza picco-anchor massima
+\emph default
+ (ms)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+264
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Numero minimo Link comuni per match
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Principali-differenze-tra"
+
+\end_inset
+
+Principali differenze tra fin e OLAF
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Vi sono anche alcune importati differenze su cosa i due algoritmi considerano
+ picco
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:I-Links"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Nel caso di OLAF un picco è definito tale se e solo se, nello spettro, è
+ un punto di massimo locale nell'intorno di:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $1.6KHz$
+\end_inset
+
+ sull'asse delle frequenze
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $200ms$
+\end_inset
+
+ sull'asse dei tempi
+\end_layout
+
+\begin_layout Standard
+Inoltre, il numero di picchi per finestra viene limitato a 
+\begin_inset Formula $60$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Nel caso di fin, invece, la definizione di picco è più 
+\emph on
+fine
+\emph default
+.
+ L'algoritmo è già stato trattato
+\emph on
+ 
+\emph default
+nei paragrafi 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:I-Peaks"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:I-Links"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, ma qui di seguito viene riportato un breve recap: occorre discriminare
+ tra picco 
+\emph on
+candidato 
+\emph default
+e picco 
+\emph on
+effettivo
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Un picco è considerato 
+\emph on
+candidato
+\emph default
+ se e solo se è un punto di massimo locale nell'intorno di 
+\begin_inset Formula $78Hz$
+\end_inset
+
+ sull'asse delle frequenze.
+\end_layout
+
+\begin_layout Standard
+A questo punto viene effettuato un ulteriore passaggio: i picchi candidati
+ vengono raccolti per ogni banda critica e a passo di 
+\begin_inset Formula $500ms$
+\end_inset
+
+; solo i 
+\begin_inset Formula $3$
+\end_inset
+
+ picchi candidati ad intensità maggiore diventano picchi 
+\emph on
+effettivi
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+Inoltre, nella creazione dei Link, i picchi che lo compongono devono far
+ parte obbligatoriamente della stessa banda critica, cosa che non avviene
+ nel caso di OLAF.
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+Si è quindi proceduto nel valutare la bontà dei due algoritmi, adottando
+ un approccio simile a quanto già descritto nel paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:La-durata-del-segmento-audio"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ È stato predisposto un altro 
+\emph on
+ambiente di test
+\emph default
+, composto dai già citati 400 brani e per ognuno di questi brani:
+\end_layout
+
+\begin_layout Enumerate
+è stato estratto un segmento con una durata compresa tra 
+\begin_inset Formula $0.5$
+\end_inset
+
+ e 
+\begin_inset Formula $6$
+\end_inset
+
+ secondi, con un passo di 
+\begin_inset Formula $0.5$
+\end_inset
+
+ secondi
+\end_layout
+
+\begin_layout Enumerate
+ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
+ un range tra 
+\begin_inset Formula $-40dB$
+\end_inset
+
+ e 
+\begin_inset Formula $40dB$
+\end_inset
+
+ a passo 10
+\end_layout
+
+\begin_layout Enumerate
+per ogni segmento è stato avviato il processo di identificazione utilizzando
+ sia fin che OLAF
+\end_layout
+
+\begin_layout Standard
+Nelle figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako--30"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako--10"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako-10"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako-30"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ viene riportato il rate delle identificazioni corrette, mettendo a confronto
+ i due algoritmi.
+ È stato escluso il grafico nel caso 
+\begin_inset Formula $SNR=-40dB$
+\end_inset
+
+ in quanto entrambi gli algoritmi presentavano un true positive rate pressocchè
+ nullo.
 \end_layout
 
 \begin_layout Standard
@@ -12286,7 +12962,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12484,7 +13160,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12725,7 +13401,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -12923,7 +13599,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13164,7 +13840,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13362,7 +14038,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13603,7 +14279,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13801,7 +14477,7 @@ addplot+[
 
 
 \backslash
-addlegendentry{Panako};
+addlegendentry{OLAF};
 \end_layout
 
 \begin_layout Plain Layout
@@ -13855,7 +14531,135 @@ Rate positivi con
 
 \end_inset
 
+Dai grafici si possono estrarre le seguenti informazioni:
+\end_layout
 
+\begin_layout Itemize
+per un SNR compreso tra 
+\begin_inset Formula $-20dB$
+\end_inset
+
+ e 
+\begin_inset Formula $0dB$
+\end_inset
+
+ è evidente la superiorità di fin, che presenta un rate di riconoscimento
+ quasi doppio per segmenti audio sufficientemente lunghi
+\end_layout
+
+\begin_layout Itemize
+per un SNR compreso tra 
+\begin_inset Formula $10dB$
+\end_inset
+
+ e 
+\begin_inset Formula $40dB$
+\end_inset
+
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+per segmenti di durata superiore a circa 
+\begin_inset Formula $2s$
+\end_inset
+
+ fin ottiene i risultati migliori
+\end_layout
+
+\begin_layout Itemize
+per segmenti di dutata inferiore a circa 
+\begin_inset Formula $2s$
+\end_inset
+
+ OLAF ha un rate di ricoscimento più elevato
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+il rate di riconoscimento di fin tende al 
+\begin_inset Formula $100\%$
+\end_inset
+
+ più velocemente di quello di OLAF
+\end_layout
+
+\begin_layout Standard
+Questi comportamenti sono giustificati dall'implementazione delle due soluzioni.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset VSpace defskip
+\end_inset
+
+Fin ha un algoritmo per la scelta dei picchi più rifinito, in cui viene
+ sfruttato il concetto di banda critica.
+ Questo gli permette di essere più immune al rumore.
+\end_layout
+
+\begin_layout Standard
+Dall'altro lato OLAF performa meglio quando il rumore è relativamente 
+\emph on
+contenuto
+\emph default
+ ed è superiore a fin per segmenti di durata inferiore a 
+\begin_inset Formula $2s$
+\end_inset
+
+.
+ Questo è dovuto al metodo con il quale vengono costruiti i Link in fin:
+ la distanza tra anchor point e picco dev'essere di almeno 
+\begin_inset Formula $1s$
+\end_inset
+
+, mentre in OLAF tale distanza è pari a 
+\begin_inset Formula $16ms$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi tabella 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Principali-differenze-tra"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Si noti, infatti, come nei grafici per 
+\begin_inset Formula $SNR\geq10dB$
+\end_inset
+
+ la curva di fin cambia repentinamente pendenza nell'intorno di 
+\begin_inset Formula $1s$
+\end_inset
+
+.
+ In altre parole: i Link iniziano ad essere creati per segmenti audio di
+ lunghezza superiore a 
+\begin_inset Formula $1s$
+\end_inset
+
+ nel caso fin, di 
+\begin_inset Formula $16ms$
+\end_inset
+
+ nel caso di OLAF.
+ In futuro si potrebbe pensare di modificare questi parametri, per migliorare,
+ potenzialmente, le performance di fin nel caso di segmenti audio più brevi.
 \end_layout
 
 \begin_layout Chapter
