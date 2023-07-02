@@ -1,19 +1,16 @@
-21 alle 9:00
-
-Titolo:
-    -WebAssembly-based audio fingerprinting running in the browser
-    -Audio fingerprinting in WebAssembly per l'esecuzione in browser web
-
 Presentazione:
 10-12 min
 10 slide circa
--obiettivi (fingerpritng nel browser)
-	-perchè? fino a pochi anni fa capacità browser limitate (audio e realtime) tutto su server, implemntaizoni correnti spediscono audio al server. Ora col browser si può fare gran parte in locale per scaricare il server
+-obiettivi (fingerprinting nel browser)
+	-perchè?
+	    -fino a pochi anni fa capacità browser limitate (audio e realtime) tutto su server
+	    -implementazioni correnti spediscono audio al server
+	    -ora col browser si può fare gran parte in locale per scaricare il server
 	-schema old/new
 -cos'è audio fingerprinting
 	-cos'è?
 	-hash di spezzoni di audio
-	-applicazioni: riconoscimento (ahzam, acousticid, acrcloud) e sync second screen
+	-applicazioni: riconoscimento (shazam, acousticid, acrcloud) e sync second screen
 		-citazione su come fanno soldi?
 		-sync audio/video, pubblicità
 -wasm e webaudio
