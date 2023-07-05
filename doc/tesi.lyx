@@ -369,13 +369,9 @@ literal "true"
  e framework per JavaScript, atti a semplificare lo sviluppo di applicazioni
  web complesse e a migliorarne la qualità, giusto per citarne alcuni: React,
  Angular, Vue.js, ma anche il più 
-\begin_inset Quotes eld
-\end_inset
-
+\emph on
 anziano
-\begin_inset Quotes erd
-\end_inset
-
+\emph default
  jQuery.
 \begin_inset VSpace defskip
 \end_inset
@@ -426,7 +422,7 @@ Del quale non mancano i detrattori
 
 \begin_layout Standard
 Nei primi anni 2010, quando Node.js iniziava a prendere piede, ci si è posti
- un'altra domanda 
+ un'altra domanda: 
 \begin_inset Quotes eld
 \end_inset
 
@@ -506,7 +502,7 @@ literal "true"
  avanzata simile a quella di un'applicazione desktop tradizionale.
  Le RIA sono caratterizzate da una vasta gamma di funzionalità e interattività
  che le distinguono dalla semplici pagine web statiche.
- Oltre alla classica triade HTML + CSS + JavaScript le RIA possono fare
+ Oltre alla classica triade HTML + CSS + JavaScript, le RIA possono fare
  uso di tecnologie più avanzate e recenti come WebSockets, WebAudio, WebAssembly
 , WebRTC, WebVR, WebGPU, Web Animations API.
  In sostanza il browser diventa un'interfaccia o un'astrazione della macchina
@@ -527,8 +523,8 @@ literal "true"
  È stata progettata per consentire agli sviluppatori di creare RIA che includono
  funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
  di suoni.
- L'API è basata su un'architettura a nodi, dove ogni nodo rappresenta una
- singola operazione di elaborazione del suono.
+ L'API è basata su un'architettura a nodi, dove ognuno di essi rappresenta
+ una singola operazione di elaborazione del suono.
  I nodi possono essere collegati tra loro per creare una catena di elaborazione,
  in cui il suono viene elaborato in successione da ogni nodo che attraversa.
  La manipolazione del suono avviene in real time.
@@ -568,8 +564,9 @@ literal "true"
 Sfruttando tutte queste tecnologie e un ecosistema ormai maturo, l'obiettivo
  di questa tesi è quello di discutere la realizzazione di un sistema per
  l'identificazione di audio: un utente sottopone uno spezzone di un brano
- audio di pochi secondi al sistema, il quale risponde col nome di quel brano.
- L'obiettivo principale è quello di eseguire l'algoritmo di identificazione
+ audio di pochi secondi al sistema, il quale lo riconosce e può mostare
+ all'utente informazioni ad esso correlate.
+ L'intento, inoltre, è quello di eseguire l'algoritmo di identificazione
  su dispositivi eterogenei all'interno di un web browser, utilizzando Wasm
  e WebAudio.
  Questo presenta numerosi vantaggi, tra i più importanti si possono individuare:
@@ -617,11 +614,8 @@ literal "true"
 
 , ovvero un applicazione o servizio progettato per essere utilizzato su
  un dispositivo separato, come smartphone o tablet, mentre si fruisce un
- altro contenuto su un dispositivo di 
-\emph on
-maggiore importanza
-\emph default
-, come la televisione o lo schermo di un PC.
+ altro contenuto su un dispositivo di maggiore importanza, come la televisione
+ o lo schermo di un PC.
  Queste applicazioni offrono un'esperienza interattiva e complementare al
  contenuto principale, arricchendo l'interazione dell'utente e fornendo
  ulteriori informazioni.
@@ -766,7 +760,7 @@ noprefix "false"
 \emph on
 second-screen application
 \emph default
- per la presentazione in sincronia con un brano riprodotto del testo del
+ per la presentazione, in sincronia con un brano riprodotto, del testo del
  brano stesso, analizzando come questo tipo di applicazioni possano giovare
  delle soluzioni discusse in questo documento.
 \end_layout
@@ -873,16 +867,17 @@ dumb terminal
 
 \end_inset
 
-, limitandosi a interagire con l'API del server.
+, limitandosi a interagire con l'API esposta dal server.
  La nuova soluzione adottata, invece, si propone di spostare parte della
  logica di business dal server al client, in un'ottica distribuita che avvicina
- la computazione all'utente e alleggerisce, al contempo, il carico sul server
- centrale, riducendo così i costi correlati.
+ la computazione all'utente e alleggerisce, al contempo, il carico sul server,
+ riducendo così i costi correlati.
  Tale approccio innovativo sfrutta le risorse disponibili sui dispositivi
  dell'utente, aumentando la scalabilità del sistema e garantendo prestazioni
  elevate e una maggiore efficienza.
- Questa soluzione rappresenta un notevole passo avanti nella progettazione
- di applicazioni web avanzate, fornendo un'esperienza utente fluida e gradevole.
+ Questa soluzione rappresenta un passo avanti nella progettazione di applicazion
+i web computazionalmente onerose, fornendo un'esperienza utente potenzialmente
+ più fluida e gradevole.
 \end_layout
 
 \begin_layout Subsection
@@ -938,8 +933,8 @@ Si immagini quindi che, ad un certo punto, un client voglia avviare il processo
 \emph on
 fingerprinting
 \emph default
- al punto 1 sul client, ma in questo caso le features estratte vengono inviate
- ad un endpoint REST.
+ del punto 1 sul client, ma in questo caso le features estratte vengono
+ inviate ad un endpoint REST.
 \end_layout
 
 \begin_layout Enumerate
@@ -960,17 +955,7 @@ Se la ricerca ha successo, il server REST invia al client il nome della
 \begin_layout Standard
 Si noti, anzitutto, che la parte più intensiva dal punto di vista computazionale
  è l'estrazione delle features, al contrario la ricerca delle similarità,
- sebbene impegnativa, non lo è quanto l'estrazione delle features stesse
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Ulteriori considerazioni sull'argomento verranno fatte in seguito
-\end_layout
-
-\end_inset
-
-.
+ sebbene impegnativa, non lo è quanto l'estrazione delle features stesse.
  In altre parole, il momento di maggior carico computazionale si verifica
  in due fasi:
 \end_layout
@@ -981,7 +966,7 @@ Ulteriori considerazioni sull'argomento verranno fatte in seguito
 Lato server
 \emph default
 : solo nella fase iniziale che porta al popolamento del database, durante
- l'analisi dei brani originali (ovvero fasi 1 e 2)
+ l'analisi dei brani originali (ovvero fasi 1 e 2).
 \end_layout
 
 \begin_layout Itemize
@@ -989,7 +974,7 @@ Lato server
 \emph on
 Lato client
 \emph default
-: nell'estrazione delle features della registrazione del brano da riconoscere
+: nell'estrazione delle features della registrazione del brano da riconoscere.
 \end_layout
 
 \begin_layout Standard
@@ -1006,15 +991,16 @@ Il server REST ha una duplice funzione:
 \begin_layout Itemize
 Presentare i dati nel formato corretto sia lato client che lato database,
  fungendo quindi da una sorta di relay e disaccoppiando la rappresentazione
- interna dei dati a quella esposta al client
+ interna dei dati a quella esposta al client.
 \end_layout
 
 \begin_layout Itemize
-Individuare similarità con le features già presenti nel database
+Individuare similarità con le features già presenti nel database.
 \end_layout
 
 \begin_layout Standard
-L'intero sistema verrà descritto in modo più dettagliato nei capitoli successivi.
+L'intero sistema verrà descritto in modo più dettagliato e rigoroso nei
+ capitoli successivi.
 \end_layout
 
 \begin_layout Section
@@ -1119,7 +1105,8 @@ server_entry
  
 \emph default
 in grado di elaborare i brani completi per estrarne le features, per poi
- memorizzarle nel database insieme al nome del brano associato
+ memorizzarle nel database insieme al nome del brano associato.
+ Dipende da entrambe le librerie.
 \end_layout
 
 \begin_layout Itemize
