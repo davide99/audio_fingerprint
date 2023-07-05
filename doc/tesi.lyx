@@ -43,6 +43,7 @@
     }
 }
 \end_preamble
+\options a4paper
 \use_default_options true
 \maintain_unincluded_children false
 \language italian
