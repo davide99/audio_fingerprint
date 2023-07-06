@@ -8273,8 +8273,11 @@ noprefix "false"
 
 \end_inset
 
- ed evidenziando lo scope di server_entry, si ottiene quando riportato in
- figura 
+ ed evidenziando lo scope di 
+\emph on
+server_entry
+\emph default
+, si ottiene quanto riportato in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Schema-architettura-generale-server_entry"
@@ -8335,15 +8338,15 @@ server_entry
 \end_layout
 
 \begin_layout Enumerate
-leggere i file Wave dei brani originali da dalla memoria di massa
+Leggere i file Wave dei brani originali da dalla memoria di massa.
 \end_layout
 
 \begin_layout Enumerate
-estrarne i Links
+Estrarne i Links.
 \end_layout
 
 \begin_layout Enumerate
-memorizzare i Links e nomi dei brani all'interno del database
+Memorizzare i Links e nomi dei brani all'interno del database.
 \end_layout
 
 \begin_layout Standard
@@ -8363,8 +8366,8 @@ noprefix "false"
 
 \begin_layout Standard
 Più tecnicamente, server_entry riceve attraverso la riga di comando un path
- che punta ad una cartella contenente dei Wave e per ogni Wave nella cartella
- richiama una singola funzione di fin_db: 
+ che punta ad una cartella contenente dei file Wave e per ogni Wave nella
+ cartella richiama una singola funzione di fin_db: 
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
