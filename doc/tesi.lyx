@@ -15564,14 +15564,30 @@ name "chap:Utilizzi-futuri"
 Utilizzi futuri
 \end_layout
 
+\begin_layout Standard
+Di seguito ci si focalizzerà sui possibili utilizzi futuri del sistema descritto
+ nei capitoli precedenti.
+\end_layout
+
+\begin_layout Standard
+Nello specifico è importante notare come l'algoritmo del fingerprinting
+ possa essere usato anche in ambiti diversi rispetto a quello del riconoscimento
+ musicale, quali la sincronizzazione di più stream multimediali e il riconoscime
+nto di particolari segnali audio che indicano l'accadere di un determinato
+ evento.
+\end_layout
+
 \begin_layout Section
 Sincronizzazione di contenuti provenienti da sorgenti differenti
 \end_layout
 
 \begin_layout Standard
 Uno scenario tipico nella post-produzione di materiale audiovisivo è la
- sincronizzazione di materiale audiovisivo proveniente da più fonti.
- Si pensi ad uno scenario come quello in figura 
+ sincronizzazione di stream multimediali provenienti da più fonti.
+\end_layout
+
+\begin_layout Standard
+Si pensi ad uno scenario come quello in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Acquisizioni-multiple"
@@ -15624,12 +15640,12 @@ Scenario acquisizioni multiple
 
 \begin_layout Enumerate
 Una videocamera acquisisce un contenuto audio e video, l'audio viene registrato
- attraverso il microfono interno della videocamera
+ attraverso il microfono interno della videocamera.
 \end_layout
 
 \begin_layout Enumerate
 Un registratore audio acquisisce attraverso un microfono (per esempio un
- lavalier) l'audio di un operatore
+ lavalier) l'audio di un operatore.
 \end_layout
 
 \begin_layout Standard
@@ -15653,7 +15669,7 @@ o ulteriori sforzi di correzione.
 \end_layout
 
 \begin_layout Standard
-Un alternativa, soprattutto in ambienti meno 
+Un'alternativa, soprattutto in ambienti meno 
 \emph on
 professionali
 \emph default
@@ -15680,7 +15696,7 @@ status open
 \begin_inset External
 	template Inkscape
 	filename img/acquisizioni_multiple_sincronizzazione.svg
-	width 50col%
+	width 55col%
 
 \end_inset
 
@@ -15711,11 +15727,11 @@ Sincronizzazione acquisizioni multiple
 \end_layout
 
 \begin_layout Enumerate
-L'acquisizione audio è disponibile
+L'acquisizione audio è disponibile.
 \end_layout
 
 \begin_layout Enumerate
-L'acquisizione audio/video è disponibile
+L'acquisizione audio/video è disponibile.
 \end_layout
 
 \begin_layout Enumerate
@@ -15729,11 +15745,11 @@ La sincronizzazione avviene sul segnale audio e non sui fotogrammi
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
-L'acquisizione audio estratta è disponibile
+L'acquisizione audio estratta è disponibile.
 \end_layout
 
 \begin_layout Enumerate
@@ -15741,11 +15757,11 @@ Viene avviato l'algoritmo per identificare l'
 \emph on
 offset temporale
 \emph default
- tra le due acquisizioni
+ tra le due acquisizioni.
 \end_layout
 
 \begin_layout Enumerate
-L'offset temporale viene visualizzato all'utente
+L'offset temporale viene visualizzato all'utente.
 \end_layout
 
 \begin_layout Standard
@@ -15769,12 +15785,12 @@ noprefix "false"
 
 \begin_layout Itemize
 Il client, il server REST, il database e i segnali audio da analizzare risiedere
-bbero tutti sulla stessa macchina
+bbero tutti sulla stessa macchina.
 \end_layout
 
 \begin_layout Itemize
 Sebbene si continuerà ad utilizzare un database per le operazioni di memorizzazi
-one dei Link
+one dei Links
 \begin_inset Foot
 status open
 
@@ -15794,12 +15810,12 @@ noprefix "false"
 
 \end_inset
 
-, si potrebbe utilizzare un DBMS più lightweight come SQLite
+, si potrebbe utilizzare un DBMS più lightweight come SQLite.
 \end_layout
 
 \begin_layout Itemize
-Il database dei Link andrebbe creato e distrutto ad ogni esecuzione dell'algorit
-mo
+Il database dei Links andrebbe creato e distrutto ad ogni esecuzione dell'algori
+tmo.
 \end_layout
 
 \begin_layout Section
@@ -15830,6 +15846,10 @@ literal "true"
  La personalizzazione della pubblicità si basa proprio su questo concetto,
  adattando l'approccio promozionale per soddisfare le esigenze specifiche
  di ciascun individuo o segmento di utenti.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15883,6 +15903,10 @@ literal "true"
 \begin_layout Standard
 Il sistema di fingerprinting e riconoscimento discusso in questo documento
  presenta un ottimo candidato per l'implementazione di un sistema simile.
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -15952,7 +15976,7 @@ Grezzo, non elaborato
 
 \end_inset
 
- proveniente da una web radio viene scaricato in modo continuo da un client
+ proveniente da una web radio viene scaricato in modo continuo da un client.
 \end_layout
 
 \begin_layout Enumerate
@@ -15969,27 +15993,27 @@ specifico
 
 \begin_deeper
 \begin_layout Enumerate
-Subito dopo il marker iniziale viene inserito un segmento pubblicitario
- standard, ovvero non personalizzato
+subito dopo il marker iniziale viene inserito un segmento pubblicitario
+ standard, ovvero non personalizzato.
 \end_layout
 
 \begin_layout Enumerate
-D'altro canto, un client 
+d'altro canto, un client 
 \emph on
 intelligente
 \emph default
- può rilevare il marker iniziale: verrà analizzato questo scenario
+ può rilevare il marker iniziale: verrà analizzato questo scenario.
 \end_layout
 
 \end_deeper
 \begin_layout Enumerate
 Viene reperito un segmento pubblicitario personalizzato sulla base dell'ascoltat
-ore da una sorgente terza
+ore da una sorgente terza.
 \end_layout
 
 \begin_layout Enumerate
 Il segmento pubblicitario personalizzato viene inserito all'interno dello
- stream finale che l'utente ascolta
+ stream finale che l'utente ascolta.
 \end_layout
 
 \begin_layout Enumerate
@@ -15997,22 +16021,22 @@ Viene inserito un
 \series bold
 marker audio finale
 \series default
-, che indica che il segmento pubblicitario è terminato
+, che indica che il segmento pubblicitario è terminato.
 \end_layout
 
 \begin_deeper
 \begin_layout Enumerate
-Il segmento pubblicitario personalizzato dovrebbe essere già stato scelto
+il segmento pubblicitario personalizzato dovrebbe essere già stato scelto
  opportunamente, in modo tale che la durata sia compatibile con quella del
- segmento pubblicitario non personalizzato
+ segmento pubblicitario non personalizzato.
 \end_layout
 
 \begin_layout Enumerate
-Se così non fosse, si ritorna comunque allo stream 
+se così non fosse, si ritorna comunque allo stream 
 \emph on
 raw
 \emph default
- quando viene ricevuto il marker finale
+ quando viene ricevuto il marker finale.
 \end_layout
 
 \end_deeper
@@ -16021,29 +16045,29 @@ Si noti che:
 \end_layout
 
 \begin_layout Itemize
-questa soluzione non impatta su un client non intelligente, che fruisce
- lo stream 
+Questa soluzione è trasparente per il client non intelligente, ovvero non
+ impatta su di esso, dato che fruisce lo stream 
 \emph on
 raw
 \emph default
-, così come ha sempre fatto
+, così come ha sempre fatto.
 \end_layout
 
 \begin_layout Itemize
-il marker audio finale non è strettamente necessario, si potrebbe utilizzare
+Il marker audio finale non è strettamente necessario, si potrebbe utilizzare
  un marker audio iniziale diverso a seconda del tempo a disposizione per
- il segmento pubblicitario
+ il segmento pubblicitario.
 \end_layout
 
 \begin_layout Itemize
-il client dovrà avere un piccolo buffer, atto ad analizzare lo stream per
- individuare l'eventuale marker iniziale
+Il client dovrà avere un piccolo buffer, atto ad analizzare lo stream per
+ individuare l'eventuale marker iniziale prima del playback.
 \end_layout
 
 \begin_layout Itemize
-potrebbe essere conveniente portare il database dei Link che caratterizzano
+Potrebbe essere conveniente portare il database dei Links che caratterizzano
  i marker iniziali in locale sul client, in modo tale che il processo di
- identificazione sia più reattivo
+ identificazione sia più reattivo.
 \end_layout
 
 \begin_layout Chapter
