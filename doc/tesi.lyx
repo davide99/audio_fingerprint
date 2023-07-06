@@ -44,6 +44,8 @@
         }
     }
 }
+
+\def\lst@lettertrue{\let\lst@ifletter\iffalse}
 \end_preamble
 \options a4paper
 \use_default_options true
@@ -9665,7 +9667,7 @@ Il compito principale dell'eseguibile
 \emph on
 wasm_client
 \emph default
- è quello acquisire un breve segmento audio attraverso il microfono del
+ è quello di acquisire un breve segmento audio attraverso il microfono del
  client, estrarne i Links e inviarli al server_rest per avviare il processo
  di identificazione.
  Lo scope del client Wasm è quindi quello rappresentato in figura 
@@ -9727,7 +9729,7 @@ L'entry point
 \begin_layout Standard
 L'entry point del client Wasm è la funzione 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9755,7 +9757,7 @@ AudioContext
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -9784,7 +9786,7 @@ literal "true"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -9830,14 +9832,17 @@ AudioNode
 \begin_layout Standard
 La creazione del render thread è, in realtà, un'operazione asincrona: una
  volta terminata viene richiamata la callback 
-\begin_inset ERT
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{audioWorkletProcessorCreated}
+audioWorkletProcessorCreated
 \end_layout
 
 \end_inset
@@ -9851,14 +9856,14 @@ La callback audioWorkletProcessorCreated
 
 \begin_layout Standard
 La callback 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{audioWorkletProcessorCreated}
+audioWorkletProcessorCreated
 \end_layout
 
 \end_inset
@@ -9876,7 +9881,7 @@ AudioWorklet
 
 \end_inset
 
- per l'estrazione dei Links e della preparazione dell'interfaccia da proporre
+ per l'estrazione dei Links e della preparazione dell'interfaccia da esporre
  all'utente.
 \begin_inset VSpace defskip
 \end_inset
@@ -9911,14 +9916,14 @@ Nessun output
 
 \begin_layout Itemize
 Una funzione per il processamento custom chiamata 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{processAudio}
+processAudio
 \end_layout
 
 \end_inset
@@ -10119,7 +10124,20 @@ name "sec:La-funzione-processAudio"
 
 \end_inset
 
-La funzione processAudio
+La funzione 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+processAudio
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10161,14 +10179,14 @@ noprefix "false"
 
 \begin_layout Standard
 La funzione 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{processAudio}
+processAudio
 \end_layout
 
 \end_inset
@@ -10218,16 +10236,16 @@ texttt{DummyReader}
 \end_layout
 
 \begin_layout Standard
-Si noti però che una volta estratti i Links questi dovranno essere inviati
+Si noti, però, che una volta estratti i Links questi dovranno essere inviati
  al server, il che presuppone il poter utilizzare l'API JavaScript 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{fetch}
+fetch
 \end_layout
 
 \end_inset
@@ -10248,7 +10266,7 @@ texttt{AudioWorklet}
 \end_inset
 
 : bisogna ritornare nel main thread JavaScript.
- A questo scopo viene richiamata la funzione
+ A questo scopo viene richiamata la funzione:
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
@@ -10277,34 +10295,28 @@ void emscripten_audio_worklet_post_function_v(
 \end_inset
 
 passando come primo parametro 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{EMSCRIPTEN
-\backslash
-_AUDIO
-\backslash
-_MAIN
-\backslash
-_THREAD}
+EMSCRIPTEN_AUDIO_MAIN_THREAD
 \end_layout
 
 \end_inset
 
  ad indicare di voler dialogare con il main thread e come secondo parametro
  
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{messageReceivedOnMainThread}
+messageReceivedOnMainThread
 \end_layout
 
 \end_inset
@@ -10319,11 +10331,24 @@ name "sec:La-callback-messageReceivedOnMai"
 
 \end_inset
 
-La callback messageReceivedOnMainThread
+La callback 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+messageReceivedOnMainThread
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Ritornati nel main thread JavaScript e con abbastanza campioni, si può avviare
+Ritornati nel main thread JavaScript e con abbastanza campioni si può avviare
  il processo di identificazione.
  Si procede come segue:
 \end_layout
@@ -10343,19 +10368,19 @@ texttt{DummyReader}
 \end_inset
 
  utilizzando la funzione 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{fin::computeLinks}
+fin::computeLinks
 \end_layout
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -10372,20 +10397,24 @@ texttt{ByteBuffer}
 
 \end_inset
 
- attraverso 
-\begin_inset ERT
+ attraverso
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{toByteBuffer}
+toByteBuffer
 \end_layout
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -10402,60 +10431,60 @@ texttt{ByteBuffer}
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Viene configurata la 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{fetch}
+fetch
 \end_layout
 
 \end_inset
 
  per eseguire una POST verso il server REST che ha come body lo stream di
- byte
+ byte.
 \end_layout
 
 \begin_layout Enumerate
 Viene effettuata la 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{fetch}
+fetch
 \end_layout
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Se la 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{fetch}
+fetch
 \end_layout
 
 \end_inset
 
  ha successo e la registrazione viene identificata allora viene mostrato
- il nome del brano, insieme ad alcune informazioni accessorie
+ il nome del brano, insieme ad alcune informazioni accessorie.
 \end_layout
 
 \begin_layout Section
@@ -10488,11 +10517,11 @@ noprefix "false"
 \emph on
 ambiente di test
 \emph default
-, composto dai già citati 400 brani e per ognuno di questi brani:
+, composto dai già citati brani e per ognuno di essi:
 \end_layout
 
 \begin_layout Enumerate
-è stato estratto un segmento con una durata compresa tra 
+È stato estratto un segmento con una durata compresa tra 
 \begin_inset Formula $0.5$
 \end_inset
 
@@ -10504,11 +10533,11 @@ ambiente di test
 \begin_inset Formula $0.5$
 \end_inset
 
- secondi
+ secondi.
 \end_layout
 
 \begin_layout Enumerate
-ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
+Ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
  un range tra 
 \begin_inset Formula $-40dB$
 \end_inset
@@ -10537,11 +10566,11 @@ noprefix "false"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
-per ogni segmento è stato avviato il processo di identificazione
+Per ogni segmento è stato avviato il processo di identificazione
 \begin_inset Foot
 status open
 
@@ -10564,7 +10593,7 @@ mock_test
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -10580,6 +10609,10 @@ noprefix "false"
 \end_inset
 
 .
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -11729,8 +11762,7 @@ noprefix "false"
 Tuttavia, è opportuno considerare, ancora una volta, che le condizioni di
  test potrebbero non corrispondere esattamente a quelle di un ambiente reale.
  Pertanto, per tenere conto dell'impossibilità di simulare perfettamente
- l'ambiente reale, sarebbe ragionevole scegliere una durata superiore ai
- 
+ tale ambiente, sarebbe ragionevole scegliere una durata superiore ai 
 \begin_inset Formula $4$
 \end_inset
 
@@ -11802,6 +11834,10 @@ require-corp
 SharedArrayBuffer
 \family default
  e l'ambiente in cui viene utilizzato.
+\end_layout
+
+\begin_layout Standard
+Il server web che serve la RIA è quindi stato modificato di conseguenza.
 \end_layout
 
 \begin_layout Chapter
