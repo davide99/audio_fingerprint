@@ -6147,7 +6147,7 @@ DB
 
 \end_inset
 
- è la classe
+
 \begin_inset Foot
 status open
 
@@ -6170,7 +6170,7 @@ db.cpp
 
 \end_inset
 
- che si occupa di dialogare con l'istanza del database.
+ è la classe che si occupa di dialogare con l'istanza del database.
 \end_layout
 
 \begin_layout Section
@@ -6460,7 +6460,7 @@ WavReader
 
 \end_inset
 
- per leggere il file passatogli come parametro
+ per leggere il file passatogli come parametro.
 \end_layout
 
 \begin_layout Enumerate
@@ -6477,13 +6477,13 @@ computeLinks
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Richiama il metodo 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -6494,13 +6494,13 @@ db.insertSong
 
 \end_inset
 
- passando come parametri il nome del brano e i Links del brano stesso
+ passando come parametri il nome del brano e i Links del brano stesso.
 \end_layout
 
 \begin_layout Standard
 A sua volta il metodo 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -6624,7 +6624,7 @@ Arabella
 \begin_inset Text
 
 \begin_layout Plain Layout
-Polly
+Fell In Love With A Girl
 \end_layout
 
 \end_inset
@@ -6967,11 +6967,11 @@ Si assuma ora che:
 \end_layout
 
 \begin_layout Itemize
-i Links e i nomi dei brani completi siano già nel database
+i Links e i nomi dei brani completi siano già nel database.
 \end_layout
 
 \begin_layout Itemize
-i Links siano già stati estratti dal segmento da identificare
+i Links siano già stati estratti dal segmento da identificare.
 \end_layout
 
 \begin_layout Standard
@@ -7082,7 +7082,7 @@ musicinfo
 \series bold
 _recording
 \series default
- conterrà i Links di un solo audio.
+ conterrà i Links di un solo segnale audio.
 \end_layout
 
 \begin_layout Itemize
@@ -7142,7 +7142,7 @@ literal "true"
 \end_layout
 
 \begin_layout Enumerate
-È una come 
+È una 
 \emph on
 temporary table
 \emph default
@@ -7164,7 +7164,7 @@ ENGINE=MEMORY
 
 \end_inset
 
-, ovvero la tabella viene mantenuta interamente in memoria RAM e non viene
+, ovvero la tabella viene mantenuta interamente in RAM, non venendo, quindi,
  scritta su disco.
 \end_layout
 
@@ -7211,7 +7211,12 @@ fin::DB::SearchResult searchFromLinks(
 
 \begin_layout Plain Layout
 
-    DB &db
+    DB &db,
+\end_layout
+
+\begin_layout Plain Layout
+
+    bool noMinHint
 \end_layout
 
 \begin_layout Plain Layout
@@ -7221,7 +7226,7 @@ fin::DB::SearchResult searchFromLinks(
 
 \end_inset
 
-definita in 
+ed è definita in 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -7235,7 +7240,15 @@ fin_db.h
 \end_inset
 
 .
- Prende in input i Links della registrazione e un oggetto 
+ Prende in input:
+\end_layout
+
+\begin_layout Enumerate
+i Links della registrazione.
+\end_layout
+
+\begin_layout Enumerate
+un oggetto 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -7249,9 +7262,37 @@ DB
 \end_inset
 
 .
- Richiama il metodo 
+\end_layout
+
+\begin_layout Enumerate
+un parametro che indica se ritornare un match a prescindere dal numero di
+ Links in comune
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Vedi paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:link-comuni"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Richiama il metodo 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -7338,7 +7379,7 @@ found
 \end_inset
 
  indica se il segmento è stato identificato correttamente, ovvero se è stato
- trovato un match nel database
+ trovato un match nel database.
 \end_layout
 
 \begin_layout Itemize
@@ -7354,7 +7395,7 @@ id
 
 \end_inset
 
- è l'identificativo del brano originale identificato
+ è l'identificativo del brano originale identificato.
 \end_layout
 
 \begin_layout Itemize
@@ -7371,7 +7412,7 @@ timeDelta
 \end_inset
 
  è la differenza temporale in secondi tra il segmento registrato e la sua
- posizione nel brano originale
+ posizione nel brano originale.
 \end_layout
 
 \begin_layout Itemize
@@ -7392,7 +7433,7 @@ commonLinks
 status open
 
 \begin_layout Plain Layout
-Vedi 
+Vedi paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sec:I-Links"
@@ -7407,7 +7448,7 @@ noprefix "false"
 
 \end_inset
 
- in comune tra il segmento e il brano originale
+ in comune tra il segmento e il brano originale.
 \end_layout
 
 \begin_layout Itemize
@@ -7423,7 +7464,7 @@ name
 
 \end_inset
 
- è il nome del brano originale
+ è il nome del brano originale.
 \end_layout
 
 \begin_layout Standard
@@ -7431,7 +7472,7 @@ Quindi, se il brano viene identificato, vengono popolati di conseguenza
  i primi 4 campi della struct.
  Per reperire il nome del brano viene richiamato un ulteriore metodo: 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -7446,9 +7487,9 @@ db.getSongNameById
 \end_layout
 
 \begin_layout Standard
-Nello specifico 
+Nello specifico, 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -7459,17 +7500,17 @@ db.getSongNameById
 
 \end_inset
 
- consiste, in una query su 
+ consiste in una query su 
 \series bold
 musicinfo
 \series default
- per ottenere il nome associato all'id.
+ per ottenere il nome associato ad un determinato id.
 \end_layout
 
 \begin_layout Standard
 Il metodo 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -7506,7 +7547,7 @@ Il metodo db.searchSongGivenLinks
 \begin_layout Standard
 Il metodo 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -7518,7 +7559,7 @@ db.searchSongGivenLinks
 \end_inset
 
  è il cuore della parte di identificazione di un brano.
- Si basa su tre idee di base:
+ Si basa su tre concetti fondamentali:
 \end_layout
 
 \begin_layout Enumerate
@@ -7610,7 +7651,7 @@ start
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -7622,7 +7663,7 @@ Gli hash di
 \begin_inset Formula $Links_{R}$
 \end_inset
 
- devono corrispondere
+ devono corrispondere.
 \end_layout
 
 \begin_layout Standard
@@ -7638,7 +7679,7 @@ Raggruppare per
 \begin_inset Formula $n$
 \end_inset
 
- il numero di elementi che ricadono nello stesso gruppo
+ il numero di elementi che ricadono nello stesso gruppo.
 \end_layout
 
 \begin_layout Enumerate
@@ -7646,11 +7687,11 @@ Ordinare per
 \begin_inset Formula $n$
 \end_inset
 
- decrescente
+ decrescente.
 \end_layout
 
 \begin_layout Enumerate
-Estrarre il primo gruppo che rappresenta il match migliore
+Estrarre il primo gruppo che rappresenta il match migliore.
 \end_layout
 
 \begin_layout Standard
@@ -7816,16 +7857,23 @@ noprefix "false"
 \begin_inset Formula $2000$
 \end_inset
 
- sulle x, questo vuol dire che:
+ sulle 
+\begin_inset Formula $x$
+\end_inset
+
+, questo vuol dire che:
 \end_layout
 
 \begin_layout Itemize
-Un match è stato trovato
+Un match è stato trovato.
 \end_layout
 
 \begin_layout Itemize
-La registrazione è iniziata circa 2000 finestre dopo l'inizio del brano
- originale
+La registrazione è iniziata circa 
+\begin_inset Formula $2000$
+\end_inset
+
+ finestre dopo l'inizio del brano originale.
 \end_layout
 
 \begin_layout Standard
@@ -7969,7 +8017,7 @@ Qual è la soglia oltre la quale si può dire con
 abbastanza sicurezza
 \emph default
  che un segmento registrato fa parte di un determinato brano? La cosa più
- ragionevole da fare, è definire sperimentalmente una soglia di Links in
+ ragionevole da fare è definire sperimentalmente una soglia di Links in
  comune tra segmento registrato e brano originale, oltre la quale si ottiene
  un rate di falsi positivi basso.
 \end_layout
@@ -7981,7 +8029,7 @@ Intuitivamente quanto più il numero di Links in comune è basso tanto più
 \emph on
 confidence
 \emph default
- sull'identificazione alta.
+ alta sull'identificazione.
 \end_layout
 
 \begin_layout Standard
@@ -7989,7 +8037,7 @@ A questo scopo è stato predisposto un ambiente di test:
 \end_layout
 
 \begin_layout Enumerate
-viene estratto un segmento di durata compresa tra 
+Viene estratto un segmento di durata compresa tra 
 \begin_inset Formula $0.5$
 \end_inset
 
@@ -7997,16 +8045,16 @@ viene estratto un segmento di durata compresa tra
 \begin_inset Formula $6$
 \end_inset
 
- secondi dai brani originali
+ secondi dai brani originali.
 \end_layout
 
 \begin_layout Enumerate
-per ogni segmento estratto viene eseguito il processo di identificazione
+Per ogni segmento estratto viene eseguito il processo di identificazione.
 \end_layout
 
 \begin_layout Enumerate
-per ogni segmento vengono memorizzati in una mappa il numero di Link in
- comune come chiave e i false positive e i true positive come valore
+Per ogni segmento vengono memorizzati in una mappa il numero di Links in
+ comune come chiave e i false positive e i true positive come valore.
 \end_layout
 
 \begin_layout Standard
@@ -8023,7 +8071,7 @@ noprefix "false"
 \end_inset
 
 , che visualizza il rate di falsi positivi al variare del numero di Links
- in comune individuati.
+ in comune.
 \end_layout
 
 \begin_layout Standard
@@ -8161,7 +8209,7 @@ Si può, quindi, facilmente notare, interpretando il grafico, che la soglia
 \end_layout
 
 \begin_layout Standard
-La soglia di Link in comune è stata dunque impostata a 
+La soglia di Link in comune è stata, dunque, impostata a 
 \begin_inset Formula $15$
 \end_inset
 
@@ -8178,7 +8226,7 @@ status open
 
 \begin_layout Plain Layout
 
-consts::links::MIN_HINT
+MIN_HINT
 \end_layout
 
 \end_inset
