@@ -10124,20 +10124,7 @@ name "sec:La-funzione-processAudio"
 
 \end_inset
 
-La funzione 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-processAudio
-\end_layout
-
-\end_inset
-
-
+La funzione processAudio
 \end_layout
 
 \begin_layout Standard
@@ -10331,20 +10318,7 @@ name "sec:La-callback-messageReceivedOnMai"
 
 \end_inset
 
-La callback 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-messageReceivedOnMainThread
-\end_layout
-
-\end_inset
-
-
+La callback messageReceivedOnMainThread
 \end_layout
 
 \begin_layout Standard
@@ -11963,7 +11937,7 @@ textcircled{6}
 
 \end_inset
 
- è pressoché identico a quanto già presentato per wasm_client.
+ è pressoché identico a quanto già presentato nel caso di wasm_client.
 \end_layout
 
 \begin_layout Standard
@@ -12069,7 +12043,7 @@ status open
 
 , dove 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4"
 inline true
 status open
 
@@ -12258,14 +12232,14 @@ La funzione processAudio
 
 \begin_layout Standard
 La funzione 
-\begin_inset ERT
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+inline true
 status open
 
 \begin_layout Plain Layout
 
-
-\backslash
-texttt{processAudio}
+processAudio
 \end_layout
 
 \end_inset
@@ -12297,13 +12271,13 @@ std::chrono::system_clock::time_point firstSampleTime
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Itemize
 La variabile 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12316,7 +12290,7 @@ firstSampleTime
 
  viene valorizzata quando vengono inseriti i primi campioni nel 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12327,13 +12301,13 @@ DummyReader
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 In altre parole, 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12411,7 +12385,7 @@ noprefix "false"
 
 , 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12461,7 +12435,7 @@ firstSampleTime =
 \begin_layout Standard
 È necessario, infatti, sottrarre 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12474,7 +12448,7 @@ samples128Delta
 
  in quanto all'assegnazione di 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12498,7 +12472,11 @@ AudioWorklet
 
 \end_inset
 
- ha già ricevuto 128 campioni.
+ ha già ricevuto 
+\begin_inset Formula $128$
+\end_inset
+
+ campioni.
 \end_layout
 
 \begin_layout Section
@@ -12522,7 +12500,7 @@ getElapsedTimeSinceFirstSample
  si occupa di calcolare quanti secondi sono passati da quando è stata valorizzat
 a la variabile globale 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12623,7 +12601,7 @@ status open
 
 \begin_layout Plain Layout
 
-steady_clock
+std::chrono::steady_clock
 \end_layout
 
 \end_inset
@@ -12636,7 +12614,7 @@ status open
 
 \begin_layout Plain Layout
 
-high_resolution_clock
+std::chrono::high_resolution_clock
 \end_layout
 
 \end_inset
@@ -12644,7 +12622,7 @@ high_resolution_clock
 .
  Tuttavia, occorre considerare che la variabile 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12672,7 +12650,7 @@ getElapsedTimeSinceFirstSample
  viene invocata nel main thread di JavaScript: in altre parole non è detto
  che il clock che valorizza 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
 inline true
 status open
 
@@ -12684,7 +12662,7 @@ firstSampleTime
 \end_inset
 
  e quello utilizzato per calcolare la differenza temporale utilizzino lo
- stesso riferimento nel tempo.
+ stesso riferimento temporale.
  La mancanza di sincronizzazione può portare, quindi, a risultati privi
  di significato nel richiamo di 
 \begin_inset listings
@@ -12708,7 +12686,7 @@ status open
 
 \begin_layout Plain Layout
 
-system_clock
+std::chrono::system_clock
 \end_layout
 
 \end_inset
@@ -12729,7 +12707,7 @@ La callback messageReceivedOnMainThread
 \begin_layout Standard
 Inizialmente la callback 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -12840,11 +12818,7 @@ getElapsedTimeSinceFirstSample
 \end_layout
 
 \begin_layout Enumerate
-Viene schedulata la visualizzazione del testo al tempo corretto: il 
-\begin_inset Formula $\mathtt{text}_{i}$
-\end_inset
-
-, ovvero il testo i-esimo, dovrà essere visualizzato all'istante (vedi figura
+Viene schedulata la visualizzazione del testo al tempo corretto (vedi figura
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -12855,7 +12829,11 @@ noprefix "false"
 
 \end_inset
 
-):
+): il 
+\begin_inset Formula $\mathtt{text}_{i}$
+\end_inset
+
+, ovvero il testo i-esimo, dovrà essere visualizzato all'istante:
 \end_layout
 
 \begin_layout Standard
