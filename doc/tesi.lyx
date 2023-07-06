@@ -21,6 +21,8 @@
 \end{filecontents*}
 \begin{filecontents*}{data/min_hint.csv}
 \end{filecontents*}
+\begin{filecontents*}{data/c.csv}
+\end{filecontents*}
 \begin{filecontents*}{data/panako_length_success_rate.csv}
 \end{filecontents*}
 \pgfmathdeclarefunction{gauss}{2}{%
@@ -82,7 +84,7 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
+\cite_engine natbib
 \cite_engine_type default
 \biblio_style plain
 \use_bibtopic false
@@ -1273,7 +1275,7 @@ readers
 
 \end_inset
 
-, la rappresentazione di un audio nel dominio del tempo.
+, è la rappresentazione di un audio nel dominio del tempo.
  La classe definisce un metodo virtuale puro 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
@@ -1318,15 +1320,15 @@ Reader
 
 \begin_deeper
 \begin_layout Enumerate
-Finestra il segnale ottenendone un segmento
+Finestra il segnale ottenendone un segmento.
 \end_layout
 
 \begin_layout Enumerate
-Calcola la DFT per ogni segmento
+Calcola la DFT per ogni segmento.
 \end_layout
 
 \begin_layout Enumerate
-Calcola il modulo dell'output della DFT per ogni segmento
+Calcola il modulo dell'output della DFT per ogni segmento.
 \end_layout
 
 \begin_layout Enumerate
@@ -1343,7 +1345,7 @@ fftWindow
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -1360,8 +1362,8 @@ fftWindow
 
 \end_inset
 
- compongono lo spettrogramma, in altre parole una rappresentazione in frequenza
- dell'audio
+ compongono lo spettrogramma, in altre parole una rappresentazione nel tempo
+ del contenuto in frequenza dell'audio.
 \end_layout
 
 \end_deeper
@@ -1370,7 +1372,7 @@ fftWindow
 \series bold
 findPeaks
 \series default
- è una funziona nel namespace 
+ è una funzione nel namespace 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
 inline true
@@ -1383,7 +1385,7 @@ core
 
 \end_inset
 
- che estrae i picchi più alti
+ che estrae i picchi più intensi
 \begin_inset Foot
 status open
 
@@ -1419,7 +1421,21 @@ sono il risultato dell'operazione di
 \emph on
 fingerprinting
 \emph default
-, ovvero le features che caratterizzano l'audio.
+, ovvero le features che caratterizzano l'audio, sono definiti nel namespace
+ 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+core
+\end_layout
+
+\end_inset
+
+.
  Vengono creati a partire dai vari 
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily}"
@@ -1442,19 +1458,6 @@ status open
 \begin_layout Plain Layout
 
 findPeaks
-\end_layout
-
-\end_inset
-
- e fanno parte del namespace 
-\begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
-inline true
-status open
-
-\begin_layout Plain Layout
-
-core
 \end_layout
 
 \end_inset
@@ -1526,7 +1529,7 @@ getData()
 
  che ritorna un 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -1537,7 +1540,7 @@ std::vector<float>
 
 \end_inset
 
- contenente i campioni
+ contenente i campioni.
 \end_layout
 
 \begin_layout Itemize
@@ -1555,7 +1558,7 @@ dropSamples()
 
  che svuota il 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -1566,7 +1569,7 @@ vector
 
 \end_inset
 
- dei campioni
+ dei campioni.
 \end_layout
 
 \begin_layout Standard
@@ -1667,7 +1670,7 @@ DummyReader
 
 , un mero wrapper attorno al contenitore 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -1738,7 +1741,7 @@ math
 \begin_layout Standard
 Il costruttore riceve in input come parametro un 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -2297,7 +2300,7 @@ le performance di queste finestre.
 \emph on
 ambiente di test
 \emph default
- composto da circa 400 brani di generi molto diversi tra loro
+ composto da circa 500 brani di generi molto diversi tra loro
 \begin_inset Foot
 status open
 
@@ -2366,7 +2369,7 @@ per un SNR fino a
 \begin_inset Formula $-15dB$
 \end_inset
 
- la finestra con le performances migliori è quella di Hann
+ la finestra con le performances migliori è quella di Hann.
 \end_layout
 
 \begin_layout Itemize
@@ -2374,12 +2377,12 @@ nel tratto tra
 \begin_inset Formula $-15dB$
 \end_inset
 
- in poi la finestra rettangolare e quella di Hann sono comparabili
+ in poi la finestra rettangolare e quella di Hann sono comparabili.
 \end_layout
 
 \begin_layout Itemize
-la finestra di Blackman fa ottenere un recognition rate sempre minore o
- di quello della finestra di Hann o di quella rettangolare
+l'utilizzo della finestra di Blackman si traduce in un recognition rate
+ sempre minore o di quello della finestra di Hann o di quella rettangolare.
 \end_layout
 
 \begin_layout Standard
@@ -2431,12 +2434,12 @@ noprefix "false"
 
 \begin_layout Enumerate
 Sopperire all'attenuazione agli estremi della finestra introdotti dalla
- funzione finestra di Hann
+ funzione finestra di Hann.
 \end_layout
 
 \begin_layout Enumerate
-Analizzare meglio il contenuto in frequenza a cavallo tra due finestre senza
- overlap
+Analizzare meglio il contenuto in frequenza a cavallo tra due finestre se
+ non si usa overlap.
 \end_layout
 
 \begin_layout Standard
@@ -2801,7 +2804,7 @@ literal "true"
 , 
 \emph default
 ossia la capacità di un'analisi spettrale di distinguere due componenti
- di frequenza vicine nel dominio della frequenza.
+ di frequenza vicine (nel dominio della frequenza).
  Dipende dal numero di campioni utilizzati nella finestra e dalla finestra
  utilizzata
 \begin_inset Foot
@@ -2830,9 +2833,9 @@ risoluzione in frequenza
 \emph default
  della DFT può essere calcolata come segue:
 \begin_inset Formula 
-\[
-\Delta f=\frac{F_{S}}{N}
-\]
+\begin{equation}
+\Delta f=\frac{F_{S}}{N}\label{eq:risoluzione-freq}
+\end{equation}
 
 \end_inset
 
@@ -2849,7 +2852,7 @@ risoluzione spettrale
 \emph default
 , anche detta 
 \emph on
-dimensione del bin di frequenze
+dimensione del bin di frequenze.
 \end_layout
 
 \begin_layout Itemize
@@ -2858,14 +2861,309 @@ dimensione del bin di frequenze
 
  è la 
 \emph on
-frequenza di campionamento
+frequenza di campionamento.
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $N$
 \end_inset
 
- sono il numero di campioni in una finestra
+ sono il numero di campioni in una finestra.
+\end_layout
+
+\begin_layout Standard
+Se si guarda alla definizione di DFT di seguito
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{aligned}X[n]:= & \sum_{k=0}^{N-1}x[k]e^{-i\frac{2\pi kn}{N}}\end{aligned}
+\label{eq:def_dft}
+\end{equation}
+
+\end_inset
+
+dove 
+\begin_inset Formula $N$
+\end_inset
+
+ rappresenta ancora il numero di campioni della finestra, si può facilmente
+ notare che per calcolare il bin n-esimo bisognerà eseguire 
+\begin_inset Formula $N$
+\end_inset
+
+ addizioni e 
+\begin_inset Formula $N$
+\end_inset
+
+ moltiplicazioni (quindi 
+\begin_inset Formula $2N$
+\end_inset
+
+ operazioni in totale).
+ Di conseguenza, ottenere 
+\begin_inset Formula $N$
+\end_inset
+
+ bins vuol dire eseguire 
+\begin_inset Formula $2N^{2}$
+\end_inset
+
+ operazioni in virgola mobile: una complessità non indifferente (pari a
+ 
+\begin_inset Formula $\mathcal{O}(N^{2})$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Fortunatamente esistono implementazioni più efficienti della DFT che prendono
+ il nome di FFT (Fast Fourier Transforms).
+ Queste implementazioni, come ad esempio fftw, hanno una complessità di
+ solo 
+\begin_inset Formula $\mathcal{O}(N\log N)$
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "frigo2005design"
+literal "true"
+
+\end_inset
+
+.
+ Le complessità della DFT e della FFT sono visibili nel grafico 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "mar:Complessita-dft-fft"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		domain=0:4096,
+\end_layout
+
+\begin_layout Plain Layout
+
+		samples=100,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 4096,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin =  0,
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid = major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Dimensione finestra $(N)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Complessità,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis x line=bottom,
+\end_layout
+
+\begin_layout Plain Layout
+
+		axis y line=left,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymode=log,
+\end_layout
+
+\begin_layout Plain Layout
+
+		legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+		legend cell align={left}
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+			color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+			line width=1pt
+\end_layout
+
+\begin_layout Plain Layout
+
+		]{
+\end_layout
+
+\begin_layout Plain Layout
+
+			x^2
+\end_layout
+
+\begin_layout Plain Layout
+
+		};
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addlegendentry{DFT};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+			color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+			line width=1pt
+\end_layout
+
+\begin_layout Plain Layout
+
+		]{
+\end_layout
+
+\begin_layout Plain Layout
+
+			x*log10(x)
+\end_layout
+
+\begin_layout Plain Layout
+
+		};
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addlegendentry{FFT};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\lang italian
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "mar:Complessita-dft-fft"
+
+\end_inset
+
+Complessità DFT e FFT
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2877,17 +3175,17 @@ La libreria fin è configurata per trattare segnali audio campionati a
 \begin_inset Formula $512$
 \end_inset
 
- campioni
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Successivamente verranno fatte delle considerazioni su queste scelte
-\end_layout
+ campioni, quindi usando la 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:risoluzione-freq"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-, quindi:
+:
 \begin_inset Formula 
 \[
 \Delta f=\frac{8000Hz}{512}=15.625Hz
@@ -2899,6 +3197,100 @@ Successivamente verranno fatte delle considerazioni su queste scelte
 \end_layout
 
 \begin_layout Standard
+È importante considerare un altro aspetto: nonostante l'incrementare la
+ dimensione della finestra migliori la risoluzione in frequenza (permettendo
+ di avere bin più 
+\emph on
+stretti
+\emph default
+), viene incrementato anche il numero di operazioni che compongono la FFT,
+ essendo dipendente da 
+\begin_inset Formula $N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Allo stesso tempo, tuttavia, sarebbe controproducente usare una frequenza
+ di campionamento del segnale pari a 
+\begin_inset Formula $44100Hz$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+La frequenza standard per il campionamento audio
+\end_layout
+
+\end_inset
+
+, in quanto questo porterebbe ad avere una risoluzione in frequenza molto
+ bassa
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula $\Delta f=\frac{44100Hz}{512}\cong86Hz$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ La soluzione consiste nel fare 
+\emph on
+downsampling, 
+\emph default
+ovvero
+\emph on
+ 
+\emph default
+abbassare la frequenza di campionamento del segnale, in questo caso a 
+\begin_inset Formula $8000Hz$
+\end_inset
+
+.
+ L'unica differenza sarà che il segnale ricampionato avrà, al massimo, un
+ contenuto in frequenza tra gli 
+\begin_inset Formula $0Hz$
+\end_inset
+
+ e i 
+\begin_inset Formula $4000Hz$
+\end_inset
+
+ circa, tuttavia questo non rappresenta un problema: la parte 
+\emph on
+più significativa
+\emph default
+ del segnale, ovvero le frequenze più basse, è ancora presente.
+\end_layout
+
+\begin_layout Standard
+In questo modo quindi si riduce la complessità di un fattore 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ pari a:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\alpha=\frac{N^{2}}{N\log N}=\frac{N}{\log N}
+\]
+
+\end_inset
+
+Il tutto mantenendo la risoluzione in frequenza ragionevolmente bassa.
+\end_layout
+
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
@@ -2907,57 +3299,51 @@ Successivamente verranno fatte delle considerazioni su queste scelte
 
 \begin_layout Standard
 \noindent
-Inoltre, è necessario fare alcune osservazioni aggiuntive:
+Inoltre, è necessario fare alcune osservazioni aggiuntive
+\begin_inset CommandInset citation
+LatexCommand cite
+key "briggs1995dft"
+literal "true"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Enumerate
 Il primo bin non contiene informazioni rilevanti riguardo la rappresentazione
- in frequenza del segnale
-\begin_inset CommandInset citation
-LatexCommand cite
-key "briggs1995dft"
-literal "true"
-
-\end_inset
-
-
+ in frequenza del segnale.
 \end_layout
 
 \begin_layout Enumerate
-L'output della DFT su segnali reali è simmetrico
-\begin_inset CommandInset citation
-LatexCommand cite
-key "briggs1995dft"
-literal "true"
-
-\end_inset
-
-
+L'output della DFT su segnali reali è simmetrico.
 \end_layout
 
 \begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
-A dimostrazione del primo fatto si può partire dalla definizione della DFT:
-\begin_inset Formula 
-\begin{equation}
-\begin{aligned}X[n]:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}\end{aligned}
-\label{eq:def_dft}
-\end{equation}
+A dimostrazione del primo fatto si può partire dalla definizione della DFT
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def_dft"
+plural "false"
+caps "false"
+noprefix "false"
 
 \end_inset
 
-e valutarla in 
+ e valutarla in 
 \begin_inset Formula $n=0$
 \end_inset
 
 :
 \begin_inset Formula 
 \[
-\begin{aligned}X[n]|_{n=0}:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}|_{n=0}\\
-= & \sum_{t=0}^{N-1}x(t)e^{0}\\
-= & \sum_{t=0}^{N-1}x(t)
+\begin{aligned}X[n]|_{n=0}:= & \sum_{k=0}^{N-1}x[k]e^{-i\frac{2\pi kn}{N}}|_{n=0}\\
+= & \sum_{k=0}^{N-1}x[k]e^{0}\\
+= & \sum_{k=0}^{N-1}x[k]
 \end{aligned}
 \]
 
@@ -2980,7 +3366,7 @@ del segnale in ingresso che può essere assunto pari a
 
 \begin_layout Standard
 Per quanto riguarda il secondo fatto, si deve dimostrare che se 
-\begin_inset Formula $x(t)$
+\begin_inset Formula $x[n]$
 \end_inset
 
  è un segnale a valori reali allora:
@@ -2995,11 +3381,11 @@ dove:
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $X(\astrosun)$
+\begin_inset Formula $X[\astrosun]$
 \end_inset
 
  è l'output della DFT applicata a 
-\begin_inset Formula $x(t)$
+\begin_inset Formula $x[n]$
 \end_inset
 
 
@@ -3017,7 +3403,17 @@ dove:
 \end_layout
 
 \begin_layout Standard
-Si sostituisce 
+Partendo dalla 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:simmetria_dft"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, si sostituisce 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3035,23 +3431,13 @@ noprefix "false"
 
 \end_inset
 
-, proveniente dalla 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "eq:simmetria_dft"
-plural "false"
-caps "false"
-noprefix "false"
-
-\end_inset
-
 :
 \begin_inset Formula 
 \[
-\begin{aligned}X[N-n]:= & \sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi t(N-n)}{N}}\\
-= & \sum_{t=0}^{N-1}x(t)\underbrace{e^{-i2\pi t}}_{1\forall t}e^{i\frac{2\pi tn}{N}}\\
-= & \sum_{t=0}^{N-1}x(t)e^{i\frac{2\pi tn}{N}}\\
-= & \left(\sum_{t=0}^{N-1}x(t)e^{-i\frac{2\pi tn}{N}}\right)^{*}\\
+\begin{aligned}X[N-n]:= & \sum_{k=0}^{N-1}x[k]e^{-i\frac{2\pi k(N-n)}{N}}\\
+= & \sum_{k=0}^{N-1}x[k]\underbrace{e^{-i2\pi k}}_{1\forall k}e^{i\frac{2\pi kn}{N}}\\
+= & \sum_{k=0}^{N-1}x[k]e^{i\frac{2\pi kn}{N}}\\
+= & \left(\sum_{k=0}^{N-1}x[k]e^{-i\frac{2\pi kn}{N}}\right)^{*}\\
 = & X^{*}[n]
 \end{aligned}
 \]
@@ -3059,7 +3445,7 @@ noprefix "false"
 \end_inset
 
 Dove il passaggio al coniugato è invariante per 
-\begin_inset Formula $x(t)$
+\begin_inset Formula $x[k]$
 \end_inset
 
  dato che è a valori reali.
@@ -3072,11 +3458,11 @@ Dove il passaggio al coniugato è invariante per
 \begin_layout Standard
 Le due precedenti considerazioni permettono quindi all'algoritmo di lavorare
  in maniera più efficiente, escludendo la componente DC dai calcoli ed impiegand
-o una versione ottimizzata della DFT per input reali, con soli 
+o una versione ottimizzata della FFT per input reali, con soli 
 \begin_inset Formula $\frac{N}{2}-1$
 \end_inset
 
- coefficienti utili in output.
+ coefficienti utili in output, dimezzando di fatto la complessità.
 \end_layout
 
 \begin_layout Subsection
@@ -3158,7 +3544,7 @@ fftWindow
 
  viene inserita in un 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -3234,13 +3620,13 @@ consts.h
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Itemize
 Altezza pari ad un range di frequenze, chiamato 
 \emph on
-banda
+banda.
 \end_layout
 
 \begin_layout Standard
@@ -3556,7 +3942,7 @@ noprefix "false"
 \begin_inset Formula $C=4$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Itemize
@@ -3564,7 +3950,7 @@ La banda ha dimensione fissa pari a
 \begin_inset Formula $100Hz$
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -3576,7 +3962,17 @@ Nell'algoritmo questi parametri sono scelti diversamente:
 \begin_inset Formula $32$
 \end_inset
 
- e la suddivisione in bande segue una scala logaritmica (vedere 
+ (vedere 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:Scelta-di-c"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) e la suddivisione in bande segue una scala logaritmica (vedere 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Scelta-della-dimensione"
@@ -4086,7 +4482,7 @@ findPeaks
 
  sarà disponibile un 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -4194,7 +4590,7 @@ m(f)=2595\log_{10}\left(\frac{f}{700}+1\right)\label{eq:mel-inv}
 rappresentata in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "mar:Mapping-tra-Hertz"
+reference "fig:Mapping-tra-Hertz"
 plural "false"
 caps "false"
 noprefix "false"
@@ -4205,7 +4601,7 @@ noprefix "false"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float marginfigure
+\begin_inset Float figure
 wide false
 sideways false
 status open
@@ -4233,13 +4629,6 @@ begin{axis}[
 \begin_layout Plain Layout
 
 		width=
-\backslash
-textwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-		height=
 \backslash
 textwidth,
 \end_layout
@@ -4354,7 +4743,7 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "mar:Mapping-tra-Hertz"
+name "fig:Mapping-tra-Hertz"
 
 \end_inset
 
@@ -4525,6 +4914,258 @@ Si è scelto di scartare le frequenze inferiori a
 o informazioni rilevanti.
 \end_layout
 
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Scelta-di-c"
+
+\end_inset
+
+Scelta di 
+\begin_inset Formula $C$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $C$
+\end_inset
+
+ rappresenta il passo di suddivisione dello spettro nel tempo (vedi 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Spectrum-division"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Ogni 
+\begin_inset Formula $C$
+\end_inset
+
+ finestre (e per ogni banda) vengono estratti i 3 picchi più significativi.
+\end_layout
+
+\begin_layout Standard
+È necessario trovare il giusto compromesso tra 
+\begin_inset Formula $C$
+\end_inset
+
+, il numero di picchi individuati e la robustezza dell'algoritmo:
+\end_layout
+
+\begin_layout Itemize
+Avere un 
+\begin_inset Formula $C$
+\end_inset
+
+ 
+\emph on
+grande
+\emph default
+ vuol dire estrarre pochi picchi per ogni banda, il matching diventerà più
+ difficoltoso, in quanto vengono estratte poche features dei segnali audio.
+\end_layout
+
+\begin_layout Itemize
+Avere un 
+\begin_inset Formula $C$
+\end_inset
+
+ 
+\emph on
+piccolo
+\emph default
+, al contrario, significa estrarre più picchi, avere un matching più robusto
+ (dato che vengono estratte più features), ma al contempo dover memorizzare
+ più features nel database.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={C},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={Recognition rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend pos=south east,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+textwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathparse{
+\backslash
+tick*100}
+\backslash
+pgfmathprintnumber{
+\backslash
+pgfmathresult}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=C, y=rate, col sep=comma] {data/c.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Recognition-rate-in-fx-C"
+
+\end_inset
+
+Recognition rate in funzione del parametro 
+\begin_inset Formula $C$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Anche in questo caso risulta necessario valutare le performance del sistema
+ in funzione di 
+\begin_inset Formula $C$
+\end_inset
+
+.
+ È stato predisposto un ambiente di test, simile a quello già presentato
+ nel paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "subsec:La-finestratura"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, ottenendo il grafico in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Recognition-rate-in-fx-C"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+È possibile notare che per un 
+\begin_inset Formula $C$
+\end_inset
+
+ superiore a 
+\begin_inset Formula $40$
+\end_inset
+
+ il rate di riconoscimento diventa pressocchè nullo.
+ Al contrario per un 
+\begin_inset Formula $C$
+\end_inset
+
+ inferiore a circa 
+\begin_inset Formula $30$
+\end_inset
+
+ si ottiene un buon recognition rate.
+ Si è quindi scelto di utilizzare un 
+\begin_inset Formula $C$
+\end_inset
+
+ pari a 
+\begin_inset Formula $32$
+\end_inset
+
+, permettendo, in questo modo, di minimizzare il numero di features estratte.
+\end_layout
+
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
@@ -4543,7 +5184,7 @@ picchi
 ) che, in teoria, potrebbero essere utilizzate per identificare un brano.
  Ogni picco del segmento registrato dal client dovrebbe essere confrontato
  con i picchi del brano completo.
- Tuttavia, questo approccio, anche se semplice e probabilmente funzionante,
+ Tuttavia questo approccio, anche se semplice e probabilmente funzionante,
  risulterebbe troppo lento.
  Infatti, in questo caso, la complessità sarebbe dell'ordine della lunghezza
  totale di tutti i brani presenti nel database: paradossalmente, più brani
