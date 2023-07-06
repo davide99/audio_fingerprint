@@ -12935,8 +12935,8 @@ https://github.com/JorenSix/Olaf
 
 \end_inset
 
- è un'applicazione per l'identificazione audio, simile, nello scopo, all'algorit
-mo già presentato in questo documento.
+ è un'applicazione per l'identificazione audio, simile nello scopo, all'algoritm
+o già presentato in questo documento.
 \end_layout
 
 \begin_layout Standard
@@ -12976,7 +12976,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="10" columns="3">
+<lyxtabular version="3" rows="11" columns="3">
 <features tabularvalignment="middle">
 <column alignment="center" valignment="top" width="0pt">
 <column alignment="center" valignment="top" width="0pt">
@@ -13063,7 +13063,10 @@ Dimensione finestra
 \begin_inset Text
 
 \begin_layout Plain Layout
-512
+\begin_inset Formula $512$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13072,7 +13075,10 @@ Dimensione finestra
 \begin_inset Text
 
 \begin_layout Plain Layout
-1024
+\begin_inset Formula $1024$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13096,7 +13102,10 @@ Sample rate
 \begin_inset Text
 
 \begin_layout Plain Layout
-8000
+\begin_inset Formula $8000$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13105,7 +13114,10 @@ Sample rate
 \begin_inset Text
 
 \begin_layout Plain Layout
-16000
+\begin_inset Formula $16000$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13129,7 +13141,10 @@ Step size finestra
 \begin_inset Text
 
 \begin_layout Plain Layout
-256
+\begin_inset Formula $256$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13138,7 +13153,47 @@ Step size finestra
 \begin_inset Text
 
 \begin_layout Plain Layout
-128
+\begin_inset Formula $128$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\emph on
+Overlap finestre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $50\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $12.5\%$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13162,7 +13217,10 @@ Frequenza minima
 \begin_inset Text
 
 \begin_layout Plain Layout
-174
+\begin_inset Formula $174$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13171,7 +13229,10 @@ Frequenza minima
 \begin_inset Text
 
 \begin_layout Plain Layout
-140
+\begin_inset Formula $140$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13195,7 +13256,10 @@ Frequenza massima
 \begin_inset Text
 
 \begin_layout Plain Layout
-3616
+\begin_inset Formula $3616$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13204,7 +13268,10 @@ Frequenza massima
 \begin_inset Text
 
 \begin_layout Plain Layout
-8000
+\begin_inset Formula $8000$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13228,7 +13295,10 @@ Distanza picco-anchor minima
 \begin_inset Text
 
 \begin_layout Plain Layout
-1000
+\begin_inset Formula $1000$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13237,7 +13307,10 @@ Distanza picco-anchor minima
 \begin_inset Text
 
 \begin_layout Plain Layout
-16
+\begin_inset Formula $16$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13261,7 +13334,10 @@ Distanza picco-anchor massima
 \begin_inset Text
 
 \begin_layout Plain Layout
-3000
+\begin_inset Formula $3000$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13270,7 +13346,10 @@ Distanza picco-anchor massima
 \begin_inset Text
 
 \begin_layout Plain Layout
-264
+\begin_inset Formula $264$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13292,7 +13371,10 @@ Numero minimo Link comuni per match
 \begin_inset Text
 
 \begin_layout Plain Layout
-15
+\begin_inset Formula $15$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13301,7 +13383,10 @@ Numero minimo Link comuni per match
 \begin_inset Text
 
 \begin_layout Plain Layout
-6
+\begin_inset Formula $6$
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -13339,7 +13424,11 @@ Principali differenze tra fin e OLAF
 \end_inset
 
 Vi sono anche alcune importati differenze su cosa i due algoritmi considerano
- picco
+ 
+\emph on
+picco
+\emph default
+
 \begin_inset Foot
 status open
 
@@ -13449,7 +13538,11 @@ A questo punto viene effettuato un ulteriore passaggio: i picchi candidati
 \begin_inset Formula $500ms$
 \end_inset
 
-; solo i 
+ (
+\begin_inset Formula $C=32$
+\end_inset
+
+); solo i 
 \begin_inset Formula $3$
 \end_inset
 
@@ -13486,11 +13579,11 @@ noprefix "false"
 \emph on
 ambiente di test
 \emph default
-, composto dai già citati 400 brani e per ognuno di questi brani:
+, composto dai già citati brani e per ognuno di questi brani:
 \end_layout
 
 \begin_layout Enumerate
-è stato estratto un segmento con una durata compresa tra 
+È stato estratto un segmento con una durata compresa tra 
 \begin_inset Formula $0.5$
 \end_inset
 
@@ -13502,11 +13595,11 @@ ambiente di test
 \begin_inset Formula $0.5$
 \end_inset
 
- secondi
+ secondi.
 \end_layout
 
 \begin_layout Enumerate
-ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
+Ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
  un range tra 
 \begin_inset Formula $-40dB$
 \end_inset
@@ -13515,12 +13608,12 @@ ad ogni segmento è stato applicato del rumore, facendo variare l'SNR in
 \begin_inset Formula $40dB$
 \end_inset
 
- a passo 10
+ a passo 10.
 \end_layout
 
 \begin_layout Enumerate
-per ogni segmento è stato avviato il processo di identificazione utilizzando
- sia fin che OLAF
+Per ogni segmento è stato avviato il processo di identificazione utilizzando
+ sia fin che OLAF.
 \end_layout
 
 \begin_layout Standard
@@ -15334,7 +15427,7 @@ Dai grafici si possono estrarre le seguenti informazioni:
 \end_layout
 
 \begin_layout Itemize
-per un SNR compreso tra 
+Per un SNR compreso tra 
 \begin_inset Formula $-20dB$
 \end_inset
 
@@ -15343,11 +15436,11 @@ per un SNR compreso tra
 \end_inset
 
  è evidente la superiorità di fin, che presenta un rate di riconoscimento
- quasi doppio per segmenti audio sufficientemente lunghi
+ quasi doppio per segmenti audio sufficientemente lunghi.
 \end_layout
 
 \begin_layout Itemize
-per un SNR compreso tra 
+Per un SNR compreso tra 
 \begin_inset Formula $10dB$
 \end_inset
 
@@ -15364,7 +15457,7 @@ per segmenti di durata superiore a circa
 \begin_inset Formula $2s$
 \end_inset
 
- fin ottiene i risultati migliori
+ fin ottiene i risultati migliori.
 \end_layout
 
 \begin_layout Itemize
@@ -15372,16 +15465,16 @@ per segmenti di durata inferiore a circa
 \begin_inset Formula $2s$
 \end_inset
 
- OLAF ha un rate di riconoscimento più elevato
+ OLAF ha un rate di riconoscimento più elevato.
 \end_layout
 
 \end_deeper
 \begin_layout Itemize
-il rate di riconoscimento di fin tende al 
+Il rate di riconoscimento di fin tende al 
 \begin_inset Formula $100\%$
 \end_inset
 
- più velocemente di quello di OLAF
+ più velocemente di quello di OLAF.
 \end_layout
 
 \begin_layout Standard
@@ -15452,7 +15545,7 @@ noprefix "false"
 \begin_inset Formula $1s$
 \end_inset
 
- nel caso fin, di 
+ nel caso di fin, di 
 \begin_inset Formula $16ms$
 \end_inset
 
