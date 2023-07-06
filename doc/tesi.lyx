@@ -8456,7 +8456,7 @@ noprefix "false"
 \emph on
 server_rest
 \emph default
-, si ottiene quando riportato in figura 
+, si ottiene quanto riportato in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Schema-architettura-generale-server_rest"
@@ -8568,7 +8568,7 @@ literal "true"
 
 \begin_layout Standard
 I browser moderni che supportano CORS, prima di inviare la vera e propria
- richiesta
+ richiesta HTTP
 \begin_inset Foot
 status open
 
@@ -8724,7 +8724,7 @@ Access-Control-Allow-Origin
 \emph on
 cross-site request forgery
 \emph default
- (CSRF) e a violazioni della politica di sicurezza del browser.
+ (CSRF) e a violazioni delle politiche di sicurezza del browser.
 \end_layout
 
 \begin_layout Standard
@@ -8830,9 +8830,29 @@ literal "true"
 
 \begin_layout Standard
 Basti pensare che, mediamente, i Links estratti da una registrazione di
- 6/7 secondi sono circa 900.
- Ogni Link contiene due interi a 64 bit, ovvero 20 cifre decimali, che rappresen
-tano rispettivamente l'hash e il numero della finestra di appartenenza.
+ 
+\begin_inset Formula $6$
+\end_inset
+
+/
+\begin_inset Formula $7$
+\end_inset
+
+ secondi sono circa 
+\begin_inset Formula $900$
+\end_inset
+
+.
+ Ogni Link contiene due interi a 
+\begin_inset Formula $64$
+\end_inset
+
+ bit, ovvero 
+\begin_inset Formula $20$
+\end_inset
+
+ cifre decimali, che rappresentano rispettivamente l'hash e il numero della
+ finestra di appartenenza.
  Se si rappresenta un Link in JSON come segue
 \begin_inset Foot
 status open
@@ -8871,7 +8891,7 @@ status open
 
 \end_inset
 
-allora lo spazio occupato ammonta a:
+allora lo spazio richiesto ammonta a:
 \begin_inset Formula 
 \[
 len("[")+len(hash)+len(",")+len(window)+len("]")=43B
@@ -9045,7 +9065,8 @@ Rappresentazione serializzazione binaria Links
 \end_inset
 
 Al contrario, se si utilizza una serializzazione binaria, in cui si giustappongo
-no i due interi Link in uno stream di byte (vedi figura 
+no i due interi che compongono il Link in uno stream di byte (vedi figura
+ 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "fig:Rappresentazione-serializzazione"
@@ -9104,7 +9125,7 @@ ByteBuffer
 
  nel namespace 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9123,13 +9144,13 @@ status open
 \begin_layout Plain Layout
 Nello specifico 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
 \begin_layout Plain Layout
 
-uint8_t
+std::uint8_t
 \end_layout
 
 \end_inset
@@ -9143,7 +9164,7 @@ uint8_t
 \end_layout
 
 \begin_layout Itemize
-aggiungere un dato arbitrario nel buffer stesso, attraverso il metodo:
+Aggiungere un dato arbitrario nel buffer stesso, attraverso il metodo:
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
@@ -9165,7 +9186,7 @@ void add(const T &data)
 \end_layout
 
 \begin_layout Itemize
-rimuovere un dato dal buffer, con:
+Rimuovere un dato dal buffer, con:
 \begin_inset listings
 lstparams "basicstyle={\ttfamily},language={C++},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},breaklines=false,basicstyle={\ttfamily},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline false
@@ -9215,7 +9236,7 @@ Links
 
  nei metodi 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9228,7 +9249,7 @@ toByteBuffer()
 
  e 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9256,7 +9277,7 @@ ByteBuffer
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Itemize
@@ -9273,7 +9294,7 @@ ByteBuffer
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -9301,7 +9322,7 @@ ByteBuffer
 
  richiamando 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9373,7 +9394,7 @@ ByteBuffer
 
  Links richiamando 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
