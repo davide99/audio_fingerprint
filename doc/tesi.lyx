@@ -16071,6 +16071,65 @@ Potrebbe essere conveniente portare il database dei Links che caratterizzano
 \end_layout
 
 \begin_layout Chapter
+Conclusioni
+\end_layout
+
+\begin_layout Standard
+Il sistema proposto in questa tesi è nato come un progetto personale, foraggiato
+ dalla voglia di avere una migliore comprensione delle tecnologie impiegate
+ nel riconoscimento audio, interrogandosi sul come fosse possibile realizzare
+ un sistema di tale portata.
+\end_layout
+
+\begin_layout Standard
+Dopo aver verificato l'efficacia dell'algoritmo di riconoscimento, è emersa
+ la volontà di esplorare nuove prospettive, in collaborazione con il relatore,
+ che hanno portato ad esplorare scenari innovativi, primo fra tutti l'esecuzione
+ dell'algoritmo all'interno del browser.
+\end_layout
+
+\begin_layout Standard
+In seguito, sono state affrontate sfide molto stimolanti, come l'integrazione
+ di elementi aggiuntivi al semplice matching audio, come l'implementazione
+ di un'applicazione per la visualizzazione in sincronia del testo dei brani
+ musicali, presentando qualcosa di nuovo e ancora poco praticato.
+\end_layout
+
+\begin_layout Standard
+Tuttavia, il momento più appagante è stato la conclusione del progetto,
+ momento in cui si è avuta la realizzazione di un sistema completamente
+ funzionante, il quale, sebbene rimanga un prototipo, è un gradino sopra
+ alla mera realizzazione 
+\emph on
+accademica
+\emph default
+ di una semplice libreria che ruota intorno all'implementazione di un algoritmo.
+\end_layout
+
+\begin_layout Standard
+È importante sottolineare che il percorso di ricerca non si conclude con
+ questa tesi.
+ A riprova di ciò, sono già state presentate ulteriori interessanti applicazioni
+ che, con un adeguato sviluppo, potrebbero aprire nuovi orizzonti in questo
+ campo.
+ Non si esclude anche la possibilità di scoprire nuove e inaspettate applicazion
+i non trattate in questo documento.
+\end_layout
+
+\begin_layout Standard
+Inoltre, l'informatica è un settore in continua evoluzione, nulla va considerato
+ 
+\emph on
+impensabile
+\emph default
+: fino a poco tempo fa sembrava impossibile eseguire del codice C++ all'interno
+ di un browser, eppure oggi WebAssembly è un elemento fondamentale del nuovo
+ Internet.
+ Considerando l'incessante progresso tecnologico, forse, non si possono
+ nemmeno immaginare le possibilità che il futuro riserba.
+\end_layout
+
+\begin_layout Chapter
 Ringraziamenti
 \end_layout
 
@@ -16081,7 +16140,7 @@ status open
 \begin_layout Plain Layout
 Desidero esprimere la mia più profonda gratitudine a tutte le persone che
  mi hanno sostenuto durante il mio percorso universitario e durante la realizzaz
-ione di questa tesi.
+ione di questa tesi (tutti, rigorosamente, in ordine alfabetico).
 \begin_inset VSpace defskip
 \end_inset
 
@@ -16089,38 +16148,32 @@ ione di questa tesi.
 \end_layout
 
 \begin_layout Plain Layout
-Prima di tutto, vorrei ringraziare i miei genitori Gianni e Daniela, per
+Prima di tutto, vorrei ringraziare i miei genitori Daniela e Gianni, per
  il loro amore, il loro costante sostegno e l'incoraggiamento che mi hanno
  donato lungo tutto il cammino accademico.
- Senza di loro, tutto questo non sarebbe stato possibile.
+ Senza di loro non avrei fatto nemmeno i test d'ingresso.
+\end_layout
+
+\begin_layout Plain Layout
+A mia madre, mia confidente e sostegno incondizionato lungo il mio percorso.
+ Tu hai creduto in me anche quando io stesso avevo dubbi, hai instillato
+ in me fiducia e determinazione.
+ Sei stata al mio fianco in ogni momento, ascoltando le mie gioie e le mie
+ preoccupazioni, incoraggiandomi a superare ogni ostacolo.
+ Il mio successo è anche il tuo successo, e per questo ti sono eternamente
+ grato.
 \end_layout
 
 \begin_layout Plain Layout
 A mio padre, un uomo straordinario che ha saputo trasmettermi la passione
  per l'informatica sin da quando ero bambino.
- Grazie per aver reso la tecnologia parte integrante della nostra famiglia,
- per avermi fornito gli strumenti necessari per esplorare questo mondo.
- Ogni volta che mi portavi con te al lavoro da piccolo, mi hai aperto le
- porte di un mondo affascinante, permettendomi di affacciarmi sulle sfide
- e le possibilità dell'informatica.
+ Grazie per avermi fornito gli strumenti necessari per esplorare questo
+ mondo, sin da quando mi insegnasti a scrivere su Word da piccolo.
  Se oggi posso dedicarmi a ciò che amo, è grazie a te e alla tua dedizione
  nel coltivare il mio interesse.
 \end_layout
 
 \begin_layout Plain Layout
-A mia madre, confidente instancabile e sostegno incondizionato lungo il
- mio percorso.
- Tu hai creduto in me anche quando io stesso avevo dubbi, hai instillato
- in me fiducia e determinazione.
- Sei stata al mio fianco in ogni momento, ascoltando le mie gioie e le mie
- preoccupazioni, incoraggiandomi a superare ogni ostacolo.
- Hai saputo vedere il mio potenziale e mi hai sostenuto con il tuo amore
- incondizionato.
- Grazie, mamma, per il tuo sostegno costante, per avermi dato la forza di
- credere in me stesso e per avermi insegnato il valore della perseveranza.
- Senza di te, non avrei potuto realizzare tutto ciò che ho raggiunto.
- Il mio successo è anche il tuo successo, e per questo ti sono eternamente
- grato.
 \begin_inset VSpace defskip
 \end_inset
 
@@ -16142,12 +16195,12 @@ Un ringraziamento speciale va al mio relatore, il professor Antonio Servetti,
 \begin_layout Plain Layout
 Voglio inoltre ringraziare i miei amici, i 
 \emph on
-coki
+cocky
 \emph default
 , che sono stati al mio fianco durante gli alti e i bassi di questa avventura
  accademica.
- Le nostre discussioni, le condivisioni e il sostegno reciproco hanno reso
- il mio percorso molto più leggero.
+ Le nostre discussioni, i concili e il vostro sostegno hanno reso il mio
+ percorso molto più leggero.
 \end_layout
 
 \begin_layout Plain Layout
@@ -16174,22 +16227,22 @@ A Andrea (
 \emph on
 Felipe
 \emph default
-), desidero ringraziarti per i tuoi preziosi aiuti tecnici e i consigli
- che mi hai fornito da buon (
+), desidero ringraziarti per i tuoi consigli da buon (
 \emph on
 vero
 \emph default
 ) informatico.
- Sono grato per la tua collaborazione e per aver condiviso con te questa
- passione per l'informatica in questi anni.
+ Sono felice di aver condiviso con te questa passione per l'informatica
+ in questi anni.
+ Prima o poi faremo un progetto insieme, ne sono sicuro.
 \end_layout
 
 \begin_layout Plain Layout
-Infine, a Gloria, voglio ringraziarti per le risate che abbiamo condiviso
- e i momenti che hai catturato con le tue preziose polaroid, che custodisco
- gelosamente.
- Ricorderò sempre i nostri momenti di spensieratezza e le biciclette rotte.
- Grazie per la tua allegria, la tua creatività e la tua amicizia.
+Infine, a Gloria, ci conosciamo da meno di un anno, ma è come se ti conoscessi
+ da una vita.
+ Voglio ringraziarti per le risate che abbiamo condiviso e i momenti che
+ hai catturato nei tuoi diari, custodirò tutti questi ricordi gelosamente.
+ Credo che ci ricorderemo a vita della biciclette rotte.
 \end_layout
 
 \begin_layout Plain Layout
