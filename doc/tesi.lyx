@@ -9439,19 +9439,20 @@ noprefix "false"
 \end_layout
 
 \begin_layout Itemize
-Dialoga direttamente col database senza passare per il rest_server
+Dialoga direttamente col database senza passare per il rest_server.
 \end_layout
 
 \begin_layout Itemize
-Non utilizza il microfono per registrare un segmento audio da identificare
+Non utilizza il microfono per registrare un segmento audio da identificare,
+ bensì legge un file Wave.
 \end_layout
 
 \begin_layout Itemize
 È un eseguibile 
 \emph on
-standard
+tradizionale
 \emph default
- e non una RIA
+ e non una RIA.
 \end_layout
 
 \begin_layout Standard
@@ -9512,13 +9513,13 @@ WavReader
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Calcola i Links a partire dai sample utilizzando la funzione 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily}"
+lstparams "language={C++},basicstyle={\ttfamily},keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9529,7 +9530,7 @@ fin::computeLinks
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -9557,7 +9558,7 @@ L'unico scopo di questo passaggio è verificare il corretto funzionamento
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
@@ -9574,13 +9575,13 @@ ByteBuffer
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
 Dati i Links cerca nel database un match facendo ricorso a 
 \begin_inset listings
-lstparams "language={C++},basicstyle={\ttfamily},breaklines=true"
+lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
 inline true
 status open
 
@@ -9591,11 +9592,62 @@ fin::searchFromLinks
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Enumerate
-Stampa a video il nome del brano identificato
+Stampa a video il nome del brano identificato.
+\end_layout
+
+\begin_layout Standard
+Eventualmente, se viene passato a riga di comando l'argomento 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+--to-json
+\end_layout
+
+\end_inset
+
+, mock_client stampa su stdout un oggetto JSON contenente i campi della
+ struct 
+\begin_inset listings
+lstparams "language={C++},basicstyle={\ttfamily}"
+inline true
+status open
+
+\begin_layout Plain Layout
+
+SearchResult
+\end_layout
+
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Per maggiori informazioni vedere il paragrafo 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:Inserimento-brano"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
