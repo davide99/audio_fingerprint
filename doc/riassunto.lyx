@@ -466,6 +466,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset ERT
 status open
 
@@ -516,14 +517,14 @@ tick}
 
 \begin_layout Plain Layout
 
-	height=0.8*
+	height=0.7*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-	width=
+	width=0.9*
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -677,14 +678,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-		height=0.8*
+		height=0.7*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-		width=
+		width=0.9*
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -1055,14 +1056,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-		height=0.8*
+		height=0.7*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-		width=
+		width=0.9*
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -1601,6 +1602,7 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset ERT
 status open
 
@@ -1634,14 +1636,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	height=0.8*
+	height=0.7*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-	width=
+	width=0.9*
 \backslash
 axisdefaultwidth
 \end_layout
@@ -1796,10 +1798,11 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\align center
 \begin_inset External
 	template RasterImage
 	filename img/screenshot_lyrics.png
-	width 100col%
+	width 75col%
 
 \end_inset
 
@@ -2363,6 +2366,38 @@ Rate positivi con
 
 \begin_layout Section
 Conclusioni
+\end_layout
+
+\begin_layout Standard
+Il sistema proposto in questa tesi è nato come un progetto personale, foraggiato
+ dalla voglia di avere una migliore comprensione delle tecnologie impiegate
+ nel riconoscimento audio, interrogandosi sul come fosse possibile realizzare
+ un sistema di tale portata.
+\end_layout
+
+\begin_layout Standard
+La second screen application ha rappresentato un'evoluzione naturale del
+ sistema di fingerprinting e matching, ma la sfida principale è stata l'esecuzio
+ne dell'algoritmo nell'ambiente browser web.
+\end_layout
+
+\begin_layout Standard
+È importante sottolineare che il percorso di ricerca non si conclude con
+ questa tesi: l'algoritmo presentato può essere usato anche in ambiti diversi
+ rispetto a quello del riconoscimento musicale, quali la sincronizzazione
+ di stream multimediali e il riconoscimento di particolari segnali audio
+ che indicano l'accadere di un determinato evento.
+ Non si esclude la possibilità di scoprire nuove e inaspettate applicazioni
+ non trattate in questo documento.
+\end_layout
+
+\begin_layout Standard
+L'informatica è un settore in continua evoluzione: nulla è da considerarsi
+ 
+\emph on
+irrealizzabile
+\emph default
+.
 \end_layout
 
 \begin_layout Standard
