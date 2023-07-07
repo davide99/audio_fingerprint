@@ -12935,6 +12935,14 @@ https://github.com/JorenSix/Olaf
 
 \end_inset
 
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "six2023olaf"
+literal "true"
+
+\end_inset
+
  è un'applicazione per l'identificazione audio, simile nello scopo, all'algoritm
 o già presentato in questo documento.
 \end_layout
@@ -16134,10 +16142,6 @@ Ringraziamenti
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
 Desidero esprimere la mia più profonda gratitudine a tutte le persone che
  mi hanno sostenuto durante il mio percorso universitario e durante la realizzaz
 ione di questa tesi (tutti, rigorosamente, in ordine alfabetico).
@@ -16147,14 +16151,14 @@ ione di questa tesi (tutti, rigorosamente, in ordine alfabetico).
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Prima di tutto, vorrei ringraziare i miei genitori Daniela e Gianni, per
  il loro amore, il loro costante sostegno e l'incoraggiamento che mi hanno
  donato lungo tutto il cammino accademico.
  Senza di loro non avrei fatto nemmeno i test d'ingresso.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A mia madre, mia confidente e sostegno incondizionato lungo il mio percorso.
  Tu hai creduto in me anche quando io stesso avevo dubbi, hai instillato
  in me fiducia e determinazione.
@@ -16164,7 +16168,7 @@ A mia madre, mia confidente e sostegno incondizionato lungo il mio percorso.
  grato.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A mio padre, un uomo straordinario che ha saputo trasmettermi la passione
  per l'informatica sin da quando ero bambino.
  Grazie per avermi fornito gli strumenti necessari per esplorare questo
@@ -16173,14 +16177,14 @@ A mio padre, un uomo straordinario che ha saputo trasmettermi la passione
  nel coltivare il mio interesse.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Un ringraziamento speciale va al mio relatore, il professor Antonio Servetti,
  per la sua guida, il suo prezioso supporto, la sua fiducia in me e il tempo
  dedicatomi.
@@ -16192,29 +16196,32 @@ Un ringraziamento speciale va al mio relatore, il professor Antonio Servetti,
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Voglio inoltre ringraziare i miei amici, i 
 \emph on
 cocky
 \emph default
 , che sono stati al mio fianco durante gli alti e i bassi di questa avventura
  accademica.
- Le nostre discussioni, i concili e il vostro sostegno hanno reso il mio
- percorso molto più leggero.
+ Le nostre discussioni, i 
+\emph on
+concili
+\emph default
+ e il vostro sostegno hanno reso il mio percorso molto più leggero.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A Lorenzo (
 \emph on
 Arabella
 \emph default
 ), vorrei esprimere la mia gratitudine per la tua costante presenza, il
- tuo sostegno incondizionato e l'avermi fatto appassionare alla musica.
+ tuo appoggio e l'avermi fatto (ri)appassionare alla musica.
  Hai sempre creduto in me e hai condiviso le mie gioie e le mie sfide.
  La tua amicizia è un vero tesoro.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A Emmanuel, desidero ringraziarti per le chiacchierate fino alle 3 di notte,
  le risate, i consigli, i piani diabolici e l'energia positiva.
  Hai reso i momenti di studio e di svago ancora più significativi con la
@@ -16222,7 +16229,7 @@ A Emmanuel, desidero ringraziarti per le chiacchierate fino alle 3 di notte,
  Si sente quando non ci sei.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A Andrea (
 \emph on
 Felipe
@@ -16237,7 +16244,7 @@ vero
  Prima o poi faremo un progetto insieme, ne sono sicuro.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Infine, a Gloria, ci conosciamo da meno di un anno, ma è come se ti conoscessi
  da una vita.
  Voglio ringraziarti per le risate che abbiamo condiviso e i momenti che
@@ -16245,7 +16252,7 @@ Infine, a Gloria, ci conosciamo da meno di un anno, ma è come se ti conoscessi
  Credo che ci ricorderemo a vita della biciclette rotte.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Non potrei essere più grato per avere amici così straordinari accanto a
  me.
  Grazie di cuore per tutto il vostro supporto e amicizia.
@@ -16255,14 +16262,14 @@ Non potrei essere più grato per avere amici così straordinari accanto a
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Infine, desidero ringraziare tutti coloro che, in modo diretto o indiretto,
  hanno contribuito alla realizzazione di questa tesi.
  Il loro supporto, le loro risorse e il loro apporto hanno arricchito il
  mio lavoro e reso possibile la sua conclusione con successo.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 A tutte queste persone, che hanno condiviso con me gioie e sfide in questa
  avventura accademica, voglio dedicare il mio più sincero apprezzamento
  e riconoscimento.
@@ -16270,20 +16277,15 @@ A tutte queste persone, che hanno condiviso con me gioie e sfide in questa
  stata una realtà.
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Standard
 Grazie di cuore a tutti voi.
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
