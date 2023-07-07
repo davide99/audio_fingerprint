@@ -7,6 +7,20 @@
 \textclass article
 \begin_preamble
 \usepackage{pgfplots}
+
+%per filtrare dati csv
+\pgfplotsset{
+    discard if not/.style 2 args={
+        x filter/.code={
+            \edef\tempa{\thisrow{#1}}
+            \edef\tempb{#2}
+            \ifx\tempa\tempb
+            \else
+                \def\pgfmathresult{inf}
+            \fi
+        }
+    }
+}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -1816,7 +1830,535 @@ Screenshot testo sincronizzato
 \end_layout
 
 \begin_layout Section
-Confronto con concorrenza
+Altre soluzioni
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+OLAF
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "six2023olaf"
+literal "true"
+
+\end_inset
+
+ è un'applicazione per l'identificazione audio, simile, nello scopo, all'algorit
+mo già presentato in questo documento.
+\end_layout
+
+\begin_layout Standard
+Sono stati effettuati dei confronti tra i due sistemi, testandone il funzionamen
+to su segmenti audio molto rumorosi, alcuni risultati sono riportati nelle
+ figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako--20"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ e 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Panako--10"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, dove con 
+\emph on
+fin
+\emph default
+ ci si riferisce all'implementazione oggetto di questo documento.
+ Si nota ad occhio la superiore robustezza al rumore rispetto ad OLAF: questo
+ è dovuto al fatto che l'implementazione qui descritta presenta un algoritmo
+ per la scelta dei picchi più rifinito, in cui viene sfruttato il concetto
+ di banda critica, permettendogli di essere più immune al rumore.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={Lunghezza segmento ($s$)},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={True positive rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers,
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
+\end_layout
+
+\begin_layout Plain Layout
+
+	height=0.5*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	xmin=0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	ymin=0, ymax=100,
+\end_layout
+
+\begin_layout Plain Layout
+
+	enlarge y limits=0.25
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-20}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/panako_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{OLAF};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Panako--20"
+
+\end_inset
+
+Rate positivi con 
+\begin_inset Formula $SNR=-20dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={Lunghezza segmento ($s$)},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={True positive rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers,
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend style={at={(0.02,0.98)},anchor=north west,draw=none},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend cell align={left},
+\end_layout
+
+\begin_layout Plain Layout
+
+	height=0.5*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	xmin=0.5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	ymin=0, ymax=100,
+\end_layout
+
+\begin_layout Plain Layout
+
+	enlarge y limits=0.25
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=red,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/recording_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{fin};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot+[
+\end_layout
+
+\begin_layout Plain Layout
+
+	solid,
+\end_layout
+
+\begin_layout Plain Layout
+
+	color=green,
+\end_layout
+
+\begin_layout Plain Layout
+
+	discard if not={snr}{-10}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [
+\end_layout
+
+\begin_layout Plain Layout
+
+	x=length, y=percentage_true, col sep=comma,
+\end_layout
+
+\begin_layout Plain Layout
+
+] {data/panako_length_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{OLAF};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Panako--10"
+
+\end_inset
+
+Rate positivi con 
+\begin_inset Formula $SNR=-10dB$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
