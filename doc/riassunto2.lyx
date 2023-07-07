@@ -7,7 +7,7 @@
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language italian
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -30,7 +30,16 @@
 \index_command default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry true
 \use_package amsmath 1
@@ -67,7 +76,7 @@
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style english
+\quotes_style french
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
@@ -170,94 +179,140 @@ Introduzione
 \end_layout
 
 \begin_layout Standard
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- Duis nec turpis elit.
- Nunc tristique eros rhoncus turpis tincidunt, eget ultrices tortor facilisis.
- Nunc sodales lectus eget sem iaculis euismod.
- Proin malesuada libero ipsum, eget pretium mauris facilisis eu.
- Nullam maximus enim quis risus placerat, a placerat sem dignissim.
- Curabitur risus erat, tristique at velit et, aliquam bibendum enim.
- Phasellus facilisis, sapien vitae rutrum posuere, ex orci elementum velit,
- sed hendrerit magna nibh a lorem.
- Duis gravida quam sed tristique hendrerit.
- Integer porttitor imperdiet sem auctor sodales.
- Donec id augue nisi.
- Maecenas dignissim, neque ut volutpat bibendum, sem est consequat ipsum,
- a mollis nisi magna id neque.
- Duis tincidunt blandit convallis.
- Praesent vel massa elit.
- Donec nulla lacus, mollis eget porta volutpat, sollicitudin vitae tellus.
- Fusce porta eleifend tempus.
+Negli ultimi anni si è notato un trend sempre crescente nell'utilizzo di
+ JavaScript per la creazione di applicazioni desktop
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rauch2012smashing"
+literal "true"
+
+\end_inset
+
+, grazie all'esistenza di tecnologie come Node.js
+\begin_inset CommandInset citation
+LatexCommand cite
+key "rauch2012smashing"
+literal "true"
+
+\end_inset
+
+ e Electron
+\begin_inset CommandInset citation
+LatexCommand cite
+key "scott2020javascript"
+literal "true"
+
+\end_inset
+
+.
+ Il trend di scrivere applicazioni in JavaScript è stato amplificato dalla
+ crescente importanza del web come piattaforma per la distribuzione di applicazi
+oni software.
+ Software utilizzati quotidianamente da miliardi di utenti sono basati sul
+ web e, per forza di cose, devono essere scritti in JavaScript.
 \end_layout
 
 \begin_layout Standard
-Aliquam malesuada, erat eget ullamcorper scelerisque, neque felis vulputate
- metus, ut egestas eros turpis vitae nibh.
- Fusce finibus, sapien in volutpat rhoncus, metus ex mollis nunc, eget imperdiet
- libero mi id arcu.
- Nullam mattis, justo vitae aliquam efficitur, tellus est aliquet quam,
- eu rutrum lacus lorem at libero.
- Morbi nec neque eget leo porta molestie.
- Mauris tristique a neque in elementum.
- Donec vel lacinia neque.
- Nulla a malesuada tellus, eget dignissim neque.
- Nulla at dignissim orci.
- Proin tincidunt dolor sed erat rutrum fringilla.
- Curabitur consequat cursus neque condimentum dignissim.
- Suspendisse imperdiet elit non lectus placerat aliquam.
- Nulla accumsan facilisis sagittis.
- Integer quis aliquam velit.
- Aliquam erat volutpat.
+Da qui la nascita delle cosiddette 
+\emph on
+Rich Internet Applications
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+D'ora in avanti RIA
+\end_layout
+
+\end_inset
+
+
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "fraternali2010rich"
+literal "true"
+
+\end_inset
+
+, ovvero applicazioni web che offrono un'esperienza utente interattiva e
+ avanzata simile a quella di un'applicazione desktop tradizionale.
+ Le RIA sono caratterizzate da una vasta gamma di funzionalità e interattività
+ che le distinguono dalla semplici pagine web statiche.
+ Oltre alla classica triade HTML + CSS + JavaScript, le RIA possono fare
+ uso di tecnologie più avanzate e recenti come WebSockets, WebAudio, WebAssembly
+, WebRTC.
+ In sostanza il browser diventa un'interfaccia o un'astrazione della macchina
+ sottostante, alla quale si può accedere utilizzando JavaScript.
+ Nello specifico WebAudio
+\begin_inset CommandInset citation
+LatexCommand cite
+key "choi2018audioworklet"
+literal "true"
+
+\end_inset
+
+ è un'API JavaScript avanzata che consente di manipolare e generare audio
+ all'interno del browser.
+ È stata progettata per consentire agli sviluppatori di creare RIA che includono
+ funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
+ di suoni.
+ Inoltre, la necessità di scrivere applicazioni real time ha portato la
+ necessità di dover eseguire codice ad alta efficienza, obiettivo non realizzabi
+le facilmente con un linguaggio interpretato quale JavaScript.
+ Per questo motivo nasce 
+\emph on
+WebAssembly
+\emph default
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Più semplicemente Wasm
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "haas2017bringing"
+literal "true"
+
+\end_inset
+
+: un formato di codice binario portabile che consente di eseguire codice
+ di basso livello all'interno del browser web.
 \end_layout
 
 \begin_layout Standard
-Vivamus sit amet rutrum ligula, vitae tempus massa.
- Curabitur metus purus, commodo sed ipsum a, pulvinar aliquam magna.
- Suspendisse commodo dui sed vehicula pulvinar.
- Sed nec nibh id odio blandit volutpat.
- Aenean tempor tristique quam, eu lacinia mi placerat sed.
- Nulla pellentesque, nunc fringilla laoreet egestas, turpis ligula efficitur
- diam, ut dictum lacus mi ut orci.
- Nullam eu luctus mi, nec accumsan nisl.
- Suspendisse at ornare nisl.
- Donec non dolor egestas, dignissim diam quis, elementum dui.
- Sed mollis tincidunt magna a facilisis.
- Mauris eget pharetra orci.
- Phasellus varius pulvinar libero at volutpat.
- Nullam nunc ante, efficitur eu luctus laoreet, iaculis a quam.
- Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
- inceptos himenaeos.
+L'obiettivo di questo documento è quello di discutere la realizzazione di
+ un sistema per l'identificazione di audio, da eseguire su dispositivi eterogene
+i all'interno di un web browser, sfruttando Wasm e WebAudio.
+ Questo presenta numerosi vantaggi, tra i più importanti:
+\end_layout
+
+\begin_layout Itemize
+l'evitare all'utente il download di un'app addizionale
+\end_layout
+
+\begin_layout Itemize
+la riduzione del carico lato server: parte della complessità può essere
+ spostata sul dispositivo dell'utente finale
 \end_layout
 
 \begin_layout Standard
-Nunc nec orci tempus, pharetra dolor nec, egestas purus.
- Duis dapibus velit at dolor dictum sollicitudin.
- Fusce eget odio id nibh posuere ornare.
- Aliquam non sapien arcu.
- Etiam egestas a urna non rutrum.
- Pellentesque suscipit at metus ultrices sodales.
- Sed fermentum, erat sed pulvinar bibendum, nunc dui gravida elit, sit amet
- consectetur enim diam in augue.
- Praesent eget metus et lectus dapibus faucibus.
- Vivamus ut aliquet dolor.
- Duis nisi nulla, commodo at mollis in, dapibus in dolor.
- Nam cursus, felis vel feugiat aliquam, erat quam euismod dolor, non dictum
- felis tortor sit amet ex.
- Maecenas ac vehicula turpis, ac malesuada purus.
-\end_layout
-
-\begin_layout Standard
-Donec vel mollis nisl, at ultricies quam.
- Praesent et dui accumsan leo consequat posuere.
- Cras ut est nisl.
- In ornare mauris id volutpat accumsan.
- Nunc rhoncus convallis ornare.
- Pellentesque at orci viverra, volutpat nisl non, dapibus nulla.
- Vivamus consequat nunc turpis, sit amet consectetur ante luctus ac.
- Quisque finibus metus eu elit imperdiet iaculis.
- Vestibulum quis justo at elit dapibus tincidunt vitae et sapien.
- Morbi consequat velit lectus, vel ultrices leo pulvinar sed.
- 
+Si guiderà il lettore attraverso la realizzazione del sistema di identificazione
+ tra le varie sezioni; trattando la realizzazione di una 
+\emph on
+second-screen application
+\emph default
+ per la presentazione, in sincronia con un brano riprodotto, del testo del
+ brano stesso.
+ Verranno analizzate anche le differenze e il funzionamento di un altro
+ algoritmo concorrente open-source, per poi passare, infine, ai possibili
+ utilizzi futuri.
 \end_layout
 
 \begin_layout Section
@@ -292,8 +347,16 @@ Robustezza applicazione
 Conclusioni
 \end_layout
 
-\begin_layout Section
-Bibliografia
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintCited"
+bibfiles "biblio"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
