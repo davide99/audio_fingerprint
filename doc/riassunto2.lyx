@@ -113,24 +113,31 @@ Davide Pisanò, Antonio Servetti
 \end_layout
 
 \begin_layout Abstract
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- Duis nec turpis elit.
- Nunc tristique eros rhoncus turpis tincidunt, eget ultrices tortor facilisis.
- Nunc sodales lectus eget sem iaculis euismod.
- Proin malesuada libero ipsum, eget pretium mauris facilisis eu.
- Nullam maximus enim quis risus placerat, a placerat sem dignissim.
- Curabitur risus erat, tristique at velit et, aliquam bibendum enim.
- Phasellus facilisis, sapien vitae rutrum posuere, ex orci elementum velit,
- sed hendrerit magna nibh a lorem.
- Duis gravida quam sed tristique hendrerit.
- Integer porttitor imperdiet sem auctor sodales.
- Donec id augue nisi.
- Maecenas dignissim, neque ut volutpat bibendum, sem est consequat ipsum,
- a mollis nisi magna id neque.
- Duis tincidunt blandit convallis.
- Praesent vel massa elit.
- Donec nulla lacus, mollis eget porta volutpat, sollicitudin vitae tellus.
- Fusce porta eleifend tempus.
+Negli ultimi anni si è assistito a una trasformazione nel paradigma di sviluppo
+ delle applicazioni desktop, il quale si è mosso con determinazione verso
+ un'architettura web-based.
+ JavaScript è passato dall’essere un linguaggio per pagine web ad un linguaggio
+ 
+\emph on
+general purpose
+\emph default
+, rendendo necessaria l’introduzione di nuove tecnologie come WebAudio e
+ WebAssembly.
+ In questo documento si propone di indagare la possibilità di sfruttare
+ queste tecnologie web per realizzare un sistema di audio fingerprinting
+ che possa operare direttamente nel browser, valutandone l'effettiva fattibilità.
+ Verrà inoltre trattata una declinazione innovativa del sistema di riconosciment
+o, attraverso la realizzazione di una 
+\emph on
+second screen application 
+\emph default
+eseguita nel browser.
+ È inoltre stata condotta un'analisi dello stato dell'arte nel campo dell'audio
+ fingerprinting, per comprendere le soluzioni già esistenti.
+ I risultati ottenuti da questa ricerca promettono di fornire nuove prospettive
+ per lo sviluppo di applicazioni audio web-based, aprendo le porte a possibili
+ futuri sviluppi e applicazioni nell'ambito del riconoscimento audio in
+ tempo reale all'interno del browser.
 \begin_inset VSpace bigskip
 \end_inset
 
