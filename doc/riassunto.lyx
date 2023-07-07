@@ -1739,6 +1739,156 @@ noprefix "false"
 , ad indicare un match.
 \end_layout
 
+\begin_layout Standard
+Esisterà, inoltre, una soglia oltre la quale si può dire con 
+\emph on
+abbastanza sicurezza 
+\emph default
+che un segmento registrato fa parte di un determinato brano: si può ragionare
+ in termini di soglia di numero Links in comune tra segmento registrato
+ e brano originale, oltre la quale si ottiene un rate di falsi positivi
+ basso.
+ Dalla figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:False-positive-rate-in-fz-link-comuni"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ si può notare come tale soglia si aggiri intorno ai 
+\begin_inset Formula $15$
+\end_inset
+
+ Links.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={Numero Link in comune},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={False positive rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend pos=north east,
+\end_layout
+
+\begin_layout Plain Layout
+
+	height=0.8*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=common_links, y=false_positive, col sep=comma] {data/min_hint.cs
+v};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:False-positive-rate-in-fz-link-comuni"
+
+\end_inset
+
+False positive rate in funzione del numero di Link in comune
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Robustezza applicazione
 \end_layout
