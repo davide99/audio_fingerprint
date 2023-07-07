@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{pgfplots}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language italian
@@ -316,7 +319,1213 @@ second-screen application
 \end_layout
 
 \begin_layout Section
-The proposed low-latency WebRTC application
+L'estrazione delle features
+\end_layout
+
+\begin_layout Standard
+Il primo passo è quello di estrarre dai segnali audio delle features, sulla
+ base delle quali effettuare il fingerprinting e la ricerca.
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/fin_architettura.svg
+	width 100col%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Architettura-fin"
+
+\end_inset
+
+Schema estrazione Links
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Il processo è indicato in figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Architettura-fin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Si parte da una rappresentazione del dominio nel tempo del segnale audio
+ (
+\series bold
+Reader
+\series default
+), si procede creando lo spettrogramma (
+\series bold
+Spectrogram
+\series default
+), successivamente si estraggono i picchi (
+\series bold
+Peaks
+\series default
+) più intensi
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nonché i più significativi
+\end_layout
+
+\end_inset
+
+ (
+\series bold
+Peaks
+\series default
+) e infine si creano i 
+\series bold
+Links
+\series default
+, ovvero il 
+\emph on
+fingerprint
+\emph default
+ del segnale audio.
+\end_layout
+
+\begin_layout Standard
+Lo spettrogramma è ottenuto finestrando il segnale audio con overlap del
+ 
+\begin_inset Formula $50\%$
+\end_inset
+
+.
+ In figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Recognition-rate-in"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ è possibile vedere il recognition rate al variare della funzione finestra
+ utilizzata e dell'SNR del segmento da riconoscere: si è scelto di utilizzare
+ la finestra di 
+\emph on
+Hann
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "podder2014comparative"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={SNR ($dB$)},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={Recognition rate},
+\end_layout
+
+\begin_layout Plain Layout
+
+	legend pos=south east,
+\end_layout
+
+\begin_layout Plain Layout
+
+	yticklabel={$
+\backslash
+pgfmathprintnumber{
+\backslash
+tick}
+\backslash
+%$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	no markers,
+\end_layout
+
+\begin_layout Plain Layout
+
+	height=0.8*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=blackman, col sep=comma] {data/windows_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Blackman}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=hann, col sep=comma] {data/windows_success_rate.csv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Hann}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot table [x=db, y=rectangular, col sep=comma] {data/windows_success_rate.csv
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{Rettangolare}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Recognition-rate-in"
+
+\end_inset
+
+Recognition rate in funzione dell'SNR per le varie finestre
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+L'individuazione dei picchi avviene suddividendo lo spettrogramma in celle
+ composte da 
+\begin_inset Formula $32$
+\end_inset
+
+ fineste e range di frequenze in base alla 
+\emph on
+scala Mel
+\emph default
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "pedersen1965mel"
+literal "true"
+
+\end_inset
+
+ (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Three-points-per"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=0.8*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+		yticklabel={$
+\backslash
+pgfmathparse{10^(
+\backslash
+tick/1000)}
+\backslash
+pgfmathprintnumber{
+\backslash
+pgfmathresult}$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=0.8pt] (0,0) rectangle (40,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=0.8pt] (40,0) rectangle (80,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[blue, line width=0.8pt] (80,0) rectangle (120,100);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=0.8pt] (0,100) rectangle (40,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=0.8pt] (40,100) rectangle (80,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[green, line width=0.8pt] (80,100) rectangle (120,200);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=0.8pt] (0,200) rectangle (40,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=0.8pt] (40,200) rectangle (80,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[red, line width=0.8pt] (80,200) rectangle (120,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=0.8pt] (0,300) rectangle (40,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=0.8pt] (40,300) rectangle (80,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+draw[orange, line width=0.8pt] (80,300) rectangle (120,400);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\end_layout
+
+\begin_layout Plain Layout
+
+		
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 0.745560224337 , 378.5992651
+97 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 3.35149848633 , 885.69642912
+8 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 1.36552968092 , 687.79506248
+ ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 3.73052621593 , 1521.618562
+76 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 2.24021149438 , 1286.762539
+77 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 2.31025446998 , 1759.585072
+66 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 0.367038182557 , 2640.0077863
+8 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 2.60223704132 , 2543.51959691
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 3.29030455474 , 2857.42356211
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 3.06012887649 , 3859.57073
+579 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 1.04281482521 , 3310.98256
+132 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 0.342092598793 ,
+ 3187.00295803 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 6.13965840628 , 346.37314184
+4 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 6.18220033666 , 151.14467838
+3 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 5.10152863505 , 640.55570001
+8 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 6.25598325224 , 1797.769092
+61 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 7.08091233708 , 1668.626795
+36 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 5.30064456137 , 1131.850638
+39 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 7.2544573697 , 2751.61392809
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 6.8872104256 , 2267.19959314
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 7.45001350539 , 2289.19953153
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 5.64148867695 , 3139.99246
+694 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 5.80868333293 , 3160.84633
+384 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 4.68927142292 , 3263.16366
+007 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.50986878705 , 653.82012721
+1 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.94884609281 , 539.46336189
+3 ) }; 
+\backslash
+addplot [ blue ,only marks,mark=star] coordinates { ( 8.44637953657 , 707.94351178
+6 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 9.49315824083 , 1563.597638
+99 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 9.74759745215 , 1888.112335
+31 ) }; 
+\backslash
+addplot [ green ,only marks,mark=star] coordinates { ( 10.7844077137 , 1477.871231
+18 ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 8.899479235 , 2856.56308609
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 9.50730112412 , 2796.10602412
+ ) }; 
+\backslash
+addplot [ red ,only marks,mark=star] coordinates { ( 11.6806723738 , 2173.69277417
+ ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 9.28333255686 , 3800.01058
+487 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 9.87529616782 , 3162.85741
+608 ) }; 
+\backslash
+addplot [ orange ,only marks,mark=star] coordinates { ( 10.5805497799 , 3704.10829
+642 ) }; 
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Three-points-per"
+
+\end_inset
+
+
+\lang italian
+Spettrogramma
+\lang english
+ con 
+\begin_inset Formula $3$
+\end_inset
+
+ 
+\lang italian
+picchi
+\lang english
+ per cella
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\lang english
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+		grid=major,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xlabel = Tempo $(s)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ylabel = Frequenza $(Hz)$,
+\end_layout
+
+\begin_layout Plain Layout
+
+		xmin = 0, xmax = 13,
+\end_layout
+
+\begin_layout Plain Layout
+
+		ymin = 0, ymax = 4000,
+\end_layout
+
+\begin_layout Plain Layout
+
+		height=0.8*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+		width=
+\backslash
+axisdefaultwidth,
+\end_layout
+
+\begin_layout Plain Layout
+
+		yticklabel={$
+\backslash
+pgfmathparse{10^(
+\backslash
+tick/1000)}
+\backslash
+pgfmathprintnumber{
+\backslash
+pgfmathresult}$},
+\end_layout
+
+\begin_layout Plain Layout
+
+	]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(1.2337624452119649,156)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.35010304565267,253)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.177029724681008,116)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(7.256587195538682,472)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(2.4197754035932766,253)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(3.706892420762254,294)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(9.859084153519337,252)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(8.53495230903478,49)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(11.49611021144223,322)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [blue,only marks,mark=star] coordinates {(9.464007176483538,561)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.6697999467081948,1769)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(4.026956852208946,1302)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(5.936343337187637,1144)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.6650481493475238,1174)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(6.461964839223465,1183)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(11.853904443933935,1143)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(5.739713325186329,1541)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(3.0155036031597597,1118)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(7.689312333706191,1665)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [green,only marks,mark=star] coordinates {(11.70364789096238,1616)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.523615767930713,2545)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(1.0848245428151932,2659)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(10.129650705452748,2383)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.970368763958769,2520)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(7.532556747022665,2595)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.553257221637658,2275)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(1.164954468021365,2180)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(5.860749713924608,2487)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(3.8631716522570008,2458)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [red,only marks,mark=star] coordinates {(6.739810860494329,2305)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(7.560235078417245,3829)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(7.697392888392581,3145)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(6.66181336299463,3323)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(11.308449523876288,3184)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(3.209950802394781,3259)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(2.935104227985603,3601)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(11.688375153800843,3878)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(8.107012587028235,3143)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(8.518029171169964,3777)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [orange,only marks,mark=star] coordinates {(0.2129169186634634,3812)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, red},text mark as
+ node=true] coordinates {(3.523615767930713,2545)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (7.532556747022665,2595)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(7.532556747022665,2595)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (5.860749713924608,2487)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(5.860749713924608,2487)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot [mark=none] coordinates {(3.523615767930713,2545) (6.739810860494329,2305)
+};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[only marks,mark=o,mark options={solid,scale=2, black},text mark
+ as node=true] coordinates {(6.739810860494329,2305)};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+draw[fill=yellow, fill opacity=0.2] (50,200) rectangle (80,300);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang english
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Anchor-target"
+
+\end_inset
+
+
+\lang italian
+Selezione
+\lang english
+ 
+\lang italian
+dell'anchor
+\lang english
+ point e 
+\lang italian
+della
+\lang english
+ target zone
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\lang italian
+Infine ogni picco viene considerato un 
+\emph on
+anchor point
+\emph default
+, al quale è associata una determinata 
+\emph on
+target zone
+\emph default
+ (ovvero una porzione della costellazione dei picchi), per ogni picco della
+ target zone viene creato un 
+\emph on
+Link
+\emph default
+ (figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Anchor-target"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), ovvero una struttura dati definita come:
+\begin_inset Formula 
+\[
+Link\left\{ \begin{aligned}hash= & h(\delta_{w},\delta_{f},\alpha.frequency)\\
+window= & \alpha.window
+\end{aligned}
+\right.
+\]
+
+\end_inset
+
+Dove 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ è l'anchor point e 
+\begin_inset Formula $\beta$
+\end_inset
+
+ un picco nella target zone, allora 
+\begin_inset Formula $\delta_{w}=\beta.window-\alpha.window$
+\end_inset
+
+, 
+\begin_inset Formula $\delta_{f}=\beta.frequency-\alpha.frequency$
+\end_inset
+
+ e 
+\begin_inset Formula $h(\astrosun)$
+\end_inset
+
+ è una funzione di hash.
 \end_layout
 
 \begin_layout Section
