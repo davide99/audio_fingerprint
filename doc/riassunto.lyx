@@ -1529,7 +1529,214 @@ Dove
 \end_layout
 
 \begin_layout Section
-Latency Measurements
+Matching
+\end_layout
+
+\begin_layout Standard
+Estratti e memorizzati i Link di una libreria di brani allora si può procedere
+ al 
+\emph on
+matching
+\emph default
+.
+ Si ammetta di voler riconoscere un segmento audio proveniente da un brano
+ non noto, allora si estrarranno i Link anche in questo caso e si metteranno
+ i due set di Link in relazione tenendo in conto che tra i Links del brano
+ originale 
+\begin_inset Formula $Links_{O}$
+\end_inset
+
+ e quelli del segmento registrato 
+\begin_inset Formula $Links_{R}$
+\end_inset
+
+ dev'esserci una differenza temporale 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ costante e non negativa se si riferiscono allo stesso brano e che gli hash
+ di 
+\begin_inset Formula $Links_{O}$
+\end_inset
+
+ e di 
+\begin_inset Formula $Links_{R}$
+\end_inset
+
+ devono corrispondere.
+ A questo punto basta quindi raggruppare per 
+\begin_inset Formula $\Delta T$
+\end_inset
+
+ e per id del brano originale, definendo con 
+\begin_inset Formula $n$
+\end_inset
+
+ il numero di elementi che ricadono nello stesso gruppo, ordinare per 
+\begin_inset Formula $n$
+\end_inset
+
+ decrescente ed, infine, estrarre il primo gruppo che rappresenta il match
+ migliore.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{axis}[
+\end_layout
+
+\begin_layout Plain Layout
+
+	xlabel={
+\backslash
+# finestra brano originale},
+\end_layout
+
+\begin_layout Plain Layout
+
+	ylabel={
+\backslash
+# finestra registrazione},
+\end_layout
+
+\begin_layout Plain Layout
+
+	height=0.8*
+\backslash
+axisdefaultheight,
+\end_layout
+
+\begin_layout Plain Layout
+
+	width=
+\backslash
+axisdefaultwidth
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[
+\end_layout
+
+\begin_layout Plain Layout
+
+	scatter,
+\end_layout
+
+\begin_layout Plain Layout
+
+	only marks,
+\end_layout
+
+\begin_layout Plain Layout
+
+	scatter/use mapped color={red},
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark options={scale=1.5, opacity=0.2}
+\end_layout
+
+\begin_layout Plain Layout
+
+] table [x=original, y=recording, col sep=comma] {data/matching_time_difference.c
+sv};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Scatter-match"
+
+\end_inset
+
+Scatterplot di un match
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Scatter-match"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ sull'asse delle ascisse è rappresentato il numero di finestra nella quale
+ è contenuto un Link di 
+\begin_inset Formula $Links_{O}$
+\end_inset
+
+, analogamente per l'asse delle ordinate ma per i 
+\begin_inset Formula $Links_{R}$
+\end_inset
+
+: si noti la diagonale a densità maggiore intorno al valore 
+\begin_inset Formula $2000$
+\end_inset
+
+ sulle 
+\begin_inset Formula $x$
+\end_inset
+
+, ad indicare un match.
 \end_layout
 
 \begin_layout Section
