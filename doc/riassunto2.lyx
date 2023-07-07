@@ -1,0 +1,293 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "lmodern" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date true
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1.5cm
+\topmargin 1.5cm
+\rightmargin 1.5cm
+\bottommargin 1.5cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+twocolumn[
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{@twocolumnfalse} 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Title
+Audio fingerprinting in WebAssembly per l'esecuzione in browser web
+\end_layout
+
+\begin_layout Author
+Davide Pisanò, Antonio Servetti
+\end_layout
+
+\begin_layout Abstract
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ Duis nec turpis elit.
+ Nunc tristique eros rhoncus turpis tincidunt, eget ultrices tortor facilisis.
+ Nunc sodales lectus eget sem iaculis euismod.
+ Proin malesuada libero ipsum, eget pretium mauris facilisis eu.
+ Nullam maximus enim quis risus placerat, a placerat sem dignissim.
+ Curabitur risus erat, tristique at velit et, aliquam bibendum enim.
+ Phasellus facilisis, sapien vitae rutrum posuere, ex orci elementum velit,
+ sed hendrerit magna nibh a lorem.
+ Duis gravida quam sed tristique hendrerit.
+ Integer porttitor imperdiet sem auctor sodales.
+ Donec id augue nisi.
+ Maecenas dignissim, neque ut volutpat bibendum, sem est consequat ipsum,
+ a mollis nisi magna id neque.
+ Duis tincidunt blandit convallis.
+ Praesent vel massa elit.
+ Donec nulla lacus, mollis eget porta volutpat, sollicitudin vitae tellus.
+ Fusce porta eleifend tempus.
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{@twocolumnfalse}
+\end_layout
+
+\begin_layout Plain Layout
+
+]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduzione
+\end_layout
+
+\begin_layout Standard
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+ Duis nec turpis elit.
+ Nunc tristique eros rhoncus turpis tincidunt, eget ultrices tortor facilisis.
+ Nunc sodales lectus eget sem iaculis euismod.
+ Proin malesuada libero ipsum, eget pretium mauris facilisis eu.
+ Nullam maximus enim quis risus placerat, a placerat sem dignissim.
+ Curabitur risus erat, tristique at velit et, aliquam bibendum enim.
+ Phasellus facilisis, sapien vitae rutrum posuere, ex orci elementum velit,
+ sed hendrerit magna nibh a lorem.
+ Duis gravida quam sed tristique hendrerit.
+ Integer porttitor imperdiet sem auctor sodales.
+ Donec id augue nisi.
+ Maecenas dignissim, neque ut volutpat bibendum, sem est consequat ipsum,
+ a mollis nisi magna id neque.
+ Duis tincidunt blandit convallis.
+ Praesent vel massa elit.
+ Donec nulla lacus, mollis eget porta volutpat, sollicitudin vitae tellus.
+ Fusce porta eleifend tempus.
+\end_layout
+
+\begin_layout Standard
+Aliquam malesuada, erat eget ullamcorper scelerisque, neque felis vulputate
+ metus, ut egestas eros turpis vitae nibh.
+ Fusce finibus, sapien in volutpat rhoncus, metus ex mollis nunc, eget imperdiet
+ libero mi id arcu.
+ Nullam mattis, justo vitae aliquam efficitur, tellus est aliquet quam,
+ eu rutrum lacus lorem at libero.
+ Morbi nec neque eget leo porta molestie.
+ Mauris tristique a neque in elementum.
+ Donec vel lacinia neque.
+ Nulla a malesuada tellus, eget dignissim neque.
+ Nulla at dignissim orci.
+ Proin tincidunt dolor sed erat rutrum fringilla.
+ Curabitur consequat cursus neque condimentum dignissim.
+ Suspendisse imperdiet elit non lectus placerat aliquam.
+ Nulla accumsan facilisis sagittis.
+ Integer quis aliquam velit.
+ Aliquam erat volutpat.
+\end_layout
+
+\begin_layout Standard
+Vivamus sit amet rutrum ligula, vitae tempus massa.
+ Curabitur metus purus, commodo sed ipsum a, pulvinar aliquam magna.
+ Suspendisse commodo dui sed vehicula pulvinar.
+ Sed nec nibh id odio blandit volutpat.
+ Aenean tempor tristique quam, eu lacinia mi placerat sed.
+ Nulla pellentesque, nunc fringilla laoreet egestas, turpis ligula efficitur
+ diam, ut dictum lacus mi ut orci.
+ Nullam eu luctus mi, nec accumsan nisl.
+ Suspendisse at ornare nisl.
+ Donec non dolor egestas, dignissim diam quis, elementum dui.
+ Sed mollis tincidunt magna a facilisis.
+ Mauris eget pharetra orci.
+ Phasellus varius pulvinar libero at volutpat.
+ Nullam nunc ante, efficitur eu luctus laoreet, iaculis a quam.
+ Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+ inceptos himenaeos.
+\end_layout
+
+\begin_layout Standard
+Nunc nec orci tempus, pharetra dolor nec, egestas purus.
+ Duis dapibus velit at dolor dictum sollicitudin.
+ Fusce eget odio id nibh posuere ornare.
+ Aliquam non sapien arcu.
+ Etiam egestas a urna non rutrum.
+ Pellentesque suscipit at metus ultrices sodales.
+ Sed fermentum, erat sed pulvinar bibendum, nunc dui gravida elit, sit amet
+ consectetur enim diam in augue.
+ Praesent eget metus et lectus dapibus faucibus.
+ Vivamus ut aliquet dolor.
+ Duis nisi nulla, commodo at mollis in, dapibus in dolor.
+ Nam cursus, felis vel feugiat aliquam, erat quam euismod dolor, non dictum
+ felis tortor sit amet ex.
+ Maecenas ac vehicula turpis, ac malesuada purus.
+\end_layout
+
+\begin_layout Standard
+Donec vel mollis nisl, at ultricies quam.
+ Praesent et dui accumsan leo consequat posuere.
+ Cras ut est nisl.
+ In ornare mauris id volutpat accumsan.
+ Nunc rhoncus convallis ornare.
+ Pellentesque at orci viverra, volutpat nisl non, dapibus nulla.
+ Vivamus consequat nunc turpis, sit amet consectetur ante luctus ac.
+ Quisque finibus metus eu elit imperdiet iaculis.
+ Vestibulum quis justo at elit dapibus tincidunt vitae et sapien.
+ Morbi consequat velit lectus, vel ultrices leo pulvinar sed.
+ 
+\end_layout
+
+\begin_layout Section
+Related Work
+\end_layout
+
+\begin_layout Standard
+sfg
+\end_layout
+
+\begin_layout Section
+Background
+\end_layout
+
+\begin_layout Standard
+fg
+\end_layout
+
+\begin_layout Section
+The proposed low-latency WebRTC application
+\end_layout
+
+\begin_layout Section
+Latency Measurements
+\end_layout
+
+\begin_layout Section
+Robustezza applicazione
+\end_layout
+
+\begin_layout Section
+Conclusioni
+\end_layout
+
+\begin_layout Section
+Bibliografia
+\end_layout
+
+\end_body
+\end_document
