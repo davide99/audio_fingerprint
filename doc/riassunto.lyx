@@ -72,7 +72,7 @@
 \leftmargin 1.5cm
 \topmargin 1.5cm
 \rightmargin 1.5cm
-\bottommargin 1.5cm
+\bottommargin 2cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -1739,30 +1739,40 @@ noprefix "false"
 , ad indicare un match.
 \end_layout
 
+\begin_layout Section
+Testo del brano in sincronia
+\end_layout
+
 \begin_layout Standard
-Esisterà, inoltre, una soglia oltre la quale si può dire con 
+Sfruttando l'algoritmo di fingerprinting e matching descritto precedentemente
+ è possibile realizzare una 
 \emph on
-abbastanza sicurezza 
+second screen application
 \emph default
-che un segmento registrato fa parte di un determinato brano: si può ragionare
- in termini di soglia di numero Links in comune tra segmento registrato
- e brano originale, oltre la quale si ottiene un rate di falsi positivi
- basso.
- Dalla figura 
+ che identifichi un brano in riproduzione attraverso il microfono e che
+ ne mostri il relativo testo sincronizzato in tempo reale, il tutto all'interno
+ di un web browser.
+\end_layout
+
+\begin_layout Standard
+L'applicazione, facendo ricorso a WebAudio e a Wasm, registrerà un breve
+ segmento audio attraverso il microfono dell'utente, ne estrarrà i Links
+ e li invierà a un server dove sono contenuti i Links dei brani originali,
+ il server cercherà di individuare un match e risponderà al client con il
+ nome del match e punto del brano originale in cui sono contenuti i Link
+ del segmento, il client riceve queste informazioni, ottiene il testo del
+ brano identificato e lo sincronizza in base al tempo trascorso.
+ In figura 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:False-positive-rate-in-fz-link-comuni"
+reference "fig:Screenshot-lyrics"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- si può notare come tale soglia si aggiri intorno ai 
-\begin_inset Formula $15$
-\end_inset
-
- Links.
+ è presentato il sistema in azione.
 \end_layout
 
 \begin_layout Standard
@@ -1772,94 +1782,10 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{axis}[
-\end_layout
-
-\begin_layout Plain Layout
-
-	xlabel={Numero Link in comune},
-\end_layout
-
-\begin_layout Plain Layout
-
-	ylabel={False positive rate},
-\end_layout
-
-\begin_layout Plain Layout
-
-	legend pos=north east,
-\end_layout
-
-\begin_layout Plain Layout
-
-	height=0.8*
-\backslash
-axisdefaultheight,
-\end_layout
-
-\begin_layout Plain Layout
-
-	width=
-\backslash
-axisdefaultwidth,
-\end_layout
-
-\begin_layout Plain Layout
-
-	yticklabel={$
-\backslash
-pgfmathprintnumber{
-\backslash
-tick}
-\backslash
-%$},
-\end_layout
-
-\begin_layout Plain Layout
-
-	no markers
-\end_layout
-
-\begin_layout Plain Layout
-
-]
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-addplot table [x=common_links, y=false_positive, col sep=comma] {data/min_hint.cs
-v};
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
+\begin_inset External
+	template RasterImage
+	filename img/screenshot_lyrics.png
+	width 100col%
 
 \end_inset
 
@@ -1872,11 +1798,11 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:False-positive-rate-in-fz-link-comuni"
+name "fig:Screenshot-lyrics"
 
 \end_inset
 
-False positive rate in funzione del numero di Link in comune
+Screenshot testo sincronizzato
 \end_layout
 
 \end_inset
@@ -1890,7 +1816,7 @@ False positive rate in funzione del numero di Link in comune
 \end_layout
 
 \begin_layout Section
-Robustezza applicazione
+Confronto con concorrenza
 \end_layout
 
 \begin_layout Section
