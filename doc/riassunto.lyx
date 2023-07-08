@@ -197,15 +197,8 @@ Introduzione
 
 \begin_layout Standard
 Negli ultimi anni si è notato un trend sempre crescente nell'utilizzo di
- JavaScript per la creazione di applicazioni desktop
-\begin_inset CommandInset citation
-LatexCommand cite
-key "rauch2012smashing"
-literal "true"
-
-\end_inset
-
-, grazie all'esistenza di tecnologie come Node.js
+ JavaScript per la creazione di applicazioni desktop, grazie all'esistenza
+ di tecnologie come Node.js
 \begin_inset CommandInset citation
 LatexCommand cite
 key "rauch2012smashing"
@@ -222,9 +215,8 @@ literal "true"
 \end_inset
 
 .
- Il trend di scrivere applicazioni in JavaScript è stato amplificato dalla
- crescente importanza del web come piattaforma per la distribuzione di applicazi
-oni software.
+ Questo trend è stato amplificato dalla crescente importanza del web come
+ piattaforma per la distribuzione di applicazioni software.
  Software utilizzati quotidianamente da miliardi di utenti sono basati sul
  web e, per forza di cose, devono essere scritti in JavaScript.
 \end_layout
@@ -261,7 +253,11 @@ literal "true"
 , WebRTC.
  In sostanza il browser diventa un'interfaccia o un'astrazione della macchina
  sottostante, alla quale si può accedere utilizzando JavaScript.
- Nello specifico WebAudio
+ Nello specifico 
+\emph on
+WebAudio
+\emph default
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "choi2018audioworklet"
@@ -269,8 +265,8 @@ literal "true"
 
 \end_inset
 
- è un'API JavaScript avanzata che consente di manipolare e generare audio
- all'interno del browser.
+ è un'API JavaScript che consente di manipolare e generare audio all'interno
+ del browser.
  È stata progettata per consentire agli sviluppatori di creare RIA che includono
  funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
  di suoni.
@@ -337,8 +333,11 @@ L'estrazione delle features
 \end_layout
 
 \begin_layout Standard
-Il primo passo è quello di estrarre dai segnali audio delle features, sulla
- base delle quali effettuare il fingerprinting e la ricerca.
+Il primo passo è quello di estrarre dai segnali audio delle 
+\emph on
+features
+\emph default
+, sulla base delle quali effettuare il fingerprinting e la ricerca.
  
 \begin_inset Float figure
 wide false
@@ -387,7 +386,7 @@ noprefix "false"
 \end_inset
 
 .
- Si parte da una rappresentazione del dominio nel tempo del segnale audio
+ Si parte da una rappresentazione nel dominio nel tempo del segnale audio
  (
 \series bold
 Reader
@@ -617,11 +616,7 @@ Recognition rate in funzione dell'SNR per le varie finestre
 \end_inset
 
 L'individuazione dei picchi avviene suddividendo lo spettrogramma in celle
- composte da 
-\begin_inset Formula $32$
-\end_inset
-
- fineste e range di frequenze in base alla 
+ contenenti più finestre e range di frequenze funziona della 
 \emph on
 scala Mel
 \emph default
@@ -1555,8 +1550,8 @@ matching
 \emph default
 .
  Si ammetta di voler riconoscere un segmento audio proveniente da un brano
- non noto, allora si estrarranno i Link anche in questo caso e si metteranno
- i due set di Link in relazione tenendo in conto che tra i Links del brano
+ non noto, allora, anche in questo caso, si estrarranno i Link e si metteranno
+ i due set di Link in relazione, tenendo in conto che tra i Links del brano
  originale 
 \begin_inset Formula $Links_{O}$
 \end_inset
@@ -1583,7 +1578,11 @@ matching
 \begin_inset Formula $\Delta T$
 \end_inset
 
- e per id del brano originale, definendo con 
+ e per 
+\begin_inset Formula $id$
+\end_inset
+
+ del brano originale, definendo con 
 \begin_inset Formula $n$
 \end_inset
 
@@ -1760,7 +1759,7 @@ Testo del brano in sincronia
 \end_layout
 
 \begin_layout Standard
-Sfruttando l'algoritmo di fingerprinting e matching descritto precedentemente
+Sfruttando l'algoritmo di fingerprinting e matching descritto precedentemente,
  è possibile realizzare una 
 \emph on
 second screen application
@@ -1881,10 +1880,10 @@ noprefix "false"
 fin
 \emph default
  ci si riferisce all'implementazione oggetto di questo documento.
- Si nota ad occhio la superiore robustezza al rumore rispetto ad OLAF: questo
- è dovuto al fatto che l'implementazione qui descritta presenta un algoritmo
+ Si nota ad occhio la migliore robustezza al rumore rispetto ad OLAF: questo
+ è dovuto al fatto che l'implementazione qui descritta si avvale di un algoritmo
  per la scelta dei picchi più rifinito, in cui viene sfruttato il concetto
- di banda critica, permettendogli di essere più immune al rumore.
+ di banda critica, permettendo di avere una maggiore immunità al rumore.
 \end_layout
 
 \begin_layout Standard
@@ -2386,18 +2385,8 @@ ne dell'algoritmo nell'ambiente browser web.
  questa tesi: l'algoritmo presentato può essere usato anche in ambiti diversi
  rispetto a quello del riconoscimento musicale, quali la sincronizzazione
  di stream multimediali e il riconoscimento di particolari segnali audio
- che indicano l'accadere di un determinato evento.
- Non si esclude la possibilità di scoprire nuove e inaspettate applicazioni
- non trattate in questo documento.
-\end_layout
-
-\begin_layout Standard
-L'informatica è un settore in continua evoluzione: nulla è da considerarsi
- 
-\emph on
-irrealizzabile
-\emph default
-.
+ che indicano l'accadere di un determinato evento, ma non si esclude la
+ possibilità di scoprire ulteriori nuove e inaspettate applicazioni.
 \end_layout
 
 \begin_layout Standard
