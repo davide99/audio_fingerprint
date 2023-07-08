@@ -2394,7 +2394,7 @@ ne dell'algoritmo nell'ambiente browser web.
 LatexCommand bibtex
 btprint "btPrintCited"
 bibfiles "biblio"
-options "plain"
+options "unsrt"
 
 \end_inset
 
