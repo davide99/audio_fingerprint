@@ -22,6 +22,7 @@
     }
 }
 \end_preamble
+\options a4paper
 \use_default_options true
 \maintain_unincluded_children false
 \language italian
@@ -86,7 +87,7 @@
 \leftmargin 1.5cm
 \topmargin 1.5cm
 \rightmargin 1.5cm
-\bottommargin 2cm
+\bottommargin 2.5cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -140,9 +141,9 @@ Davide Pisanò, Antonio Servetti
 
 \begin_layout Abstract
 Negli ultimi anni si è assistito a una trasformazione nel paradigma di sviluppo
- delle applicazioni desktop, il quale si è mosso con determinazione verso
- un'architettura web-based.
- JavaScript è passato dall’essere un linguaggio per pagine web ad un linguaggio
+ delle applicazioni desktop, che è mossa con determinazione verso un'architettur
+a web-based.
+ JavaScript è passato dall’essere un linguaggio per pagine web, ad un linguaggio
  
 \emph on
 general purpose
@@ -247,7 +248,7 @@ literal "true"
 , ovvero applicazioni web che offrono un'esperienza utente interattiva e
  avanzata simile a quella di un'applicazione desktop tradizionale.
  Le RIA sono caratterizzate da una vasta gamma di funzionalità e interattività
- che le distinguono dalla semplici pagine web statiche.
+ che le distinguono dalle semplici pagine web statiche.
  Oltre alla classica triade HTML + CSS + JavaScript, le RIA possono fare
  uso di tecnologie più avanzate e recenti come WebSockets, WebAudio, WebAssembly
 , WebRTC.
@@ -268,11 +269,11 @@ literal "true"
  è un'API JavaScript che consente di manipolare e generare audio all'interno
  del browser.
  È stata progettata per consentire agli sviluppatori di creare RIA che includono
- funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
+ funzionalità audio come la registrazione, la riproduzione e l'elaborazione
  di suoni.
- Inoltre, la necessità di scrivere applicazioni real time ha portato la
- necessità di dover eseguire codice ad alta efficienza, obiettivo non realizzabi
-le facilmente con un linguaggio interpretato quale JavaScript.
+ Inoltre, la necessità di scrivere applicazioni real time ha recato con
+ sé la necessità di dover eseguire codice ad alta efficienza, obiettivo
+ non realizzabile facilmente con un linguaggio interpretato quale JavaScript.
  Per questo motivo nasce 
 \emph on
 WebAssembly
@@ -303,7 +304,7 @@ literal "true"
 L'obiettivo di questo documento è quello di discutere la realizzazione di
  un sistema per l'identificazione di audio, da eseguire su dispositivi eterogene
 i all'interno di un web browser, sfruttando Wasm e WebAudio.
- Questo presenta numerosi vantaggi, tra i più importanti:
+ Questo presenta numerosi vantaggi; tra i più importanti:
 \end_layout
 
 \begin_layout Itemize
@@ -391,11 +392,11 @@ noprefix "false"
 \series bold
 Reader
 \series default
-), si procede creando lo spettrogramma (
+); si procede creando lo spettrogramma (
 \series bold
 Spectrogram
 \series default
-), successivamente si estraggono i picchi (
+); successivamente si estraggono i picchi (
 \series bold
 Peaks
 \series default
@@ -516,14 +517,14 @@ tick}
 
 \begin_layout Plain Layout
 
-	height=0.7*
+	height=0.8*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-	width=0.9*
+	width=
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -616,7 +617,7 @@ Recognition rate in funzione dell'SNR per le varie finestre
 \end_inset
 
 L'individuazione dei picchi avviene suddividendo lo spettrogramma in celle
- contenenti più finestre e range di frequenze funziona della 
+ contenenti più finestre e range di frequenze in funzione della 
 \emph on
 scala Mel
 \emph default
@@ -673,14 +674,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-		height=0.7*
+		height=0.8*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-		width=0.9*
+		width=
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -1051,14 +1052,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-		height=0.7*
+		height=0.8*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-		width=0.9*
+		width=
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -1551,7 +1552,7 @@ matching
 .
  Si ammetta di voler riconoscere un segmento audio proveniente da un brano
  non noto, allora, anche in questo caso, si estrarranno i Link e si metteranno
- i due set di Link in relazione, tenendo in conto che tra i Links del brano
+ i due set di Link in relazione, tenendo in conto che, tra i Links del brano
  originale 
 \begin_inset Formula $Links_{O}$
 \end_inset
@@ -1560,7 +1561,7 @@ matching
 \begin_inset Formula $Links_{R}$
 \end_inset
 
- dev'esserci una differenza temporale 
+, dev'esserci una differenza temporale 
 \begin_inset Formula $\Delta T$
 \end_inset
 
@@ -1635,14 +1636,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	height=0.7*
+	height=0.8*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-	width=0.9*
+	width=
 \backslash
 axisdefaultwidth
 \end_layout
@@ -1739,7 +1740,7 @@ noprefix "false"
 \begin_inset Formula $Links_{O}$
 \end_inset
 
-, analogamente per l'asse delle ordinate ma per i 
+; analogamente per l'asse delle ordinate ma per i 
 \begin_inset Formula $Links_{R}$
 \end_inset
 
@@ -1774,8 +1775,8 @@ L'applicazione, facendo ricorso a WebAudio e a Wasm, registrerà un breve
  segmento audio attraverso il microfono dell'utente, ne estrarrà i Links
  e li invierà a un server dove sono contenuti i Links dei brani originali,
  il server cercherà di individuare un match e risponderà al client con il
- nome del match e punto del brano originale in cui sono contenuti i Link
- del segmento, il client riceve queste informazioni, ottiene il testo del
+ nome del match e punto del brano originale in cui sono contenuti i Links
+ del segmento; il client riceve queste informazioni, ottiene il testo del
  brano identificato e lo sincronizza in base al tempo trascorso.
  In figura 
 \begin_inset CommandInset ref
@@ -1801,7 +1802,7 @@ status open
 \begin_inset External
 	template RasterImage
 	filename img/screenshot_lyrics.png
-	width 75col%
+	width 80col%
 
 \end_inset
 
@@ -1854,7 +1855,7 @@ mo già presentato in questo documento.
 
 \begin_layout Standard
 Sono stati effettuati dei confronti tra i due sistemi, testandone il funzionamen
-to su segmenti audio molto rumorosi, alcuni risultati sono riportati nelle
+to su segmenti audio molto rumorosi; alcuni risultati sono riportati nelle
  figure 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2368,7 +2369,7 @@ Conclusioni
 \end_layout
 
 \begin_layout Standard
-Il sistema proposto in questa tesi è nato come un progetto personale, foraggiato
+Il sistema proposto in questa tesi è nato come un progetto personale, intrigato
  dalla voglia di avere una migliore comprensione delle tecnologie impiegate
  nel riconoscimento audio, interrogandosi sul come fosse possibile realizzare
  un sistema di tale portata.
@@ -2385,7 +2386,7 @@ ne dell'algoritmo nell'ambiente browser web.
  questa tesi: l'algoritmo presentato può essere usato anche in ambiti diversi
  rispetto a quello del riconoscimento musicale, quali la sincronizzazione
  di stream multimediali e il riconoscimento di particolari segnali audio
- che indicano l'accadere di un determinato evento, ma non si esclude la
+ che indicano l'accadere di un determinato evento; ma non si esclude la
  possibilità di scoprire ulteriori nuove e inaspettate applicazioni.
 \end_layout
 
