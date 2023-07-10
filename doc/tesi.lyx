@@ -322,7 +322,7 @@ la realizzazione di un nuovo linguaggio ma eseguito sulla stessa macchina
 
 \begin_layout Standard
 Ricade nella prima categoria VBScript di Microsoft, basato su Visual Basic,
- introdotto a metà degli anni '90, oggi non più supportato da nessun browser
+ introdotto a metà degli anni '90, oggi non più supportato da alcun browser
  moderno.
 \end_layout
 
@@ -371,7 +371,7 @@ literal "true"
  di una nuova tecnologia.
  Oggi, infatti, si assiste ad una quantità sempre crescente di librerie
  e framework per JavaScript, atti a semplificare lo sviluppo di applicazioni
- web complesse e a migliorarne la qualità, giusto per citarne alcuni: React,
+ web complesse e a migliorarne la qualità; giusto per citarne alcuni: React,
  Angular, Vue.js, ma anche il più 
 \emph on
 anziano
@@ -384,7 +384,7 @@ anziano
 \end_layout
 
 \begin_layout Standard
-Per questi ed altri motivi, durante la fine degli anni 2000, ci si è iniziati
+Per questi ed altri motivi, durante la fine degli anni 2000, si è iniziato
  a porre una domanda: 
 \begin_inset Quotes eld
 \end_inset
@@ -446,11 +446,11 @@ literal "true"
 \end_inset
 
 : un framework open-source che consente agli sviluppatori di creare applicazioni
- desktop multi-piattaforma utilizzando tecnologie web standard come HTML,
+ desktop multi-piattaforma, utilizzando tecnologie web standard come HTML,
  CSS e JavaScript.
  Dal lato mobile nascono tecnologie analoghe a Electron come Ionic, React
  Native e PhoneGap, tutte con obiettivi abbastanza simili.
- Man mano l'ecosistema JavaScript ha iniziato a diventare quello che Java
+ Man mano, l'ecosistema JavaScript, ha iniziato a diventare quello che Java
  era nei primi anni 2000
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -463,11 +463,11 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-Il motivo principale dietro alla popolarità di questo ecosistema basato
- su JavaScript è la possibilità di utilizzare un'unica codebase (in JavaScript)
- che può essere eseguita su piattaforme molto diverse tra loro, problematica
- che è molto sentita nell'ambito mobile dove si hanno due piattaforme completame
-nte diverse: Android e iOS
+Il motivo principale della popolarità di questo ecosistema basato su JavaScript,
+ è la possibilità di utilizzare un'unica codebase (in JavaScript) che può
+ essere eseguita su piattaforme molto diverse tra loro, problematica che
+ è molto sentita nell'ambito mobile dove si hanno due piattaforme completamente
+ diverse: Android e iOS
 \begin_inset Foot
 status open
 
@@ -522,7 +522,7 @@ literal "true"
 
 \end_inset
 
- è un'API JavaScript avanzata che consente di manipolare e generare audio
+ è un'API JavaScript avanzata, che consente di manipolare e generare audio
  all'interno del browser.
  È stata progettata per consentire agli sviluppatori di creare RIA che includono
  funzionalità audio, come la registrazione, la riproduzione e l'elaborazione
@@ -537,7 +537,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-La necessità di scrivere applicazioni real time ha portato la necessità
+La necessità di scrivere applicazioni real time, ha portato la necessità
  di dover eseguire codice ad alta efficienza, obiettivo non realizzabile
  completamente con un linguaggio interpretato quale JavaScript.
  Alla fine degli anni 2010 nasce quindi 
@@ -568,7 +568,7 @@ literal "true"
 Sfruttando tutte queste tecnologie e un ecosistema ormai maturo, l'obiettivo
  di questa tesi è quello di discutere la realizzazione di un sistema per
  l'identificazione di audio: un utente sottopone uno spezzone di un brano
- audio di pochi secondi al sistema, il quale lo riconosce e può mostare
+ audio di pochi secondi al sistema, il quale lo riconosce e può mostrare
  all'utente informazioni ad esso correlate.
  L'intento, inoltre, è quello di eseguire l'algoritmo di identificazione
  su dispositivi eterogenei all'interno di un web browser, utilizzando Wasm
@@ -629,7 +629,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-Un esempio pionieristico delle second screen application è stato il programma
+Un esempio pionieristico delle second screen applications è stato il programma
  televisivo 
 \emph on
 American Idol
@@ -1190,7 +1190,7 @@ La libreria
 fin
 \emph default
  è il componente principale del sistema e ha il compito di estrarre le features
- caratterizzanti di un brano, garantendo il più possibile, che audio simili
+ caratterizzanti di un brano, garantendo il più possibile che audio simili
  abbiano features simili.
  D'ora in avanti ci si riferirà alle features indicandole come 
 \emph on
@@ -1977,7 +1977,7 @@ literal "true"
 
 \end_inset
 
-: il caso più semplice consiste nel utilizzare una finestra rettangolare
+: il caso più semplice consiste nell'utilizzare una finestra rettangolare
  come indicato in figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2020,7 +2020,7 @@ Lo
 spectral leakage
 \emph default
  non può essere del tutto evitato, ma può essere tenuto sotto controllo
- e ridotto utilizzando una funzione finestra più complessa rispetto a quella
+ e ridotto, utilizzando una funzione finestra più complessa rispetto a quella
  rettangolare.
 \begin_inset VSpace defskip
 \end_inset
@@ -2038,7 +2038,7 @@ risoluzione spettrale
 range dinamico
 \emph default
  del sistema.
- Infatti, l'utilizzo di una finestra con banda passante stretta consente
+ Infatti, l'utilizzo di una finestra con banda passante stretta, consente
  di ottenere una maggiore risoluzione spettrale, ovvero di distinguere frequenze
  molto vicine tra loro, ma allo stesso tempo comporta una riduzione del
  range dinamico del sistema, ovvero della capacità di distinguere segnali
@@ -2105,7 +2105,7 @@ Hann
 \emph on
 rettangolare
 \emph default
- ma un range dinamico migliore.
+, ma un range dinamico migliore.
  La finestra di 
 \emph on
 Blackman
@@ -2316,16 +2316,16 @@ I generi inclusi sono stati il metal, il rock, il blues e la musica classica
 \end_layout
 
 \begin_layout Enumerate
-è stato estratto un segmento di pochi secondi.
+È stato estratto un segmento di pochi secondi.
 \end_layout
 
 \begin_layout Enumerate
-il segmento è stato distorto, sommando del rumore non bianco e introducendo
+Il segmento è stato distorto, sommando del rumore non bianco e introducendo
  del clipping.
 \end_layout
 
 \begin_layout Enumerate
-nota l'energia del segmento del segnale, è stato sommato un rumore per ottenere
+Nota l'energia del segmento del segnale, è stato sommato un rumore per ottenere
  un SNR target.
 \end_layout
 
@@ -2367,7 +2367,7 @@ Analizzando dal grafico le prestazioni delle finestre di Hann, rettangolare
 \end_layout
 
 \begin_layout Itemize
-per un SNR fino a 
+Per un SNR fino a 
 \begin_inset Formula $-15dB$
 \end_inset
 
@@ -2375,7 +2375,7 @@ per un SNR fino a
 \end_layout
 
 \begin_layout Itemize
-nel tratto tra 
+Nel tratto tra 
 \begin_inset Formula $-15dB$
 \end_inset
 
@@ -2383,7 +2383,7 @@ nel tratto tra
 \end_layout
 
 \begin_layout Itemize
-l'utilizzo della finestra di Blackman si traduce in un recognition rate
+L'utilizzo della finestra di Blackman si traduce in un recognition rate
  sempre minore o di quello della finestra di Hann o di quella rettangolare.
 \end_layout
 
@@ -4544,7 +4544,7 @@ La scala Mel è stata sviluppata per emulare il modo in cui l'orecchio umano
  percepisce le frequenze dei suoni: è basata sulla scoperta sperimentale
  che più alta è la frequenza di due suoni più è difficile per l'orecchio
  umano discriminarli.
- Questa scala è, quindi, stata creata per mappare le frequenze del suono
+ Questa scala è stata, quindi, creata per mappare le frequenze del suono
  in modo che la loro rappresentazione sia più in linea con la percezione
  dell'orecchio umano.
 \end_layout
@@ -5147,7 +5147,7 @@ noprefix "false"
 \begin_inset Formula $40$
 \end_inset
 
- il rate di riconoscimento diventa pressocchè nullo.
+ il rate di riconoscimento diventa pressoché nullo.
  Al contrario per un 
 \begin_inset Formula $C$
 \end_inset
@@ -5261,7 +5261,7 @@ Inizialmente vuoto
 \end_layout
 
 \begin_layout Standard
-La bande sono le stesse definite in base della scala Mel (vedi 
+Le bande sono le stesse definite in base alla scala Mel (vedi 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "subsec:Scelta-della-dimensione"
@@ -6080,7 +6080,7 @@ Ricerca
 \emph on
  
 \emph default
-gestire il processo di individuazione del brano a partire dal Links che
+gestire il processo di individuazione del brano a partire dai Links che
  lo caratterizzano
 \end_layout
 
@@ -7096,7 +7096,7 @@ time
 \bar under
 start
 \bar default
-, questo è dovuto al fatto che nel caso dei brani completi 
+, questo è dovuto al fatto che nel caso dei brani completi, 
 \bar under
 time
 \bar default
@@ -7853,7 +7853,7 @@ noprefix "false"
 
  è stato riportato un grafico in cui sull'asse delle ascisse è presente
  il numero di finestra nella quale è contenuto un Link della registrazione
- originale, analogamente accade per l'asse delle ordinate ma per il segmento
+ originale, analogamente accade per l'asse delle ordinate, ma per il segmento
  registrato.
  Si nota facilmente la diagonale a densità maggiore intorno al valore 
 \begin_inset Formula $2000$
@@ -8340,7 +8340,7 @@ server_entry
 \end_layout
 
 \begin_layout Enumerate
-Leggere i file Wave dei brani originali da dalla memoria di massa.
+Leggere i file Wave dei brani originali dalla memoria di massa.
 \end_layout
 
 \begin_layout Enumerate
@@ -8348,7 +8348,7 @@ Estrarne i Links.
 \end_layout
 
 \begin_layout Enumerate
-Memorizzare i Links e nomi dei brani all'interno del database.
+Memorizzare i Links e i nomi dei brani all'interno del database.
 \end_layout
 
 \begin_layout Standard
@@ -8598,7 +8598,7 @@ request
 
 \begin_layout Standard
 In questo modo, il protocollo CORS garantisce che solo le richieste provenienti
- da origine sicure e autorizzate possano accedere alle risorse del server
+ da origini sicure e autorizzate possano accedere alle risorse del server
  esterno, garantendo la sicurezza nello scambio di informazioni tra origin
  diverse.
 \begin_inset VSpace defskip
@@ -10218,7 +10218,7 @@ texttt{DummyReader}
 
 \end_inset
 
- contiene abbastanza campioni il processo di estrazione dei Links può essere
+ contiene abbastanza campioni, il processo di estrazione dei Links può essere
  avviato.
 \end_layout
 
@@ -10294,7 +10294,7 @@ EMSCRIPTEN_AUDIO_MAIN_THREAD
 
 \end_inset
 
- ad indicare di voler dialogare con il main thread e come secondo parametro
+ ad indicare di voler dialogare con il main thread e, come secondo parametro,
  
 \begin_inset listings
 lstparams "language={C++},basicstyle={\ttfamily},breaklines=true,tabsize=4,keywordstyle={\color{blue}},commentstyle={\color{magenta}\itshape},emphstyle={\color{red}},stringstyle={\color{green}},identifierstyle={\color{cyan}}"
@@ -10322,7 +10322,7 @@ La callback messageReceivedOnMainThread
 \end_layout
 
 \begin_layout Standard
-Ritornati nel main thread JavaScript e con abbastanza campioni si può avviare
+Ritornati nel main thread JavaScript e con abbastanza campioni, si può avviare
  il processo di identificazione.
  Si procede come segue:
 \end_layout
@@ -10491,7 +10491,7 @@ noprefix "false"
 \emph on
 ambiente di test
 \emph default
-, composto dai già citati brani e per ognuno di essi:
+, composto dai già citati brani, e per ognuno di essi:
 \end_layout
 
 \begin_layout Enumerate
@@ -11768,7 +11768,7 @@ SharedArrayBuffer
 \family default
  è un tipo di buffer condiviso, utilizzato, ad esempio, per la comunicazione
  tra main thread e rendering thread, permettendo contemporaneamente a entrambi
- di poter accedere in modo sincronizzato ai dati in esso contenuti.
+ di accedere in modo sincronizzato ai dati in esso contenuti.
 \end_layout
 
 \begin_layout Standard
@@ -11811,7 +11811,7 @@ SharedArrayBuffer
 \end_layout
 
 \begin_layout Standard
-Il server web che serve la RIA è quindi stato modificato di conseguenza.
+Il server web che serve la RIA è stato, quindi, modificato di conseguenza.
 \end_layout
 
 \begin_layout Chapter
@@ -12661,7 +12661,7 @@ firstSampleTime
 
 \end_inset
 
- e quello utilizzato per calcolare la differenza temporale utilizzino lo
+ e quello utilizzato per calcolare la differenza temporale, utilizzino lo
  stesso riferimento temporale.
  La mancanza di sincronizzazione può portare, quindi, a risultati privi
  di significato nel richiamo di 
@@ -13571,7 +13571,7 @@ Inoltre, nella creazione dei Link, i picchi che lo compongono devono far
 \begin_inset VSpace defskip
 \end_inset
 
-Si è quindi proceduto nel valutare la bontà dei due algoritmi, adottando
+Si è quindi proceduto per valutare la bontà dei due algoritmi, adottando
  un approccio simile a quanto già descritto nel paragrafo 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -15909,7 +15909,7 @@ literal "true"
 \end_layout
 
 \begin_layout Standard
-Il sistema di fingerprinting e riconoscimento discusso in questo documento
+Il sistema di fingerprinting e riconoscimento, discusso in questo documento,
  presenta un ottimo candidato per l'implementazione di un sistema simile.
 \begin_inset VSpace defskip
 \end_inset
@@ -16029,7 +16029,7 @@ Viene inserito un
 \series bold
 marker audio finale
 \series default
-, che indica che il segmento pubblicitario è terminato.
+ che indica che il segmento pubblicitario è terminato.
 \end_layout
 
 \begin_deeper
@@ -16083,9 +16083,9 @@ Conclusioni
 \end_layout
 
 \begin_layout Standard
-Il sistema proposto in questa tesi è nato come un progetto personale, foraggiato
+Il sistema proposto in questa tesi è nato come un progetto personale, intrigato
  dalla voglia di avere una migliore comprensione delle tecnologie impiegate
- nel riconoscimento audio, interrogandosi sul come fosse possibile realizzare
+ nel riconoscimento audio, interrogandomi sul come fosse possibile realizzare
  un sistema di tale portata.
 \end_layout
 
@@ -16107,7 +16107,7 @@ In seguito, sono state affrontate sfide molto stimolanti, come l'integrazione
 Tuttavia, il momento più appagante è stato la conclusione del progetto,
  momento in cui si è avuta la realizzazione di un sistema completamente
  funzionante, il quale, sebbene rimanga un prototipo, è un gradino sopra
- alla mera realizzazione 
+ la mera realizzazione 
 \emph on
 accademica
 \emph default
@@ -16133,8 +16133,8 @@ impensabile
 : fino a poco tempo fa sembrava impossibile eseguire del codice C++ all'interno
  di un browser, eppure oggi WebAssembly è un elemento fondamentale del nuovo
  Internet.
- Considerando l'incessante progresso tecnologico, forse, non si possono
- nemmeno immaginare le possibilità che il futuro riserba.
+ Considerando l'incessante progresso tecnologico, probabilmente, non si
+ possono nemmeno immaginare le possibilità che il futuro riserba.
 \end_layout
 
 \begin_layout Chapter
