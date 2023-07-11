@@ -25,7 +25,7 @@
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
-\language english
+\language italian
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -81,7 +81,7 @@
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style english
+\quotes_style french
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
@@ -239,21 +239,11 @@ LatexCommand tableofcontents
 
 \end_deeper
 \begin_layout Section
-Motivation
+Audio fingerprinting
 \end_layout
 
 \begin_layout Subsection
-The Basic Problem That We Studied
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-Basic Problem
-\end_layout
-
-\end_inset
-
-
+Fingerprinting nel browser web
 \end_layout
 
 \begin_layout Frame
@@ -261,8 +251,7 @@ Basic Problem
 status open
 
 \begin_layout Plain Layout
-Make Titles Informative.
- Use Uppercase Letters.
+Il Fingerprinting Audio
 \end_layout
 
 \end_inset
@@ -271,45 +260,113 @@ Make Titles Informative.
 \end_layout
 
 \begin_deeper
-\begin_layout FrameSubtitle
-Frame subtitles are optional.
- Use upper- or lowercase letters.
-\begin_inset Note Note
+\begin_layout Itemize
+\begin_inset Argument item:2
 status open
 
 \begin_layout Plain Layout
-A title should summarize the slide in an understandable fashion for anyone
- how does not follow everything on the slide itself.
- 
+
+1-
 \end_layout
 
+\end_inset
+
+Il 
+\series bold
+fingerprint audio
+\series default
+ è l'impronta digitale di un audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ogni fingerprint identifica univocamente un audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+Il 
+\series bold
+fingerprinting audio
+\series default
+ crea il fingerprint dell'audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+L'algoritmo estrae delle features significative dell'audio
+\begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
 \begin_layout Itemize
-Use Itemize a lot.
-\end_layout
+Un brano può essere ricercato note 
+\emph on
+alcune
+\emph default
+ sue features
+\begin_inset VSpace vfill
+\end_inset
 
-\begin_deeper
-\begin_layout Pause
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Use very short sentences or short phrases.
-\end_layout
-
-\begin_deeper
-\begin_layout Pause
 
 \end_layout
 
 \end_deeper
-\begin_layout Itemize
-These overlays are created using the Pause style.
+\begin_layout Overprint
+\begin_inset Argument item:1
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/fingerprinting.svg
+	width 75col%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
