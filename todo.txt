@@ -1,13 +1,7 @@
 Presentazione:
 10-12 min
 10 slide circa
--wasm e webaudio
-	-sorgenti compilati eseguiti nel browser
-	-integrazione con webaudio
-		-riferimento covid, ha sdoganato queste tecnologie
-	-acquisizione, passaggio di memoria, gestione thread real time, 128 campioni, invio dati con fetch
-=====circa 4 slide fino a qui======
--spiegazione algoritmo, sfruttare molto le immagini
+
 =====4/7 slide======
 -curve di riconoscimento in fz della lunghezza segmento
 -e del rumore
