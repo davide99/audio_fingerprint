@@ -3,5 +3,3 @@ Presentazione:
 10 slide circa
 
 =====4/7 slide======
--curve di riconoscimento in fz della lunghezza segmento
--e del rumore
