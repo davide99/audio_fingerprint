@@ -1758,16 +1758,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	xlabel={
-\backslash
-# finestra brano originale},
+	xlabel={Differenza di finestra},
 \end_layout
 
 \begin_layout Plain Layout
 
 	ylabel={
 \backslash
-# finestra registrazione},
+# Links nel match},
 \end_layout
 
 \begin_layout Plain Layout
@@ -1798,28 +1796,12 @@ addplot[
 
 \begin_layout Plain Layout
 
-	scatter,
+	hist={bins=50}
 \end_layout
 
 \begin_layout Plain Layout
 
-	only marks,
-\end_layout
-
-\begin_layout Plain Layout
-
-	scatter/use mapped color={red},
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark options={scale=1.5, opacity=0.2}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [x=original, y=recording, col sep=comma] {data/matching_time_difference.c
-sv};
+] table [y index=0] {data/matching_time_difference_hinst.csv};
 \end_layout
 
 \begin_layout Plain Layout

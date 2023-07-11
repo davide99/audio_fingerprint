@@ -1622,16 +1622,14 @@ begin{axis}[
 
 \begin_layout Plain Layout
 
-	xlabel={
-\backslash
-# finestra brano originale},
+	xlabel={Differenza di finestra},
 \end_layout
 
 \begin_layout Plain Layout
 
 	ylabel={
 \backslash
-# finestra registrazione},
+# Links nel match},
 \end_layout
 
 \begin_layout Plain Layout
@@ -1662,28 +1660,12 @@ addplot[
 
 \begin_layout Plain Layout
 
-	scatter,
+	hist={bins=50}
 \end_layout
 
 \begin_layout Plain Layout
 
-	only marks,
-\end_layout
-
-\begin_layout Plain Layout
-
-	scatter/use mapped color={red},
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark options={scale=1.5, opacity=0.2}
-\end_layout
-
-\begin_layout Plain Layout
-
-] table [x=original, y=recording, col sep=comma] {data/matching_time_difference.c
-sv};
+] table [y index=0] {data/matching_time_difference_hinst.csv};
 \end_layout
 
 \begin_layout Plain Layout
@@ -1711,11 +1693,11 @@ end{tikzpicture}
 \begin_layout Plain Layout
 \begin_inset CommandInset label
 LatexCommand label
-name "fig:Scatter-match"
+name "fig:Istogramma-match"
 
 \end_inset
 
-Scatterplot di un match
+Istogramma di un match
 \end_layout
 
 \end_inset
@@ -1728,23 +1710,27 @@ Scatterplot di un match
 In figura 
 \begin_inset CommandInset ref
 LatexCommand ref
-reference "fig:Scatter-match"
+reference "fig:Istogramma-match"
 plural "false"
 caps "false"
 noprefix "false"
 
 \end_inset
 
- sull'asse delle ascisse è rappresentato il numero di finestra nella quale
- è contenuto un Link di 
+ sull'asse delle ascisse è rappresentata la differenza di finestra tra i
+ Links di 
 \begin_inset Formula $Links_{O}$
 \end_inset
 
-; analogamente per l'asse delle ordinate ma per i 
+ e 
 \begin_inset Formula $Links_{R}$
 \end_inset
 
-: si noti la diagonale a densità maggiore intorno al valore 
+, sull'asse delle ordinate è riportato l'
+\begin_inset Formula $n$
+\end_inset
+
+ già citato: si noti il picco intorno al valore 
 \begin_inset Formula $2000$
 \end_inset
 
