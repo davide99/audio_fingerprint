@@ -216,36 +216,8 @@ beamerdefaultoverlayspecification{<+->}
 
 \end_layout
 
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Outline
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset CommandInset toc
-LatexCommand tableofcontents
-
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout Section
 Audio fingerprinting
-\end_layout
-
-\begin_layout Subsection
-Fingerprinting nel browser web
 \end_layout
 
 \begin_layout Frame
@@ -403,7 +375,7 @@ L'estrazione delle features consiste in:
 
 \begin_deeper
 \begin_layout Enumerate
-Individuare i picchi nel dominio della frequenza al variare tempo
+Individuare i picchi nel brano
 \begin_inset VSpace defskip
 \end_inset
 
@@ -436,8 +408,6 @@ anchor-picco
 
 \end_deeper
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 wide false
 sideways false
@@ -445,8 +415,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -993,42 +961,6 @@ end{tikzpicture}
 \end_layout
 
 \end_deeper
-\begin_layout Section
-Our Results/Contribution
-\end_layout
-
-\begin_layout Subsection
-Main Results
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Make Titles Informative.
- 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Theorem
-On first slide.
-\end_layout
-
-\begin_layout Pause
-
-\end_layout
-
-\begin_layout Corollary
-On second slide.
-\end_layout
-
-\end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -1041,8 +973,7 @@ On second slide.
 status open
 
 \begin_layout Plain Layout
-Make Titles Informative.
- 
+Applicazioni del fingerprinting
 \end_layout
 
 \end_inset
@@ -1051,17 +982,8 @@ Make Titles Informative.
 \end_layout
 
 \begin_deeper
-\begin_layout ColumnsTopAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Theorem
-\begin_inset Argument 1
+\begin_layout Itemize
+\begin_inset Argument item:2
 status open
 
 \begin_layout Plain Layout
@@ -1071,15 +993,45 @@ status open
 
 \end_inset
 
-In left column.
+
+\series bold
+Riconoscimento audio
+\series default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
-\begin_layout Column
-5cm
+\begin_deeper
+\begin_layout Itemize
+Audio simili convideranno molto features
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
-\begin_layout Corollary
-\begin_inset Argument 1
+\begin_layout Itemize
+Es: 
+\emph on
+Shazam
+\emph default
+, 
+\emph on
+ACRCloud
+\emph default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
 status open
 
 \begin_layout Plain Layout
@@ -1089,31 +1041,12 @@ status open
 
 \end_inset
 
-In right column.
-\begin_inset Newline newline
-\end_inset
 
-New line
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Subsection
-Basic Ideas for Proofs/Implementations
-\end_layout
-
-\begin_layout Section*
-Summary
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Summary
-\end_layout
-
+\series bold
+Sincronizzazione 
+\series default
+di fonti multimediali
+\begin_inset VSpace defskip
 \end_inset
 
 
@@ -1121,76 +1054,7 @@ Summary
 
 \begin_deeper
 \begin_layout Itemize
-The
-\color none
- 
-\color inherit
-
-\begin_inset Flex Alert
-status open
-
-\begin_layout Plain Layout
-first main message
-\end_layout
-
-\end_inset
-
-
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-The
-\color none
- 
-\color inherit
-
-\begin_inset Flex Alert
-status open
-
-\begin_layout Plain Layout
-second main message
-\end_layout
-
-\end_inset
-
-
-\color none
- of your talk in one or two lines.
-\end_layout
-
-\begin_layout Itemize
-Perhaps a
-\color none
- 
-\color inherit
-
-\begin_inset Flex Alert
-status open
-
-\begin_layout Plain Layout
-third message
-\end_layout
-
-\end_inset
-
-
-\color none
-, but not more than that.
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-An outlook is always optional.
-\end_layout
-
-\end_inset
-
-
+È possibile sincronizzare due stream audio distinti
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1198,16 +1062,130 @@ An outlook is always optional.
 \end_layout
 
 \begin_layout Itemize
-Outlook
+Es: second screen application
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+3-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Pubblicità 
+\series default
+personalizzata
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-What we have not done yet.
+Inserimento di un segmento audio personalizzato
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Section
+Implementazione proposta
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Obiettivo: Fingerprinting nel Browser
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+1-
+\end_layout
+
+\end_inset
+
+Per molti anni capacità dei browser limitate
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Scarse performance con Javascript
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Even more stuff.
+Niente operazioni in real time
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Computazioni a carico del server
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+Ora browser più avanzati
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Computazioni parzialmente sul client
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Server più scarichi
 \end_layout
 
 \end_deeper
