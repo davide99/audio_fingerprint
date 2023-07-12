@@ -239,7 +239,7 @@ Obiettivi
 status open
 
 \begin_layout Plain Layout
-Obiettivo: Fingerprinting Audio nel Browser
+Fingerprinting Audio nel Browser
 \end_layout
 
 \end_inset
@@ -757,6 +757,10 @@ di fonti multimediali
 
 \begin_layout Itemize
 Es: second screen application
+\begin_inset VSpace defskip
+\end_inset
+
+
 \end_layout
 
 \end_deeper
