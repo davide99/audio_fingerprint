@@ -239,7 +239,7 @@ Obiettivi
 status open
 
 \begin_layout Plain Layout
-Fingerprinting Audio nel Browser
+Introduzione
 \end_layout
 
 \end_inset
@@ -248,82 +248,16 @@ Fingerprinting Audio nel Browser
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
+\begin_layout Standard
+\align center
 
-\begin_layout Plain Layout
-
-1-
+\series bold
+\size huge
+Obiettivo
+\series default
+: fingerprinting di segnali audio all'interno del browser
 \end_layout
 
-\end_inset
-
-Per molti anni capacità dei browser limitate
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Scarse performance con Javascript
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Niente operazioni in real time
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Computazioni a carico del server
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Ora browser più avanzati
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Computazioni parzialmente sul client
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Server più scarichi
-\end_layout
-
-\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -455,6 +389,246 @@ status open
 
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Applicazioni del Fingerprinting
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+1-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Riconoscimento audio
+\series default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Audio simili convideranno molto features
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Es: 
+\emph on
+Shazam
+\emph default
+, 
+\emph on
+ACRCloud
+\emph default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Sincronizzazione 
+\series default
+di fonti multimediali
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+È possibile sincronizzare due stream audio distinti
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Es: second screen application
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+3-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Pubblicità 
+\series default
+personalizzata
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Inserimento di un segmento audio personalizzato
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Frame
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Fingerprinting Audio nel Browser
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+1-
+\end_layout
+
+\end_inset
+
+Per molti anni capacità dei browser limitate
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Scarse performance con Javascript
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Niente operazioni in real time
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Computazioni a carico del server
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+Ora browser più avanzati
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Computazioni parzialmente sul client
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Server più scarichi
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -662,12 +836,16 @@ Server risponde
 
 \end_layout
 
+\begin_layout Section
+Dettagli implementativi
+\end_layout
+
 \begin_layout Frame
 \begin_inset Argument 4
 status open
 
 \begin_layout Plain Layout
-Applicazioni del fingerprinting
+Wasm e WebAudio
 \end_layout
 
 \end_inset
@@ -676,54 +854,52 @@ Applicazioni del fingerprinting
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
+\begin_layout Standard
+È possibile eseguire l'algoritmo nel browser grazie a:
+\end_layout
+
+\begin_layout ColumnsTopAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Block
+\begin_inset Argument 2
 status open
 
 \begin_layout Plain Layout
-
-1-
+Wasm
 \end_layout
 
 \end_inset
 
 
-\series bold
-Riconoscimento audio
-\series default
+\begin_inset Float figure
+wide false
+sideways false
+status open
 
-\begin_inset VSpace defskip
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/wasm.svg
+	scale 8
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Audio simili convideranno molto features
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Es: 
-\emph on
-Shazam
-\emph default
-, 
-\emph on
-ACRCloud
-\emph default
-
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
 \begin_inset Argument item:2
 status open
@@ -735,35 +911,84 @@ status open
 
 \end_inset
 
-
-\series bold
-Sincronizzazione 
-\series default
-di fonti multimediali
+Formato per codice binario
 \begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+Eseguibile nel browser
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+Target per linguaggi di alto livello
+\end_layout
+
+\end_deeper
+\begin_layout Column
+5cm
+\end_layout
+
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+WebAudio
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template RasterImage
+	filename img/webaudio.png
+	lyxscale 5
+	scale 6
+
+\end_inset
+
+
+\end_layout
+
 \end_inset
 
 
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-È possibile sincronizzare due stream audio distinti
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Es: second screen application
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
 \begin_layout Itemize
 \begin_inset Argument item:2
 status open
@@ -775,37 +1000,39 @@ status open
 
 \end_inset
 
-
-\series bold
-Pubblicità 
-\series default
-personalizzata
+API Javascript
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
 \begin_layout Itemize
-Inserimento di un segmento audio personalizzato
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+3-
+\end_layout
+
+\end_inset
+
+Manipolazione audio
 \end_layout
 
 \end_deeper
 \end_deeper
-\begin_layout Frame
-
-\end_layout
-
+\end_deeper
 \begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
 \begin_inset Separator plain
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Dettagli implementativi
 \end_layout
 
 \begin_layout Frame
@@ -864,7 +1091,7 @@ anchor-picco
 \end_layout
 
 \end_deeper
-\begin_layout Standard
+\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -1418,198 +1645,9 @@ end{tikzpicture}
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
 \end_inset
 
 
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Wasm e WebAudio
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-È possibile eseguire l'algoritmo nel browser grazie a:
-\end_layout
-
-\begin_layout ColumnsTopAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Block
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-Wasm
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset External
-	template Inkscape
-	filename img/wasm.svg
-	scale 8
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Formato per codice binario
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Eseguibile nel browser
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Target per linguaggi di alto livello
-\end_layout
-
-\end_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Block
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-WebAudio
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset External
-	template RasterImage
-	filename img/webaudio.png
-	lyxscale 5
-	scale 6
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-3-
-\end_layout
-
-\end_inset
-
-API Javascript
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-3-
-\end_layout
-
-\end_inset
-
-Manipolazione audio
-\end_layout
-
-\end_deeper
-\end_deeper
-\end_deeper
-\begin_layout Standard
 \begin_inset Separator plain
 \end_inset
 
