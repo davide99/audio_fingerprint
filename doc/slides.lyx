@@ -16,10 +16,26 @@
 \titlegraphic{\includegraphics[width=2cm]{img/logo_polito.png}}
 
 \defbeamertemplate{footline}{author and page number}{%
-  \usebeamercolor[fg]{page number in head/foot}%
-  \usebeamerfont{page number in head/foot}%
-  \hspace{1em}\insertshortauthor\hfill%
-  \insertpagenumber\,/\,\insertpresentationendpage\kern1em\vskip2pt%
+    \ifnum \insertpagenumber=1
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex,center]{}%
+        % empty environment to raise height
+      \end{beamercolorbox}}%
+      \vskip0pt%
+    \else
+      \leavevmode%
+      \hbox{%
+      \begin{beamercolorbox}[wd=\paperwidth,ht=2.25ex,dp=1ex]{title in head/foot}%
+        \usebeamerfont{title in head/foot}
+		\hspace{1em}
+		\insertshortauthor\hfill%
+		\insertshorttitle\hfill
+		\insertframenumber/\inserttotalframenumber
+		\kern1em
+      \end{beamercolorbox}}%
+      \vskip0pt%
+    \fi
 }
 \setbeamertemplate{footline}[author and page number]{}
 
@@ -160,7 +176,7 @@ Servetti
 status open
 
 \begin_layout Plain Layout
-Davide Pisanò, Antonio Servetti
+Davide Pisanò
 \end_layout
 
 \end_inset
@@ -169,10 +185,6 @@ Davide Pisanò, Antonio Servetti
 \end_layout
 
 \begin_layout Institute
-Collegio di Ingegneria Informatica, del Cinema e Meccatronica
-\begin_inset Newline newline
-\end_inset
-
 Politecnico di Torino
 \begin_inset Argument 1
 status open
@@ -187,42 +199,16 @@ Politecnico di Torino
 \end_layout
 
 \begin_layout Date
-Laurea Magistrale in Ingegneria Informatica, Luglio 2023
+Laurea Magistrale in Ingegneria Informatica
+\begin_inset Newline newline
+\end_inset
+
+25 Luglio 2023
 \begin_inset Argument 1
 status open
 
 \begin_layout Plain Layout
 LM 2023
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-If you wish to uncover everything in a step-wise fashion, uncomment the
- following command:
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-%
-\backslash
-beamerdefaultoverlayspecification{<+->}
 \end_layout
 
 \end_inset
