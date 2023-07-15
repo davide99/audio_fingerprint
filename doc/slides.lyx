@@ -1086,6 +1086,512 @@ end{textblock*}
 status open
 
 \begin_layout Plain Layout
+WebAssembly
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{textblock*}{
+\backslash
+paperwidth}(10.5cm,1.9cm)
+\end_layout
+
+\end_inset
+
+
+\begin_inset External
+	template Inkscape
+	filename img/wasm.svg
+	scale 8
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{textblock*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Formato per codice binario
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Eseguibile nel browser
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Performance comparabili a quelle native
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Target per linguaggi di basso livello
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/wasm_chain.svg
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Nel Dettaglio: WebAssembly
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout ColumnsTopAligned
+
+\end_layout
+
+\begin_deeper
+\begin_layout Column
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+.5
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+WebAssembly
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{minipage}{
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1em}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template Inkscape
+	filename img/wasm.svg
+	scale 8
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.2em}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{minipage}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Formato per codice binario
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Eseguibile nel browser
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Target per linguaggi di basso livello
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\lang english
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+uncover<2>{
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Column
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+.5
+\backslash
+textwidth
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+\begin_inset Argument 2
+status open
+
+\begin_layout Plain Layout
+WebAudio
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+only<1>{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{minipage}{
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1em}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+transparent{0.2}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template RasterImage
+	filename img/webaudio.png
+	lyxscale 5
+	scale 6
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.2em}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{minipage}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Block
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+only<2>{
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{minipage}{
+\backslash
+textwidth}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{1em}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset External
+	template RasterImage
+	filename img/webaudio.png
+	lyxscale 5
+	scale 6
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{0.2em}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{minipage}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+API JavaScript
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Manipolazione e acquisizione audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+In tempo reale
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset VSpace vfill
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
 Il Fingerprinting Audio
 \end_layout
 
@@ -1370,190 +1876,6 @@ Es: inserimento di un segmento audio personalizzato
 Dettagli implementativi
 \end_layout
 
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-WebAssembly e WebAudio
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-È possibile eseguire l'algoritmo nel browser grazie a:
-\end_layout
-
-\begin_layout ColumnsTopAligned
-
-\end_layout
-
-\begin_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Block
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-WebAssembly
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset External
-	template Inkscape
-	filename img/wasm.svg
-	scale 8
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Formato per codice binario
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Eseguibile nel browser
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Target per linguaggi di basso livello
-\end_layout
-
-\end_deeper
-\begin_layout Column
-5cm
-\end_layout
-
-\begin_layout Block
-\begin_inset Argument 2
-status open
-
-\begin_layout Plain Layout
-WebAudio
-\end_layout
-
-\end_inset
-
-
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset External
-	template RasterImage
-	filename img/webaudio.png
-	lyxscale 5
-	scale 6
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-3-
-\end_layout
-
-\end_inset
-
-API Javascript
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-3-
-\end_layout
-
-\end_inset
-
-Manipolazione audio
-\end_layout
-
-\end_deeper
-\end_deeper
-\end_deeper
 \begin_layout Standard
 \begin_inset Note Note
 status open
