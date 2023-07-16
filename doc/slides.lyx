@@ -2330,6 +2330,29 @@ begin{tikzpicture}
 
 
 \backslash
+tikzset{
+\end_layout
+
+\begin_layout Plain Layout
+
+    every pin/.style={fill=yellow!50!white,rectangle,rounded corners=3pt,font=
+\backslash
+tiny}
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 begin{axis}[
 \end_layout
 
@@ -2376,7 +2399,7 @@ axisdefaultwidth,
 
 \begin_layout Plain Layout
 
-	every mark/.append style={scale=10, line width=0.8pt}
+	no markers
 \end_layout
 
 \begin_layout Plain Layout
@@ -2419,17 +2442,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=4,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=red,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2472,17 +2490,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=green,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2525,17 +2538,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=blue,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2578,17 +2586,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=cyan,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2631,17 +2634,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=magenta,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2684,17 +2682,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=brown,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2737,17 +2730,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=lime,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2790,17 +2778,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=olive,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2843,17 +2826,12 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	mark repeat=4,
+	solid,
 \end_layout
 
 \begin_layout Plain Layout
 
-	mark phase=5,
-\end_layout
-
-\begin_layout Plain Layout
-
-	mark size=2pt,
+	color=orange,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2881,6 +2859,46 @@ addplot+[
 
 \backslash
 addlegendentry{$40 dB$};
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[] coordinates {(6,-1)} node[pin=150:{
+\backslash
+footnotesize $-40dB$}]{};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[] coordinates {(6,39)} node[pin=150:{
+\backslash
+footnotesize $-20dB$}]{};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[] coordinates {(6,89.5)} node[pin=-100:{
+\backslash
+footnotesize $-10dB$}]{};
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addplot[] coordinates {(2.5,80)} node[pin=150:{
+\backslash
+footnotesize $40dB$}]{};
 \end_layout
 
 \begin_layout Plain Layout
