@@ -57,6 +57,7 @@
 
 \usepackage{transparent}
 \usepackage[absolute,overlay]{textpos}
+\pgfplotsset{compat=1.18}
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
@@ -1321,7 +1322,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-Il Fingerprinting Audio
+Il Fingerprinting (1)
 \end_layout
 
 \end_inset
@@ -1331,16 +1332,6 @@ Il Fingerprinting Audio
 
 \begin_deeper
 \begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-1-
-\end_layout
-
-\end_inset
-
 Il 
 \series bold
 fingerprint audio
@@ -1361,67 +1352,16 @@ Ogni fingerprint identifica univocamente un audio
 
 \end_layout
 
-\end_deeper
 \begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-Il 
-\series bold
-fingerprinting audio
-\series default
- crea il fingerprint dell'audio
+Approccio simile a Shazam
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
-\begin_deeper
-\begin_layout Itemize
-L'algoritmo estrae delle features 
-\emph on
-riassuntive
-\emph default
- dell'audio
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Un audio può essere ricercato note 
-\emph on
-alcune
-\emph default
- sue features
-\begin_inset VSpace vfill
-\end_inset
-
-
-\end_layout
-
 \end_deeper
-\begin_layout Overprint
-\begin_inset Argument item:1
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -1430,8 +1370,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset External
 	template Inkscape
-	filename img/fingerprinting.svg
-	width 75col%
+	filename img/spettrogramma.svg
+	scale 39
 
 \end_inset
 
@@ -1456,30 +1396,11 @@ status open
 status open
 
 \begin_layout Plain Layout
-Applicazioni del Fingerprinting
+Il Fingerprinting (2)
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-1-
-\end_layout
-
-\end_inset
-
-
-\series bold
-Riconoscimento audio
-\series default
 
 \begin_inset VSpace defskip
 \end_inset
@@ -1489,23 +1410,20 @@ Riconoscimento audio
 
 \begin_deeper
 \begin_layout Itemize
-Audio simili convideranno molte features
+Dallo spettrogramma vengono estratti dei picchi
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
+\begin_deeper
 \begin_layout Itemize
-Es: 
+Ovvero delle feature 
 \emph on
-Shazam
+riassuntive
 \emph default
-, 
-\emph on
-ACRCloud
-\emph default
-
+ del segnale
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1514,152 +1432,18 @@ ACRCloud
 
 \end_deeper
 \begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-2-
-\end_layout
-
-\end_inset
-
-
-\series bold
-Sincronizzazione 
-\series default
-di fonti multimediali
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Più stream provenienti da fonti differenti
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Es: second screen application
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-\begin_inset Argument item:2
-status open
-
-\begin_layout Plain Layout
-
-3-
-\end_layout
-
-\end_inset
-
-
-\series bold
-Riconoscimento 
-\series default
-di eventi
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Reagire alla presenza di un 
-\emph on
-marker
-\emph default
- audio
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Es: inserimento di un segmento audio personalizzato
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Dettagli implementativi
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Estrazione delle Features
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-L'estrazione delle features consiste in:
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Enumerate
-Individuare i picchi nel brano
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Correlare un picco 
+Picchi correlati con un picco 
 \emph on
 anchor
 \emph default
- con gli altri picchi
+
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
-\begin_layout Enumerate
+\begin_layout Itemize
 Per ogni coppia 
 \emph on
 anchor-picco
@@ -1671,8 +1455,7 @@ anchor-picco
 
 \end_layout
 
-\end_deeper
-\begin_layout Plain Layout
+\begin_layout Standard
 \begin_inset Float figure
 wide false
 sideways false
@@ -2226,9 +2009,7 @@ end{tikzpicture}
 \end_layout
 
 \end_deeper
-\end_inset
-
-
+\begin_layout Standard
 \begin_inset Separator plain
 \end_inset
 
@@ -2360,7 +2141,7 @@ Miglior match
 status open
 
 \begin_layout Plain Layout
-Riconoscimento: Visualizzazione
+Matching: Visualizzazione
 \end_layout
 
 \end_inset
@@ -2507,10 +2288,6 @@ end{tikzpicture}
 \end_layout
 
 \end_deeper
-\begin_layout Frame
-
-\end_layout
-
 \begin_layout Standard
 \begin_inset Separator plain
 \end_inset
@@ -2579,11 +2356,6 @@ tick}
 
 \begin_layout Plain Layout
 
-	no markers,
-\end_layout
-
-\begin_layout Plain Layout
-
 	height=1.0*
 \backslash
 axisdefaultheight,
@@ -2598,7 +2370,13 @@ axisdefaultwidth,
 
 \begin_layout Plain Layout
 
-	legend style={at={(0.02,0.98)},anchor=north west}
+	legend style={at={(0.02,0.98)},anchor=north west,nodes={scale=0.75, transform
+ shape}},
+\end_layout
+
+\begin_layout Plain Layout
+
+	every mark/.append style={scale=10, line width=0.8pt}
 \end_layout
 
 \begin_layout Plain Layout
@@ -2614,17 +2392,44 @@ axisdefaultwidth,
 
 
 \backslash
+addlegendimage{empty legend}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+addlegendentry{
+\backslash
+hspace{-.6cm}
+\backslash
+textbf{SNR}}
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
 addplot+[
 \end_layout
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=red,
+	mark phase=4,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2667,12 +2472,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=green,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2715,12 +2525,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=blue,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2763,12 +2578,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=cyan,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2811,12 +2631,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=magenta,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2859,12 +2684,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=brown,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2907,12 +2737,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=lime,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -2955,12 +2790,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=olive,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -3003,12 +2843,17 @@ addplot+[
 
 \begin_layout Plain Layout
 
-	solid,
+	mark repeat=4,
 \end_layout
 
 \begin_layout Plain Layout
 
-	color=orange,
+	mark phase=5,
+\end_layout
+
+\begin_layout Plain Layout
+
+	mark size=2pt,
 \end_layout
 
 \begin_layout Plain Layout
@@ -3066,6 +2911,157 @@ end{tikzpicture}
 
 \end_layout
 
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Applicazioni del Fingerprinting
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+1-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Riconoscimento audio
+\series default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Audio simili convideranno molte features
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Es: 
+\emph on
+Shazam
+\emph default
+, 
+\emph on
+ACRCloud
+\emph default
+
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+2-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Sincronizzazione 
+\series default
+di fonti multimediali
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Più stream provenienti da fonti differenti
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Es: second screen application
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+\begin_inset Argument item:2
+status open
+
+\begin_layout Plain Layout
+
+3-
+\end_layout
+
+\end_inset
+
+
+\series bold
+Riconoscimento 
+\series default
+di eventi
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Reagire alla presenza di un 
+\emph on
+marker
+\emph default
+ audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Es: inserimento di un segmento audio personalizzato, riconoscimento di trigger
+ in videogiochi
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
