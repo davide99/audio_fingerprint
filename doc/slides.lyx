@@ -171,7 +171,8 @@ and
 \emph on
 Relatore
 \emph default
-: Antonio
+: Prof.
+ Antonio
 \begin_inset space ~
 \end_inset
 
@@ -218,10 +219,6 @@ LM 2023
 \end_inset
 
 
-\end_layout
-
-\begin_layout Section
-Obiettivi
 \end_layout
 
 \begin_layout Frame
@@ -630,7 +627,7 @@ status open
 \backslash
 begin{textblock*}{
 \backslash
-paperwidth}(10cm,2.75cm)
+paperwidth}(10cm,3.4cm)
 \end_layout
 
 \end_inset
@@ -699,7 +696,7 @@ only<1>{
 \backslash
 begin{textblock*}{
 \backslash
-paperwidth}(10cm,4.3cm)
+paperwidth}(10cm,4.9cm)
 \end_layout
 
 \begin_layout Plain Layout
@@ -761,7 +758,7 @@ only<2->{
 \backslash
 begin{textblock*}{
 \backslash
-paperwidth}(10cm,4.3cm)
+paperwidth}(10cm,4.9cm)
 \end_layout
 
 \end_inset
@@ -839,7 +836,7 @@ only<1-2>{
 \backslash
 begin{textblock*}{
 \backslash
-paperwidth}(10cm,5.8cm)
+paperwidth}(10cm,6.4cm)
 \end_layout
 
 \begin_layout Plain Layout
@@ -902,7 +899,7 @@ only<3->{
 \backslash
 begin{textblock*}{
 \backslash
-paperwidth}(10cm,5.8cm)
+paperwidth}(10cm,6.4cm)
 \end_layout
 
 \end_inset
@@ -913,142 +910,6 @@ paperwidth}(10cm,5.8cm)
 	filename img/webaudio.png
 	lyxscale 5
 	scale 3.6
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{textblock*}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Pause
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Niente API per rendering 3D
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-
-\series bold
-Soluzione
-\series default
-: WebGL
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-only<1-3>{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{textblock*}{
-\backslash
-paperwidth}(9.65cm,7.4cm)
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-transparent{0.2}
-\end_layout
-
-\end_inset
-
-
-\begin_inset External
-	template Inkscape
-	filename img/webgl.svg
-	scale 5
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-transparent{1}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{textblock*}
-\end_layout
-
-\begin_layout Plain Layout
-
-}
-\end_layout
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-only<4->{
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{textblock*}{
-\backslash
-paperwidth}(9.65cm,7.4cm)
-\end_layout
-
-\end_inset
-
-
-\begin_inset External
-	template Inkscape
-	filename img/webgl.svg
-	scale 5
 
 \end_inset
 
