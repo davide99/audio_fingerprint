@@ -1132,13 +1132,23 @@ Manipolazione e acquisizione audio
 \end_layout
 
 \begin_layout Itemize
-Processing in tempo reale in thread dedicato
+Processing in tempo reale
 \begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+In thread dedicato
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
 \begin_layout Itemize
 Architettura basata su nodi
 \begin_inset VSpace bigskip
@@ -1222,28 +1232,32 @@ Approccio simile a Shazam
 \end_layout
 
 \end_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset External
-	template Inkscape
-	filename img/spettrogramma.svg
-	scale 39
-
+\begin_layout Itemize
+Dal segnale viene calcolato lo spettrogramma
+\begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
+\begin_layout Itemize
+Dallo spettrogramma vengono estratti dei picchi
+\begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Ovvero delle feature 
+\emph on
+riassuntive
+\emph default
+ del segnale
+\end_layout
+
+\end_deeper
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -1270,65 +1284,28 @@ Il Fingerprinting (2)
 \end_layout
 
 \begin_deeper
-\begin_layout Itemize
-Dallo spettrogramma vengono estratti dei picchi
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Ovvero delle feature 
-\emph on
-riassuntive
-\emph default
- del segnale
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Picchi correlati con un picco 
-\emph on
-anchor
-\emph default
-
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Per ogni coppia 
-\emph on
-anchor-picco
-\emph default
- calcolare l'hash
-\end_layout
-
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\align left
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\align center
-\begin_inset External
-	template Inkscape
-	filename img/spettrogramma_links.svg
-	scale 45
+
+
+\backslash
+setlength{
+\backslash
+parindent}{-1.5em}
+\end_layout
 
 \end_inset
 
 
-\end_layout
+\begin_inset External
+	template Inkscape
+	filename img/spettrogramma.svg
+	scale 40
+	keepAspectRatio
 
 \end_inset
 
@@ -1358,7 +1335,7 @@ Matching
 
 \begin_deeper
 \begin_layout Itemize
-Basato su tre idee:
+Basato su due idee:
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1382,14 +1359,6 @@ Basato su tre idee:
 \end_inset
 
  costante tra features brano originale e registrazione
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Uguaglianza tra features basata su hash
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1424,18 +1393,6 @@ Ogni gruppo da
 \end_inset
 
  features
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Enumerate
-Ordinare per 
-\begin_inset Formula $n$
-\end_inset
-
- crescente
 \begin_inset VSpace defskip
 \end_inset
 
@@ -2402,8 +2359,7 @@ marker
 \end_layout
 
 \begin_layout Itemize
-Es: inserimento di un segmento audio personalizzato, riconoscimento di trigger
- in videogiochi
+Es: riconoscimento di trigger in videogiochi
 \end_layout
 
 \end_deeper
