@@ -242,7 +242,90 @@ Introduzione
 \size huge
 Obiettivo
 \series default
-: fingerprinting di segnali audio all'interno del browser
+: fingerprinting di segnali audio nel browser 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Il Fingerprinting
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Fingerprint audio
+\series default
+ 
+\begin_inset Formula $\rightarrow$
+\end_inset
+
+ impronta digitale di un audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ogni fingerprint identifica univocamente un audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Insieme di features che 
+\emph on
+riassumono
+\emph default
+ l'audio
+\begin_inset VSpace defskip
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+A segnali simili corrispondono features simili
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\begin_inset VSpace bigskip
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename img/fingerprinting.svg
+	scale 65
+
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -1193,85 +1276,7 @@ status open
 status open
 
 \begin_layout Plain Layout
-Il Fingerprinting (1)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Il 
-\series bold
-fingerprint audio
-\series default
- è l'impronta digitale di un audio
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Ogni fingerprint identifica univocamente un audio
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Approccio simile a Shazam
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\end_deeper
-\begin_layout Itemize
-Dal segnale viene calcolato lo spettrogramma
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-Dallo spettrogramma vengono estratti dei picchi
-\begin_inset VSpace defskip
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Itemize
-Ovvero delle feature 
-\emph on
-riassuntive
-\emph default
- del segnale
-\end_layout
-
-\end_deeper
-\end_deeper
-\begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Il Fingerprinting (2)
+Il Fingerprinting nel Dettaglio
 \end_layout
 
 \end_inset
@@ -1325,7 +1330,7 @@ parindent}{-1.5em}
 status open
 
 \begin_layout Plain Layout
-Matching
+Matching (1)
 \end_layout
 
 \end_inset
@@ -1359,15 +1364,54 @@ Basato su due idee:
 \end_inset
 
  costante tra features brano originale e registrazione
-\begin_inset VSpace defskip
+\begin_inset VSpace bigskip
 \end_inset
 
 
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset External
+	template Inkscape
+	filename img/match_waveform.svg
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Frame
+\begin_inset Argument 4
+status open
+
+\begin_layout Plain Layout
+Matching (2)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
 \begin_layout Itemize
-Quindi bisognerà:
+Il 
+\emph on
+matching 
+\emph default
+consiste quindi nel:
 \begin_inset VSpace defskip
 \end_inset
 
@@ -1412,49 +1456,20 @@ Miglior match
 \end_layout
 
 \end_deeper
-\end_deeper
 \begin_layout Standard
-\begin_inset Separator plain
-\end_inset
-
-
-\end_layout
-
-\begin_layout Frame
-\begin_inset Argument 4
-status open
-
-\begin_layout Plain Layout
-Matching: Visualizzazione
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
+\noindent
 \align center
-\begin_inset External
-	template Inkscape
-	filename img/match_waveform.svg
-	scale 45
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset ERT
 status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+setlength{
+\backslash
+parindent}{-1.5em}
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -1490,14 +1505,14 @@ nel gruppo $n$},
 
 \begin_layout Plain Layout
 
-	height=.5*
+	height=.7*
 \backslash
 axisdefaultheight,
 \end_layout
 
 \begin_layout Plain Layout
 
-	width=1.3*
+	width=1.2*
 \backslash
 axisdefaultwidth,
 \end_layout
@@ -1566,11 +1581,6 @@ end{tikzpicture}
 
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
 \end_deeper
 \begin_layout Standard
 \begin_inset Separator plain
@@ -1594,14 +1604,21 @@ Recognition Rate
 
 \begin_deeper
 \begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
+\begin_inset VSpace vfill
+\end_inset
+
+
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
+
+
+\backslash
+setlength{
+\backslash
+parindent}{-1.0em}
+\end_layout
 
 \begin_layout Plain Layout
 
@@ -2206,8 +2223,7 @@ end{tikzpicture}
 \end_inset
 
 
-\end_layout
-
+\begin_inset VSpace vfill
 \end_inset
 
 
@@ -2259,7 +2275,7 @@ Riconoscimento audio
 
 \begin_deeper
 \begin_layout Itemize
-Audio simili convideranno molte features
+Audio simili condivideranno molte features
 \begin_inset VSpace defskip
 \end_inset
 
@@ -2376,7 +2392,7 @@ Es: riconoscimento di trigger in videogiochi
 status open
 
 \begin_layout Plain Layout
-Second Screen Application
+Conclusioni
 \end_layout
 
 \end_inset
@@ -2385,21 +2401,33 @@ Second Screen Application
 \end_layout
 
 \begin_deeper
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename img/screenshot_lyrics.png
-	scale 30
-
+\begin_layout Itemize
+È possibile fare fingerprinting di segnali audio nel browser?
+\begin_inset VSpace defskip
 \end_inset
 
 
 \end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+Si
+\series default
+.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+\align center
+\begin_inset VSpace defskip
+\end_inset
+
+
+\begin_inset Graphics
+	filename img/screenshot_lyrics.png
+	scale 25
 
 \end_inset
 
